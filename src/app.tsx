@@ -381,12 +381,12 @@ export function App() {
         <span>
           <span>©{new Date().getFullYear()}</span>{" "}
           <a
-            href="https://interfaceoffice.com"
+            href="https://getromy.app"
             target="_blank"
             rel="noopener noreferrer"
             className={isDark ? "text-neutral-500 hover:text-neutral-100" : "text-neutral-400 hover:text-neutral-900"}
           >
-            Interface Office
+            GetRomy LLC
           </a>
         </span>
       </footer>
