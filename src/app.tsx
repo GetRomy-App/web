@@ -176,7 +176,7 @@ export function App() {
       <main className="mx-auto flex min-h-screen max-w-4xl flex-col space-y-32 px-6 py-20">
         <div className="flex flex-col space-y-14">
           <div className="space-y-6">
-            <h1 className="text-5xl leading-tight"><HandwrittenText text="Rōmy" seed={12} /></h1>
+            <h1 className="text-3xl leading-tight" style={{ fontFamily: "'Comfortaa', cursive", fontWeight: 500 }}>Rōmy</h1>
             <p className={isDark ? "text-neutral-400" : "text-neutral-500"}>
               Rōmy helps small nonprofits find new major donors at a fraction of
               the cost of existing solutions.
@@ -347,7 +347,7 @@ export function App() {
               onClick={handleToggleDark}
             >
               <OrganicBackground isDark={isDark} />
-              <div className="relative z-10 p-8 sm:p-14">
+              <div className="relative z-10 p-5 sm:p-8">
                 <img
                   ref={imgRef}
                   alt="Rōmy interface preview"
