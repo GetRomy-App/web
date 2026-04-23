@@ -32,7 +32,7 @@ export function Button({
   const typeValue: React.ButtonHTMLAttributes<HTMLButtonElement>["type"] =
     render ? undefined : "button";
   const classes = [
-    "inline-flex items-center justify-center gap-1.5 rounded-full font-[450] transition-colors",
+    "inline-flex items-center justify-center gap-1.5 rounded-full font-[450] transition-colors cursor-pointer",
     sizeClasses[size],
     variantClasses[variant],
     className,
