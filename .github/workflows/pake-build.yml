@@ -1,0 +1,73 @@
+name: Build Desktop Apps
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version tag (e.g. v1.0.0)'
+        required: true
+        default: 'v1.0.0'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            platform: windows
+          - os: ubuntu-latest
+            platform: linux
+          - os: macos-latest
+            platform: macos
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Linux dependencies
+        if: matrix.platform == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf libgtk-3-dev
+
+      - name: Install pake-cli
+        run: npm install -g pake-cli
+
+      - name: Copy icon
+        run: |
+          curl -L -o icon.png "https://raw.githubusercontent.com/GetRomy-App/web/main/public/icon-logo-transparent.png"
+
+      - name: Build with Pake (macOS)
+        if: matrix.platform == 'macos'
+        run: pake "https://intel.getromy.app" --name "Romy" --icon icon.png --width 1400 --height 900 --multi-arch
+
+      - name: Build with Pake (Windows)
+        if: matrix.platform == 'windows'
+        run: pake "https://intel.getromy.app" --name "Romy" --icon icon.png --width 1400 --height 900
+
+      - name: Build with Pake (Linux)
+        if: matrix.platform == 'linux'
+        run: pake "https://intel.getromy.app" --name "Romy" --icon icon.png --width 1400 --height 900
+
+      - name: List output
+        run: ls -la
+        shell: bash
+
+      - name: Upload to release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          files: |
+            *.dmg
+            *.exe
+            *.msi
+            *.deb
+            *.AppImage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
