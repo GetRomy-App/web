@@ -313,7 +313,7 @@ export function App() {
           <div className="relative">
             {/* Handwritten arrow pointing at the image */}
             <div
-              className="pointer-events-none absolute -top-16 right-8 z-20 flex flex-col items-center sm:right-12"
+              className="pointer-events-none absolute -top-12 right-4 z-20 flex flex-col items-center sm:-top-16 sm:right-12"
               style={{
                 fontFamily: '"Gloria Hallelujah", cursive',
                 fontSize: "0.875rem",
@@ -321,7 +321,7 @@ export function App() {
               }}
             >
               <span
-                className="whitespace-nowrap pl-12"
+                className="whitespace-nowrap pl-4 sm:pl-12"
                 style={{ rotate: "6deg", opacity: 0.75 }}
               >
                 Click Me
