@@ -1,7 +1,28 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import Button from '$lib/components/ui/Button.svelte';
-	import { productUrl } from '$lib/release';
+	import { productUrl, fallbackReleaseUrl } from '$lib/release';
 	import { toggleTheme, isDark } from '$lib/theme';
+
+	const RELEASE_TAG = 'v1.0.0';
+	const BASE = `https://github.com/GetRomy-App/web/releases/download/${RELEASE_TAG}`;
+
+	let downloadUrl = $state(fallbackReleaseUrl);
+
+	onMount(() => {
+		const ua = (navigator.userAgent || '').toLowerCase();
+		const platform = (navigator.platform || '').toLowerCase();
+		const uaData = (navigator as any).userAgentData;
+		const plat = uaData?.platform?.toLowerCase() || platform;
+
+		if (plat.includes('mac') || ua.includes('mac')) {
+			downloadUrl = `${BASE}/Romy.dmg`;
+		} else if (plat.includes('win') || ua.includes('win')) {
+			downloadUrl = `${BASE}/Romy_x64.msi`;
+		} else if (plat.includes('linux') || (ua.includes('linux') && !ua.includes('android'))) {
+			downloadUrl = `${BASE}/Romy.deb`;
+		}
+	});
 </script>
 
 <div class="inset-x-0 top-2 md:top-6 px-2 md:px-8 fixed z-40 flex justify-center">
@@ -23,7 +44,7 @@
 			<Button
 				class="h-7 text-xs"
 				variant="ghost"
-				href="https://github.com/GetRomy-App/web/releases/download/v1.0.0/Romy.dmg"
+				href={downloadUrl}
 				target="_blank"
 				rel="noreferrer"
 			>

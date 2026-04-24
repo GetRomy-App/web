@@ -30,6 +30,10 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
+      - name: Add x86_64 target (macOS)
+        if: matrix.platform == 'macos'
+        run: rustup target add x86_64-apple-darwin
+
       - name: Install Linux dependencies
         if: matrix.platform == 'linux'
         run: |
@@ -41,7 +45,7 @@ jobs:
 
       - name: Copy icon
         run: |
-          curl -L -o icon.png "https://raw.githubusercontent.com/GetRomy-App/web/main/public/icon-logo-transparent.png"
+          curl -L -o icon.png "https://raw.githubusercontent.com/GetRomy-App/web/main/static/icon-logo.png"
 
       - name: Build with Pake (macOS)
         if: matrix.platform == 'macos'
