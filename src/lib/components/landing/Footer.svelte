@@ -285,9 +285,7 @@
 
 <footer class="footer-reveal">
 	<div bind:this={container} class="absolute inset-0 z-0"></div>
-	<div bind:this={footerText} class="relative z-10 flex flex-col items-center justify-center h-full gap-3">
-		<span class="text-white/30 text-xs">© 2026 GetRomy LLC</span>
-	</div>
+	<div bind:this={footerText} class="relative z-10"></div>
 </footer>
 
 <style>
