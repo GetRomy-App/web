@@ -1,0 +1,71 @@
+---
+title: "How We Built a Donor Intelligence Engine Starting at $0.10 per Prospect"
+date: "2026-04-15"
+excerpt: "Enterprise wealth screening has been locked behind five-figure contracts for decades. We rebuilt the unit economics from scratch — here's the real cost breakdown."
+tag: "Engineering"
+---
+
+# How We Built a Donor Intelligence Engine Starting at $0.10 per Prospect
+
+Enterprise donor intelligence costs between $15,000 and $50,000 per year. Platforms like DonorSearch, iWave, and WealthEngine have set this price floor for decades. We wanted to know whether that cost was inherent to the problem or just an artifact of the market.
+
+## The cost structure of legacy platforms
+
+Traditional wealth screening platforms are expensive for three reasons:
+
+1. **Data licensing fees.** Accessing real estate records, SEC filings, and philanthropic databases costs real money. Enterprise vendors license entire datasets upfront and pass these costs through with margin.
+2. **Manual curation.** Many platforms still rely on human researchers to verify and enrich records. Analyst time is the single largest variable cost.
+3. **Monolithic infrastructure.** Running large-scale matching engines and search indices requires significant compute — especially when the architecture was designed a decade ago and can't scale down.
+
+We rebuilt each layer.
+
+## Our architecture
+
+**Intelligent model routing.** Romy uses a complexity router that classifies each research question and assigns the right model tier. Simple lookups hit a fast, lightweight model at 1 credit. Complex donor research routes to a deep-research model tuned for prospect intelligence — with a large context window and multi-step reasoning — at 2 credits. You never pay for a premium model when a fast one will do.
+
+**Structured enrichment pipelines.** For batch prospect research and discovery, each prospect runs through a structured enrichment pipeline that outputs typed data — estimated donor capacity, wealth indicators, giving history, cause areas, professional background, and a RōmyScore. The cost: 2.5 credits for base enrichment, 5 credits for deep enrichment.
+
+**Sourced web research.** Our chat-based agent searches the web for every claim and links to the source. Every fact in a Romy report is traceable — no unsourced assertions.
+
+**Serverless infrastructure.** Nothing runs when idle. Isolated sandbox environments handle source processing. Durable workflows handle sync operations. Object storage with zero egress fees handles uploads. The infrastructure scales to zero when your team isn't using it.
+
+## The real cost breakdown
+
+We have three subscription tiers:
+
+| Plan | Monthly | Credits/Month | Cost per Credit |
+|---|---|---|---|
+| Growth | $29 | 500 | $0.058 |
+| Pro | $89 | 1,000 | $0.089 |
+| Scale | $199 | 5,000 | $0.040 |
+
+Base prospect enrichment costs 2.5 credits. That means:
+
+- **Scale plan:** $0.10 per prospect
+- **Growth plan:** $0.15 per prospect
+- **Pay-as-you-go (Ultra pack):** $0.125 per prospect
+
+Deep enrichment at 5 credits doubles those numbers — $0.20 to $0.30 per prospect — but includes RōmyScore breakdown, philanthropic history detail, and engagement signals.
+
+For comparison, enterprise per-prospect costs typically range from $8 to $15 when you divide annual licensing by typical usage volumes.
+
+## What each prospect gets
+
+Every enriched prospect includes:
+
+- **Estimated donor capacity** in USD
+- **Known giving total** from public records
+- **Wealth indicator** (Very High $10M+, High $1M-$10M, Medium $250K-$1M, Low <$250K)
+- **RōmyScore 2.0** — a normalized 0-100 score with category breakdown
+- **Donor type** (Individual, Foundation, Corporate, Family Office, DAF)
+- **Cause areas** and philanthropic interests
+- **Professional background** and nonprofit affiliations
+- **Research summary** with source citations
+
+In chat mode, the agent produces a full 16-section research report with giving capacity formulas, engagement strategy, solicitation guardrails, and source methodology.
+
+## What this means
+
+A nonprofit on the Growth plan ($29/month) can research 200 prospects per month at base depth. On the Scale plan ($199/month), that's 2,000 prospects. With enterprise tools, $199 wouldn't cover the onboarding fee.
+
+The economics of donor intelligence don't have to be exclusionary. We proved it.

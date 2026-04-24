@@ -34,6 +34,13 @@
 			<span class="text-foreground text-base font-medium tracking-tight">Rōmy</span>
 		</div>
 		<div class="gap-0.5 flex items-center">
+			<a
+				href="/labs"
+				class="text-gray-alpha-600 hover:text-foreground text-xs font-medium transition-colors"
+			>
+				Labs
+			</a>
+			<span class="text-gray-alpha-400 text-xs select-none">//</span>
 			<button
 				onclick={toggleTheme}
 				aria-label="Toggle theme"

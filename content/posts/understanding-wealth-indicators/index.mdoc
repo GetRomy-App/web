@@ -1,0 +1,89 @@
+---
+title: "What Actually Predicts Giving Capacity — and How Romy Scores It"
+date: "2026-02-10"
+excerpt: "Not all wealth signals predict giving. We built a scoring framework that separates capacity from inclination — and saves fundraisers hours of manual assessment."
+tag: "Data Science"
+---
+
+# What Actually Predicts Giving Capacity — and How Romy Scores It
+
+A prospect with a $3M home might never give. A serial entrepreneur who just sold a business might be ready for a transformational gift. The challenge is separating wealth from willingness — and surfacing the right prospects before your team spends hours researching the wrong ones.
+
+## The time problem
+
+Manual prospect assessment is the biggest time sink in fundraising. A development officer typically spends 30 to 45 minutes per prospect, cross-referencing property records, SEC filings, foundation databases, and news articles. Most of that time is spent gathering data — not making decisions.
+
+For a team screening 200 prospects for a capital campaign, that's 100 to 150 hours of research. At that pace, you're spending weeks on data collection before you make a single ask.
+
+Romy reduces that to seconds per prospect. But speed without accuracy is worse than slow — it leads to wasted meetings with unqualified prospects or, worse, approaches with incorrect information. So the scoring has to be right.
+
+## Which indicators actually matter
+
+We analyzed donor records across multiple data sources to understand which wealth signals most reliably predict major gift behavior. The results are consistent with what experienced fundraisers know intuitively, but they also surface some surprises.
+
+**Strong predictors of giving:**
+
+1. **Prior philanthropic giving** — By far the strongest signal. Someone who has given before is dramatically more likely to give again. The amount matters: a prospect with $100K+ in verified giving is in a different category than one with $5K.
+2. **Nonprofit board service** — Board membership indicates both capacity and inclination. Multiple board seats are an even stronger signal.
+3. **Foundation or DAF ownership** — Prospects who have set up giving vehicles have already committed to philanthropy. This is a capacity signal and an intent signal.
+4. **Business ownership (especially multiple businesses)** — Entrepreneurs have both the wealth and the liquidity patterns that lead to major gifts. Multi-business owners score higher because the pattern suggests sustained success, not a single venture.
+
+**Moderate predictors:**
+
+5. **Real estate values** — A reliable wealth proxy, but it doesn't capture liquid assets well. A $3M home doesn't tell you much about available cash.
+6. **Executive compensation** — At $500K+, it's meaningful. Below that, it's noisy — many high-net-worth individuals take minimal salaries.
+
+**Weak predictors (often overweighted by traditional tools):**
+
+7. **Zip code wealth proxies** — Too coarse. Within any affluent zip code, there's enormous variance.
+8. **Luxury asset registrations** — Yachts and aircraft correlate with wealth but not with giving behavior.
+9. **Political contributions** — Modest signal at best. Giving to political causes doesn't reliably predict charitable giving.
+
+## How RōmyScore works
+
+RōmyScore evaluates prospects across four categories, then normalizes to a 0-100 scale. The categories are weighted toward the signals that actually predict giving — not just the ones that indicate wealth.
+
+**Foundation** — The largest category. Covers real estate, business ownership, compensation, giving history, board service, and foundation/DAF ownership. This is where the bulk of the score comes from, because these are the attributes with the strongest predictive power.
+
+**Liquidity & Tax-Planning** — Timing signals. Recent business exits, RMD eligibility (age 70.5+), and active DAF contributions. These indicate that a prospect may have recently gained liquidity or has tax incentives to give now.
+
+**Opportunity & Commitment** — Long-term indicators. Serial entrepreneurship, early-stage success, and legacy positioning (decades-long business ownership combined with age). These predict sustained capacity over time.
+
+**Constraints** — Deductions for circumstances that may limit near-term giving, like sector headwinds or children in college. These are time-limited — they expire when the constraint resolves.
+
+The score is conservative by design: attributes only receive points when there's supporting evidence from public records. A score of 0 for any attribute means insufficient data, not that the attribute is absent.
+
+### Score bands
+
+| Band | Score | What it means for your team |
+|---|---|---|
+| Exceptional | 85-100 | Prioritize immediate cultivation — this prospect has strong capacity and giving signals |
+| Very Strong | 68-84 | Strong case for major gift solicitation — worth a personal meeting |
+| Strong | 49-67 | Develop the relationship and monitor for liquidity triggers |
+| Moderate | 29-48 | Track passively — build connection, watch for business exits or life events |
+| Developing | 0-28 | Limited data or capacity signals — revisit if new information surfaces |
+
+## Three tiers of capacity estimation
+
+RōmyScore tells you whether a prospect is worth pursuing. The giving capacity formulas tell you how much to ask for. Romy automatically selects the most accurate formula based on available data:
+
+- **Tier 1 (GS)** — Uses only real estate and giving data. Available for almost every prospect. Provides a conservative baseline estimate.
+- **Tier 2 (EGS)** — Adds salary and age data. Averages about 25% higher than GS because it captures income-driven capacity. Romy can estimate salary from property values when compensation data isn't directly available.
+- **Tier 3 (Snapshot)** — The most thorough formula. Combines income, real estate, business revenue, and 5-year giving history, then applies a behavioral adjustment factor based on entrepreneurship, giving patterns, and constraints.
+
+Each tier maps the final estimate to a 0-20 gift capacity rating — from "Unable to Rate" at 0 to "$5M+" at 20.
+
+## What this saves
+
+Without automated scoring, a fundraiser spends their time on two tasks that Romy can do faster and more consistently:
+
+1. **Data gathering** — 30-45 minutes per prospect, cross-referencing property records, SEC filings, foundation databases, and news. Romy does this in seconds.
+2. **Capacity estimation** — Manual estimates are inconsistent. Two fundraisers evaluating the same prospect will often disagree by 2-3x on the recommended ask amount. Romy's formulas produce consistent, auditable estimates.
+
+The time saved compounds. A team that spends 2 weeks screening 200 prospects manually can do the same work in an afternoon with Romy — and the capacity estimates will be more consistent across the entire list.
+
+## Why transparency matters
+
+Most wealth screening platforms treat their scoring as a black box. You get a number — no breakdown, no formula, no way to audit.
+
+Every RōmyScore comes with a category breakdown and a rationale. You can see exactly which attributes contributed, which data was missing, and which constraints applied. A prospect who scored 72 because of strong real estate and giving history is a different cultivation conversation than one who scored 72 because of a recent business exit. The score is the same; the strategy is completely different. The breakdown tells you which.

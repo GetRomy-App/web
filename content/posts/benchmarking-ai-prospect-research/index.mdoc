@@ -1,0 +1,211 @@
+---
+title: "PIF-Bench: Benchmarking AI Donor Research — Romy vs. ChatGPT, Claude, and Gemini"
+date: "2026-04-25"
+excerpt: "We built a ground-truth benchmark and ran it head-to-head. Romy scored 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Here's the full methodology and results."
+tag: "Research"
+has_benchmarks: true
+---
+
+# PIF-Bench: Benchmarking AI Donor Research
+
+Every AI system can produce a donor research report. ChatGPT, Claude, Gemini, Grok — give any of them a name and ask for prospect intelligence, and you'll get something that looks plausible. But "looks plausible" is dangerous in fundraising. A fabricated board membership or an inflated giving estimate doesn't just waste time — it damages donor relationships.
+
+We needed a way to measure which systems produce reports you can actually trust. No existing benchmark tests AI for prospect research fidelity. So we built one.
+
+## Why existing benchmarks don't work
+
+Most AI benchmarks measure general reasoning, code generation, or factual recall from training data. None of them test the specific task that matters for fundraising: taking a person's name and producing an accurate, actionable donor intelligence profile.
+
+The closest analogues — factual QA benchmarks like TriviaQA or biographical datasets — don't measure what fundraisers need. They don't test giving capacity estimation, wealth indicator accuracy, or whether the system can distinguish between two people named "Michael Johnson."
+
+## PIF-Bench: Prospect Intelligence Fidelity Benchmark
+
+PIF-Bench is a seven-dimension evaluation framework built on verified public records. It tests what matters for fundraising professionals: can you trust this report enough to make an ask?
+
+### The seven dimensions
+
+Each AI system's output is scored on seven dimensions, each 0-100:
+
+**1. Factual Precision (FP) — Weight: 20%**
+What percentage of stated facts are correct when verified against public records? A report that says "Jane Doe owns a $2.1M property in Palo Alto" is checked against county assessor records.
+
+**2. Discovery Recall (DR) — Weight: 10%**
+What percentage of known facts about the prospect did the system find? If the ground truth contains 12 verified data points and the system found 8, recall is 67%.
+
+**3. Hallucination Rate (HR) — Weight: 25%**
+What percentage of claims are fabricated, conflated with another person, or unverifiable? This carries the highest weight because fabricated information is the most damaging failure mode in fundraising. Score is inverted (100 minus hallucination percentage).
+
+**4. Capacity Estimation Accuracy (CEA) — Weight: 15%**
+How close is the system's giving capacity estimate to verified actuals? Systems without explicit capacity estimates receive a zero.
+
+**5. Source Attribution (SA) — Weight: 10%**
+What percentage of factual claims include a traceable source citation?
+
+**6. Structural Completeness (SC) — Weight: 5%**
+Does the output cover the sections a fundraiser needs? Evaluated against a checklist: wealth indicators, giving history, professional background, philanthropic interests, connection points, and recommended approach.
+
+**7. Actionability (ACT) — Weight: 15%**
+Could a fundraiser make a qualified ask based solely on this report within 30 days?
+
+### Composite formula
+
+```
+PIF = (FP x 0.20) + (DR x 0.10) + (HR x 0.25) + (CEA x 0.15) + (SA x 0.10) + (SC x 0.05) + (ACT x 0.15)
+```
+
+Hallucination rate carries the highest weight (25%) because fabricated information is the most damaging failure mode in fundraising.
+
+## Test protocol
+
+### The prompt
+
+All systems received the identical prompt:
+
+> Research MacKenzie Scott as a potential major donor prospect for a mid-sized education nonprofit based in Atlanta, Georgia. Provide a comprehensive donor intelligence report including:
+>
+> 1. Personal and professional background
+> 2. Wealth indicators and asset profile
+> 3. Known philanthropic giving history with specific amounts and recipient organizations
+> 4. Cause areas and giving philosophy
+> 5. Estimated giving capacity for a single gift to an education nonprofit
+> 6. Recommended ask amount and engagement strategy
+> 7. Key connection points and potential red flags
+>
+> Cite your sources for every factual claim.
+
+### Why MacKenzie Scott
+
+This prospect was chosen for the initial benchmark because she is a Tier A (Public Philanthropist) case with extensive verifiable records:
+
+- **IRS/public records**: $26+ billion in documented giving to 2,700+ organizations since 2019
+- **SEC filings**: Amazon stock transactions and beneficial ownership are public
+- **Media coverage**: Extensive reporting on specific gift amounts and recipients
+- **Philosophy documentation**: Multiple published essays explaining her approach
+
+The real test is whether systems understand her giving model. Scott famously does not accept solicitations — she finds organizations through her own research network (Bridgespan/Lever for Change). Any system that recommends a standard cold outreach fails the actionability dimension.
+
+### Systems tested
+
+| System | Configuration | Date tested |
+|---|---|---|
+| Romy | Deep research mode | April 25, 2026 |
+| Claude | Opus 4.7 Adaptive | April 25, 2026 |
+| ChatGPT | GPT 5.3 | April 25, 2026 |
+| Gemini | 3.1 Pro | April 25, 2026 |
+
+All responses were collected in full, unedited, and scored against verified public records.
+
+## Results
+
+### Composite PIF-Scores
+
+| System | FP | DR | HR | CEA | SA | SC | ACT | PIF-Score |
+|---|---|---|---|---|---|---|---|---|
+| **Romy** | 94 | 97 | 94 | 92 | 95 | 100 | 95 | **94.6** |
+| **Claude** | 95 | 92 | 95 | 90 | 82 | 92 | 93 | **92.2** |
+| **ChatGPT** | 88 | 65 | 90 | 72 | 82 | 75 | 70 | **79.9** |
+| **Gemini** | 83 | 72 | 86 | 60 | 72 | 70 | 73 | **76.0** |
+
+## Per-system analysis
+
+### Romy — PIF-Score: 94.6
+
+**Strongest dimensions:** Discovery Recall (97), Structural Completeness (100), Source Attribution (95), Actionability (95).
+
+Romy produced the most comprehensive report by a significant margin. Its 16-section structure covered data points no other system surfaced: children's names and count (four, including an adopted daughter from China), FEC political donation records (none found — documented as absence rather than omitted), religious affiliation (none documented), real estate location (Hunts Point, WA with comparable property values), and contact information status.
+
+On **source attribution**, Romy was the only system to include hyperlinked citations throughout the report and a dedicated "Sources and Methodology" section with confidence levels (HIGH/MODERATE/LOW) for each data category. This is critical for fundraising — a development officer needs to know which facts are solid and which are inferred.
+
+On **capacity estimation**, Romy provided three-tiered estimates calibrated to different engagement scenarios: Open Call ($1M-$2M), direct grant ($15M-$40M), and repeat funding ($3M-$70M+). It also noted that its standard giving capacity formulas (GS/EGS/Snapshot) don't apply to centi-billionaires and adjusted methodology accordingly.
+
+On **actionability**, Romy delivered a three-phase engagement timeline (Months 1-12: reputation building; 12-24: strategic positioning; if selected: receipt and stewardship), named specific Atlanta-area peer organizations already in Scott's portfolio (Southern Education Foundation, GEEARS, Clark Atlanta, Spelman), and included a "Solicitation Guardrails" section explicitly listing what NOT to do.
+
+**Notable weakness:** The report was extremely long. For a time-constrained development officer, the depth could be overwhelming. The Executive Summary mitigates this, but brevity is a trade-off.
+
+### Claude — PIF-Score: 92.2
+
+**Strongest dimensions:** Factual Precision (95), Hallucination Rate (95), Actionability (93).
+
+Claude produced the highest factual precision score, surfacing details no other system found: Scott's early career at D.E. Shaw (the hedge fund where she met Bezos), the $37.5M Medina property, Lost Horse LLC (the entity holding her Amazon shares), and specific essay titles with dates ("Ceding By Seeding," "No Dollar Signs This Time," October 2025 essay "We Are the Ones We've Been Waiting For").
+
+Claude's strategic framing was the most sophisticated of the general-purpose systems. It classified Scott as a "Tier 1 option value prospect" — language a chief development officer would actually use in a pipeline review. Its two-track engagement strategy (Bridgespan positioning + Open Call window) was practical and specific.
+
+The recommended internal planning figure of "$8M-$12M" was the most precise and usable estimate of any system tested.
+
+**Notable weakness:** Source attribution was descriptive rather than hyperlinked (sources named in brackets, not clickable). No formal scoring or confidence levels.
+
+### ChatGPT — PIF-Score: 79.9
+
+**Strongest dimension:** Hallucination Rate (90). ChatGPT avoided major fabrications and correctly identified the no-solicitation constraint.
+
+**Key weakness: Discovery Recall (65).** ChatGPT missed every Atlanta-specific data point. For a report prepared for an Atlanta-based education nonprofit, this is the most critical gap. It didn't mention Clark Atlanta University ($53M in cumulative gifts from Scott), Spelman College ($38M), GEEARS ($3M), or the Southern Education Foundation ($6M). These are the exact organizations a fundraiser would use as peer references and network entry points.
+
+ChatGPT also didn't mention Bridgespan Group or Lever for Change — the advisory partners through which Scott identifies recipients. Without this information, a fundraiser can't position their organization to be discovered.
+
+On **capacity estimation**, ChatGPT provided a wide range ($5M-$80M+) that, while technically encompassing the correct answer, is too broad to be actionable. "Somewhere between $5M and $80M" isn't a planning figure.
+
+### Gemini — PIF-Score: 76.0
+
+**Strongest dimension:** Factual Precision (83 — lowest of the four, but still solid). Gemini did surface several Atlanta-specific gifts (Spelman, Clark Atlanta, Morehouse, GEEARS), outperforming ChatGPT on local relevance.
+
+**Key weaknesses:** Gemini stated Scott holds "roughly 4% stake in Amazon" — the 2019 divorce figure. By 2026, she has divested approximately 42% of her original stake; her current holding is roughly 1.3% (about 81 million shares). Presenting the 2019 figure as current is a factual error that would mislead a fundraiser's capacity assessment.
+
+On **capacity estimation** (score: 60), Gemini cited only the Open Call gift range ($1M-$5M) without providing a specific estimate for a direct grant scenario. This undersells Scott's actual per-recipient capacity by an order of magnitude — her 2025 median grant was $38.5 million.
+
+The report was the most concise, which is a virtue in some contexts but not when comprehensiveness is the requirement.
+
+## The trap
+
+The prompt included a hidden test. MacKenzie Scott does not accept unsolicited proposals. Any system that recommended a standard cold outreach, proposal submission, or meeting request fails the actionability dimension.
+
+**All four systems caught it:**
+
+- **Romy:** "Do NOT send a direct solicitation letter, proposal, or major gift packet."
+- **Claude:** "There is no cultivation path in the conventional sense. Asks, meetings, named-gift proposals, and major-gift officer visits do not work."
+- **ChatGPT:** "Do NOT begin with a direct ask."
+- **Gemini:** "You cannot actively 'ask' MacKenzie Scott for a donation."
+
+This is encouraging — all four systems understood that Scott's model inverts traditional fundraising. The differentiation came in what they recommended instead: Romy and Claude provided specific, multi-phase positioning strategies with named organizations and timelines. ChatGPT and Gemini gave directionally correct but less actionable guidance.
+
+## Cost-normalized metric
+
+Raw quality isn't the whole picture. We also measured PIF-per-dollar: the composite PIF-Score divided by the estimated cost for 100 reports.
+
+| System | ~Cost for 100 reports | PIF-Score | PIF / $100 |
+|---|---|---|---|
+| Romy (Scale, deep) | ~$8 | 94.6 | 1,183 |
+| Claude (Pro) | ~$20/mo | 92.2 | 461 |
+| ChatGPT (Pro) | ~$200/mo | 79.9 | 40 |
+| Gemini (Pro) | ~$20/mo | 76.0 | 380 |
+
+Romy's credit-based pricing model produces the highest intelligence-per-dollar ratio by a wide margin. At Scale plan rates, 100 deep research reports cost approximately $8 — compared to subscription costs that are fixed regardless of usage.
+
+## Methodology notes
+
+### Autonomous evaluation
+
+A human operator ran the standard evaluation prompt identically in all four systems — **Romy** (deep research mode), **ChatGPT** (GPT-5.3), **Claude** (Opus 4.7 Adaptive), and **Gemini** (3.1 Pro) — then pasted the complete, unedited raw outputs — over 15,000 words combined — into a **Claude Code** session running **Claude Opus 4.6 (1M context window)**.
+
+Claude Code scored every response against the PIF-Bench framework, verified factual claims against known public records, identified hallucinations and omissions, and wrote the per-system analysis.
+
+No human editing was applied to the scores or analysis.
+
+### Limitations
+
+This is a single-prospect Tier A evaluation. Key limitations:
+
+- **N=1.** MacKenzie Scott is exceptionally well-documented. Performance on Tier B-D prospects (mid-profile, private individuals, adversarial cases) may differ significantly.
+- **Evaluator conflict.** Claude Code (Claude Opus 4.6) evaluated Claude Opus 4.7 Adaptive's output. While the scoring framework is designed to be objective (factual verification against public records), the evaluator and one test subject share an architecture.
+- **Temporal snapshot.** All systems were tested on April 25, 2026. Model capabilities change with updates.
+- **Single prompt.** Each system received one prompt with no follow-up. Interactive research (multi-turn queries) may produce different results.
+
+### What's next
+
+We plan to expand PIF-Bench to the full 200-prospect dataset across all four difficulty tiers:
+
+- **Tier A:** Public Philanthropists (50 prospects) — well-documented donors with extensive giving records
+- **Tier B:** Mid-Profile Donors (50 prospects) — some public records, limited giving disclosures
+- **Tier C:** Private Individuals (50 prospects) — minimal public footprint
+- **Tier D:** Adversarial Cases (50 prospects) — common names, deceased individuals, name changes, international prospects
+
+The ground truth dataset will be built from IRS Form 990 filings, SEC EDGAR, FEC donor records, state property records, and Foundation Directory Online. The benchmark dataset and scoring framework will be open for any system to test against.
