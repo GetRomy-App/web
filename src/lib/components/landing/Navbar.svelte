@@ -30,12 +30,13 @@
 		class="max-w-3xl border-gray-alpha-200 bg-background/60 p-2 backdrop-blur-md rounded-xl flex w-full items-center justify-between border"
 	>
 		<div class="gap-0.5 ml-2 flex items-center">
-			<img src="/icon-logo.png" alt="Rōmy logo" class="size-6" />
+			<img src="/icon-logo.png" alt="" class="size-6" />
 			<span class="text-foreground text-base font-medium tracking-tight">Rōmy</span>
 		</div>
 		<div class="gap-0.5 flex items-center">
 			<button
 				onclick={toggleTheme}
+				aria-label="Toggle theme"
 				class="text-gray-alpha-600 hover:text-foreground text-xs font-medium transition-colors cursor-pointer"
 			>
 				{$isDark ? 'Light' : 'Dark'}
@@ -52,7 +53,7 @@
 			</Button>
 			<Button class="h-7 text-xs" href={productUrl} target="_blank" rel="noreferrer">
 				Get Started
-				<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" class="size-3">
+				<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" class="size-3" aria-hidden="true">
 					<path d="M9 6C9 6 15 10.4189 15 12C15 13.5812 9 18 9 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
 				</svg>
 			</Button>

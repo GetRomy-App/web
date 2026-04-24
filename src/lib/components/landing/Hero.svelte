@@ -15,7 +15,7 @@
 	$effect(() => {
 		if (!previewImg) return;
 		const dark = $isDark;
-		const nextSrc = dark ? '/screenshot.png' : '/screenshot-light.png';
+		const nextSrc = dark ? '/screenshot.webp' : '/screenshot-light.webp';
 
 		gsap.to(previewImg, {
 			filter: 'blur(16px) saturate(0.6)',
@@ -121,7 +121,7 @@
 	<div bind:this={heroButtons} class="gap-4 sm:flex-row flex flex-col items-center opacity-0">
 		<Button class="group" size="lg" href={productUrl} target="_blank" rel="noreferrer">
 			Get Started
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="size-4">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="size-4" aria-hidden="true">
 				<path d="M9 6C9 6 15 10.4189 15 12C15 13.5812 9 18 9 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
 			</svg>
 		</Button>
@@ -134,8 +134,9 @@
 		<div class="relative z-10 p-5 sm:p-8">
 			<img
 				bind:this={previewImg}
-				src="/screenshot.png"
+				src="/screenshot.webp"
 				alt="Preview of Rōmy"
+				decoding="async"
 				class="screenshot-img h-auto w-full rounded-md opacity-0"
 			/>
 		</div>
