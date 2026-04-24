@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-export const isDark = writable(true);
+export const isDark = writable(false);
 
 export function toggleTheme() {
 	isDark.update((v) => {
