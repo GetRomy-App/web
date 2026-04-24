@@ -45,7 +45,8 @@
 			if (!mounted) return;
 
 			tl = gsap.timeline();
-			titleSplit = new SplitText(heroTitle, { type: 'lines', mask: 'lines', linesClass: 'pb-4' });
+			const isMobile = window.innerWidth < 768;
+			titleSplit = new SplitText(heroTitle, { type: 'lines', mask: 'lines', linesClass: isMobile ? 'pb-1' : 'pb-4' });
 			descSplit = new SplitText(heroDesc, { type: 'lines', mask: 'lines' });
 
 			tl.fromTo(
