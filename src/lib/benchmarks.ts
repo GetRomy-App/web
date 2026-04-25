@@ -14,10 +14,10 @@ export const PIF_OVERALL: BenchmarkDimension = {
 	label: 'Overall PIF-Score',
 	subtitle: 'Average across 5 prospects (Scott, Powell Jobs, Gund, Hastings, Smith)',
 	bars: [
-		{ name: 'Romy', score: 93.5, highlight: true },
-		{ name: 'Claude', score: 93.0, highlight: false },
-		{ name: 'Gemini', score: 81.9, highlight: false },
-		{ name: 'ChatGPT', score: 76.0, highlight: false }
+		{ name: 'Romy', score: 94.1, highlight: true },
+		{ name: 'Claude', score: 92.3, highlight: false },
+		{ name: 'Gemini', score: 79.1, highlight: false },
+		{ name: 'ChatGPT', score: 76.9, highlight: false }
 	]
 };
 
@@ -27,29 +27,29 @@ export const PIF_DIMENSIONS: BenchmarkDimension[] = [
 		subtitle: 'Percentage of stated facts verified against public records',
 		bars: [
 			{ name: 'Romy', score: 94, highlight: true },
-			{ name: 'Claude', score: 95, highlight: false },
-			{ name: 'ChatGPT', score: 88, highlight: false },
-			{ name: 'Gemini', score: 83, highlight: false }
+			{ name: 'Claude', score: 93, highlight: false },
+			{ name: 'Gemini', score: 84, highlight: false },
+			{ name: 'ChatGPT', score: 84, highlight: false }
 		]
 	},
 	{
 		label: 'Discovery Recall',
 		subtitle: 'Percentage of known facts the system found',
 		bars: [
-			{ name: 'Romy', score: 97, highlight: true },
-			{ name: 'Claude', score: 92, highlight: false },
-			{ name: 'ChatGPT', score: 65, highlight: false },
-			{ name: 'Gemini', score: 72, highlight: false }
+			{ name: 'Romy', score: 96, highlight: true },
+			{ name: 'Claude', score: 94, highlight: false },
+			{ name: 'Gemini', score: 72, highlight: false },
+			{ name: 'ChatGPT', score: 63, highlight: false }
 		]
 	},
 	{
 		label: 'Hallucination Rate',
 		subtitle: 'Inverted: higher = fewer fabricated claims',
 		bars: [
-			{ name: 'Romy', score: 94, highlight: true },
-			{ name: 'Claude', score: 95, highlight: false },
-			{ name: 'ChatGPT', score: 90, highlight: false },
-			{ name: 'Gemini', score: 86, highlight: false }
+			{ name: 'Romy', score: 93, highlight: true },
+			{ name: 'Claude', score: 93, highlight: false },
+			{ name: 'ChatGPT', score: 87, highlight: false },
+			{ name: 'Gemini', score: 85, highlight: false }
 		]
 	},
 	{
@@ -57,19 +57,19 @@ export const PIF_DIMENSIONS: BenchmarkDimension[] = [
 		subtitle: 'Accuracy and calibration of giving capacity estimate',
 		bars: [
 			{ name: 'Romy', score: 92, highlight: true },
-			{ name: 'Claude', score: 90, highlight: false },
-			{ name: 'ChatGPT', score: 72, highlight: false },
-			{ name: 'Gemini', score: 60, highlight: false }
+			{ name: 'Claude', score: 93, highlight: false },
+			{ name: 'Gemini', score: 76, highlight: false },
+			{ name: 'ChatGPT', score: 69, highlight: false }
 		]
 	},
 	{
 		label: 'Source Attribution',
 		subtitle: 'Percentage of claims with traceable citations',
 		bars: [
-			{ name: 'Romy', score: 95, highlight: true },
-			{ name: 'Claude', score: 82, highlight: false },
-			{ name: 'ChatGPT', score: 82, highlight: false },
-			{ name: 'Gemini', score: 72, highlight: false }
+			{ name: 'Romy', score: 94, highlight: true },
+			{ name: 'Claude', score: 85, highlight: false },
+			{ name: 'ChatGPT', score: 80, highlight: false },
+			{ name: 'Gemini', score: 76, highlight: false }
 		]
 	},
 	{
@@ -77,9 +77,9 @@ export const PIF_DIMENSIONS: BenchmarkDimension[] = [
 		subtitle: 'Coverage of sections a fundraiser needs',
 		bars: [
 			{ name: 'Romy', score: 100, highlight: true },
-			{ name: 'Claude', score: 92, highlight: false },
-			{ name: 'ChatGPT', score: 75, highlight: false },
-			{ name: 'Gemini', score: 70, highlight: false }
+			{ name: 'Claude', score: 89, highlight: false },
+			{ name: 'ChatGPT', score: 74, highlight: false },
+			{ name: 'Gemini', score: 72, highlight: false }
 		]
 	},
 	{
@@ -87,9 +87,9 @@ export const PIF_DIMENSIONS: BenchmarkDimension[] = [
 		subtitle: 'Could a fundraiser make a qualified ask from this report?',
 		bars: [
 			{ name: 'Romy', score: 95, highlight: true },
-			{ name: 'Claude', score: 93, highlight: false },
-			{ name: 'ChatGPT', score: 70, highlight: false },
-			{ name: 'Gemini', score: 73, highlight: false }
+			{ name: 'Claude', score: 95, highlight: false },
+			{ name: 'Gemini', score: 76, highlight: false },
+			{ name: 'ChatGPT', score: 66, highlight: false }
 		]
 	}
 ];

@@ -192,16 +192,176 @@ No human editing was applied to the scores or analysis.
 
 ### Limitations
 
-This is a single-prospect Tier A evaluation. Key limitations:
+The original Round 1 was a single-prospect Tier A evaluation. Key limitations:
 
-- **N=1.** MacKenzie Scott is exceptionally well-documented. Performance on Tier B-D prospects (mid-profile, private individuals, adversarial cases) may differ significantly.
+- **N=1.** MacKenzie Scott is exceptionally well-documented. Performance on Tier B-D prospects (mid-profile, private individuals, adversarial cases) may differ significantly. *Round 2 (below) begins addressing this with four additional Tier A prospects.*
 - **Evaluator conflict.** Claude Code (Claude Opus 4.6) evaluated Claude Opus 4.7 Adaptive's output. While the scoring framework is designed to be objective (factual verification against public records), the evaluator and one test subject share an architecture.
 - **Temporal snapshot.** All systems were tested on April 25, 2026. Model capabilities change with updates.
 - **Single prompt.** Each system received one prompt with no follow-up. Interactive research (multi-turn queries) may produce different results.
 
-### What's next
+## Round 2: Multi-prospect evaluation
 
-We plan to expand PIF-Bench to the full 200-prospect dataset across all four difficulty tiers:
+A single Tier A prospect tells you how a system performs on its easiest case. To stress-test the framework, we ran four additional prospects through Romy — spanning different sectors, geographies, and edge conditions. Equivalent reports from Claude, ChatGPT, and Gemini for the same prospects are being collected and will be added below as each is scored against the same framework.
+
+All four prospects are Tier A (well-documented public philanthropists), so Round 2 expands prospect coverage rather than difficulty tier. The full Tier A–D protocol is still ahead.
+
+### The four prospects
+
+| # | Prospect | Sector | Geography | Edge case tested |
+|---|---|---|---|---|
+| 1 | Reed Hastings | Charter schools | Rural Colorado | Imminent boardroom transition (Netflix exit June 2026) |
+| 2 | Agnes Gund | Arts education | New York City | Deceased September 18, 2025 |
+| 3 | Laurene Powell Jobs | Journalism / media literacy | Washington, D.C. | Recent ~$1.44B liquidity event (Dec 2025) |
+| 4 | Robert Smith | HBCU engineering | Texas | Sensitive 2020 legal history |
+
+### Romy scores
+
+| Prospect | FP | DR | HR | CEA | SA | SC | ACT | PIF-Score |
+|---|---|---|---|---|---|---|---|---|
+| Reed Hastings | 95 | 96 | 93 | 94 | 95 | 100 | 96 | **94.9** |
+| Agnes Gund | 96 | 95 | 92 | 89 | 95 | 100 | 95 | **93.8** |
+| Laurene Powell Jobs | 94 | 97 | 93 | 91 | 92 | 100 | 95 | **93.9** |
+| Robert Smith | 93 | 96 | 91 | 92 | 94 | 100 | 96 | **93.6** |
+| **Average** | **94.5** | **96.0** | **92.3** | **91.5** | **94.0** | **100** | **95.5** | **94.0** |
+
+Combined with the MacKenzie Scott baseline (94.6), Romy averages **94.1 across five Tier A prospects** — a tight band suggesting consistent performance on well-documented public philanthropists rather than benchmark-overfit on Scott specifically.
+
+### What stood out
+
+**Edge case adaptation (Gund, deceased Sept 2025).** Romy caught the death date and pivoted the entire 16-section report from individual solicitation to family foundation strategy. It named Catherine Gund (Chair of the $556M George Gund Foundation) and Anna Traggio as the operative trustees, and flagged Studio in a School — the dominant NYC arts education nonprofit Gund founded in 1977 — as competitive overlap any new arts-ed pitch must address. A system that cold-pitches a deceased prospect is worse than useless, and adaptive handling of this edge case is the entire reason it was included.
+
+**Geographic anchor discovery (Hastings, rural Colorado).** Romy surfaced two anchor assets that materially shape engagement: Hastings's $20–$41M Lone Rock Retreat in Bailey, CO (a nonprofit educator facility he built for charter and public school teachers) and the Charter School Growth Fund headquarters in Broomfield, CO (where he sits on the board). Both are concrete proof of Colorado intent rather than abstract affinity, and both materially change the engagement strategy.
+
+**Timing-sensitive intelligence (Powell Jobs, Dec 2025).** Powell Jobs divested her ~20% Monumental Sports stake in December 2025 — roughly $1.44B in fresh liquidity. Romy flagged this within five months of the event and called it a 12–18 month tax-planning window. Recency at this fidelity is the difference between actionable intelligence and stale research.
+
+**Judgment on sensitive material (Smith, 2020 DOJ).** Smith's 2020 non-prosecution agreement with the DOJ is public record. Romy surfaced it in the capacity-assessment context as a tax-planning factor, then explicitly listed it under "Solicitation Guardrails" as a topic NOT to raise in cultivation conversations. Knowing what to know but not say is closer to intelligence than research.
+
+### Where Romy lost points
+
+**Capacity estimation on edge cases (CEA: 89, Gund).** Standard EGS/GS capacity formulas don't apply cleanly to deceased prospects. Romy adjusted methodology and provided two-vehicle ranges (AG Foundation $250K–$2M; George Gund Foundation $1M–$10M), but the absence of a single defensible asking number is a real cost to a fundraiser writing a pipeline forecast. A dedicated estate / family-foundation capacity model would close this.
+
+**Hallucination floor (HR: 91, Smith).** Real estate values across Smith's five-state portfolio (Austin, Malibu, NYC, Denver, Florida) are estimated from neighborhood comparables rather than parcel records, because the underlying assets sit inside LLCs and trusts that don't surface in name-based searches. Romy disclosed this methodology in the sources section, but estimates without inline confidence labels still count against the metric. The mitigation — labeling each estimate with a confidence tag in the body of the report rather than only in methodology — would close most of this gap.
+
+**Source attribution drift (SA: 92, Powell Jobs).** Romy's earlier reports include hyperlinked citations on nearly every factual claim. The Powell Jobs report relies more on inline parenthetical sources ("Source: Wikipedia", "Source: Bloomberg") without hyperlinks for several recent claims. Citation density is intact; clickability is the regression.
+
+### ChatGPT scores
+
+| Prospect | FP | DR | HR | CEA | SA | SC | ACT | PIF-Score |
+|---|---|---|---|---|---|---|---|---|
+| Reed Hastings | 85 | 60 | 88 | 78 | 80 | 75 | 68 | **78.7** |
+| Agnes Gund | 85 | 62 | 85 | 50 | 78 | 70 | 50 | **70.8** |
+| Laurene Powell Jobs | 78 | 65 | 83 | 72 | 80 | 75 | 73 | **76.4** |
+| Robert Smith | 85 | 62 | 88 | 75 | 80 | 75 | 70 | **78.7** |
+| **Average** | **83** | **62** | **86** | **69** | **80** | **74** | **65** | **76.1** |
+
+Combined with the MacKenzie Scott baseline (79.9), ChatGPT averages **76.9 across five Tier A prospects**.
+
+### What ChatGPT got right
+
+**Caught the Gund death pivot.** ChatGPT correctly identified Agnes Gund as deceased (1938–2025) and acknowledged Studio in a School as the institutional incumbent any new arts-ed pitch would face. This is non-trivial — a system that cold-pitches a deceased prospect is actively harmful.
+
+**Citation discipline.** Sources are real and hyperlinked across all four reports (Wikipedia, Forbes, AP News, Ford Foundation, official institutional sites). No fabricated URLs surfaced.
+
+**Defensible capacity bands.** ChatGPT consistently provides tiered capacity ranges (conservative / realistic / stretch) with primary asks in the right ballpark — $25M–$40M for Smith and Hastings, $10M–$25M for Powell Jobs.
+
+### Where ChatGPT missed
+
+**Geographic anchors, consistently (DR avg: 62).** The same Atlanta-blindness pattern from Round 1, repeated four times. For Smith (Texas HBCU prompt), ChatGPT noted "Vista presence in Austin" but missed the existing **Prairie View A&M ↔ Student Freedom Initiative partnership** — the obvious warm-intro path. For Hastings (rural Colorado), no **Lone Rock Retreat** in Bailey, CO and no **Charter School Growth Fund** Broomfield HQ. For Powell Jobs (D.C. media literacy), no mention of **The Atlantic's Washington headquarters at the Watergate**. For Gund (NYC arts-ed), no **Catherine Gund** (Chair of the $556M George Gund Foundation) — the actual primary engagement target post-death.
+
+**Edge-case strategy doesn't follow the edge case (Gund, ACT: 50).** ChatGPT caught that Gund is deceased, then continued to recommend a $5M–$10M direct ask qualified as "if alive / comparable donor profile." The pivot to family foundation strategy — where the operational money actually sits and where Catherine Gund and Anna Traggio decide — is absent. Acknowledging an obstacle without rerouting around it is the most consequential actionability failure across the four reports.
+
+**Net worth calibration on Powell Jobs (FP: 78).** ChatGPT cites "~$21–24+ billion" sourced to InfluenceWatch. Forbes (April 2026), Bloomberg (Nov 2025), and LeaderPortfolio (Dec 2025) all place her in the $11.9B–$14.2B range. ChatGPT's figure overstates by roughly 50%, which propagates into inflated capacity assumptions downstream.
+
+**Recency gaps.** Powell Jobs's December 2025 Monumental Sports divestment (~$1.44B liquidity event — an obvious tax-planning window) is missing. So is her October 2025 *Wall Street Journal* essay on trust-based philanthropy — relevant grantee-side framing from five months before the test. Source recency, not just source presence, is what makes intelligence actionable.
+
+### Claude scores
+
+| Prospect | FP | DR | HR | CEA | SA | SC | ACT | PIF-Score |
+|---|---|---|---|---|---|---|---|---|
+| Reed Hastings | 94 | 96 | 93 | 94 | 85 | 88 | 96 | **93.1** |
+| Agnes Gund | 93 | 94 | 91 | 93 | 87 | 88 | 94 | **91.9** |
+| Laurene Powell Jobs | 94 | 96 | 92 | 94 | 88 | 88 | 96 | **93.1** |
+| Robert Smith | 90 | 92 | 93 | 92 | 85 | 88 | 95 | **91.4** |
+| **Average** | **93** | **95** | **92** | **93** | **86** | **88** | **95** | **92.4** |
+
+Combined with the MacKenzie Scott baseline (92.2), Claude averages **92.3 across five Tier A prospects**. *Evaluator-conflict caveat: Claude scoring Claude. The original Limitations section already disclosed this for Round 1 (Claude Opus 4.6 evaluated Claude Opus 4.7 Adaptive). The same applies here. Specific deductions below are tied to verifiable evidence rather than holistic judgment to limit subjective drift.*
+
+### What Claude got right
+
+**Edge case (Gund) handled correctly.** Claude opens the Gund report with a "⚠️ Critical Status Alert" lead, pivots to family-foundation strategy naming Catherine Gund (George Gund Foundation chair) and Anna Traggio, and flags Studio in a School as the "elephant in the room" — competing with the founder's own institution. Same strategic conclusion as Romy.
+
+**Named warm leads with current titles (DR avg: 95).** This is Claude's most consistent strength. Evan Smith (former Texas Tribune CEO, now Senior Advisor to both Texas Tribune and Emerson Collective) for Powell Jobs. Neerav Kingsland (CEO, Hastings Fund) for Hastings. Hasna Muhammad (Chair, Studio in a School board) and Sonia Lopez (AG Foundation administrator) for Gund. Michael Lomax, Henry Louis Gates Jr., Keith Shoates for Smith. These aren't generic referrals — they're operational connectors with documented affiliations.
+
+**Milestone-tied capacity reasoning (CEA avg: 93).** Claude consistently builds ask amounts as multi-year milestone structures rather than flat numbers. For Hastings: Year-1 $2M / Years 2–4 $8M / Year-5 capstone $15M, framed as a CSGF-style growth investment. For Powell Jobs: $1.5M over three years, anchored to the documented $4.6M three-year ProPublica precedent. This is sophisticated capacity calibration tied to the donor's documented giving cadence.
+
+**Specific journalism-portfolio data (Powell Jobs).** Claude surfaced ProPublica gift specifics by year — $500K (2016), $700K (2017), $4.6M three-year (2018), $2M (2021) — sourced to the 2021 *Columbia Journalism Review* investigation and ProPublica's IRS Form 990s. Romy noted ProPublica as a major recipient but did not produce this gift-by-year ledger.
+
+### Where Claude lost points
+
+**No hyperlinks (SA avg: 86).** Claude's citations are descriptive — "per Goodreturns, Source 14" or "per *Columbia Journalism Review* investigation" — but never clickable. Source discipline is otherwise strong (methodology section, primary-vs-secondary callouts on the Gund 990 figures), but a development officer cannot trace a claim to its source in one click. The fix is purely formatting; the underlying sourcing is solid.
+
+**Smaller section count (SC avg: 88).** Claude's reports run 7–8 main sections plus a Bottom Line. Romy's run 16, covering family detail, real-estate parcel-level breakdown, contact info, multi-page sources methodology, and explicit confidence levels. Claude packs more into each section, but the structural footprint is smaller, which counts against a fundraiser-side coverage checklist.
+
+**Cornell gift amount error in the Smith report (FP: 90).** Claude states Smith's 2016 Cornell gift was "$30M total ($20M from Fund II Foundation + $10M for STEM scholarships from Smith personally)." The actual 2016 gift, widely reported and confirmed by Cornell's own announcement, was **$50M** — the figure that triggered the engineering school renaming. The $20M discrepancy on a flagship gift propagates downstream into capacity reasoning that anchors on this datapoint.
+
+**Eight children claim (Smith).** Claude reports Smith has "eight children across both marriages." Wikipedia and other public sources consistently report seven (three from the first marriage, four from the second). Minor by itself, but combined with the Cornell figure, suggests Claude's specificity occasionally exceeds its source confidence.
+
+### Gemini scores
+
+| Prospect | FP | DR | HR | CEA | SA | SC | ACT | PIF-Score |
+|---|---|---|---|---|---|---|---|---|
+| Reed Hastings | 83 | 70 | 82 | 80 | 75 | 72 | 78 | **78.9** |
+| Agnes Gund | 84 | 74 | 84 | 85 | 75 | 74 | 80 | **81.2** |
+| Laurene Powell Jobs | 82 | 70 | 85 | 75 | 78 | 70 | 73 | **78.2** |
+| Robert Smith | 88 | 72 | 86 | 78 | 78 | 72 | 78 | **81.1** |
+| **Average** | **84** | **72** | **84** | **80** | **77** | **72** | **77** | **79.8** |
+
+Combined with the MacKenzie Scott baseline (76.0), Gemini averages **79.1 across five Tier A prospects** — meaningfully ahead of ChatGPT (76.9) but well behind Claude (92.3) and Romy (94.1).
+
+### What Gemini got right
+
+**Cornell amount correct (Smith FP: 88, highest among Round 2 systems on this prospect).** Gemini states Smith's 2016 Cornell gift was "$50M total ($30M personal + $20M Fund II)." This matches Cornell's own announcement and the figure that triggered the engineering school renaming. *Claude got this wrong as "$30M total"; Gemini got it right.* On this specific datapoint, Gemini outperformed Claude.
+
+**Caught the Gund death pivot (CEA: 85, ACT: 80).** "Critical Executive Note" at the top of the Gund report flagged the September 18, 2025 death and explicitly redirected to "her estate, her philanthropic trusts, and her family members (such as her daughter, Catherine Gund)." Recommended $1M–$5M to the estate or family foundation rather than directly to a deceased prospect. This is the same strategic pivot Romy and Claude made — and a meaningful improvement over ChatGPT's "$5M–$10M if alive" approach.
+
+**Geographic anchors (better than ChatGPT).** Surfaced CSGF's Colorado presence as a warm intro path for Hastings. Surfaced College Track's DC center as a Powell Jobs anchor. Used the Peace Corps narrative for rural Colorado positioning. ChatGPT missed all three of these.
+
+**Milestone-based capacity reasoning (CEA avg: 80).** For Hastings, recommended "$1M–$2.5M seed/expansion grant... with a built-in roadmap for a subsequent $10M+ scaling grant once performance metrics are proven." That's structurally similar to Claude's milestone framing. ChatGPT did not produce this kind of layered ask.
+
+### Where Gemini lost points
+
+**Harvard date wrong (Gund FP: 84).** Gemini states Agnes Gund earned her MA from Harvard "in 1962." Wikipedia, Bowdoin College's obituary, and other sources confirm 1980. An 18-year error on a verifiable educational milestone.
+
+**Netflix founded "1998" (Hastings FP: 83).** Actual founding year is 1997 per Wikipedia and SEC filings. Minor but a clean factual error on the company's most-cited founding date.
+
+**CSGF "Denver office" (Hastings).** CSGF's HQ is **Broomfield**, CO, not Denver. Broomfield is in the Denver metro area, so the warm-intro point is directionally correct, but the specific city is wrong (Romy and Claude both correctly identify Broomfield).
+
+**Recency gap on Powell Jobs (HR: 85).** Same pattern as ChatGPT. Gemini still treats Powell Jobs's 20% Monumental Sports stake as a current asset and uses it as a "D.C. footprint" hook. She divested in December 2025 — five months before the test. Romy and Claude both flagged this divestment.
+
+**Missed Lone Rock Retreat (Hastings DR: 70).** No mention of Hastings's $20M+ Lone Rock Retreat in Bailey, CO — the single most concrete proof of his Colorado intent and the most specific anchor for a rural-Colorado charter pitch. Romy and Claude both surfaced this. Missing it is a real DR cost on a geographic-specificity prompt.
+
+**Missed George Gund Foundation (Gund DR: 74).** No mention that Catherine Gund chairs the $556M George Gund Foundation — the actual operational successor entity. Anna Traggio (4th child / co-trustee of AG Foundation) also absent. The pivot to family foundation is correct in concept but missing the specific institutional infrastructure.
+
+**No hyperlinks (SA avg: 77).** Inline citations like "[Forbes, 2026]" or "(Source: The Art Newspaper, Wikipedia)" — descriptively sourced but never clickable. Same regression as Claude on this dimension.
+
+### Cross-system comparison (final)
+
+All four systems are now scored across all five prospects.
+
+| Prospect | Romy | Claude | Gemini | ChatGPT |
+|---|---|---|---|---|
+| MacKenzie Scott (R1) | 94.6 | 92.2 | 76.0 | 79.9 |
+| Reed Hastings | **94.9** | **93.1** | **78.9** | **78.7** |
+| Agnes Gund | **93.8** | **91.9** | **81.2** | **70.8** |
+| Laurene Powell Jobs | **93.9** | **93.1** | **78.2** | **76.4** |
+| Robert Smith | **93.6** | **91.4** | **81.1** | **78.7** |
+| **5-prospect avg** | **94.1** | **92.3** | **79.1** | **76.9** |
+
+**Final ordering: Romy > Claude > Gemini > ChatGPT.** The Romy-Claude gap is tight (1.8 points), the Claude-Gemini gap is wide (13.2 points), and Gemini-ChatGPT is meaningful but small (2.2 points). Gemini's edge over ChatGPT comes almost entirely from edge-case adaptation (Gund pivot) and geographic specificity (CSGF Colorado, College Track DC) — the exact dimensions where ChatGPT consistently fails.
+
+## What's next
+
+Beyond the four-prospect Round 2 above, we plan to expand PIF-Bench to the full 200-prospect dataset across all four difficulty tiers:
 
 - **Tier A:** Public Philanthropists (50 prospects) — well-documented donors with extensive giving records
 - **Tier B:** Mid-Profile Donors (50 prospects) — some public records, limited giving disclosures
