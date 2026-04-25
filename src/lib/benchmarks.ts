@@ -12,12 +12,12 @@ export interface BenchmarkDimension {
 
 export const PIF_OVERALL: BenchmarkDimension = {
 	label: 'Overall PIF-Score',
-	subtitle: 'Composite prospect intelligence fidelity (0-100)',
+	subtitle: 'Average across 5 prospects (Scott, Powell Jobs, Gund, Hastings, Smith)',
 	bars: [
-		{ name: 'Romy', score: 94.6, highlight: true },
-		{ name: 'Claude', score: 92.2, highlight: false },
-		{ name: 'ChatGPT', score: 79.9, highlight: false },
-		{ name: 'Gemini', score: 76.0, highlight: false }
+		{ name: 'Romy', score: 93.5, highlight: true },
+		{ name: 'Claude', score: 93.0, highlight: false },
+		{ name: 'Gemini', score: 81.9, highlight: false },
+		{ name: 'ChatGPT', score: 76.0, highlight: false }
 	]
 };
 
