@@ -41,6 +41,13 @@
 				Labs
 			</a>
 			<span class="text-gray-alpha-400 text-xs select-none">//</span>
+			<a
+				href="/blog"
+				class="text-gray-alpha-600 hover:text-foreground text-xs font-medium transition-colors"
+			>
+				Blog
+			</a>
+			<span class="text-gray-alpha-400 text-xs select-none">//</span>
 			<button
 				onclick={toggleTheme}
 				aria-label="Toggle theme"
