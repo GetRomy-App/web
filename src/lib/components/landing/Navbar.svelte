@@ -47,10 +47,10 @@
 	<nav
 		class="max-w-3xl border-gray-alpha-200 bg-background/60 p-2 backdrop-blur-md rounded-xl flex w-full items-center justify-between border"
 	>
-		<div class="gap-0.5 ml-2 flex items-center">
+		<a href="/" aria-label="Rōmy home" class="gap-0.5 ml-2 flex items-center no-underline">
 			<img src="/icon-logo.png" alt="" class="size-6" />
 			<span class="text-foreground text-base font-medium tracking-tight">Rōmy</span>
-		</div>
+		</a>
 		<div class="gap-0.5 flex items-center">
 			<!-- Desktop links -->
 			<a
