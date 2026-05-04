@@ -11,7 +11,7 @@ export interface PostMeta {
 	date: string;
 	excerpt: string;
 	tag: string;
-	has_benchmarks?: boolean;
+	has_benchmarks: boolean;
 }
 
 export interface Post extends PostMeta {
@@ -40,7 +40,8 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 				title: data.title ?? entry.name,
 				date: data.date ?? '',
 				excerpt: data.excerpt ?? '',
-				tag: data.tag ?? ''
+				tag: data.tag ?? '',
+				has_benchmarks: data.has_benchmarks ?? false
 			});
 		} catch {
 			// skip entries without index.mdoc
