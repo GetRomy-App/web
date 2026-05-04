@@ -1,0 +1,85 @@
+---
+title: Sub-processors
+description: Third-party services that process personal data on our behalf
+effective: 2026-05-05
+---
+
+**Effective:** 2026-05-05
+**Last updated:** 2026-05-05
+
+A "sub-processor" is a third-party service that processes personal data on Rōmy's behalf to deliver the Service. We engage the sub-processors below. Each is bound by a written agreement requiring confidentiality, security, and (for non-US transfers) Standard Contractual Clauses or equivalent transfer mechanism.
+
+We will give customers prior notice of new sub-processors via this page (subscribe by emailing howard@getromy.app to receive change notifications). Customers may object on reasonable privacy grounds; if we cannot resolve the objection, the customer may terminate the affected portion of the Service.
+
+## Infrastructure & hosting
+
+| Sub-processor | Purpose | Location | Data accessed |
+|---|---|---|---|
+| **Vercel Inc.** | Application hosting (intel.getromy.app, getromy.app), serverless functions, edge network, build pipeline | USA | All app traffic, server logs |
+| **Vercel Blob** | File storage for chat attachments and uploaded files | USA | Customer-uploaded files |
+| **Vercel Functions / Sandbox** | Compute for AI agent runs and isolated execution | USA | Customer content during execution |
+| **Vercel Analytics** | First-party page-view analytics on the application (intel.getromy.app) | USA | Anonymous visit metadata. Vercel Analytics does not store IP addresses; visits are identified by a daily-rotating hashed identifier. |
+| **Supabase Inc.** | Primary PostgreSQL database (accounts, chats, messages, knowledge, prospect batches) | USA | All structured customer data and account info |
+| **Redis (managed via Upstash or equivalent)** | Key-value cache, sessions, sandbox state, rate limit counters | USA | Session tokens, transient cache, sandbox state |
+
+## AI providers (via Vercel AI Gateway)
+
+| Sub-processor | Purpose | Location |
+|---|---|---|
+| **Vercel AI Gateway** | Routes model requests to underlying providers; provides observability and provider abstraction | USA |
+| Underlying model providers (e.g. **Anthropic**, **OpenAI**, **Google**, **xAI**, others available via the Gateway) | Generate AI responses, embeddings, completions | USA / EU depending on provider and routing |
+
+Rōmy itself does not train models on customer content. Underlying providers receive prompts and inputs only as needed to generate a response, under their API terms, which generally prohibit training on API-submitted data. We do not opt in to data sharing for training. Where a provider offers a "zero-retention" or "no-logging" option that is compatible with the Service, we will adopt it.
+
+## Authentication
+
+| Sub-processor | Purpose | Location | Data accessed |
+|---|---|---|---|
+| **Google LLC** (OAuth) | Sign-in / sign-out via Google account | USA | Google name, email, profile image, account ID. We do not access Gmail, Drive, Calendar, or other Google service contents. |
+| **Have I Been Pwned (Troy Hunt)** | Breach-check when a user sets or changes a password (sign-up, password reset, password change) | International (Cloudflare-fronted) | A hashed prefix of the password (k-anonymity). The full password is never sent. Used only to reject passwords that have appeared in a public breach. |
+
+We do not use a third-party identity provider for email + password sign-in: passwords are hashed and stored locally in our Supabase database by Better Auth.
+
+## Email
+
+| Sub-processor | Purpose | Location | Data accessed |
+|---|---|---|---|
+| **Resend** | Transactional email delivery (sign-in verification, account / security notices, and a short onboarding sequence sent over the first week after signup) | USA | Recipient email, name, message content |
+
+## Billing
+
+| Sub-processor | Purpose | Location | Data accessed |
+|---|---|---|---|
+| **Autumn (useautumn.com)** | Subscription billing, plan attach, customer portal, credit purchases. Routes payment data to its underlying processor (e.g. Stripe) on Autumn's hosted flow. | USA | Customer name, email, plan, transaction metadata. We do not see or store payment-card numbers. |
+
+## Content sources used during research (read-only fetch)
+
+When you upload a YouTube channel as a content source, or when our agent retrieves public information about a Prospect, we fetch from third parties as a *user* of those services. They are not our sub-processors but they are recipients of our request metadata (e.g. our IP and user agent). They include:
+
+- **Google APIs (YouTube Data API)** — to enumerate videos for YouTube sources you add
+- **Public websites** you ask us to crawl (RSS feeds, websites added as Sources)
+- **Public web search and retrieval** during prospect research
+
+These are end services we read from, not data processors of yours.
+
+## Data residency and transfers
+
+All listed sub-processors process personal data in or via the United States. For transfers from the EEA / UK / Switzerland to the US, we rely on:
+
+- The **EU Standard Contractual Clauses (2021/914)** (Modules 2 and 3 as applicable)
+- The **UK International Data Transfer Addendum**
+- Supplementary measures (TLS in transit, encryption at rest, access controls, the right of customers to delete data immediately)
+
+Copies of executed SCCs are available on request to howard@getromy.app.
+
+## Change history
+
+We will list material changes here.
+
+| Date | Change |
+|---|---|
+| 2026-05-05 | Initial publication |
+
+---
+
+*Published at intel.getromy.app/subprocessors. Customers can subscribe to change notifications by emailing howard@getromy.app.*

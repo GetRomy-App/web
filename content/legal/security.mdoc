@@ -1,0 +1,93 @@
+---
+title: Security Overview
+description: How Rōmy protects customer data
+effective: 2026-05-05
+---
+
+**Effective:** 2026-05-05
+**Last updated:** 2026-05-05
+
+This page describes how Rōmy protects customer data. It supplements our [Privacy Policy](/privacy) and the [Data Processing Agreement](/dpa). For specific questions, email **solomon@getromy.app**.
+
+---
+
+## Architecture in brief
+
+- **Application:** Nuxt (Vue 3) running on Vercel serverless infrastructure
+- **Database:** PostgreSQL via Supabase
+- **Cache / sessions:** Redis
+- **File storage:** Vercel Blob
+- **AI:** Vercel AI Gateway routing to selected model providers
+- **Authentication:** Better Auth — Google OAuth + email/password (passwords hashed; HIBP breach-check on sign-up; email verification required) + API keys (hashed at rest, shown once)
+- **Email:** Resend (sign-in verification, account / security notices, and a short onboarding sequence)
+- **Billing:** Autumn (payment data handled by their hosted flow; we do not see card numbers)
+
+A full sub-processor list with locations is at [/subprocessors](/subprocessors).
+
+## Encryption
+
+- **In transit:** TLS 1.2+ on every public endpoint, including the marketing site (getromy.app), the application (intel.getromy.app), and all API endpoints.
+- **At rest:** Supabase encrypts the database; Vercel Blob encrypts stored files.
+- **Sessions:** cookies are Secure and HTTP-only with SameSite protection.
+
+## Access control
+
+- Sign-in is via Google OAuth or email + password. Passwords are hashed by Better Auth (we never see plaintext) and checked against the Have I Been Pwned breach database on sign-up. Email verification is required before an account can be used.
+- API keys (if used) are stored hashed and revealed to the user only once at creation.
+- Production systems require individual authentication; least-privilege access; MFA for admin functions.
+- Customer data is segregated by `userId` at the application layer; queries are scoped to the authenticated user.
+
+## AI handling
+
+- Rōmy itself does not train AI models on customer content. Customer prompts and outputs are sent to underlying model providers via the Vercel AI Gateway under those providers' API terms, which generally prohibit using API-submitted data for training. We do not opt in to data sharing for training, and we do not submit customer content to consumer-grade models.
+- AI outputs are inferences and may be inaccurate. We surface this to users in the product and in the [Terms of Service](/terms).
+
+## Data segregation
+
+Within the application, every record is associated with a user account. Cascading deletes ensure that when a user account is deleted, dependent records (chats, messages, knowledge, batches, prospects, files) are removed in the same transaction.
+
+## Sandboxing
+
+When the Service runs agents that execute code or perform external retrieval, it does so inside isolated Vercel Sandbox environments with limited network and lifetime, separated from customer data unless explicitly required.
+
+## Vulnerability management
+
+- We update dependencies regularly and monitor advisories.
+- We accept good-faith security reports at **solomon@getromy.app**. See our coordinated disclosure policy in the [AUP](/aup#3-vulnerability-disclosure).
+- We do not currently run a paid bug bounty.
+
+## Logging and monitoring
+
+- Application and access logs are collected for security investigations and debugging.
+- Anomaly detection operates at the platform layer (Vercel, Supabase).
+- Logs are retained according to the provider's defaults and minimised over time.
+
+## Backups and recovery
+
+Supabase performs routine backups with the provider's standard retention. Restorations are tested through provider-supplied mechanisms.
+
+## Incident response
+
+If we identify a Personal Data Breach, we follow the procedure documented in our internal Incident Response Plan, with a target of notifying affected customers and regulators within 72 hours of becoming aware (per GDPR Art. 33). Breach reports go to:
+
+- Affected customers (by email and in-app where possible)
+- Supervisory authorities, where required by law
+- Affected data subjects, where the breach is high risk to their rights
+
+## Compliance
+
+- **GDPR / UK GDPR:** see the [Privacy Policy](/privacy), [Prospect Privacy Notice](/privacy/prospects), and [DPA](/dpa).
+- **CCPA / CPRA and other US state laws:** see the [Privacy Policy](/privacy).
+- **HIPAA:** Rōmy is **not** a HIPAA Business Associate and **does not sign BAAs**. Customers must not upload PHI. See [AUP](/aup).
+- **PCI-DSS:** payment-card data handling is delegated to our payment processor's hosted flow; we are not in scope for PCI-DSS as a merchant operating outside the hosted form.
+- **SOC 2 / ISO 27001:** not yet certified. We use sub-processors that are.
+
+We will publish material updates to our compliance posture on this page.
+
+## Reporting a security issue
+
+Email **solomon@getromy.app** with details and reproduction steps. We acknowledge receipt within 5 business days and aim to remediate within 90 days. Please don't disclose publicly before we've had a chance to fix.
+
+---
+
+*Published at intel.getromy.app/security.*

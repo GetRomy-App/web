@@ -1,0 +1,156 @@
+---
+title: Privacy Policy
+description: How GetRomy LLC handles personal data
+effective: 2026-05-05
+---
+
+**Effective:** 2026-05-05
+**Last updated:** 2026-05-05
+
+This Privacy Policy explains how **GetRomy LLC** ("Rōmy", "we", "us", "our") collects, uses, and shares personal information when you use **getromy.app**, **intel.getromy.app**, our APIs, and related services (together, the "Service").
+
+This policy covers personal data we process about **you** as a customer, prospective customer, or website visitor. If you are an individual whose data was uploaded to the Service by one of our customers (a "Prospect"), please see our [Prospect Privacy Notice](/privacy/prospects) instead.
+
+---
+
+## 1. Who we are
+
+**Controller:** GetRomy LLC
+**General / privacy contact:** howard@getromy.app — Howard, Chief Executive Officer
+**Technical / security contact:** solomon@getromy.app — Solomon, VP of Product
+
+We do not have an EU/UK establishment. If you are in the EEA or UK, you can contact us in English at the emails above. We will appoint an Article 27 representative if our processing volume in the EEA/UK requires one.
+
+## 2. What we collect
+
+We collect personal data in three categories.
+
+### 2.1 Information you give us
+- **Account info:** name, email address, username, profile image. You can sign in with Google OAuth or with email + password. Passwords are stored only as a hash using Better Auth defaults; we never see or store the plaintext password. New passwords are checked against the Have I Been Pwned breach database before being accepted.
+- **Billing info:** plan tier, billing address, transaction metadata (payment card details are handled by our billing processor — we do not see or store them)
+- **Customer content:** chats, messages, files you upload, knowledge base content, API requests, prospect lists you upload for research, search history ("discoveries"), highlights, agent configuration
+- **Communications:** support emails, feedback, anything you send us
+- **API keys:** if you create API keys to access our API, the key value is stored hashed and shown only once
+
+### 2.2 Information collected automatically
+- **Authentication state:** session cookies, sign-in timestamps
+- **Usage:** API endpoint hits, model used, token counts, message counts, request duration, credit consumption — used for billing and product improvement
+- **Device/connection:** IP address, user agent, approximate location derived from IP (city-level), referring URL — collected for security, fraud prevention, and basic analytics
+- **Cookies:** see our [Cookie Policy](/cookies)
+
+### 2.3 Information from third parties
+- **Google sign-in:** when you sign in with Google, we receive your name, email, profile image, and Google account ID. We do not access your Gmail, Drive, or Calendar contents.
+- **Public sources used during prospect research:** when you research a Prospect, we may retrieve information about that Prospect from publicly available sources (news sites, professional directories, regulatory filings, social profiles, public donation records). This data concerns the Prospect, not you.
+
+## 3. Why we use it (and our lawful basis under GDPR)
+
+| Purpose | Data | Lawful basis (GDPR) |
+|---|---|---|
+| Provide the Service (sign-in, run chats, run prospect research) | Account, customer content, usage | Contract (Art. 6(1)(b)) |
+| Bill you and prevent fraud | Account, billing, usage | Contract; legitimate interests (Art. 6(1)(f)) |
+| Send transactional emails (sign-in verification, account / security notices) | Email, name | Contract |
+| Send onboarding emails (a short series of welcome / how-it-works messages over the first week) | Email, name | Legitimate interests (Art. 6(1)(f)); EU/UK recipients can opt out at any time, see below |
+| Improve the product, debug, monitor abuse | Usage, content (sampled, where necessary) | Legitimate interests |
+| Comply with law | All categories as required | Legal obligation (Art. 6(1)(c)) |
+| Defend legal claims | All categories as needed | Legitimate interests |
+
+We do not currently send marketing emails. We do send a brief onboarding sequence (welcome, how it works, and similar) over the first week after signup; you can stop these at any time by replying "unsubscribe" or emailing howard@getromy.app, and we are working on a one-click unsubscribe link in each message. If we later introduce marketing campaigns, we will only send them with your opt-in consent (Art. 6(1)(a)).
+
+We **do not** sell your personal information. We **do not** use your customer content to train AI models. We **do not** share your customer content with third parties except the sub-processors listed in §6, and only as needed to operate the Service.
+
+## 4. How long we keep it
+
+| Data | Retention |
+|---|---|
+| Account info (name, email, profile image, sign-in metadata) | While your account is active. **Deleted immediately** when you delete your account. |
+| Customer content (chats, messages, files, knowledge bases, agent config, highlights) | While your account is active. **Deleted immediately** on account deletion. Files in chat blob storage are removed in the same operation. |
+| Prospect research batches and results | Until you delete them, or immediately on account deletion |
+| Billing records (invoices, transactions held by our payment processor Autumn) | 7 years (US tax / accounting obligation). Cannot be erased on request because retention is required by law. |
+| Server logs and request metadata | According to our hosting and database providers' standard policies; we do not deliberately retain longer than needed for security and debugging |
+| Database backups | Per Supabase's standard backup retention; copies of deleted data may persist in backups for a short period until they are rotated out, after which the data is irrecoverable |
+
+You can delete your account anytime from **Settings → Data & Privacy**. Deletion is immediate: every record we hold under your account is removed in a single operation, including chat files and KV cache entries. Your billing record at our payment processor is retained as described above.
+
+## 5. Who we share it with
+
+We share personal data only as described below.
+
+- **Sub-processors** that help us run the Service. The current list is at [/subprocessors](/subprocessors). Each is bound by a written contract and (where applicable) Standard Contractual Clauses.
+- **Professional advisers** (lawyers, accountants, auditors) under confidentiality.
+- **Acquirers** if we are acquired or merged (we will notify you and provide an opt-out where legally required).
+- **Authorities** if compelled by valid legal process, or to protect rights, safety, or prevent fraud.
+
+We do not share your customer content with advertisers, data brokers, or other third parties.
+
+## 6. International transfers
+
+Our infrastructure is hosted primarily in the United States. If you are in the EEA, UK, or Switzerland, your personal data will be transferred to the US and processed there. We rely on:
+
+- **Standard Contractual Clauses (SCCs)** with all sub-processors in third countries.
+- **UK International Data Transfer Addendum** for transfers from the UK.
+- **Supplementary measures**: encryption in transit (TLS 1.2+), encryption at rest, access controls, and (where supported) data residency selection.
+
+A copy of the SCCs in force with any sub-processor is available on request.
+
+## 7. Your rights
+
+Depending on where you live, you have rights over your personal data. We honour the following for **all** users regardless of jurisdiction:
+
+- **Access** — request a copy of your data (one click in Settings → Data & Privacy → Export)
+- **Erasure** — delete your account and customer content (Settings → Data & Privacy → Delete account)
+- **Correction** — fix inaccurate data
+- **Portability** — receive your data in machine-readable JSON
+- **Object / restrict** — limit certain processing
+- **Withdraw consent** — for processing based on consent (e.g. marketing)
+- **Lodge a complaint** — with your local supervisory authority (EU/UK) or the US FTC
+
+**To exercise a right:** email **howard@getromy.app** or use the in-app controls. We respond within 30 days. We will verify your identity before acting on a request.
+
+If you are an EU/UK resident and unsatisfied with our response, you may lodge a complaint with your local Data Protection Authority. We do not require you to contact us first.
+
+## 8. Children
+
+Rōmy is not directed to children under 16, and we do not knowingly collect personal data from children. If you believe a child has provided us data, contact howard@getromy.app and we will delete it.
+
+## 9. Security
+
+We protect personal data using industry-standard measures:
+
+- TLS 1.2+ for all traffic
+- Encryption at rest for databases and file storage (Supabase / Vercel Blob)
+- Cookie-based sessions over Secure, HTTP-only cookies
+- Sign-in via Google OAuth or email + password. Passwords are hashed by Better Auth (we never see or store plaintext passwords) and checked against the Have I Been Pwned breach database before being accepted. Email addresses are verified before sign-in is allowed.
+- API keys (if used) are stored hashed and shown to you only once
+- Least-privilege access controls; production access limited to designated personnel
+- Logging and anomaly monitoring
+- Regular dependency updates and vulnerability scanning
+
+No system is perfectly secure. If we discover a personal data breach, we notify affected users and (where required) supervisory authorities within 72 hours per GDPR Art. 33.
+
+See our [Security Overview](/security) for more.
+
+## 10. California residents (CCPA / CPRA)
+
+In the prior 12 months we collected the categories listed in §2 for the purposes in §3. We do **not** sell or share personal information for cross-context behavioural advertising. California residents may exercise rights to know, delete, correct, and limit the use of sensitive personal information by emailing howard@getromy.app. We do not discriminate against you for exercising these rights.
+
+## 11. Other US state laws
+
+We honour rights granted under the Virginia CDPA, Colorado CPA, Connecticut CTDPA, Utah UCPA, Texas TDPSA, Oregon OCPA, and similar laws. Use the same email above.
+
+## 12. Cookies
+
+We use cookies sparingly. Details, categories, and your choices are in our [Cookie Policy](/cookies).
+
+## 13. Changes to this policy
+
+If we make material changes, we will notify you by email and post the updated version with a new effective date. Continued use after the effective date means you accept the changes.
+
+## 14. Contact
+
+- General privacy: **howard@getromy.app**
+- Company contact: **howard@getromy.app**
+- Mail: GetRomy LLC, [MAILING ADDRESS — to be added by counsel]
+
+---
+
+*This document is the canonical privacy policy of GetRomy LLC. The version published at intel.getromy.app/privacy is rendered from this source.*
