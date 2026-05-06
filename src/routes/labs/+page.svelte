@@ -42,18 +42,18 @@
 			label: 'Time per Prospect',
 			subtitle: 'From first search to actionable report',
 			bars: [
-				{ name: 'Romy', value: 300, max: 2700, display: '30s – 10 min', color: 'var(--ds-blue-700)', pct: 12 },
-				{ name: 'Enterprise Tools', value: 300, max: 2700, display: '~5 minutes', color: 'var(--ds-gray-alpha-200)', pct: 20 },
+				{ name: 'Romy', value: 600, max: 2700, display: '2 – 10+ min', color: 'var(--ds-blue-700)', pct: 22 },
+				{ name: 'Enterprise Tools', value: 900, max: 2700, display: '5 – 15 min', color: 'var(--ds-gray-alpha-200)', pct: 33 },
 				{ name: 'Manual Research', value: 2700, max: 2700, display: '~45 minutes', color: 'var(--ds-gray-alpha-100)', pct: 100 }
 			]
 		},
 		{
-			label: 'Cost per Prospect',
-			subtitle: 'Fully loaded cost including infrastructure',
+			label: 'Cost per Report',
+			subtitle: 'Fully loaded cost per full research report, depending on subscription tier',
 			bars: [
-				{ name: 'Romy', value: 0.10, max: 15, display: '$0.10', color: 'var(--ds-blue-700)', pct: 4 },
-				{ name: 'Enterprise Tools', value: 10, max: 15, display: '$8 – $15', color: 'var(--ds-gray-alpha-200)', pct: 75 },
-				{ name: 'Manual Research', value: 15, max: 15, display: '$50+', color: 'var(--ds-gray-alpha-100)', pct: 100 }
+				{ name: 'Romy', value: 5, max: 50, display: '$0.50 – $5', color: 'var(--ds-blue-700)', pct: 10 },
+				{ name: 'Enterprise Tools', value: 15, max: 50, display: '$8 – $15', color: 'var(--ds-gray-alpha-200)', pct: 30 },
+				{ name: 'Manual Research', value: 50, max: 50, display: '$50+', color: 'var(--ds-gray-alpha-100)', pct: 100 }
 			]
 		},
 		{
