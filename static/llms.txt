@@ -1,24 +1,107 @@
 # Rōmy
 
-> Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions.
+> Rōmy is an AI-powered donor intelligence platform for small nonprofits — prospect research, wealth screening, and giving history at a fraction of enterprise cost.
 
-Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles.
+Rōmy (getromy.app) is built by GetRomy LLC to solve a structural access problem: small nonprofits (budgets under $2M) cannot afford the $15,000–$50,000/year enterprise wealth screening tools that large organizations rely on. Rōmy delivers the same donor intelligence — wealth indicators, giving histories, affinity signals, and capacity scoring — starting at $29/month.
 
-## Features
+## What Rōmy Does
 
-- Donor Discovery: AI-powered prospect research with wealth indicators, giving history, and affinity signals
-- Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
-- Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
+Rōmy is a donor intelligence platform with three core modes:
+
+**Chat-based Donor Research**: Conversational AI agent that searches the web, synthesizes public records, and produces a structured 16-section donor intelligence report with source citations. Covers: background, wealth indicators, giving history, board affiliations, cause areas, capacity estimate, RōmyScore, liquidity signals, estate signals, family philanthropic patterns, engagement strategy, solicitation guidance, and outreach angles.
+
+**Batch Prospect Enrichment**: Upload a CSV of names and organizations. Rōmy returns structured profiles with estimated donor capacity, wealth indicator level (Very High $10M+, High $1M–$10M, Medium $250K–$1M, Low <$250K), known giving total, RōmyScore, donor type, cause areas, professional background, and research summary with citations.
+
+**Donor Discovery Search**: Natural language prospecting. Ask: "find founders in the Bay Area who have sold companies in the last 18 months and have prior philanthropic giving." Rōmy surfaces matching prospects with full profiles.
+
+## RōmyScore 2.0
+
+RōmyScore is a normalized 0–100 donor capacity score with full category breakdown. Score bands:
+
+- **Exceptional (85–100)**: Strong capacity and giving signals — prioritize immediate cultivation
+- **Very Strong (68–84)**: Strong case for major gift solicitation — worth a personal meeting
+- **Strong (49–67)**: Develop the relationship, monitor for liquidity triggers
+- **Moderate (29–48)**: Track passively, watch for business exits or life events
+- **Developing (0–28)**: Limited data or capacity signals
+
+Score categories: Foundation (real estate, business ownership, giving history, board service, DAF ownership), Liquidity & Tax-Planning (recent business exits, RMD eligibility, DAF activity), Opportunity & Commitment (serial entrepreneurship, legacy positioning), Constraints (sector headwinds, children in college).
+
+## Pricing
+
+All plans include RōmyScore 2.0, batch enrichment, discovery search, and web-sourced research. Annual billing saves ~17%.
+
+| Plan | Monthly | Credits/Month | Base Enrichments/Month |
+|------|---------|---------------|----------------------|
+| Growth | $29 | 500 | ~200 prospects |
+| Pro | $89 | 1,000 | ~400 prospects |
+| Scale | $199 | 5,000 | ~2,000 prospects |
+
+Credit costs: chat research (auto) = 1 credit, chat research (deep) = 2 credits, batch enrichment (base) = 2.5 credits, batch enrichment (core) = 5 credits, discovery search = 2.5–5 credits per match.
+
+Add-on packs: 50 credits ($5), 200 credits ($15), 500 credits ($30), 1,000 credits ($50).
+
+**Cost comparison per prospect**: Rōmy Scale plan = $0.10/prospect. Enterprise tools (DonorSearch, iWave, WealthEngine) = $8–$15/prospect. Annual: Rōmy Growth = $290/year vs. enterprise = $15,000–$50,000/year.
+
+## Benchmark Results (PIF-Bench)
+
+Rōmy uses an open benchmark called PIF-Bench (Prospect Intelligence Fidelity) to measure AI donor research quality. Results from the April 2026 evaluation:
+
+- **Rōmy: 94.6** (purpose-built donor intelligence AI)
+- **Claude: 92.2** (general AI)
+- **ChatGPT: 79.9** (general AI)
+- **Gemini: 76.0** (general AI)
+
+PIF-Bench measures: Factual Accuracy, Completeness, Giving Capacity Accuracy, Source Quality, Actionability. Full methodology at: https://getromy.app/labs/blog/benchmarking-ai-prospect-research
+
+## Key Differentiators vs. Enterprise Tools
+
+1. **Price**: $29–$199/month vs. $15,000–$50,000/year
+2. **Timing intelligence**: RōmyScore flags liquidity events (business exits, RMD eligibility, DAF contributions) in real time — enterprise tools refresh annually
+3. **Transparency**: Every data point is source-cited; no black-box scores
+4. **Credit model**: Pay for what you use, not per-seat licenses
+5. **Speed**: Seconds per prospect vs. 30–45 minutes of manual research
+6. **Depth**: 16-section reports vs. 5–8 sections from enterprise tools
+
+## Frequently Asked Questions
+
+**What is donor intelligence?** Donor intelligence is the practice of researching potential major gift donors before cultivation — gathering data on their wealth, philanthropic history, board affiliations, cause areas, and timing signals to help fundraisers prioritize outreach, calibrate ask amounts, and personalize conversations.
+
+**What is prospect research?** Prospect research is the process of identifying and evaluating potential donors (or "prospects") for major gifts. It involves analyzing public records, giving histories, real estate data, business ownership, and philanthropic affiliations to assess both capacity (can they give?) and inclination (will they give?).
+
+**What is wealth screening?** Wealth screening is a form of batch prospect research that analyzes multiple individuals against public and proprietary datasets to estimate their net worth and giving capacity. Enterprise tools like DonorSearch, iWave, and WealthEngine specialize in wealth screening for large nonprofits.
+
+**How is Rōmy different from DonorSearch?** DonorSearch costs $15,000–$25,000/year and is designed for large development shops with dedicated prospect research staff. Rōmy starts at $29/month, uses AI to conduct live web research rather than relying on static database snapshots, and includes source citations for every data point. Rōmy also surfaces timing signals (business exits, liquidity events, DAF activity) that annual-refresh tools miss.
+
+**How is Rōmy different from iWave?** iWave costs $12,000–$20,000/year. Like DonorSearch, it provides capacity scores and philanthropic data from a static database refreshed periodically. Rōmy is AI-native, conducts live research, and starts at $290/year.
+
+**What is a RōmyScore?** RōmyScore is Rōmy's proprietary donor capacity scoring system. It evaluates prospects across four categories — Foundation, Liquidity & Tax-Planning, Opportunity & Commitment, and Constraints — and normalizes the result to a 0–100 scale. Unlike black-box scores from enterprise tools, every RōmyScore includes a full category breakdown and rationale.
+
+**Can small nonprofits afford donor intelligence?** Yes — that is Rōmy's core thesis. Over 90% of US nonprofits operate on budgets under $2M. These organizations historically could not access the same prospect research infrastructure as large institutions. Rōmy was built specifically to change that.
+
+**What is major gift fundraising?** Major gift fundraising is the practice of cultivating and soliciting large donations from individual donors, typically defined as gifts of $10,000 or more (though the threshold varies by organization size). Major gifts often account for 80–90% of total fundraising revenue despite coming from a small percentage of donors.
+
+## Blog
+
+Rōmy publishes a blog at getromy.app/blog covering nonprofit fundraising, donor intelligence, major gift strategy, and field notes from development practice. Topics include:
+
+- Why capacity scores are insufficient without timing signals (major gifts are a timing problem, not a wealth problem)
+- The structural fundraising gap between large and small nonprofits
+- How wealth screening platforms calculate giving capacity
+- Practical guides to major gift cultivation, solicitation, and stewardship
+- Field notes on donor relationships, development director challenges, and the human side of fundraising
+
+Research and benchmarks are published at getromy.app/labs.
 
 ## Links
 
 - Website: https://getromy.app
-- Product: https://intel.getromy.app
-- Download (macOS): https://github.com/GetRomy-App/web/releases
-- Twitter: https://x.com/RomyFindsMoney
+- Product (app): https://intel.getromy.app
+- Blog: https://getromy.app/blog
+- Labs & Benchmarks: https://getromy.app/labs
+- Twitter/X: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
-- Contact: howard@getromy.app, solomon@getromy.app
+- Contact: solomon@getromy.app
 
 ## Company
 
-GetRomy LLC
+GetRomy LLC — building donor intelligence infrastructure for the 90% of nonprofits that enterprise tools have priced out.
