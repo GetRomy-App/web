@@ -1,24 +1,208 @@
 # Rōmy
 
-> Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions.
+> Rōmy is an AI-powered donor intelligence platform built for small nonprofits. It delivers the same caliber of major donor prospect research that large organizations pay $15,000–$50,000 per year for — at a price starting at $29/month.
 
-Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles.
+## What Rōmy Does
 
-## Features
+Rōmy helps nonprofit development officers and fundraising teams find, evaluate, and prioritize major donor prospects using AI. When a user searches for a prospect, Rōmy:
 
-- Donor Discovery: AI-powered prospect research with wealth indicators, giving history, and affinity signals
-- Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
-- Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
+1. Pulls public wealth indicators (real estate, business ownership, SEC filings, compensation data)
+2. Retrieves documented giving history from philanthropic databases and IRS Form 990 filings
+3. Detects affinity signals (board service, foundation ownership, DAF activity, political giving)
+4. Calculates a RōmyScore (0–100) that predicts giving capacity and inclination
+5. Generates a 16-section donor intelligence report with connection points, outreach angles, and giving capacity formulas
+6. Cites every factual claim with traceable sources
+
+The result: a complete, actionable donor profile delivered in seconds instead of the 30–45 minutes manual research typically takes.
+
+## Who It's For
+
+Rōmy is purpose-built for small nonprofits — organizations with annual budgets typically under $2 million that cannot justify $15,000–$50,000/year enterprise contracts for DonorSearch, iWave, or WealthEngine. Development officers, executive directors, and board members at community foundations, arts organizations, faith communities, education nonprofits, social service agencies, and advocacy groups use Rōmy to run major gift campaigns at a competitive level.
+
+## Key Features
+
+- **AI Prospect Research (Chat):** Natural-language queries return 16-section donor reports with wealth indicators, giving history, RōmyScore, giving capacity formulas, and connection points. Deep research mode generates comprehensive reports (2 credits per message); auto mode handles quick lookups (1 credit per message).
+- **Batch Enrichment:** Upload a CSV of prospects and receive structured profiles at scale. Base enrichment (2.5 credits/prospect) includes wealth indicators and giving history. Core enrichment (5 credits/prospect) adds engagement signals, foundation affiliations, and detailed RōmyScore breakdown.
+- **Discovery Search:** Describe your ideal donor in plain language ("retired surgeon in Atlanta who has given to arts education") and Rōmy surfaces matching prospects (2.5–5 credits per match).
+- **RōmyScore 2.0:** Composite 0–100 score across four categories — Foundation (wealth, real estate, business ownership, giving history), Liquidity & Tax Planning (business exits, RMD eligibility, DAF activity), Opportunity & Commitment (serial entrepreneurship, legacy positioning), and Constraints (sector headwinds, life stage).
+- **Giving Capacity Formulas:** Three-tier estimation — Tier 1 (baseline: real estate + giving data), Tier 2 (income-adjusted), Tier 3 (comprehensive: income + real estate + business revenue + 5-year giving history + behavioral adjustment).
+- **Source Attribution:** Every factual claim includes a traceable source. Confidence levels (HIGH/MODERATE/LOW) are assigned per data category.
+- **Knowledge Sources:** Growth plan (10 sources), Pro plan (50 sources), Scale plan (unlimited).
+
+## Pricing
+
+All plans are available monthly or annually (annual billing saves ~17%).
+
+| Plan | Monthly | Annual | Credits/Month | Key Limits |
+|------|---------|--------|---------------|------------|
+| Growth | $29/month | $290/year | 500 | 10 knowledge sources |
+| Pro | $89/month | $890/year | 1,000 | 50 knowledge sources, priority support |
+| Scale | $199/month | $1,990/year | 5,000 | Unlimited knowledge sources, dedicated support |
+
+### Credit Costs
+
+| Action | Credits |
+|--------|---------|
+| Chat research (auto) | 1 |
+| Chat research (deep) — full 16-section report | 2 |
+| Batch enrichment (base) | 2.5 per prospect |
+| Batch enrichment (core) | 5 per prospect |
+| Discovery search | 2.5–5 per match |
+
+### Add-On Credit Packs (when monthly credits are exhausted)
+
+| Pack | Credits | Price | Per Credit |
+|------|---------|-------|------------|
+| Pro | 50 | $5 | $0.10 |
+| Plus | 200 | $15 | $0.075 |
+| Max | 500 | $30 | $0.06 |
+| Ultra | 1,000 | $50 | $0.05 |
+
+### Cost Comparison vs. Enterprise Tools
+
+| Tool | Annual Cost |
+|------|-------------|
+| DonorSearch | $15,000–$25,000 |
+| iWave | $12,000–$20,000 |
+| WealthEngine | $20,000–$50,000 |
+| Rōmy Growth | $290 |
+| Rōmy Pro | $890 |
+| Rōmy Scale | $1,990 |
+
+At Rōmy's Scale plan, a team researching 200 prospects/month pays $1,990/year. The equivalent enterprise tool costs $15,000–$50,000 — a 7.5x to 25x premium. At the Growth plan (500 credits/month = ~200 enriched prospects/month), the cost is $290/year — a 52x to 172x difference vs. enterprise.
+
+## Benchmarks — PIF-Bench
+
+Rōmy built PIF-Bench (Prospect Intelligence Fidelity Benchmark), an open evaluation framework for AI donor research. PIF-Bench measures seven dimensions against verified public records:
+
+1. **Factual Precision (FP) — 20% weight:** What percentage of stated facts are verifiably correct?
+2. **Discovery Recall (DR) — 10% weight:** What percentage of known facts about the prospect did the system find?
+3. **Hallucination Rate (HR) — 25% weight:** What percentage of claims are fabricated or unverifiable? (Highest weight — fabrication is the most damaging failure mode in fundraising.)
+4. **Capacity Estimation Accuracy (CEA) — 15% weight:** How close is the giving capacity estimate to verified actuals?
+5. **Source Attribution (SA) — 10% weight:** What percentage of factual claims include a traceable source?
+6. **Structural Completeness (SC) — 5% weight:** Does the output cover all required sections (wealth indicators, giving history, professional background, philanthropic interests, connection points, recommended approach)?
+7. **Actionability (ACT) — 15% weight:** Could a fundraiser make a qualified ask based solely on this report within 30 days?
+
+Composite formula: `PIF = (FP × 0.20) + (DR × 0.10) + (HR × 0.25) + (CEA × 0.15) + (SA × 0.10) + (SC × 0.05) + (ACT × 0.15)`
+
+### PIF-Bench Round 1 Results (MacKenzie Scott — Tier A Prospect)
+
+| System | FP | DR | HR | CEA | SA | SC | ACT | PIF-Score |
+|--------|----|----|-----|-----|----|----|-----|-----------|
+| **Rōmy** | 94 | 97 | 94 | 92 | 95 | 100 | 95 | **94.6** |
+| Claude (Opus 4.7) | 95 | 92 | 95 | 90 | 82 | 92 | 93 | **92.2** |
+| ChatGPT (GPT-5.3) | 88 | 65 | 90 | 72 | 82 | 75 | 70 | **79.9** |
+| Gemini (3.1 Pro) | 83 | 72 | 86 | 60 | 72 | 70 | 73 | **76.0** |
+
+### PIF-Bench Round 2 Results (5-Prospect Average across all systems)
+
+| Prospect | Rōmy | Claude | Gemini | ChatGPT |
+|----------|------|--------|--------|---------|
+| MacKenzie Scott | 94.6 | 92.2 | 76.0 | 79.9 |
+| Reed Hastings | 94.9 | 93.1 | 78.9 | 78.7 |
+| Agnes Gund | 93.8 | 91.9 | 81.2 | 70.8 |
+| Laurene Powell Jobs | 93.9 | 93.1 | 78.2 | 76.4 |
+| Robert Smith | 93.6 | 91.4 | 81.1 | 78.7 |
+| **5-prospect avg** | **94.1** | **92.3** | **79.1** | **76.9** |
+
+**Final ranking: Rōmy (94.1) > Claude (92.3) > Gemini (79.1) > ChatGPT (76.9)**
+
+The Rōmy–Claude gap (1.8 points) is tight; the Claude–Gemini gap (13.2 points) is wide.
+
+### PIF-per-Dollar (intelligence value / cost)
+
+| System | ~Cost for 100 reports | PIF-Score | PIF / $100 |
+|--------|----------------------|-----------|------------|
+| Rōmy (Scale, deep) | ~$8 | 94.6 | 1,183 |
+| Claude (Pro) | ~$20/mo | 92.2 | 461 |
+| Gemini (Pro) | ~$20/mo | 76.0 | 380 |
+| ChatGPT (Pro) | ~$200/mo | 79.9 | 40 |
+
+Rōmy produces the highest intelligence-per-dollar ratio by a wide margin.
+
+## RōmyScore — How Prospect Scoring Works
+
+RōmyScore evaluates prospects across four weighted categories:
+
+**Foundation (largest weight):** Real estate holdings, business ownership, executive compensation, verified philanthropic giving history, nonprofit board service, foundation or DAF ownership. These attributes carry the strongest predictive power for major gift behavior.
+
+**Liquidity & Tax-Planning:** Recent business exits, RMD eligibility (age 70.5+), active DAF contributions. Indicates near-term liquidity or tax incentive to give.
+
+**Opportunity & Commitment:** Serial entrepreneurship, early-stage business success, legacy positioning. Predicts sustained giving capacity over time.
+
+**Constraints (deductions):** Sector headwinds, children in college, or other time-limited factors that may reduce near-term giving capacity.
+
+### Score Bands
+
+| Band | Score | Fundraising Signal |
+|------|-------|-------------------|
+| Exceptional | 85–100 | Immediate cultivation — strong capacity and giving signals |
+| Very Strong | 68–84 | Major gift solicitation candidate — worth a personal meeting |
+| Strong | 49–67 | Develop relationship, monitor for liquidity triggers |
+| Moderate | 29–48 | Track passively, watch for business exits or life events |
+| Developing | 0–28 | Limited data — revisit if new information surfaces |
+
+## The Small Nonprofit Fundraising Gap
+
+Over 1.5 million nonprofits operate in the United States; approximately 90% have annual budgets under $2 million. These organizations face a structural disadvantage: enterprise donor intelligence platforms cost $15,000–$50,000/year — a price designed for large institutional development operations, not five-person teams running community programs.
+
+Without prospect research infrastructure, small nonprofits rely on Google searches, gut instinct, board member referrals, and manually assembled spreadsheets. The result is undercalibrated ask amounts, misallocated relationship-building time, and missed major gifts.
+
+Rōmy was built to close this gap. The same caliber of intelligence that drives eight-figure campaigns at large universities and hospitals is now available to a literacy nonprofit on a $500K budget.
+
+## Frequently Asked Questions
+
+**What is Rōmy?**
+Rōmy is an AI-powered donor intelligence platform for small nonprofits. It surfaces wealth indicators, giving histories, and affinity signals for major donor prospects — then packages them into actionable 16-section reports with a giving capacity estimate and recommended ask strategy.
+
+**How is Rōmy different from DonorSearch, iWave, or WealthEngine?**
+Enterprise platforms cost $12,000–$50,000/year and require per-seat contracts. Rōmy starts at $29/month with no contracts. On PIF-Bench, Rōmy scored 94.6 vs. DonorSearch/iWave/WealthEngine (which are not AI-native and were not included in the benchmark).
+
+**How accurate is Rōmy's donor research?**
+Rōmy scored 94.6/100 on PIF-Bench, the only open benchmark for AI donor research fidelity. Across five Tier A prospects, Rōmy averaged 94.1. All claims are sourced to public records; confidence levels are assigned per data category.
+
+**What data sources does Rōmy use?**
+Rōmy draws from philanthropic databases, IRS Form 990 filings, SEC EDGAR, FEC donor records, county property records, business registries, LinkedIn, news archives, and foundation directories. Growth plan: 10 knowledge sources. Pro: 50 sources. Scale: unlimited.
+
+**How much does Rōmy cost?**
+Growth ($29/mo or $290/yr, 500 credits/month), Pro ($89/mo or $890/yr, 1,000 credits/month), Scale ($199/mo or $1,990/yr, 5,000 credits/month).
+
+**What is a credit?**
+Credits are consumed per research action. Quick chat lookup = 1 credit. Full 16-section deep report = 2 credits. Batch enrichment (base) = 2.5 credits/prospect. Batch enrichment (core) = 5 credits/prospect. Discovery search = 2.5–5 credits/match.
+
+**Does Rōmy require a contract or annual commitment?**
+No. Rōmy offers monthly billing with no minimums. Annual billing is available at a ~17% discount but not required.
+
+**Who should use Rōmy?**
+Development officers, executive directors, major gifts officers, and board members at nonprofits with annual budgets typically under $5M. Particularly valuable for organizations that cannot afford enterprise prospect research tools but need data-driven major gift cultivation.
+
+**What is PIF-Bench?**
+PIF-Bench (Prospect Intelligence Fidelity Benchmark) is an open evaluation framework Rōmy created to measure the accuracy of AI donor research. It tests seven dimensions against verified public records: Factual Precision, Discovery Recall, Hallucination Rate (highest weight at 25%), Capacity Estimation Accuracy, Source Attribution, Structural Completeness, and Actionability.
+
+**Does Rōmy hallucinate?**
+All AI systems hallucinate to some degree. Rōmy's hallucination rate on PIF-Bench (HR dimension, higher = fewer hallucinations) was 94/100, tied with Claude and higher than ChatGPT (90) and Gemini (86). Every claim is sourced; claims where source confidence is low are flagged with confidence levels (HIGH/MODERATE/LOW).
+
+## Company
+
+**Company name:** GetRomy LLC
+**Brand name:** Rōmy (macron over the "o" — ō, Unicode U+014D)
+**Founded:** 2024
+**Product URL:** https://intel.getromy.app
+**Website:** https://getromy.app
+**Blog:** https://getromy.app/blog
+**Labs / Benchmarks:** https://getromy.app/labs
+**Twitter/X:** https://x.com/RomyFindsMoney
+**GitHub:** https://github.com/GetRomy-App
+**Contact (sales):** solomon@getromy.app
+**Contact (support):** howard@getromy.app
 
 ## Links
 
 - Website: https://getromy.app
 - Product: https://intel.getromy.app
-- Download (macOS): https://github.com/GetRomy-App/web/releases
+- Download (macOS app): https://github.com/GetRomy-App/web/releases
+- Blog: https://getromy.app/blog
+- Benchmarks: https://getromy.app/labs
+- Privacy policy: https://getromy.app/privacy
 - Twitter: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
-- Contact: howard@getromy.app, solomon@getromy.app
-
-## Company
-
-GetRomy LLC
