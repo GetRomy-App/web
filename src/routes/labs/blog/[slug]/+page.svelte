@@ -127,16 +127,83 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
+	<title>{data.post.title} — Rōmy Labs</title>
 	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+	<meta name="keywords" content="AI donor research, donor intelligence benchmark, nonprofit fundraising AI, prospect research accuracy, PIF-Bench, wealth screening comparison, AI nonprofit tools, donor research software comparison, {data.post.tag.toLowerCase()}, nonprofit prospect research" />
 	<meta property="og:title" content={data.post.title} />
 	<meta property="og:description" content={data.post.excerpt} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta property="og:image" content="https://getromy.app/android-chrome-512x512.png" />
+	<meta property="og:image:width" content="512" />
+	<meta property="og:image:height" content="512" />
+	<meta property="og:image:alt" content={data.post.title} />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
+	<meta property="article:tag" content={data.post.tag} />
+	<meta property="article:author" content="https://getromy.app" />
+	<meta property="article:publisher" content="https://getromy.app" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@RomyFindsMoney" />
+	<meta name="twitter:creator" content="@RomyFindsMoney" />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={data.post.excerpt} />
+	<meta name="twitter:image" content="https://getromy.app/android-chrome-512x512.png" />
 	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "ScholarlyArticle",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://getromy.app/labs/blog/" + data.post.slug
+		},
+		"headline": data.post.title,
+		"description": data.post.excerpt,
+		"image": {
+			"@type": "ImageObject",
+			"url": "https://getromy.app/android-chrome-512x512.png",
+			"width": 512,
+			"height": 512
+		},
+		"datePublished": data.post.date,
+		"dateModified": data.post.date,
+		"author": {
+			"@type": "Organization",
+			"name": "Rōmy",
+			"url": "https://getromy.app"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Rōmy",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://getromy.app/icon-logo.png",
+				"width": 512,
+				"height": 512
+			},
+			"url": "https://getromy.app"
+		},
+		"articleSection": data.post.tag,
+		"url": "https://getromy.app/labs/blog/" + data.post.slug,
+		"inLanguage": "en-US",
+		"isPartOf": {
+			"@type": "Blog",
+			"name": "Rōmy Labs",
+			"url": "https://getromy.app/labs"
+		}
+	})}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"itemListElement": [
+			{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://getromy.app" },
+			{ "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://getromy.app/labs" },
+			{ "@type": "ListItem", "position": 3, "name": data.post.title, "item": "https://getromy.app/labs/blog/" + data.post.slug }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
