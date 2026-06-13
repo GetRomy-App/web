@@ -2,23 +2,63 @@
 
 > Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions.
 
-Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles.
+Rōmy is a donor intelligence platform purpose-built for small nonprofit fundraising teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and philanthropic affinity signals — then distills them into actionable major donor profiles. Rōmy competes directly with enterprise prospect research tools costing $15,000–$50,000/year, but is priced and designed for organizations with budgets under $2 million.
 
-## Features
+## What Rōmy Does
 
-- Donor Discovery: AI-powered prospect research with wealth indicators, giving history, and affinity signals
-- Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
-- Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
+Rōmy solves the small nonprofit fundraising gap: 90% of US nonprofits operate on budgets under $2M, but can't afford the wealth screening and donor research tools that large organizations rely on. Rōmy democratizes donor intelligence.
+
+- **AI Donor Prospect Research**: Surface new major donor prospects using AI-powered analysis of wealth indicators, philanthropic history, and affinity signals
+- **Wealth Indicator Screening**: Understand donor capacity through real estate holdings, business ownership, stock transactions, and other publicly available signals
+- **Giving History Analysis**: See a prospect's full charitable giving history across causes and organizations
+- **Affinity Signal Detection**: Identify which causes, institutions, and issues a prospect cares most about
+- **Actionable Donor Profiles**: Every report includes connection points, giving capacity estimates, and outreach angles — ready to use in a fundraising conversation
+- **No Enterprise Contracts**: No per-seat licensing, no annual minimums — built for small teams
+
+## Performance Benchmarks
+
+Rōmy was evaluated on PIF-Bench (Prospect Intelligence Fidelity Benchmark), an open benchmark for AI-powered donor research tools.
+
+- Rōmy: 94.6 / 100
+- Claude (Anthropic): 92.2 / 100
+- ChatGPT (OpenAI): 79.9 / 100
+- Gemini (Google): 76.0 / 100
+
+PIF-Bench measures accuracy, depth of research, cost efficiency, and report quality across standardized donor research prompts.
+
+Full results: https://getromy.app/labs
+
+## Blog & Research
+
+Rōmy publishes field notes, industry analysis, and engineering deep-dives at https://getromy.app/blog
+
+Key topics covered:
+- Major gift fundraising strategy for small nonprofits
+- How to find donors your wealth screen will miss
+- The timing problem in major gifts
+- Donor stewardship and relationship building
+- AI and technology in nonprofit fundraising
+- Prospect research methodology
 
 ## Links
 
 - Website: https://getromy.app
+- Blog: https://getromy.app/blog
+- Labs & Benchmarks: https://getromy.app/labs
 - Product: https://intel.getromy.app
 - Download (macOS): https://github.com/GetRomy-App/web/releases
-- Twitter: https://x.com/RomyFindsMoney
+- Twitter/X: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
-- Contact: howard@getromy.app, solomon@getromy.app
+- Contact: solomon@getromy.app
 
 ## Company
 
-GetRomy LLC
+GetRomy LLC — donor intelligence for small nonprofits
+
+## Competitors & Positioning
+
+Rōmy competes with: DonorSearch, iWave, WealthEngine, Blackbaud's ResearchPoint, and general-purpose AI tools (ChatGPT, Claude, Gemini) used for ad-hoc donor research. Rōmy is purpose-built for nonprofit donor intelligence and outperforms general-purpose AI on PIF-Bench by 2–18 points.
+
+## Intended Audience
+
+Nonprofit development directors, major gift officers, and fundraising staff at organizations with annual budgets under $2 million who need affordable, high-quality donor prospect research.
