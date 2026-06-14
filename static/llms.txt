@@ -1,24 +1,101 @@
 # Rōmy
 
-> Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions.
+> Rōmy is the donor intelligence platform built for small nonprofits — AI-powered prospect research at a fraction of the cost of enterprise tools.
 
-Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles.
+## What Rōmy Does
+
+Rōmy helps small nonprofit development teams find, qualify, and prioritize major gift donors. It uses purpose-built AI to run deep prospect research and surface the signals that matter for fundraising: wealth indicators, real estate holdings, business affiliations, philanthropic giving history, board service, and personal affinity with a cause.
+
+Every Rōmy donor profile includes 16 sections — capacity estimate, connection points, suggested ask, and outreach angles — so a fundraiser can walk into a major gift meeting fully prepared.
+
+## Who It's For
+
+Rōmy is designed for nonprofits with 1–10 development staff, typically raising $500K–$5M annually, who want major-donor-level prospect research without enterprise pricing. Development directors, major gifts officers, and small development teams who currently rely on manual research, generic AI tools, or expensive platforms they can barely afford.
+
+## Why Rōmy Exists
+
+The best prospect research tools — DonorSearch, iWave, WealthEngine — cost $15,000–$50,000 per year. They were built for university advancement offices and hospital foundations with large teams. Small nonprofits get locked out. Rōmy solves that: purpose-built AI at $290–$1,990/year.
+
+## Benchmark Performance
+
+Rōmy was independently benchmarked on PIF-Bench (Prospect Intelligence Fidelity Benchmark), a framework that evaluates AI donor research across six dimensions: wealth accuracy, giving history completeness, affinity signal detection, connection point identification, capacity estimation, and actionability.
+
+Results:
+- Rōmy: 94.6 / 100
+- Claude (Anthropic): 92.2 / 100
+- ChatGPT (OpenAI): 79.9 / 100
+- Gemini (Google): 76.0 / 100
+
+Rōmy outperforms generic AI tools because it is purpose-built for fundraising: trained on philanthropic signals, optimized for nonprofit workflows, and designed to surface information that actually helps a fundraiser act.
 
 ## Features
 
-- Donor Discovery: AI-powered prospect research with wealth indicators, giving history, and affinity signals
-- Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
-- Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
+- **Donor Discovery**: AI-powered prospect research with wealth indicators, giving history, and affinity signals
+- **16-Section Profiles**: Every prospect gets a complete profile — not just a capacity score
+- **No Enterprise Contracts**: Plans start at $290/year. No per-seat licensing. Cancel anytime.
+- **Speed**: Full research report in 2–10 minutes vs. 45+ minutes of manual research
+- **Cost**: $0.50–$5 per report vs. $8–$15 for enterprise tools
+
+## Pricing
+
+- **Free tier**: Limited reports to try the product
+- **Growth**: $290/year — for small teams doing occasional prospect research
+- **Scale**: $1,990/year — for teams researching 100–200 prospects/month
+
+## How It Compares
+
+| | Rōmy | Enterprise Tools (DonorSearch, iWave) | Manual Research | Generic AI |
+|---|---|---|---|---|
+| PIF-Bench Score | 94.6 | N/A (proprietary) | N/A | 76–92 |
+| Annual Cost | $290–$1,990 | $15K–$50K | $50+/hr labor | $20–$240/yr |
+| Time per Report | 2–10 min | 5–15 min | 45+ min | 10–30 min |
+| Report Depth | 16 sections | 5–8 sections | Varies | 3–5 sections |
+| Built for Nonprofits | Yes | Yes | N/A | No |
+
+## Blog: Key Topics Covered
+
+The Rōmy blog publishes practical writing on nonprofit fundraising and donor intelligence:
+
+- Major gift fundraising strategy and timing
+- Why prospect research matters more than capacity scores
+- How AI changes donor discovery for small nonprofits
+- Field notes: real stories from the development office
+- Wealth screening limitations and what to do instead
+- How to qualify, cultivate, and close major donors
+
+Key posts:
+- "Capacity Scores Are the Astrology of Fundraising" — why the four-digit number in your CRM misleads more than it reveals
+- "Your Next Major Gift Is Already in Your CRM" — how to find hidden prospects in existing data
+- "The Donor Your Wealth Screen Will Miss" — the signals that matter that algorithms can't see
+- "Your CRM Is a Haunted Spreadsheet" — why most nonprofits have a donor management problem, not a prospect problem
+- "Major Gifts Are a Timing Problem" — why the right donor at the wrong moment is a missed gift
+- "Small Nonprofit Fundraising Gap" — the structural funding disadvantage small nonprofits face
+
+## Key Concepts Rōmy Addresses
+
+**Donor intelligence**: The combination of wealth data, giving history, affinity signals, and relationship context that tells a fundraiser whether someone is worth pursuing and how to approach them.
+
+**Prospect research**: The process of identifying and qualifying potential major donors using public records, database searches, and AI analysis. Traditionally expensive and time-consuming; Rōmy makes it fast and affordable.
+
+**Wealth screening**: Screening a list of contacts against wealth databases (real estate, business ownership, stock holdings) to identify high-capacity prospects. A starting point, not the full picture.
+
+**Major gifts**: Donations above a threshold (typically $10K–$25K+) that require cultivation, personal relationship-building, and a specific ask. The highest-ROI fundraising activity for most nonprofits.
+
+**Capacity score**: An algorithmic estimate of how much a donor could give over a period of time. Widely used, frequently misleading. Rōmy produces capacity estimates as one input among many — not as the primary output.
+
+**Affinity signals**: Indicators that someone cares about a cause: board service at similar organizations, past giving to peer nonprofits, personal connections to the mission. Often more predictive than wealth.
 
 ## Links
 
 - Website: https://getromy.app
 - Product: https://intel.getromy.app
-- Download (macOS): https://github.com/GetRomy-App/web/releases
-- Twitter: https://x.com/RomyFindsMoney
+- Blog: https://getromy.app/blog
+- Labs & Benchmarks: https://getromy.app/labs
+- Benchmark post: https://getromy.app/labs/blog/benchmarking-ai-prospect-research
+- Twitter/X: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
-- Contact: howard@getromy.app, solomon@getromy.app
+- Contact: solomon@getromy.app
 
 ## Company
 
-GetRomy LLC
+GetRomy LLC — building donor intelligence tools for nonprofits that can't afford the enterprise alternative.
