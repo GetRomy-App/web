@@ -223,20 +223,68 @@
 </script>
 
 <svelte:head>
-	<title>Romy Labs — AI Donor Research Benchmarks, PIF-Bench Results & Blog</title>
+	<title>Rōmy Labs — AI Donor Research Benchmarks & PIF-Bench Results</title>
 	<meta
 		name="description"
-		content="Romy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). See how purpose-built AI donor intelligence compares on accuracy, cost, and speed."
+		content="Rōmy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). Open benchmarks measuring AI prospect research accuracy, hallucination rate, and cost-per-report across five major donor profiles."
 	/>
 	<meta
 		name="keywords"
-		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Romy, prospect research tool"
+		content="donor research benchmark, AI prospect research comparison, PIF-Bench, nonprofit fundraising AI accuracy, wealth screening AI, donor intelligence benchmark, ChatGPT vs Rōmy, Claude vs Rōmy, Gemini vs Rōmy, prospect research tool comparison, AI hallucination fundraising, major donor research accuracy, nonprofit AI tools comparison"
 	/>
-	<meta property="og:title" content="Romy Labs — AI Donor Research Benchmarks" />
-	<meta property="og:description" content="PIF-Bench results: Romy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research." />
+	<meta property="og:title" content="Rōmy Labs — AI Donor Research Benchmarks & PIF-Bench Results" />
+	<meta property="og:description" content="PIF-Bench results across 5 prospects: Rōmy 94.1, Claude 92.3, Gemini 79.1, ChatGPT 76.9. Open benchmarks for AI-powered major donor prospect research." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/labs" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:alt" content="Rōmy Labs — AI Donor Research Benchmarks" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Rōmy Labs — AI Donor Research Benchmarks & PIF-Bench Results" />
+	<meta name="twitter:description" content="PIF-Bench: Rōmy 94.1 vs. Claude 92.3, Gemini 79.1, ChatGPT 76.9 across 5 major donor prospects. Open benchmarks for nonprofit AI." />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 	<link rel="canonical" href="https://getromy.app/labs" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"itemListElement": [
+			{
+				"@type": "ListItem",
+				"position": 1,
+				"name": "Home",
+				"item": "https://getromy.app/"
+			},
+			{
+				"@type": "ListItem",
+				"position": 2,
+				"name": "Labs",
+				"item": "https://getromy.app/labs"
+			}
+		]
+	})}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "Dataset",
+		"name": "PIF-Bench — Prospect Intelligence Fidelity Benchmark",
+		"description": "An open benchmark for evaluating AI donor prospect research systems on seven dimensions: Factual Precision, Discovery Recall, Hallucination Rate, Capacity Estimation Accuracy, Source Attribution, Structural Completeness, and Actionability. Tested across five well-documented major donor prospects (MacKenzie Scott, Reed Hastings, Agnes Gund, Laurene Powell Jobs, Robert Smith).",
+		"url": "https://getromy.app/labs",
+		"creator": {
+			"@type": "Organization",
+			"name": "GetRomy LLC",
+			"url": "https://getromy.app"
+		},
+		"datePublished": "2026-04-25",
+		"dateModified": "2026-06-15",
+		"keywords": ["donor intelligence", "prospect research", "AI benchmark", "nonprofit fundraising", "PIF-Bench", "wealth screening accuracy"],
+		"variableMeasured": [
+			"Factual Precision",
+			"Discovery Recall",
+			"Hallucination Rate",
+			"Capacity Estimation Accuracy",
+			"Source Attribution",
+			"Structural Completeness",
+			"Actionability"
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
