@@ -100,20 +100,45 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
 	<meta
 		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
+		content="Field notes, research findings, and industry perspectives on nonprofit fundraising, major donor cultivation, prospect research, and purpose-built AI donor intelligence."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, donor intelligence blog, prospect research articles, AI for nonprofits, fundraising insights, major donor cultivation, nonprofit development director, donor relationships, fundraising best practices, small nonprofit fundraising, major gifts, planned giving, donor stewardship, wealth screening insights, nonprofit sector, philanthropic research"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
+	<meta property="og:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta property="og:description" content="Field notes, research findings, and industry perspectives on nonprofit fundraising, major donor cultivation, and AI-powered prospect research." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
 	<link rel="canonical" href="https://getromy.app/blog" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "Blog",
+		"name": "Rōmy Blog",
+		"url": "https://getromy.app/blog",
+		"description": "Field notes, research findings, and industry perspectives on nonprofit fundraising, major donor cultivation, and purpose-built AI donor intelligence.",
+		"publisher": {
+			"@type": "Organization",
+			"name": "GetRomy LLC",
+			"url": "https://getromy.app",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://getromy.app/icon-logo.png"
+			}
+		},
+		"inLanguage": "en-US"
+	})}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"itemListElement": [
+			{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://getromy.app" },
+			{ "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://getromy.app/blog" }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
