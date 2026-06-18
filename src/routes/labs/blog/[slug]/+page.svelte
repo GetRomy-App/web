@@ -127,16 +127,68 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
+	<title>{data.post.title} — Rōmy Labs</title>
+	<meta name="title" content="{data.post.title} — Rōmy Labs" />
 	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
+	<meta name="keywords" content="AI donor research benchmark, nonprofit fundraising research, prospect research accuracy, PIF-Bench, wealth screening comparison, donor intelligence, {data.post.tag.toLowerCase()}" />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta property="og:title" content="{data.post.title} — Rōmy Labs" />
+	<meta property="og:description" content={data.post.excerpt} />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta name="twitter:title" content="{data.post.title} — Rōmy Labs" />
+	<meta name="twitter:description" content={data.post.excerpt} />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
+	<meta property="article:author" content="https://getromy.app" />
 	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "ScholarlyArticle",
+		"headline": data.post.title,
+		"description": data.post.excerpt,
+		"datePublished": data.post.date,
+		"dateModified": data.post.date,
+		"author": {
+			"@type": "Organization",
+			"name": "Rōmy",
+			"url": "https://getromy.app"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "GetRomy LLC",
+			"url": "https://getromy.app",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://getromy.app/icon-logo.png"
+			}
+		},
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://getromy.app/labs/blog/" + data.post.slug
+		},
+		"image": {
+			"@type": "ImageObject",
+			"url": "https://getromy.app/og-image.jpg",
+			"width": 1200,
+			"height": 630
+		},
+		"url": "https://getromy.app/labs/blog/" + data.post.slug,
+		"isPartOf": {
+			"@type": "Blog",
+			"name": "Rōmy Labs",
+			"url": "https://getromy.app/labs"
+		}
+	})}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"itemListElement": [
+			{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://getromy.app/"},
+			{"@type": "ListItem", "position": 2, "name": "Labs", "item": "https://getromy.app/labs"},
+			{"@type": "ListItem", "position": 3, "name": data.post.title, "item": "https://getromy.app/labs/blog/" + data.post.slug}
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

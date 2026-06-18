@@ -100,20 +100,21 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<meta name="title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
 	<meta
 		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
+		content="Technical deep-dives, research findings, and field notes on nonprofit fundraising, major gift strategy, prospect research, and purpose-built AI donor intelligence."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, donor intelligence insights, prospect research tips, AI for nonprofits, major gift fundraising, wealth screening, development officer, small nonprofit fundraising, donor stewardship, planned giving, capital campaign strategy"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
+	<meta property="og:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta property="og:description" content="Technical deep-dives, research findings, and field notes on nonprofit fundraising, major gift strategy, prospect research, and purpose-built AI donor intelligence." />
+	<meta name="twitter:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta name="twitter:description" content="Technical deep-dives, research findings, and field notes on nonprofit fundraising, major gift strategy, prospect research, and purpose-built AI donor intelligence." />
 </svelte:head>
 
 <Footer bind:footerText />

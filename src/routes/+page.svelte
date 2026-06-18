@@ -42,6 +42,17 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Rōmy — Donor Intelligence for Small Nonprofits</title>
+	<meta name="title" content="Rōmy — Donor Intelligence for Small Nonprofits" />
+	<meta name="description" content="Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — built for small teams." />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Rōmy — Donor Intelligence for Small Nonprofits" />
+	<meta property="og:description" content="Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — built for small teams." />
+	<meta name="twitter:title" content="Rōmy — Donor Intelligence for Small Nonprofits" />
+	<meta name="twitter:description" content="Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — built for small teams." />
+</svelte:head>
+
 <Footer bind:footerText />
 
 <Navbar />
