@@ -127,16 +127,77 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
+	<title>{data.post.title} — Rōmy Labs</title>
 	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
+	<meta name="keywords" content="AI donor research, nonprofit fundraising research, prospect research benchmark, donor intelligence, wealth screening accuracy, nonprofit AI tools, PIF-Bench, {data.post.tag.toLowerCase()}, AI fundraising, nonprofit technology research" />
+	<meta property="og:title" content="{data.post.title} — Rōmy Labs" />
 	<meta property="og:description" content={data.post.excerpt} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="{data.post.title} — Rōmy Labs" />
 	<meta property="article:published_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
+	<meta property="article:author" content="Rōmy" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@RomyFindsMoney" />
+	<meta name="twitter:title" content="{data.post.title} — Rōmy Labs" />
+	<meta name="twitter:description" content={data.post.excerpt} />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "ScholarlyArticle",
+		"headline": data.post.title,
+		"description": data.post.excerpt,
+		"datePublished": data.post.date,
+		"dateModified": data.post.date,
+		"url": `https://getromy.app/labs/blog/${data.post.slug}`,
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": `https://getromy.app/labs/blog/${data.post.slug}`
+		},
+		"image": {
+			"@type": "ImageObject",
+			"url": "https://getromy.app/og-image.jpg",
+			"width": 1200,
+			"height": 630
+		},
+		"author": {
+			"@type": "Organization",
+			"name": "Rōmy",
+			"url": "https://getromy.app"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Rōmy",
+			"url": "https://getromy.app",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://getromy.app/icon-logo.png"
+			}
+		},
+		"keywords": `AI donor research, nonprofit fundraising, ${data.post.tag}, PIF-Bench`,
+		"articleSection": data.post.tag,
+		"inLanguage": "en-US",
+		"isPartOf": {
+			"@type": "Blog",
+			"name": "Rōmy Labs",
+			"url": "https://getromy.app/labs"
+		}
+	})}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"itemListElement": [
+			{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://getromy.app" },
+			{ "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://getromy.app/labs" },
+			{ "@type": "ListItem", "position": 3, "name": data.post.title, "item": `https://getromy.app/labs/blog/${data.post.slug}` }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
