@@ -223,20 +223,59 @@
 </script>
 
 <svelte:head>
-	<title>Romy Labs — AI Donor Research Benchmarks, PIF-Bench Results & Blog</title>
+	<title>Rōmy Labs — PIF-Bench: AI Donor Research Benchmarks | Rōmy 94.6 vs ChatGPT 79.9</title>
 	<meta
 		name="description"
-		content="Romy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). See how purpose-built AI donor intelligence compares on accuracy, cost, and speed."
+		content="Open benchmarks for AI-powered nonprofit prospect research. Rōmy scores 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). Rōmy costs $0.50–$5/report vs. $8–$15 for enterprise tools. See the full methodology."
 	/>
 	<meta
 		name="keywords"
-		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Romy, prospect research tool"
+		content="AI donor research benchmark, prospect research accuracy comparison, PIF-Bench, nonprofit AI comparison, Romy vs ChatGPT, Romy vs DonorSearch, wealth screening benchmark, donor intelligence accuracy, AI fundraising tool comparison, nonprofit technology benchmark, prospect research cost comparison, donor research AI, ChatGPT nonprofit, Gemini donor research"
 	/>
-	<meta property="og:title" content="Romy Labs — AI Donor Research Benchmarks" />
-	<meta property="og:description" content="PIF-Bench results: Romy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research." />
+	<meta property="og:title" content="Rōmy Labs — PIF-Bench: Rōmy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0" />
+	<meta property="og:description" content="Open benchmarks for AI-powered nonprofit prospect research. Rōmy scores 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). Purpose-built AI wins." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/labs" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:alt" content="Rōmy Labs — AI Donor Research Benchmarks" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Rōmy Labs — PIF-Bench: Rōmy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0" />
+	<meta name="twitter:description" content="Open benchmarks for AI-powered nonprofit prospect research. Purpose-built AI vs. general-purpose models." />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 	<link rel="canonical" href="https://getromy.app/labs" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		"name": "Rōmy Labs — AI Donor Research Benchmarks",
+		"description": "Open benchmarks comparing Rōmy AI donor intelligence against ChatGPT, Claude, and Gemini using PIF-Bench (Prospect Intelligence Fidelity).",
+		"url": "https://getromy.app/labs",
+		"publisher": {
+			"@type": "Organization",
+			"name": "GetRomy LLC",
+			"url": "https://getromy.app",
+			"logo": { "@type": "ImageObject", "url": "https://getromy.app/icon-logo.png" }
+		},
+		"breadcrumb": {
+			"@type": "BreadcrumbList",
+			"itemListElement": [
+				{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://getromy.app" },
+				{ "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://getromy.app/labs" }
+			]
+		},
+		"mainEntity": {
+			"@type": "Dataset",
+			"name": "PIF-Bench: Prospect Intelligence Fidelity Benchmark",
+			"description": "Ground-truth benchmark evaluating AI systems on nonprofit donor prospect research accuracy, depth, and actionability.",
+			"url": "https://getromy.app/labs",
+			"creator": { "@type": "Organization", "name": "GetRomy LLC", "url": "https://getromy.app" },
+			"variableMeasured": [
+				{ "@type": "PropertyValue", "name": "Rōmy", "value": "94.6" },
+				{ "@type": "PropertyValue", "name": "Claude (Anthropic)", "value": "92.2" },
+				{ "@type": "PropertyValue", "name": "ChatGPT (OpenAI)", "value": "79.9" },
+				{ "@type": "PropertyValue", "name": "Gemini (Google)", "value": "76.0" }
+			]
+		}
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

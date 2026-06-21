@@ -9,6 +9,10 @@
 
 	let { data } = $props();
 
+	const metaDescription = data.post.excerpt.length > 155
+		? data.post.excerpt.slice(0, 152) + '...'
+		: data.post.excerpt;
+
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
 	let articleHeader: HTMLElement;
@@ -127,16 +131,94 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
+	<title>{data.post.title} | Rōmy Labs — Nonprofit AI Research</title>
+	<meta name="description" content={metaDescription} />
+	<meta name="keywords" content="AI donor research, nonprofit fundraising benchmark, prospect research accuracy, donor intelligence AI, PIF-Bench, AI fundraising comparison, wealth screening AI, nonprofit technology research, {data.post.tag.toLowerCase()}" />
+	<meta name="author" content="Rōmy" />
+
 	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
+	<meta property="og:description" content={metaDescription} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="{data.post.title} — Rōmy Labs" />
+	<meta property="og:site_name" content="Rōmy" />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
+	<meta property="article:author" content="https://getromy.app" />
+	<meta property="article:tag" content={data.post.tag} />
+	<meta property="article:tag" content="nonprofit AI research" />
+	<meta property="article:tag" content="donor intelligence benchmark" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@RomyFindsMoney" />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={metaDescription} />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
+	<meta name="twitter:image:alt" content="{data.post.title} — Rōmy Labs" />
+
 	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "ScholarlyArticle",
+		"headline": data.post.title,
+		"description": metaDescription,
+		"datePublished": data.post.date,
+		"dateModified": data.post.date,
+		"author": {
+			"@type": "Organization",
+			"name": "Rōmy",
+			"url": "https://getromy.app"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "GetRomy LLC",
+			"url": "https://getromy.app",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://getromy.app/icon-logo.png",
+				"width": 512,
+				"height": 512
+			}
+		},
+		"image": {
+			"@type": "ImageObject",
+			"url": "https://getromy.app/og-image.jpg",
+			"width": 1200,
+			"height": 630
+		},
+		"url": `https://getromy.app/labs/blog/${data.post.slug}`,
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": `https://getromy.app/labs/blog/${data.post.slug}`
+		},
+		"isPartOf": {
+			"@type": "Blog",
+			"name": "Rōmy Labs",
+			"url": "https://getromy.app/labs"
+		},
+		"about": [
+			{ "@type": "Thing", "name": "AI donor research" },
+			{ "@type": "Thing", "name": "nonprofit prospect research" },
+			{ "@type": "Thing", "name": "PIF-Bench benchmark" },
+			{ "@type": "Thing", "name": data.post.tag }
+		],
+		"keywords": `AI donor research, nonprofit fundraising benchmark, prospect research, ${data.post.tag}, PIF-Bench, donor intelligence`
+	})}</script>`}
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"itemListElement": [
+			{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://getromy.app" },
+			{ "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://getromy.app/labs" },
+			{ "@type": "ListItem", "position": 3, "name": data.post.title, "item": `https://getromy.app/labs/blog/${data.post.slug}` }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
