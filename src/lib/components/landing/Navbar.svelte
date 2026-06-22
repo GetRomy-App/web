@@ -55,52 +55,73 @@
 			<!-- Desktop links -->
 			<a
 				href="/labs"
-				class="text-gray-alpha-600 hover:text-foreground text-xs font-medium transition-colors hidden md:inline"
+				class="text-gray-alpha-600 hover:text-foreground text-xs font-medium md:inline hidden transition-colors"
 			>
 				Labs
 			</a>
-			<span class="text-gray-alpha-400 text-xs select-none hidden md:inline">//</span>
+			<span class="text-gray-alpha-400 text-xs md:inline hidden select-none">//</span>
 			<a
 				href="/blog"
-				class="text-gray-alpha-600 hover:text-foreground text-xs font-medium transition-colors hidden md:inline"
+				class="text-gray-alpha-600 hover:text-foreground text-xs font-medium md:inline hidden transition-colors"
 			>
 				Blog
 			</a>
-			<span class="text-gray-alpha-400 text-xs select-none hidden md:inline">//</span>
+			<span class="text-gray-alpha-400 text-xs md:inline hidden select-none">//</span>
+			<a
+				href="/status"
+				class="text-gray-alpha-600 hover:text-foreground text-xs font-medium md:inline hidden transition-colors"
+			>
+				Status
+			</a>
+			<span class="text-gray-alpha-400 text-xs md:inline hidden select-none">//</span>
 			<button
 				onclick={toggleTheme}
 				aria-label="Toggle theme"
-				class="text-gray-alpha-600 hover:text-foreground text-xs font-medium transition-colors cursor-pointer hidden md:inline"
+				class="text-gray-alpha-600 hover:text-foreground text-xs font-medium md:inline hidden cursor-pointer transition-colors"
 			>
 				{$isDark ? 'Light' : 'Dark'}
 			</button>
-			<span class="text-gray-alpha-400 text-xs select-none hidden md:inline">//</span>
+			<span class="text-gray-alpha-400 text-xs md:inline hidden select-none">//</span>
 
 			<!-- Mobile dropdown -->
-			<div class="relative md:hidden" bind:this={menuRef}>
+			<div class="md:hidden relative" bind:this={menuRef}>
 				<button
 					type="button"
 					aria-label="More"
 					aria-haspopup="menu"
 					aria-expanded={menuOpen}
 					onclick={() => (menuOpen = !menuOpen)}
-					class="text-gray-alpha-600 hover:text-foreground inline-flex items-center gap-0.5 text-xs font-medium transition-colors cursor-pointer px-1.5"
+					class="text-gray-alpha-600 hover:text-foreground gap-0.5 text-xs font-medium px-1.5 inline-flex cursor-pointer items-center transition-colors"
 				>
 					More
-					<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" class="size-2.5" aria-hidden="true">
-						<path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="10"
+						height="10"
+						viewBox="0 0 24 24"
+						fill="none"
+						class="size-2.5"
+						aria-hidden="true"
+					>
+						<path
+							d="M6 9l6 6 6-6"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						></path>
 					</svg>
 				</button>
 				{#if menuOpen}
 					<div
 						role="menu"
-						class="border-gray-alpha-200 bg-background/95 backdrop-blur-md absolute right-0 top-full mt-2 min-w-[140px] rounded-xl border p-1 shadow-lg z-50"
+						class="border-gray-alpha-200 bg-background/95 backdrop-blur-md right-0 mt-2 rounded-xl p-1 shadow-lg absolute top-full z-50 min-w-[140px] border"
 					>
 						<a
 							href="/labs"
 							role="menuitem"
 							onclick={() => (menuOpen = false)}
-							class="text-gray-alpha-600 hover:text-foreground hover:bg-gray-alpha-100 block rounded-lg px-3 py-2 text-xs font-medium transition-colors no-underline"
+							class="text-gray-alpha-600 hover:text-foreground hover:bg-gray-alpha-100 rounded-lg px-3 py-2 text-xs font-medium block no-underline transition-colors"
 						>
 							Labs
 						</a>
@@ -108,9 +129,17 @@
 							href="/blog"
 							role="menuitem"
 							onclick={() => (menuOpen = false)}
-							class="text-gray-alpha-600 hover:text-foreground hover:bg-gray-alpha-100 block rounded-lg px-3 py-2 text-xs font-medium transition-colors no-underline"
+							class="text-gray-alpha-600 hover:text-foreground hover:bg-gray-alpha-100 rounded-lg px-3 py-2 text-xs font-medium block no-underline transition-colors"
 						>
 							Blog
+						</a>
+						<a
+							href="/status"
+							role="menuitem"
+							onclick={() => (menuOpen = false)}
+							class="text-gray-alpha-600 hover:text-foreground hover:bg-gray-alpha-100 rounded-lg px-3 py-2 text-xs font-medium block no-underline transition-colors"
+						>
+							Status
 						</a>
 						<button
 							type="button"
@@ -119,7 +148,7 @@
 								toggleTheme();
 								menuOpen = false;
 							}}
-							class="text-gray-alpha-600 hover:text-foreground hover:bg-gray-alpha-100 block w-full text-left rounded-lg px-3 py-2 text-xs font-medium transition-colors cursor-pointer"
+							class="text-gray-alpha-600 hover:text-foreground hover:bg-gray-alpha-100 rounded-lg px-3 py-2 text-xs font-medium block w-full cursor-pointer text-left transition-colors"
 						>
 							{$isDark ? 'Light' : 'Dark'}
 						</button>
@@ -138,8 +167,22 @@
 			</Button>
 			<Button class="h-7 text-xs" href={productUrl} target="_blank" rel="noreferrer">
 				Get Started
-				<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" class="size-3" aria-hidden="true">
-					<path d="M9 6C9 6 15 10.4189 15 12C15 13.5812 9 18 9 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="12"
+					height="12"
+					viewBox="0 0 24 24"
+					fill="none"
+					class="size-3"
+					aria-hidden="true"
+				>
+					<path
+						d="M9 6C9 6 15 10.4189 15 12C15 13.5812 9 18 9 18"
+						stroke="currentColor"
+						stroke-width="1.5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					></path>
 				</svg>
 			</Button>
 		</div>

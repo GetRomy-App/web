@@ -1,0 +1,67 @@
+name: Uptime Monitor
+
+# Probes the services listed in data/status/services.json on a schedule and
+# commits the results to data/status/history.json. The status page (/status)
+# reads that file at build time and also fetches it live from raw.githubusercontent
+# in the browser, so the committed data is the single source of truth.
+#
+# The commit message carries [skip ci] so the data churn never triggers a
+# production redeploy — the live client fetch keeps the page fresh instead.
+
+on:
+  schedule:
+    # Every 10 minutes. GitHub may coalesce runs under load; that's fine.
+    - cron: '*/10 * * * *'
+  workflow_dispatch: {}
+
+# Never let two probe runs overlap and race on the same file.
+concurrency:
+  group: uptime-monitor
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run uptime probes
+        run: node scripts/uptime-check.mjs
+
+      - name: Commit updated history
+        run: |
+          git config user.name "romy-status-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet -- data/status/history.json; then
+            echo "No change in history; nothing to commit."
+            exit 0
+          fi
+
+          git add data/status/history.json
+          git commit -m "(Jesus Is King) chore(status): update uptime history [skip ci]"
+
+          # Rebase onto any commits that landed while we were probing, then push.
+          # Retry once to survive a narrow race with a concurrent push.
+          for attempt in 1 2 3; do
+            if git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              echo "Pushed on attempt ${attempt}."
+              exit 0
+            fi
+            echo "Push attempt ${attempt} failed; retrying..."
+            sleep 5
+          done
+          echo "Failed to push after retries." >&2
+          exit 1

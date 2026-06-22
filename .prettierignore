@@ -7,3 +7,6 @@ bun.lockb
 
 # Miscellaneous
 /static/
+
+# Machine-written uptime data (committed by the Uptime Monitor workflow)
+/data/status/history.json

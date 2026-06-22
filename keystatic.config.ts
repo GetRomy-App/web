@@ -24,6 +24,42 @@ export default config({
 				}),
 				content: fields.markdoc({ label: 'Content' })
 			}
+		}),
+		status: collection({
+			label: 'Status updates',
+			slugField: 'title',
+			path: 'content/status/*',
+			format: { contentField: 'content' },
+			schema: {
+				title: fields.slug({ name: { label: 'Title' } }),
+				date: fields.datetime({ label: 'Started', validation: { isRequired: true } }),
+				resolved: fields.datetime({ label: 'Resolved (leave blank if ongoing)' }),
+				severity: fields.select({
+					label: 'Severity',
+					options: [
+						{ label: 'Maintenance', value: 'maintenance' },
+						{ label: 'Minor', value: 'minor' },
+						{ label: 'Major', value: 'major' },
+						{ label: 'Critical', value: 'critical' }
+					],
+					defaultValue: 'minor'
+				}),
+				status: fields.select({
+					label: 'Status',
+					options: [
+						{ label: 'Investigating', value: 'investigating' },
+						{ label: 'Identified', value: 'identified' },
+						{ label: 'Monitoring', value: 'monitoring' },
+						{ label: 'Resolved', value: 'resolved' }
+					],
+					defaultValue: 'investigating'
+				}),
+				affected: fields.array(fields.text({ label: 'Service id' }), {
+					label: 'Affected services',
+					itemLabel: (props) => props.value
+				}),
+				content: fields.markdoc({ label: 'Update' })
+			}
 		})
 	}
 });
