@@ -41,10 +41,16 @@ export function currentState(history: ServiceHistory, thresholdMs: number): Serv
 	return 'operational';
 }
 
-/** Derive a day cell's visual state from its uptime ratio + degraded count. */
-function dayState(uptime: number, degraded: number): DayCell['state'] {
+/**
+ * Derive a day cell's visual state. A day is only marked "degraded" if a
+ * meaningful share of that day's probes were slow (not a single blip), so
+ * normal latency variance from the probe runner doesn't paint a day amber.
+ */
+const DEGRADED_DAY_RATIO = 0.1;
+function dayState(uptime: number, degradedRatio: number): DayCell['state'] {
 	if (uptime < 0.95) return 'down';
-	if (uptime < 1 || degraded > 0) return 'degraded';
+	if (uptime < 1) return 'degraded';
+	if (degradedRatio >= DEGRADED_DAY_RATIO) return 'degraded';
 	return 'operational';
 }
 
@@ -94,7 +100,7 @@ export function computeServiceSummary(
 		const b = daily[date];
 		if (!b || b.total === 0) return { date, uptime: null, state: 'nodata' };
 		const u = b.up / b.total;
-		return { date, uptime: u, state: dayState(u, b.degraded) };
+		return { date, uptime: u, state: dayState(u, b.degraded / b.total) };
 	});
 
 	// Sparkline of recent response times (newest last).
