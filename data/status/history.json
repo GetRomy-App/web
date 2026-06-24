@@ -1,14 +1,14 @@
 {
 	"schemaVersion": 1,
-	"generatedAt": "2026-06-24T11:34:01.997Z",
+	"generatedAt": "2026-06-24T13:51:50.383Z",
 	"degradedThresholdMs": 4000,
 	"services": {
 		"app": {
 			"lastCheck": {
-				"t": 1782300841997,
+				"t": 1782309110384,
 				"ok": true,
 				"status": 200,
-				"ms": 1941,
+				"ms": 676,
 				"error": null
 			},
 			"recent": [
@@ -172,6 +172,13 @@
 					"status": 200,
 					"ms": 1941,
 					"error": null
+				},
+				{
+					"t": 1782309110384,
+					"ok": true,
+					"status": 200,
+					"ms": 676,
+					"error": null
 				}
 			],
 			"daily": {
@@ -188,19 +195,19 @@
 					"sumMs": 16761
 				},
 				"2026-06-24": {
-					"up": 4,
-					"total": 4,
+					"up": 5,
+					"total": 5,
 					"degraded": 0,
-					"sumMs": 8615
+					"sumMs": 9291
 				}
 			}
 		},
 		"web": {
 			"lastCheck": {
-				"t": 1782300843939,
+				"t": 1782309111060,
 				"ok": true,
 				"status": 200,
-				"ms": 687,
+				"ms": 337,
 				"error": null
 			},
 			"recent": [
@@ -364,6 +371,13 @@
 					"status": 200,
 					"ms": 687,
 					"error": null
+				},
+				{
+					"t": 1782309111060,
+					"ok": true,
+					"status": 200,
+					"ms": 337,
+					"error": null
 				}
 			],
 			"daily": {
@@ -380,10 +394,10 @@
 					"sumMs": 8915
 				},
 				"2026-06-24": {
-					"up": 4,
-					"total": 4,
+					"up": 5,
+					"total": 5,
 					"degraded": 0,
-					"sumMs": 3070
+					"sumMs": 3407
 				}
 			}
 		}
