@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import Lenis from 'lenis';
 	import { gsap, ScrollTrigger, registerGsap } from '$lib/gsap';
+	import { page } from '$app/state';
 
 	let { children } = $props();
 
@@ -24,10 +25,13 @@
 		};
 	});
 
+	const siteUrl = 'https://getromy.app';
 	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
 	const description =
-		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
-	const url = 'https://getromy.app/';
+		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — built for small nonprofit teams.';
+	const ogImage = `${siteUrl}/og-image.jpg`;
+
+	let canonicalUrl = $derived(`${siteUrl}${page.url.pathname}`);
 </script>
 
 <svelte:head>
@@ -39,7 +43,7 @@
 	<meta name="description" content={description} />
 	<meta
 		name="keywords"
-		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
+		content="nonprofit donor intelligence, AI prospect research, major donor prospecting, wealth screening nonprofits, donor discovery platform, small nonprofit fundraising software, giving history analysis, DonorSearch alternative, iWave alternative, fundraising intelligence platform, nonprofit technology, donor wealth indicators, major gift fundraising, philanthropic research tool, nonprofit CRM"
 	/>
 	<meta name="author" content="GetRomy LLC" />
 	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -48,19 +52,24 @@
 
 	<!-- Open Graph -->
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content={url} />
+	<meta property="og:url" content={canonicalUrl} />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
+	<meta property="og:image" content={ogImage} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="Rōmy — Donor Intelligence for Small Nonprofits" />
 	<meta property="og:site_name" content="Rōmy" />
 	<meta property="og:locale" content="en_US" />
 
 	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@RomyFindsMoney" />
 	<meta name="twitter:creator" content="@RomyFindsMoney" />
-	<meta name="twitter:url" content={url} />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={ogImage} />
+	<meta name="twitter:image:alt" content="Rōmy — Donor Intelligence for Small Nonprofits" />
 
 	<!-- Performance -->
 	<link rel="preload" href="/fonts/Archivo-VariableFont_wdth,wght.woff2" as="font" type="font/woff2" crossorigin />
@@ -74,16 +83,28 @@
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 	<link rel="manifest" href="/site.webmanifest" />
 
-	<link rel="canonical" href={url} />
+	<link rel="canonical" href={canonicalUrl} />
 
 	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"name": "Rōmy",
+		"url": "https://getromy.app",
+		"description": "Donor intelligence platform for small nonprofits. AI-powered prospect research with wealth indicators, giving history, and affinity signals.",
+		"publisher": {
+			"@type": "Organization",
+			"name": "GetRomy LLC"
+		}
+	})}</script>`}
+
 	{@html `<script type="application/ld+json">${JSON.stringify({
 		"@context": "https://schema.org",
 		"@type": "SoftwareApplication",
 		"name": "Rōmy",
 		"url": "https://getromy.app",
 		"applicationCategory": "BusinessApplication",
-		"operatingSystem": "macOS, Windows, Linux",
+		"operatingSystem": "macOS, Windows, Linux, Web",
 		"description": "Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.",
 		"offers": {
 			"@type": "Offer",
@@ -102,7 +123,8 @@
 			"Giving history analysis",
 			"Affinity signal detection",
 			"Actionable donor profiles",
-			"No enterprise contracts required"
+			"No enterprise contracts required",
+			"Built for small nonprofit teams"
 		]
 	})}</script>`}
 
@@ -111,12 +133,17 @@
 		"@type": "Organization",
 		"name": "GetRomy LLC",
 		"url": "https://getromy.app",
-		"logo": "https://getromy.app/icon-logo.png",
+		"logo": {
+			"@type": "ImageObject",
+			"url": "https://getromy.app/icon-logo.png",
+			"width": 512,
+			"height": 512
+		},
 		"description": "Donor intelligence platform for small nonprofits",
 		"contactPoint": {
 			"@type": "ContactPoint",
 			"email": "solomon@getromy.app",
-			"contactType": "sales"
+			"contactType": "customer support"
 		},
 		"sameAs": [
 			"https://x.com/RomyFindsMoney",

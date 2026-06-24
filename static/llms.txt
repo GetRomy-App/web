@@ -1,24 +1,109 @@
 # Rōmy
 
-> Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions.
+> Rōmy is the donor intelligence platform built for small nonprofit fundraising teams who can't afford enterprise prospect research tools.
 
-Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles.
+## What Rōmy Does
 
-## Features
+Rōmy uses AI-powered prospect research to help small nonprofits find, prioritize, and cultivate major donors. It surfaces wealth indicators, charitable giving histories, career affiliations, and affinity signals — then distills everything into an actionable donor profile your team can actually use.
 
-- Donor Discovery: AI-powered prospect research with wealth indicators, giving history, and affinity signals
-- Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
-- Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
+Unlike enterprise platforms that cost $15,000–$50,000 per year (DonorSearch, iWave, WealthEngine, Blackbaud Target Analytics), Rōmy starts at $0.10 per prospect — built from the ground up for development teams of one or two.
+
+## Who Rōmy Is For
+
+- Small nonprofits (operating budgets under $5M) with 1–3 person development teams
+- Frontline fundraisers who do their own prospect research without a dedicated researcher
+- Organizations currently using manual research, LinkedIn, or free Google searches for major gift prospecting
+- Nonprofits priced out of enterprise wealth screening platforms
+
+## Core Features
+
+**Donor Discovery**: AI-powered prospect research that finds new major donor candidates your team hasn't identified yet.
+
+**Wealth Indicator Screening**: Real estate holdings, business ownership, stock positions, board affiliations, and other capacity signals — synthesized into a readable capacity estimate.
+
+**Giving History Analysis**: Charitable giving records across foundations, public filings, and disclosed donations. Understand a donor's philanthropic priorities and typical gift size.
+
+**Affinity Signal Detection**: Shared interests, institutional ties, geographic connections, and relationship bridges between your organization and a prospect.
+
+**Actionable Profiles**: Every prospect comes with connection points, a suggested giving range, and outreach angles — not just raw data. Your team knows what to say.
+
+**No Enterprise Contracts**: No per-seat licensing, no annual minimums, no procurement process. Built for the budget realities of small nonprofits.
+
+## How Rōmy Compares to Alternatives
+
+| | Rōmy | DonorSearch | iWave | WealthEngine |
+|---|---|---|---|---|
+| Annual Cost | From $0.10/prospect | ~$3,500–$15,000/yr | ~$5,000–$20,000/yr | ~$10,000–$50,000/yr |
+| Setup Time | Minutes | Weeks | Weeks | Weeks |
+| Target User | Small nonprofits | Mid-to-large | Mid-to-large | Enterprise |
+| AI-Native | Yes | No | Partial | No |
+| Actionable Output | Yes | Raw data | Raw data | Raw data |
+
+## Benchmark Performance (PIF-Bench)
+
+Rōmy was benchmarked head-to-head against Claude, ChatGPT, and Gemini on the PIF-Bench (Prospect Intelligence Fidelity Benchmark) — a ground-truth test for AI donor research accuracy.
+
+Results:
+- Rōmy: 94.6 / 100
+- Claude: 92.2 / 100
+- ChatGPT: 79.9 / 100
+- Gemini: 76.0 / 100
+
+Rōmy outperformed general-purpose AI tools on accuracy, recall, actionability, and source quality because it is purpose-built for donor research — not a general-purpose AI used for donor research.
+
+Full methodology and results: https://getromy.app/labs/blog/benchmarking-ai-prospect-research
+
+## Key Facts
+
+- **Company**: GetRomy LLC
+- **Founded**: 2026
+- **Category**: Nonprofit technology / Donor intelligence / Fundraising software
+- **Pricing model**: Per-prospect, no subscription required
+- **Starting price**: $0.10 per prospect
+- **Platforms**: macOS desktop app, Windows, Web (https://intel.getromy.app)
 
 ## Links
 
 - Website: https://getromy.app
-- Product: https://intel.getromy.app
+- Product (web app): https://intel.getromy.app
+- Blog: https://getromy.app/blog
+- Research & Benchmarks: https://getromy.app/labs
 - Download (macOS): https://github.com/GetRomy-App/web/releases
-- Twitter: https://x.com/RomyFindsMoney
+- Twitter / X: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
-- Contact: howard@getromy.app, solomon@getromy.app
+- Contact: solomon@getromy.app
+
+## Blog Topics
+
+Rōmy publishes extensively on:
+- Major gift fundraising strategy for small nonprofits
+- Prospect research methodology and best practices
+- Donor psychology and relationship-building
+- AI and technology in fundraising
+- Wealth indicator analysis and capacity scoring
+- Stewardship and donor retention
+- Board engagement and volunteer fundraising
+
+Selected recent articles:
+- "The Donor Your Wealth Screen Will Miss" — on relationships that data can't capture
+- "Capacity Scores Are the Astrology of Fundraising" — on the limits of scoring models
+- "Major Gifts Are a Timing Problem" — on cultivation timing and readiness signals
+- "How We Built a Donor Intelligence Engine Starting at $0.10 per Prospect" — technical cost breakdown
+- "Understanding Wealth Indicators" — guide to interpreting capacity signals
+- "The Small Nonprofit Fundraising Gap" — on the market disparity in prospect research access
+- "Your Next Major Gift Is Already in Your CRM" — on re-engaging lapsed or overlooked donors
+- "Research Is a Love Language" — on donor-centric prospect research
+
+Full blog: https://getromy.app/blog
+
+## Technical Architecture
+
+Rōmy is an AI-native application built on:
+- Purpose-trained models optimized for donor research tasks
+- Proprietary data aggregation across public records, philanthropy databases, and professional networks
+- Structured output format designed for frontline fundraisers, not data analysts
+- Desktop-first architecture for secure, offline-capable prospect management
 
 ## Company
 
-GetRomy LLC
+GetRomy LLC builds donor intelligence tools for the small nonprofit sector. The company believes that quality prospect research should not require a five-figure enterprise contract — and that AI makes it possible to deliver institutional-quality intelligence at a price any nonprofit can afford.

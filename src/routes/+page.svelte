@@ -42,6 +42,40 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Rōmy — Donor Intelligence for Small Nonprofits</title>
+	<meta property="og:type" content="website" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		"@id": "https://getromy.app/",
+		"url": "https://getromy.app/",
+		"name": "Rōmy — Donor Intelligence for Small Nonprofits",
+		"description": "Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — built for small nonprofit teams.",
+		"isPartOf": {
+			"@type": "WebSite",
+			"@id": "https://getromy.app",
+			"name": "Rōmy"
+		},
+		"about": {
+			"@type": "SoftwareApplication",
+			"name": "Rōmy",
+			"applicationCategory": "BusinessApplication"
+		},
+		"breadcrumb": {
+			"@type": "BreadcrumbList",
+			"itemListElement": [
+				{
+					"@type": "ListItem",
+					"position": 1,
+					"name": "Home",
+					"item": "https://getromy.app/"
+				}
+			]
+		}
+	})}</script>`}
+</svelte:head>
+
 <Footer bind:footerText />
 
 <Navbar />
