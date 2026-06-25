@@ -2,7 +2,7 @@
 	"repo": "getromy-app/web",
 	"branch": "main",
 	"timeoutMs": 15000,
-	"degradedThresholdMs": 4000,
+	"degradedThresholdMs": 6000,
 	"services": [
 		{
 			"id": "app",
