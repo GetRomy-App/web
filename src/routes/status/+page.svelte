@@ -14,6 +14,7 @@
 	import { OVERALL_STYLES, relativeTime } from '$lib/status/ui';
 	import type { HistoryDoc, ServiceSummary, OverallStatus } from '$lib/status/types';
 	import { productUrl } from '$lib/release';
+	import { contactModal } from '$lib/stores/contact.svelte';
 
 	let { data } = $props();
 
@@ -299,11 +300,7 @@
 							></path>
 						</svg>
 					</Button>
-					<Button
-						variant="secondary"
-						href="mailto:solomon@getromy.app?subject=Status%20report"
-						class="w-fit"
-					>
+					<Button variant="secondary" onclick={() => contactModal.show('issue')} class="w-fit">
 						Report an issue
 					</Button>
 				</div>

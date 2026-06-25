@@ -32,13 +32,39 @@ export function lastDayKeys(n: number, nowMs: number): string[] {
 	return keys;
 }
 
-/** Current state of a service from its most recent probe. */
+// The live badge reflects the last few probes, not a single sample, so one slow
+// or briefly-failed check can't flip the headline status. A 5-probe window is
+// ~50 min at the 10-minute cadence — wide enough to absorb a cold start or a bit
+// of runner jitter, narrow enough to surface a real, sustained problem quickly.
+const STATE_WINDOW = 5;
+
+/** Median of a non-empty numeric list. */
+function median(values: number[]): number {
+	const sorted = [...values].sort((a, b) => a - b);
+	const mid = Math.floor(sorted.length / 2);
+	return sorted.length % 2 === 1 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
+/**
+ * Current state of a service, smoothed over the last few probes:
+ *   - "down"        when no probe in the window succeeded, or the latest probe
+ *                   failed and it isn't a lone blip (>=2 recent failures) — so a
+ *                   single transient runner error doesn't read as an outage.
+ *   - "degraded"    when the MEDIAN latency of recent healthy probes exceeds the
+ *                   threshold, not just one slow ping.
+ *   - "operational" otherwise.
+ */
 export function currentState(history: ServiceHistory, thresholdMs: number): ServiceState {
-	const last = history?.lastCheck;
-	if (!last) return 'pending';
-	if (!last.ok) return 'down';
-	if (last.ms > thresholdMs) return 'degraded';
-	return 'operational';
+	const window = (history?.recent ?? []).slice(-STATE_WINDOW);
+	if (window.length === 0) return 'pending';
+
+	const healthy = window.filter((s) => s.ok);
+	if (healthy.length === 0) return 'down';
+
+	const latest = window[window.length - 1];
+	if (!latest.ok && window.length - healthy.length >= 2) return 'down';
+
+	return median(healthy.map((s) => s.ms)) > thresholdMs ? 'degraded' : 'operational';
 }
 
 /**

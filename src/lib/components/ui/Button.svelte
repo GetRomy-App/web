@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import type { HTMLAnchorAttributes } from 'svelte/elements';
+	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
 	import { cva, type VariantProps } from 'class-variance-authority';
 	import { cn } from '$lib/utils';
 
@@ -10,7 +10,8 @@
 			variants: {
 				variant: {
 					primary: 'bg-blue-700 hover:bg-blue-700/90 text-white button-highlight',
-					secondary: 'bg-[var(--ds-btn-secondary-bg)] text-foreground border-gray-alpha-200 hover:bg-[var(--ds-btn-secondary-hover)] border',
+					secondary:
+						'bg-[var(--ds-btn-secondary-bg)] text-foreground border-gray-alpha-200 hover:bg-[var(--ds-btn-secondary-hover)] border',
 					ghost: 'text-gray-alpha-600 hover:text-foreground'
 				},
 				size: {
@@ -37,12 +38,33 @@
 	interface Props extends HTMLAnchorAttributes, VariantProps<typeof linkVariants> {
 		class?: string;
 		children?: Snippet;
+		/** Button type, used only when rendered as a <button> (no `href`). */
+		type?: 'button' | 'submit' | 'reset';
 	}
 
-	let { class: className, variant, size, href, children, ...props }: Props = $props();
+	let {
+		class: className,
+		variant,
+		size,
+		href,
+		type = 'button',
+		children,
+		...props
+	}: Props = $props();
 </script>
 
-<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-<a {href} class={cn(linkVariants({ variant, size }), className)} {...props}>
-	{@render children?.()}
-</a>
+{#if href}
+	<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+	<a {href} class={cn(linkVariants({ variant, size }), className)} {...props}>
+		{@render children?.()}
+	</a>
+{:else}
+	<!-- Rest props are typed for the anchor case; re-cast for the button element. -->
+	<button
+		{type}
+		class={cn(linkVariants({ variant, size }), className)}
+		{...(props as unknown as HTMLButtonAttributes)}
+	>
+		{@render children?.()}
+	</button>
+{/if}
