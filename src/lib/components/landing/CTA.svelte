@@ -4,6 +4,7 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '../ui/Grid.svelte';
 	import { productUrl } from '$lib/release';
+	import { contactModal } from '$lib/stores/contact.svelte';
 
 	let ctaSection: HTMLElement;
 
@@ -46,7 +47,7 @@
 					'-=0.8'
 				)
 				.fromTo(
-					ctaSection.querySelectorAll('a'),
+					ctaSection.querySelectorAll('a, button'),
 					{ opacity: 0, y: 10 },
 					{ opacity: 1, y: 0, stagger: 0.1, duration: 1.0, ease: 'custom-ease' },
 					'-=0.8'
@@ -78,23 +79,65 @@
 		</p>
 	</div>
 
-	<div class="flex flex-wrap items-center gap-3">
+	<div class="gap-3 flex flex-wrap items-center">
 		<Button href={productUrl} target="_blank" rel="noreferrer" class="w-fit">
 			Get Started
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="size-4" aria-hidden="true">
-				<path d="M9 6C9 6 15 10.4189 15 12C15 13.5812 9 18 9 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="16"
+				height="16"
+				viewBox="0 0 24 24"
+				fill="none"
+				class="size-4"
+				aria-hidden="true"
+			>
+				<path
+					d="M9 6C9 6 15 10.4189 15 12C15 13.5812 9 18 9 18"
+					stroke="currentColor"
+					stroke-width="1.5"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				></path>
 			</svg>
 		</Button>
 		<Button variant="secondary" href="/labs" class="w-fit">
 			See Benchmarks
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="size-4" aria-hidden="true">
-				<path d="M9 6C9 6 15 10.4189 15 12C15 13.5812 9 18 9 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="16"
+				height="16"
+				viewBox="0 0 24 24"
+				fill="none"
+				class="size-4"
+				aria-hidden="true"
+			>
+				<path
+					d="M9 6C9 6 15 10.4189 15 12C15 13.5812 9 18 9 18"
+					stroke="currentColor"
+					stroke-width="1.5"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				></path>
 			</svg>
 		</Button>
-		<Button variant="secondary" href="mailto:howard@getromy.app,solomon@getromy.app" class="w-fit">
+		<Button variant="secondary" onclick={() => contactModal.show('contact')} class="w-fit">
 			Enterprise Access
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="size-4" aria-hidden="true">
-				<path d="M9 6C9 6 15 10.4189 15 12C15 13.5812 9 18 9 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="16"
+				height="16"
+				viewBox="0 0 24 24"
+				fill="none"
+				class="size-4"
+				aria-hidden="true"
+			>
+				<path
+					d="M9 6C9 6 15 10.4189 15 12C15 13.5812 9 18 9 18"
+					stroke="currentColor"
+					stroke-width="1.5"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				></path>
 			</svg>
 		</Button>
 	</div>

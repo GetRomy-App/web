@@ -3,6 +3,7 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import { productUrl, fallbackReleaseUrl } from '$lib/release';
 	import { toggleTheme, isDark } from '$lib/theme';
+	import { contactModal } from '$lib/stores/contact.svelte';
 
 	const RELEASE_TAG = 'v1.0.0';
 	const BASE = `https://github.com/GetRomy-App/web/releases/download/${RELEASE_TAG}`;
@@ -75,6 +76,13 @@
 			</a>
 			<span class="text-gray-alpha-400 text-xs md:inline hidden select-none">//</span>
 			<button
+				onclick={() => contactModal.show('contact')}
+				class="text-gray-alpha-600 hover:text-foreground text-xs font-medium md:inline hidden cursor-pointer transition-colors"
+			>
+				Contact
+			</button>
+			<span class="text-gray-alpha-400 text-xs md:inline hidden select-none">//</span>
+			<button
 				onclick={toggleTheme}
 				aria-label="Toggle theme"
 				class="text-gray-alpha-600 hover:text-foreground text-xs font-medium md:inline hidden cursor-pointer transition-colors"
@@ -141,6 +149,17 @@
 						>
 							Status
 						</a>
+						<button
+							type="button"
+							role="menuitem"
+							onclick={() => {
+								contactModal.show('contact');
+								menuOpen = false;
+							}}
+							class="text-gray-alpha-600 hover:text-foreground hover:bg-gray-alpha-100 rounded-lg px-3 py-2 text-xs font-medium block w-full cursor-pointer text-left transition-colors"
+						>
+							Contact
+						</button>
 						<button
 							type="button"
 							role="menuitem"

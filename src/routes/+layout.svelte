@@ -3,25 +3,38 @@
 	import { onMount } from 'svelte';
 	import Lenis from 'lenis';
 	import { gsap, ScrollTrigger, registerGsap } from '$lib/gsap';
+	import ContactModal from '$lib/components/ui/ContactModal.svelte';
+	import { contactModal } from '$lib/stores/contact.svelte';
 
 	let { children } = $props();
 
 	registerGsap();
 
-	onMount(() => {
-		const lenis = new Lenis();
+	let lenis = $state<Lenis>();
 
-		lenis.on('scroll', ScrollTrigger.update);
+	onMount(() => {
+		const instance = new Lenis();
+		lenis = instance;
+
+		instance.on('scroll', ScrollTrigger.update);
 
 		gsap.ticker.add((time: number) => {
-			lenis.raf(time * 1000);
+			instance.raf(time * 1000);
 		});
 
 		gsap.ticker.lagSmoothing(0);
 
 		return () => {
-			lenis.destroy();
+			instance.destroy();
+			lenis = undefined;
 		};
+	});
+
+	// Freeze background scrolling while the contact dialog is open.
+	$effect(() => {
+		if (!lenis) return;
+		if (contactModal.open) lenis.stop();
+		else lenis.start();
 	});
 
 	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
@@ -42,7 +55,10 @@
 		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
 	/>
 	<meta name="author" content="GetRomy LLC" />
-	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+	<meta
+		name="robots"
+		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+	/>
 	<meta name="theme-color" content="#0d0d0e" media="(prefers-color-scheme: dark)" />
 	<meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
 
@@ -63,7 +79,13 @@
 	<meta name="twitter:description" content={description} />
 
 	<!-- Performance -->
-	<link rel="preload" href="/fonts/Archivo-VariableFont_wdth,wght.woff2" as="font" type="font/woff2" crossorigin />
+	<link
+		rel="preload"
+		href="/fonts/Archivo-VariableFont_wdth,wght.woff2"
+		as="font"
+		type="font/woff2"
+		crossorigin
+	/>
 	<link rel="dns-prefetch" href="//api.github.com" />
 	<link rel="preconnect" href="//api.github.com" crossorigin />
 
@@ -78,51 +100,51 @@
 
 	<!-- Structured Data (JSON-LD) -->
 	{@html `<script type="application/ld+json">${JSON.stringify({
-		"@context": "https://schema.org",
-		"@type": "SoftwareApplication",
-		"name": "Rōmy",
-		"url": "https://getromy.app",
-		"applicationCategory": "BusinessApplication",
-		"operatingSystem": "macOS, Windows, Linux",
-		"description": "Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.",
-		"offers": {
-			"@type": "Offer",
-			"price": "0",
-			"priceCurrency": "USD",
-			"availability": "https://schema.org/InStock"
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		name: 'Rōmy',
+		url: 'https://getromy.app',
+		applicationCategory: 'BusinessApplication',
+		operatingSystem: 'macOS, Windows, Linux',
+		description:
+			'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
+		offers: {
+			'@type': 'Offer',
+			price: '0',
+			priceCurrency: 'USD',
+			availability: 'https://schema.org/InStock'
 		},
-		"publisher": {
-			"@type": "Organization",
-			"name": "GetRomy LLC",
-			"url": "https://getromy.app"
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app'
 		},
-		"featureList": [
-			"AI-powered donor prospect research",
-			"Wealth indicator screening",
-			"Giving history analysis",
-			"Affinity signal detection",
-			"Actionable donor profiles",
-			"No enterprise contracts required"
+		featureList: [
+			'AI-powered donor prospect research',
+			'Wealth indicator screening',
+			'Giving history analysis',
+			'Affinity signal detection',
+			'Actionable donor profiles',
+			'No enterprise contracts required'
 		]
 	})}</script>`}
 
 	{@html `<script type="application/ld+json">${JSON.stringify({
-		"@context": "https://schema.org",
-		"@type": "Organization",
-		"name": "GetRomy LLC",
-		"url": "https://getromy.app",
-		"logo": "https://getromy.app/icon-logo.png",
-		"description": "Donor intelligence platform for small nonprofits",
-		"contactPoint": {
-			"@type": "ContactPoint",
-			"email": "solomon@getromy.app",
-			"contactType": "sales"
+		'@context': 'https://schema.org',
+		'@type': 'Organization',
+		name: 'GetRomy LLC',
+		url: 'https://getromy.app',
+		logo: 'https://getromy.app/icon-logo.png',
+		description: 'Donor intelligence platform for small nonprofits',
+		contactPoint: {
+			'@type': 'ContactPoint',
+			email: 'solomon@getromy.app',
+			contactType: 'sales'
 		},
-		"sameAs": [
-			"https://x.com/RomyFindsMoney",
-			"https://github.com/GetRomy-App"
-		]
+		sameAs: ['https://x.com/RomyFindsMoney', 'https://github.com/GetRomy-App']
 	})}</script>`}
 </svelte:head>
 
 {@render children()}
+
+<ContactModal />
