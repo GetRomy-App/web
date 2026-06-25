@@ -223,20 +223,57 @@
 </script>
 
 <svelte:head>
-	<title>Romy Labs — AI Donor Research Benchmarks, PIF-Bench Results & Blog</title>
+	<title>Rōmy Labs — AI Donor Research Benchmarks: Rōmy 94.6 vs. ChatGPT 79.9, Claude 92.2, Gemini 76.0</title>
 	<meta
 		name="description"
-		content="Romy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). See how purpose-built AI donor intelligence compares on accuracy, cost, and speed."
+		content="Rōmy scored 94.6 on PIF-Bench — the open prospect research accuracy benchmark — vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). See full methodology, dimension breakdown, and cost comparisons."
 	/>
 	<meta
 		name="keywords"
-		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Romy, prospect research tool"
+		content="AI prospect research benchmark, PIF-Bench donor intelligence, nonprofit fundraising AI comparison, wealth screening accuracy test, ChatGPT vs Romy donor research, Claude AI nonprofit, Gemini donor research, best AI for prospect research, donor intelligence benchmark, nonprofit AI tools comparison, prospect research accuracy, DonorSearch vs AI, iWave vs AI, WealthEngine alternative, AI major donor research"
 	/>
-	<meta property="og:title" content="Romy Labs — AI Donor Research Benchmarks" />
-	<meta property="og:description" content="PIF-Bench results: Romy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research." />
+	<meta property="og:title" content="Rōmy Labs — AI Donor Research Benchmarks: Rōmy 94.6 vs. ChatGPT 79.9" />
+	<meta property="og:description" content="Open benchmarks for AI-powered prospect research. PIF-Bench results: Rōmy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Full methodology and dimension breakdown." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/labs" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 	<link rel="canonical" href="https://getromy.app/labs" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		name: 'Rōmy Labs — AI Donor Research Benchmarks',
+		description: 'Open benchmarks comparing AI prospect research tools: Rōmy, ChatGPT, Claude, and Gemini on PIF-Bench (Prospect Intelligence Fidelity benchmark).',
+		url: 'https://getromy.app/labs',
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			logo: { '@type': 'ImageObject', url: 'https://getromy.app/icon-logo.png' }
+		},
+		about: [
+			{ '@type': 'Thing', name: 'AI Prospect Research Benchmark' },
+			{ '@type': 'Thing', name: 'Donor Intelligence Accuracy' },
+			{ '@type': 'Thing', name: 'PIF-Bench' },
+			{ '@type': 'Thing', name: 'Nonprofit AI Tools' }
+		],
+		mentions: [
+			{ '@type': 'SoftwareApplication', name: 'Rōmy', url: 'https://getromy.app' },
+			{ '@type': 'SoftwareApplication', name: 'ChatGPT', url: 'https://chat.openai.com' },
+			{ '@type': 'SoftwareApplication', name: 'Claude', url: 'https://claude.ai' },
+			{ '@type': 'SoftwareApplication', name: 'Gemini', url: 'https://gemini.google.com' }
+		]
+	})}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app' },
+			{ '@type': 'ListItem', position: 2, name: 'Labs', item: 'https://getromy.app/labs' }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

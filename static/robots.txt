@@ -1,4 +1,46 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /keystatic/
+
+# Allow all major search engine crawlers explicitly
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /keystatic/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /keystatic/
+
+User-agent: Slurp
+Allow: /
+Disallow: /api/
+Disallow: /keystatic/
+
+# Allow AI crawlers for GEO (Generative Engine Optimization)
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+Disallow: /keystatic/
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
 
 Sitemap: https://getromy.app/sitemap.xml

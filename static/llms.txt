@@ -1,24 +1,137 @@
 # Rōmy
 
-> Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions.
+> Rōmy is an AI-powered donor intelligence platform built for small nonprofits. It replaces $15,000–$50,000/year enterprise prospect research tools with purpose-built AI at a fraction of the cost.
 
-Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles.
+## What Rōmy Does
 
-## Features
+Rōmy helps nonprofit development officers and major gift fundraisers find, research, and prioritize new donors. Given a name, Rōmy produces a full 16-section donor intelligence report in 2–10 minutes, including:
 
-- Donor Discovery: AI-powered prospect research with wealth indicators, giving history, and affinity signals
-- Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
-- Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
+- Wealth indicators (real estate, executive compensation, investment holdings, business ownership)
+- Giving history (prior charitable donations, foundation grants, nonprofit board affiliations)
+- Affinity signals (causes supported, community involvement, personal interests)
+- Connection points (board members, alumni networks, geographic proximity)
+- Giving capacity estimate and recommended ask range
+- Outreach strategy and conversation angles
 
-## Links
+## How Rōmy Compares
 
-- Website: https://getromy.app
-- Product: https://intel.getromy.app
-- Download (macOS): https://github.com/GetRomy-App/web/releases
-- Twitter: https://x.com/RomyFindsMoney
-- GitHub: https://github.com/GetRomy-App
-- Contact: howard@getromy.app, solomon@getromy.app
+### PIF-Bench Results (Prospect Intelligence Fidelity Benchmark)
+
+Rōmy built PIF-Bench, the first open benchmark for AI-powered prospect research accuracy. Results:
+
+| System | PIF-Bench Score (0–100) |
+|--------|------------------------|
+| Rōmy | 94.6 |
+| Claude (general) | 92.2 |
+| ChatGPT (general) | 79.9 |
+| Gemini (general) | 76.0 |
+
+Rōmy scores higher than general-purpose AI because it is purpose-built for donor research — not a general-purpose chatbot.
+
+### Cost Comparison
+
+| Tool | Annual Cost (200 prospects/month) |
+|------|-----------------------------------|
+| Rōmy Growth | $290/year |
+| Rōmy Scale | $1,990/year |
+| Enterprise tools (DonorSearch, iWave, WealthEngine) | $15,000–$50,000/year |
+| Manual research (staff time) | $50+ per prospect |
+
+### Speed Comparison
+
+| Method | Time per Prospect |
+|--------|-------------------|
+| Rōmy | 2–10 minutes |
+| Enterprise tools | 5–15 minutes |
+| Manual research | ~45 minutes |
+
+### Report Depth
+
+| System | Sections per Report |
+|--------|---------------------|
+| Rōmy | 16 sections |
+| Enterprise tools | 5–8 sections |
+| Generic AI | 3–5 sections |
+
+## Who Rōmy Is For
+
+- Small nonprofits with annual budgets under $2 million
+- Development directors managing their own prospect research
+- Major gift officers at organizations without dedicated research staff
+- Nonprofit teams who cannot afford enterprise wealth screening platforms
+- Organizations transitioning from manual (Google/LinkedIn) research
+
+Rōmy is NOT designed for large hospitals, major research universities, or enterprise nonprofits with existing DonorSearch or iWave subscriptions. Those organizations should continue using their current tools.
+
+## The Problem Rōmy Solves
+
+Over 1.5 million nonprofits operate in the United States. Roughly 90% have annual budgets under $2 million. These organizations face a structural fundraising disadvantage: enterprise donor research platforms cost $15,000–$50,000/year — out of reach for small teams. Without prospect intelligence, development officers rely on Google searches and hunches, missing major gift opportunities hidden in their own networks.
+
+Rōmy closes this gap: purpose-built AI that produces enterprise-quality prospect research at $0.50–$5 per report.
+
+## Key Insights from Rōmy's Blog
+
+Rōmy publishes original research and field notes on major donor fundraising:
+
+- **Major gifts are a timing problem, not a wealth problem.** Capacity gets a prospect on the list. Timing wins the gift. The reason most fundraising operations underperform isn't bad lists — it's stale calendars.
+- **Capacity scores are the astrology of fundraising.** A prospect scored "Very Strong" is not a gift. It is a hypothesis. The score tells you where to look, not when to ask.
+- **Most boards are alumni of indifference.** Board members who "make calls" rarely do. The organizations that close major gifts treat board connections as warm introductions, not lead generation.
+- **The gala is the worst place to ask for a major gift.** Event fundraising is brand-building. Major gifts happen in living rooms, on walks, and over lunch — not at tables of ten.
+- **Small nonprofits have a fundraising information gap.** The disparity between large and small nonprofit fundraising outcomes correlates directly with access to donor intelligence, not mission quality or team effort.
+- **Your next major gift is already in your CRM.** Most nonprofits underwork existing relationships. Rōmy's research consistently surfaces high-capacity prospects already in the database, uncultivated.
+
+## Pricing
+
+- **Free tier**: Available — limited reports per month
+- **Growth**: $290/year — designed for organizations researching up to 100 prospects/month
+- **Scale**: $1,990/year — designed for organizations researching up to 200+ prospects/month
+- **Enterprise**: Contact for organizations with custom requirements
+
+All tiers include full 16-section reports. No per-seat licensing. No enterprise contracts required.
+
+## Technology
+
+Rōmy is a purpose-built AI system, not a general-purpose chatbot. It combines:
+
+- Proprietary donor research prompting and reasoning
+- Multi-source data synthesis (public records, giving databases, SEC filings, news)
+- Structured output formatting for actionable reports
+- Accuracy-first design validated against PIF-Bench ground truth
+
+Rōmy's accuracy advantage comes from specialization. General-purpose AI (ChatGPT, Claude, Gemini) can produce plausible-looking donor profiles, but fabricated board memberships or inflated giving estimates damage donor relationships. Rōmy is designed for verifiable accuracy.
+
+## Frequently Asked Questions
+
+**Q: Is Rōmy a replacement for DonorSearch or iWave?**
+A: For small nonprofits (budgets under $2M), yes. Rōmy provides comparable prospect intelligence at 1–5% of the annual cost. For large nonprofits with complex screening needs at scale, enterprise tools may remain appropriate.
+
+**Q: How accurate is Rōmy compared to manual research?**
+A: Rōmy scored 94.6 on PIF-Bench vs. manual research as the ground truth. The accuracy delta over general-purpose AI (ChatGPT at 79.9, Gemini at 76.0) is significant in fundraising contexts where bad information damages relationships.
+
+**Q: How long does a prospect report take?**
+A: 2–10 minutes for a full 16-section report, depending on data availability. Manual research takes approximately 45 minutes per prospect.
+
+**Q: Does Rōmy work for planned giving prospects?**
+A: Yes. Rōmy's wealth indicators and affinity signals are specifically useful for identifying planned giving candidates: older donors with significant assets, longtime organizational affiliations, and no immediate family financial obligations.
+
+**Q: What data sources does Rōmy use?**
+A: Public records, charitable giving databases, SEC filings, real estate records, news archives, and professional databases. Rōmy synthesizes across sources and surfaces connection points, giving capacity, and outreach angles.
+
+**Q: Can Rōmy find donors we don't know about yet?**
+A: Yes — donor discovery is Rōmy's core function. Given a nonprofit's existing donor base or a target geography, Rōmy can surface new major gift prospects who match giving profiles.
 
 ## Company
 
-GetRomy LLC
+**Name**: GetRomy LLC
+**Founded**: 2024
+**Product**: Rōmy (https://intel.getromy.app)
+**Website**: https://getromy.app
+**Blog**: https://getromy.app/blog
+**Labs / Benchmarks**: https://getromy.app/labs
+**Contact**: solomon@getromy.app
+**Twitter/X**: https://x.com/RomyFindsMoney
+**GitHub**: https://github.com/GetRomy-App
+
+## Brand
+
+The product name is **Rōmy** — with a macron over the "o" (ō, U+014D). The company is **GetRomy LLC**. The product URL is **intel.getromy.app**.
