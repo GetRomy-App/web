@@ -180,7 +180,7 @@
 			>
 				<span class="tabular-nums">Updated {relativeTime(generatedMs, now)}</span>
 				<span class="select-none">·</span>
-				<span>Checked automatically every ~10 min</span>
+				<span>Checked automatically every few hours</span>
 				{#if live}
 					<span class="select-none">·</span>
 					<span class="text-green-600 gap-1 inline-flex items-center">

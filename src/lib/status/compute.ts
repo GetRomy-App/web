@@ -33,9 +33,10 @@ export function lastDayKeys(n: number, nowMs: number): string[] {
 }
 
 // The live badge reflects the last few probes, not a single sample, so one slow
-// or briefly-failed check can't flip the headline status. A 5-probe window is
-// ~50 min at the 10-minute cadence — wide enough to absorb a cold start or a bit
-// of runner jitter, narrow enough to surface a real, sustained problem quickly.
+// or briefly-failed check can't flip the headline status. The probe cadence is
+// irregular (GitHub coalesces scheduled runs), so we smooth over a fixed count
+// of recent probes rather than a wall-clock window: a slow median across several
+// checks — not one blip — is what flips the badge.
 const STATE_WINDOW = 5;
 
 /** Median of a non-empty numeric list. */
