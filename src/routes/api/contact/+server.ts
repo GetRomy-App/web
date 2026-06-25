@@ -14,7 +14,7 @@ import { env } from '$env/dynamic/private';
 export const prerender = false;
 
 const RESEND_ENDPOINT = 'https://api.resend.com/emails';
-const DEFAULT_FROM = 'Rōmy <noreply@getromy.app>';
+const DEFAULT_FROM = 'Rōmy <noreply@letters.getromy.app>';
 const DEFAULT_TO = ['solomon@getromy.app', 'howard@getromy.app'];
 
 const LIMITS = { name: 120, email: 200, message: 5000 } as const;
