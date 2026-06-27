@@ -223,20 +223,54 @@
 </script>
 
 <svelte:head>
-	<title>Romy Labs — AI Donor Research Benchmarks, PIF-Bench Results & Blog</title>
+	<title>Rōmy Labs — AI Donor Research Benchmarks: Rōmy 94.6 vs ChatGPT 79.9 vs Gemini 76.0</title>
 	<meta
 		name="description"
-		content="Romy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). See how purpose-built AI donor intelligence compares on accuracy, cost, and speed."
+		content="Rōmy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). Open benchmarks measuring AI donor research accuracy, cost, speed, and report depth. See the full methodology."
 	/>
 	<meta
 		name="keywords"
-		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Romy, prospect research tool"
+		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Romy, Claude vs Romy, Gemini vs Romy, prospect research tool, AI donor research accuracy, nonprofit AI benchmark, prospect research software comparison, DonorSearch alternative, iWave alternative"
 	/>
-	<meta property="og:title" content="Romy Labs — AI Donor Research Benchmarks" />
-	<meta property="og:description" content="PIF-Bench results: Romy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research." />
+	<meta property="og:title" content="Rōmy Labs — AI Donor Research Benchmarks: Rōmy Scores 94.6 on PIF-Bench" />
+	<meta property="og:description" content="PIF-Bench results: Rōmy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research — accuracy, cost, speed, and report depth." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/labs" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="Rōmy Labs — AI Donor Research Benchmarks" />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@RomyFindsMoney" />
+	<meta name="twitter:title" content="Rōmy Labs — AI Donor Research Benchmarks" />
+	<meta name="twitter:description" content="PIF-Bench results: Rōmy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research." />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 	<link rel="canonical" href="https://getromy.app/labs" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Dataset',
+		name: 'PIF-Bench: Prospect Intelligence Fidelity Benchmark',
+		description: 'Open benchmark measuring the accuracy, cost, and speed of AI-powered donor prospect research tools. Compares Rōmy, ChatGPT, Claude, and Gemini across multiple dimensions.',
+		url: 'https://getromy.app/labs',
+		creator: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app'
+		},
+		keywords: ['donor intelligence', 'prospect research', 'AI benchmark', 'nonprofit fundraising', 'wealth screening', 'PIF-Bench'],
+		measurementTechnique: 'Standardized prompts evaluated by Claude Opus across accuracy, cost, and speed dimensions',
+		variableMeasured: ['Prospect Intelligence Fidelity Score', 'Time per Prospect', 'Cost per Report', 'Annual Cost', 'Report Depth'],
+		license: 'https://creativecommons.org/licenses/by/4.0/'
+	})}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app' },
+			{ '@type': 'ListItem', position: 2, name: 'Labs', item: 'https://getromy.app/labs' }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

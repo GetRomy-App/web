@@ -2,23 +2,131 @@
 
 > Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions.
 
-Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles.
+Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable 16-section donor profiles. Purpose-built for development offices that can't afford enterprise tools like DonorSearch, iWave, or WealthEngine.
 
-## Features
+## What Rōmy Does
 
-- Donor Discovery: AI-powered prospect research with wealth indicators, giving history, and affinity signals
-- Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
-- Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
+Rōmy is a prospect research tool that replaces expensive enterprise wealth screening. It researches individual donors and generates a full intelligence report covering capacity, inclination, connections, and recommended outreach strategy. Each report typically takes 2–10 minutes and costs $0.50–$5, compared to $8–$15 per report from enterprise tools.
+
+On PIF-Bench (Prospect Intelligence Fidelity Benchmark), Rōmy scored 94.6 vs. Claude 92.2, ChatGPT 79.9, and Gemini 76.0 — the highest accuracy score among all tested systems.
+
+## Key Features
+
+- **AI-powered donor prospect research** — wealth indicators, giving history, affinity signals
+- **16-section donor profiles** — more comprehensive than enterprise tools (5–8 sections)
+- **No enterprise contracts** — starting at $290/year, vs. $15,000–$50,000/year for enterprise
+- **2–10 minute turnaround** per full report (vs. 45 minutes of manual research)
+- **Fraction of the cost** — $0.50–$5 per report vs. $8–$50 with enterprise or manual methods
+- **Quiet wealth detection** — surfaces donors traditional wealth screens miss
+
+## Pricing
+
+- **Growth Plan**: $290/year
+- **Scale Plan**: $1,990/year
+- **Enterprise**: Contact for pricing
+
+## Who Rōmy Is For
+
+Small nonprofit development offices (budgets under $2M) that need major donor prospect research but cannot afford DonorSearch, iWave, WealthEngine, or similar enterprise platforms. Rōmy gives small shops the same intelligence advantage as large institutions at a price built for lean teams.
 
 ## Links
 
 - Website: https://getromy.app
-- Product: https://intel.getromy.app
-- Download (macOS): https://github.com/GetRomy-App/web/releases
+- Product (web app): https://intel.getromy.app
+- Labs & Benchmarks: https://getromy.app/labs
+- Blog: https://getromy.app/blog
 - Twitter: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
-- Contact: howard@getromy.app, solomon@getromy.app
+- Contact: solomon@getromy.app
 
 ## Company
 
-GetRomy LLC
+GetRomy LLC — founded 2024.
+
+## Blog Posts
+
+Rōmy publishes expert writing on nonprofit fundraising strategy, donor psychology, major gift fundraising, prospect research, and AI donor intelligence.
+
+### Field Notes
+
+- [Capacity Scores Are the Astrology of Fundraising](/blog/capacity-scores-are-the-astrology-of-fundraising) (2026-06-01): A capacity score is a four-digit number that promises — with quiet algorithmic confidence — to tell you what a stranger will give you over the next ten years. It is the most expensive horoscope in fundraising.
+- [Earn the Second Meeting](/blog/earn-the-second-meeting) (2026-05-11): The goal of the first donor meeting is the second one. A short letter on the coffee that doesn't close anything, the brochure that should stay in the bag, and the one question that quietly turns a polite stranger into a lifetime giver.
+- [Her First Ask](/blog/her-first-ask) (2026-05-10): Most of the people doing major-gift work in small shops are twenty-four years old, terrified, and quietly carrying the entire program. A short letter on the asymmetry across the table — and the file that closes it.
+- [Her Giving Goes Through Fidelity Now](/blog/her-giving-goes-through-fidelity-now) (2026-06-17): A short letter on the three-hundred-billion-dollar drawer of American philanthropy that nobody is being granted out of fast enough — donor-advised funds.
+- [How We Built a Donor Intelligence Engine Starting at $0.10 per Prospect](/blog/how-we-built-donor-intelligence) (2026-04-15): Enterprise wealth screening has been locked behind five-figure contracts for decades. We rebuilt the unit economics from scratch — here's the real cost breakdown.
+- [Major Gifts Aren't a Wealth Problem. They're a Timing Problem.](/blog/major-gifts-are-a-timing-problem) (2026-05-02): Capacity gets a prospect on the list. Timing wins the gift.
+- [Most Boards Are Alumni of Indifference](/blog/most-boards-are-alumni-of-indifference) (2026-06-03): On the most overrepresented asset on your website and the most underrepresented one in your revenue mix.
+- [Nine Years on Autopay](/blog/nine-years-on-autopay) (2026-05-27): Your most loyal donor is almost certainly someone you've never called. She set up thirty dollars a month, meant every cent of it, and got filed under do-not-disturb.
+- [Nobody Reads Your Annual Report](/blog/nobody-reads-your-annual-report) (2026-06-04): The most expensive document nobody asked for, the audience we mistakenly wrote it for, and the two-cent folded card that would have outperformed it.
+- [On Asking Too Little](/blog/on-asking-too-little) (2026-05-22): We brace for the no and never learn to be suspicious of the yes that comes too fast.
+- [On Being Named in the Will](/blog/on-being-named-in-the-will) (2026-05-09): The wrongest sentence in fundraising is the planned-giving ask, because by the time the donor is on the phone the decision was made decades ago.
+- [On Being Told No](/blog/on-being-told-no) (2026-05-12): The wrongest thing in fundraising is the way we hear no. We hear it as a period. The donor heard it as a comma.
+- [Permission to Have an Evening](/blog/permission-to-have-an-evening) (2026-05-04): Fundraising shouldn't cost you your Sunday nights.
+- [Prospect Research Is a Love Language](/blog/research-is-a-love-language) (2026-05-25): Fundraisers feel a little guilty about looking donors up — like it's surveillance, like it's somehow rude to arrive prepared. It's the opposite.
+- [She Moved in March](/blog/she-moved-in-march) (2026-06-25): On the six-month window after a long-time donor moves into a continuing-care community — the quiet, sacred season in which the bequest and the final picture of her giving life are being decided.
+- [She Read Your About Page at 11:47 P.M.](/blog/she-read-your-about-page) (2026-06-05): On the audit no one on staff is awake for — the wealth screen the donor has been running on you all along.
+- [The Small Nonprofit Fundraising Gap — and How to Close It](/blog/small-nonprofit-fundraising-gap) (2026-01-15): Organizations with budgets under $2M can't afford the $15K-$50K/year tools that large nonprofits rely on. The information asymmetry is the real problem.
+- [The Advisor in Her Town](/blog/the-advisor-in-her-town) (2026-06-26): On the third person at every major-gift table — the advisor in her town — and the colleague letter the development office has spent a decade not writing.
+- [The Back Row at the Funeral](/blog/the-back-row-at-the-funeral) (2026-06-14): On the unbilled hours of a fundraising career and the small, quiet truth that the donor you are stewarding next is watching to see who showed up for someone else.
+- [The China Goes to the Daughter](/blog/the-china-goes-to-the-daughter) (2026-06-21): On the address change as the iceberg tip, and on the daughter who is becoming the person every future conversation with the institution will run through.
+- [The Christmas Card with the Check Inside](/blog/the-christmas-card-with-the-check-inside) (2026-06-22): On the quietest, most loyal envelope in your December mail — the small repeat donor the CRM has at segment five who may be planning a transformational gift.
+- [The Daughter Was in the Room](/blog/the-daughter-was-in-the-room) (2026-05-15): The single largest transfer of wealth in human history is happening through living rooms full of adult children whose names nobody at the nonprofit wrote down.
+- [The Donor Nobody Owns](/blog/the-donor-nobody-owns) (2026-05-24): Too big for the mail machine, too small for the major-gifts officer — your mid-level donors are the people your file was built to overlook.
+- [The Donor Who Outlasted Four of You](/blog/the-donor-who-outlasted-four-of-you) (2026-05-19): The average development director stays under two years. The average loyal donor stays for twenty.
+- [The Donor Who Went Quiet](/blog/the-donor-who-went-quiet) (2026-05-13): Donors almost never quit. They drift. A short letter on silent attrition — the largest, kindest, most fixable leak in American fundraising.
+- [The Donor Your Wealth Screen Will Miss](/blog/the-donor-your-wealth-screen-will-miss) (2026-05-06): Quiet wealth is real wealth — and the woman in the cardigan is sitting in your CRM right now, waiting to be noticed.
+- [The Eleven-Year Yes](/blog/the-eleven-year-yes) (2026-05-08): The most important gift of your career is probably already in motion — you just won't see it for a decade.
+- [The First-Generation Donor](/blog/the-first-generation-donor) (2026-06-20): On the donor class your wealth screen was not trained to find.
+- [The First Gift Is a Question](/blog/the-first-gift-is-a-question) (2026-05-23): Roughly four out of five first-time donors never give a second time. We call that a retention problem. It's really a manners problem.
+- [The Gala Is the Worst Place to Meet a Donor](/blog/the-gala-is-the-worst-place) (2026-06-15): A short letter on the gala as celebration of the donors you already have, not cultivation of the donors you don't.
+- [The Gift in Her Mother's Name](/blog/the-gift-in-her-mothers-name) (2026-05-30): On the tribute gift — the most undervalued signal in your file.
+- [The Gift Is in the Group Text](/blog/the-gift-is-in-the-group-text) (2026-06-11): There is a thread on four iPhones where your next major gift is being decided this month, and you are not in it.
+- [The Gift Was Decided in the Car](/blog/the-gift-was-decided-in-the-car) (2026-06-08): On the conversation no fundraiser is ever invited to — the kitchen-table debrief at 6:40 p.m.
+- [The Granddaughter at Wesleyan](/blog/the-granddaughter-at-wesleyan) (2026-06-19): On the second name in every relationship, the file column that does not exist, and the cream-paper card that is the entire bridge.
+- [The Introduction Is the Gift](/blog/the-introduction-is-the-gift) (2026-05-26): The gift hiding inside your own donor file — the one nobody thinks to request.
+- [The Kid Who Waved](/blog/the-kid-who-waved) (2026-05-17): The forty-five-minute in-person tour is the highest-converting asset your nonprofit owns, and almost nobody treats it like one.
+- [The Name on the Gift Line](/blog/the-name-on-the-gift-line) (2026-05-16): A check arrives in memory of someone the development office never knew. A short letter on the saddest field in your CRM.
+- [The Photograph on the Bookshelf](/blog/the-photograph-on-the-bookshelf) (2026-06-23): On the small framed pictures on the bookshelves of your longest, quietest donors.
+- [The Porch Is the Office](/blog/the-porch-is-the-office) (2026-06-10): On the season your sector has agreed to call slow — summer, when your donors are home, unhurried, and at the table where the gift is actually decided.
+- [The Room Was the Point](/blog/the-room-was-the-point) (2026-05-21): On the gala as the most expensive first date in town.
+- [The Seven Seconds After You Said the Number](/blog/the-seven-seconds-after-you-said-the-number) (2026-06-09): On the most honest moment in major-gift work and the discipline of not flinching while she finishes the sentence.
+- [The Sixteen-Month Job](/blog/the-sixteen-month-job) (2026-05-14): The average nonprofit fundraiser stays about sixteen months — and when they leave, the donor relationships leave with them.
+- [The Spouse You've Never Met](/blog/the-spouse-youve-never-met) (2026-05-28): Every major gift is decided twice — once at your lunch, and once that night at a kitchen table you've never been to.
+- [The Thank-You Note Is the Whole Job](/blog/the-thank-you-note-is-the-whole-job) (2026-05-07): Most thank-yous in fundraising are receipts. Receipts are necessary. They are not a thank-you note.
+- [The Three Weeks Before the Phone Call](/blog/the-three-weeks-before-the-phone-call) (2026-06-24): On research as shelter — the quiet bunker built out of paper — and the mercy of finally having nothing left to prepare.
+- [The Tour Was the Interview](/blog/the-tour-was-the-interview) (2026-06-02): A major donor asks to swing by for coffee and a quick tour. The development office hears tour. She means interview.
+- [The Trustee Who Said She'd Make Calls](/blog/the-trustee-who-said-shed-make-calls) (2026-05-18): On what the board is actually for, and the four-line email that finally gets the introduction.
+- [The Tuesday the Money Landed](/blog/the-tuesday-the-money-landed) (2026-05-31): On the six-month window after a founder gets a wire — when a thirty-year donor relationship quietly gets written for the first time.
+- [The Voicemail You Didn't Leave](/blog/the-voicemail-you-didnt-leave) (2026-06-06): On the highest-fidelity stewardship instrument ever invented — free, on every desk, used less every year.
+- [The Volunteer You Never Looked Up](/blog/the-volunteer-you-never-looked-up) (2026-05-20): The warmest prospect in your building — the one wearing a name tag.
+- [The Year the Casseroles Stopped](/blog/the-year-the-casseroles-stopped) (2026-06-18): On the second year of grief — the long, soft, almost-invisible year the development calendar is not built for.
+- [What Actually Predicts Giving Capacity — and How Rōmy Scores It](/blog/understanding-wealth-indicators) (2026-02-10): Not all wealth signals predict giving. We built a scoring framework that separates capacity from inclination.
+- [While He Could Still Read His Name](/blog/while-he-could-still-read-his-name) (2026-06-16): On the donors who increasingly do not have time to wait for the institutional calendar.
+- [You Don't Have Donors. You Have Neighbors.](/blog/you-dont-have-donors-you-have-neighbors) (2026-06-07): On the word donor, borrowed from a bank, and the older, warmer one you've been speaking in private all along.
+- [You Were Hired to Do Hospice Work](/blog/you-were-hired-to-do-hospice-work) (2026-06-12): On the job we never named, and the small unflattering truth that we trained major-gift officers in sales theory and sent them to do hospice work.
+- [Your CRM Is a Haunted Spreadsheet](/blog/your-crm-is-a-haunted-spreadsheet) (2026-06-13): On the CRM as the place where donor context goes to die.
+- [Your Next Major Gift Is Already in Your CRM](/blog/your-next-major-gift-is-already-in-your-crm) (2026-05-05): You don't have a sourcing problem. You have a forgetting problem.
+
+### Research & Benchmarks (Rōmy Labs)
+
+- [PIF-Bench: Benchmarking AI Donor Research — Rōmy vs. ChatGPT, Claude, and Gemini](/labs/blog/benchmarking-ai-prospect-research) (2026-04-25): We built a ground-truth benchmark and ran it head-to-head. Rōmy scored 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Full methodology and results.
+
+## Frequently Asked Questions
+
+**What is Rōmy?**
+Rōmy is an AI-powered donor intelligence platform for small nonprofits. It researches individual prospects and produces 16-section donor intelligence reports covering wealth indicators, giving history, connections, and recommended outreach strategy.
+
+**How does Rōmy compare to DonorSearch, iWave, or WealthEngine?**
+Rōmy costs $290–$1,990/year vs. $15,000–$50,000/year for enterprise platforms. On PIF-Bench, Rōmy scored 94.6 — outperforming generic AI tools and matching or exceeding the accuracy of enterprise systems at a fraction of the price.
+
+**What is PIF-Bench?**
+PIF-Bench (Prospect Intelligence Fidelity Benchmark) is Rōmy's open benchmark for measuring the accuracy, depth, cost, and speed of AI-powered donor prospect research. It compares Rōmy, ChatGPT, Claude, and Gemini across multiple dimensions using standardized prompts evaluated by Claude Opus.
+
+**How much does a Rōmy donor research report cost?**
+$0.50–$5 per full report on the Growth and Scale plans. Enterprise tools charge $8–$15 per report.
+
+**How long does a Rōmy prospect report take?**
+2–10 minutes for a full 16-section donor intelligence report, versus ~45 minutes for manual research.
+
+**Who is Rōmy for?**
+Small nonprofit development offices — typically organizations with budgets under $2M — that need professional-grade prospect research but cannot afford enterprise wealth screening contracts.

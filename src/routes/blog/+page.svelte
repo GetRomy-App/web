@@ -100,20 +100,57 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — AI Donor Research, Prospect Intelligence & Nonprofit Fundraising</title>
 	<meta
 		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
+		content="Expert writing on AI-powered prospect research, major gift fundraising, donor intelligence, and nonprofit fundraising strategy. Technical deep-dives and field insights from the Rōmy team."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights, major gift fundraising, wealth screening, donor discovery, small nonprofit fundraising, prospect research software"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
+	<meta property="og:title" content="Rōmy Blog — AI Donor Research & Nonprofit Fundraising Insights" />
+	<meta property="og:description" content="Expert writing on AI-powered prospect research, major gift fundraising, and donor intelligence from the Rōmy team." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="Rōmy Blog — Nonprofit Fundraising & Donor Intelligence" />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@RomyFindsMoney" />
+	<meta name="twitter:title" content="Rōmy Blog — AI Donor Research & Nonprofit Fundraising" />
+	<meta name="twitter:description" content="Expert writing on AI-powered prospect research, major gift fundraising, and donor intelligence." />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 	<link rel="canonical" href="https://getromy.app/blog" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		name: 'Rōmy Blog',
+		description: 'Expert writing on AI-powered prospect research, major gift fundraising, donor intelligence, and nonprofit fundraising strategy.',
+		url: 'https://getromy.app/blog',
+		image: 'https://getromy.app/og-image.jpg',
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app',
+			logo: {
+				'@type': 'ImageObject',
+				url: 'https://getromy.app/icon-logo.png'
+			}
+		},
+		inLanguage: 'en-US',
+		keywords: 'nonprofit fundraising, donor intelligence, prospect research, AI donor research, wealth screening, major gift fundraising'
+	})}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app' },
+			{ '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://getromy.app/blog' }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
