@@ -1,4 +1,26 @@
 User-agent: *
 Allow: /
 
+# AI crawlers — allow full indexing for GEO
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
 Sitemap: https://getromy.app/sitemap.xml

@@ -37,9 +37,9 @@
 		else lenis.start();
 	});
 
-	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
+	const title = 'Rōmy — AI Donor Research & Prospect Intelligence for Small Nonprofits';
 	const description =
-		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
+		'Rōmy is the AI-powered donor intelligence platform built for small nonprofits. Find major gift prospects, screen wealth indicators, and surface giving history — without enterprise pricing or per-seat contracts.';
 	const url = 'https://getromy.app/';
 </script>
 
@@ -52,7 +52,7 @@
 	<meta name="description" content={description} />
 	<meta
 		name="keywords"
-		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
+		content="donor intelligence platform, AI prospect research nonprofits, small nonprofit fundraising software, major donor prospecting tool, wealth screening nonprofits, giving history analysis, nonprofit prospect research, donor discovery AI, fundraising intelligence software, nonprofit major gifts, donor wealth indicators, philanthropy data platform, affordable prospect research, nonprofit donor database, AI nonprofit tools, major gift fundraising, donor cultivation software, nonprofit development software, fundraising CRM alternative, prospect research automation"
 	/>
 	<meta name="author" content="GetRomy LLC" />
 	<meta
@@ -69,14 +69,20 @@
 	<meta property="og:description" content={description} />
 	<meta property="og:site_name" content="Rōmy" />
 	<meta property="og:locale" content="en_US" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="Rōmy — AI Donor Intelligence for Small Nonprofits" />
 
 	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@RomyFindsMoney" />
 	<meta name="twitter:creator" content="@RomyFindsMoney" />
 	<meta name="twitter:url" content={url} />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
+	<meta name="twitter:image:alt" content="Rōmy — AI Donor Intelligence for Small Nonprofits" />
 
 	<!-- Performance -->
 	<link
@@ -101,18 +107,37 @@
 	<!-- Structured Data (JSON-LD) -->
 	{@html `<script type="application/ld+json">${JSON.stringify({
 		'@context': 'https://schema.org',
-		'@type': 'SoftwareApplication',
+		'@type': 'WebSite',
 		name: 'Rōmy',
 		url: 'https://getromy.app',
+		description: 'AI-powered donor intelligence platform for small nonprofits',
+		potentialAction: {
+			'@type': 'SearchAction',
+			target: {
+				'@type': 'EntryPoint',
+				urlTemplate: 'https://getromy.app/blog?q={search_term_string}'
+			},
+			'query-input': 'required name=search_term_string'
+		}
+	})}</script>`}
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		name: 'Rōmy',
+		alternateName: ['Romy', 'GetRomy', 'Rōmy Donor Intelligence'],
+		url: 'https://getromy.app',
 		applicationCategory: 'BusinessApplication',
-		operatingSystem: 'macOS, Windows, Linux',
+		applicationSubCategory: 'Fundraising Software',
+		operatingSystem: 'macOS, Windows, Linux, Web',
 		description:
-			'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
+			'Rōmy is an AI-powered donor intelligence platform for small nonprofits. It surfaces major gift prospects using wealth indicators, giving history, and affinity signals — at a price built for small teams, not enterprise budgets.',
 		offers: {
 			'@type': 'Offer',
 			price: '0',
 			priceCurrency: 'USD',
-			availability: 'https://schema.org/InStock'
+			availability: 'https://schema.org/InStock',
+			description: 'Free to get started — no enterprise contracts or per-seat fees'
 		},
 		publisher: {
 			'@type': 'Organization',
@@ -125,23 +150,103 @@
 			'Giving history analysis',
 			'Affinity signal detection',
 			'Actionable donor profiles',
-			'No enterprise contracts required'
-		]
+			'No enterprise contracts required',
+			'No per-seat licensing',
+			'Purpose-built for small nonprofits',
+			'Major gift prospecting',
+			'Donor capacity scoring'
+		],
+		screenshot: 'https://getromy.app/screenshot.webp',
+		image: 'https://getromy.app/og-image.jpg'
 	})}</script>`}
 
 	{@html `<script type="application/ld+json">${JSON.stringify({
 		'@context': 'https://schema.org',
 		'@type': 'Organization',
+		'@id': 'https://getromy.app/#organization',
 		name: 'GetRomy LLC',
+		legalName: 'GetRomy LLC',
 		url: 'https://getromy.app',
-		logo: 'https://getromy.app/icon-logo.png',
-		description: 'Donor intelligence platform for small nonprofits',
-		contactPoint: {
-			'@type': 'ContactPoint',
-			email: 'solomon@getromy.app',
-			contactType: 'sales'
+		logo: {
+			'@type': 'ImageObject',
+			url: 'https://getromy.app/icon-logo.png',
+			width: 512,
+			height: 512
 		},
-		sameAs: ['https://x.com/RomyFindsMoney', 'https://github.com/GetRomy-App']
+		image: 'https://getromy.app/og-image.jpg',
+		description: 'GetRomy LLC builds Rōmy, an AI-powered donor intelligence platform purpose-built for small nonprofits to find, qualify, and cultivate major gift prospects.',
+		foundingDate: '2024',
+		contactPoint: [
+			{
+				'@type': 'ContactPoint',
+				email: 'solomon@getromy.app',
+				contactType: 'customer support'
+			},
+			{
+				'@type': 'ContactPoint',
+				email: 'solomon@getromy.app',
+				contactType: 'sales'
+			}
+		],
+		sameAs: [
+			'https://x.com/RomyFindsMoney',
+			'https://github.com/GetRomy-App'
+		]
+	})}</script>`}
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: [
+			{
+				'@type': 'Question',
+				name: 'What is Rōmy?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Rōmy is an AI-powered donor intelligence platform built for small nonprofits. It uses prospect research, wealth indicators, and giving history to help fundraisers find and qualify major gift donors — at a fraction of the cost of enterprise tools.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'How does Rōmy help small nonprofits find major donors?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Rōmy surfaces wealth indicators, philanthropic giving history, and affinity signals for each prospect, then delivers an actionable donor profile with connection points, estimated giving capacity, and suggested outreach angles. It automates what would otherwise take 45 minutes of manual research per prospect.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'What makes Rōmy different from enterprise prospect research tools?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Enterprise prospect research tools like DonorSearch and iWave are priced for large institutions with dedicated research staff. Rōmy is purpose-built for small nonprofit teams — no enterprise contracts, no per-seat licensing, and no research analyst required. Every report is designed to be immediately actionable by a frontline fundraiser.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'What is prospect research for nonprofits?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Prospect research is the process of evaluating potential donors to estimate their capacity to give and their likelihood to support your mission. It typically involves researching wealth indicators (real estate, stock holdings, business interests), philanthropic history (prior charitable gifts), and affinity signals (board memberships, alumni connections, community ties). Rōmy automates this process using AI.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'How much does Rōmy cost?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Rōmy is free to get started. Unlike enterprise donor intelligence platforms that charge thousands per year in licensing fees, Rōmy is built around a pricing model that works for small nonprofit budgets. Visit getromy.app to get started.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'What are wealth indicators in fundraising?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Wealth indicators are data signals that suggest a person has the financial capacity to make a major gift to a nonprofit. Common indicators include real estate ownership, business ownership or executive roles, stock holdings, prior major gifts to other organizations, and board service at peer institutions. Rōmy screens for these automatically as part of each donor profile.'
+				}
+			}
+		]
 	})}</script>`}
 </svelte:head>
 

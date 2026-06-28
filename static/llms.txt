@@ -1,24 +1,76 @@
 # Rōmy
 
-> Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions.
+> Rōmy is an AI-powered donor intelligence platform purpose-built for small nonprofits. It helps fundraisers find, qualify, and cultivate major gift prospects — without enterprise pricing, per-seat contracts, or a dedicated research analyst.
 
-Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles.
+## What Rōmy Does
 
-## Features
+Rōmy automates prospect research for nonprofit fundraisers. When a fundraiser submits a donor name, Rōmy:
 
-- Donor Discovery: AI-powered prospect research with wealth indicators, giving history, and affinity signals
-- Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
-- Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
+1. Screens for wealth indicators (real estate holdings, business ownership, executive roles, stock positions)
+2. Surfaces philanthropic giving history (prior major gifts to peer organizations, foundation giving, named gifts)
+3. Identifies affinity signals (board memberships, alumni connections, community ties, volunteer history)
+4. Generates an actionable donor profile with estimated giving capacity, connection points, and suggested outreach angles
 
-## Links
+What takes a trained research analyst 30–45 minutes per prospect, Rōmy delivers in minutes.
 
+## Who It's For
+
+Rōmy is built for small nonprofit development teams — typically 1–5 people managing a major gifts program without a dedicated prospect researcher. These organizations are underserved by enterprise tools like DonorSearch, iWave, and WealthEngine, which are priced for institutions with seven-figure fundraising budgets.
+
+Rōmy is not a CRM replacement. It is a prospect intelligence layer that plugs into any existing workflow.
+
+## Key Differentiators
+
+- **No enterprise contracts** — no multi-year commitments or per-seat licensing
+- **Purpose-built for small teams** — designed for a generalist fundraiser, not a research analyst
+- **Immediately actionable reports** — every profile includes outreach angles and connection points, not just raw data
+- **AI-native** — built on modern AI rather than retrofitted database lookups
+- **Affordable** — a price point that makes sense for nonprofits raising $500K–$5M annually
+
+## Product
+
+- Web app: https://intel.getromy.app
 - Website: https://getromy.app
-- Product: https://intel.getromy.app
-- Download (macOS): https://github.com/GetRomy-App/web/releases
-- Twitter: https://x.com/RomyFindsMoney
-- GitHub: https://github.com/GetRomy-App
-- Contact: howard@getromy.app, solomon@getromy.app
+- Blog (field notes & research): https://getromy.app/blog
+- Labs (benchmarks & technical research): https://getromy.app/labs
+
+## Benchmarks
+
+Rōmy publishes the PIF-Bench (Prospect Intelligence Fidelity Benchmark), an open evaluation framework for AI donor research tools. PIF-Bench scores systems across five dimensions: Wealth Accuracy, Philanthropic History, Affinity Signal Detection, Profile Completeness, and Actionability. Rōmy consistently outperforms ChatGPT, Perplexity, and manual research workflows on this benchmark.
 
 ## Company
 
-GetRomy LLC
+- Name: GetRomy LLC
+- Founded: 2024
+- Contact: solomon@getromy.app
+- Twitter/X: https://x.com/RomyFindsMoney
+- GitHub: https://github.com/GetRomy-App
+
+## Frequently Asked Questions
+
+**What is prospect research for nonprofits?**
+Prospect research is the process of evaluating potential donors to estimate their financial capacity to give and their likelihood to support a specific mission. It involves researching wealth indicators, charitable giving history, and personal affinity signals.
+
+**What are wealth indicators in fundraising?**
+Wealth indicators are data signals suggesting a person has capacity for a major gift. Common indicators include real estate ownership, business equity, executive compensation, stock holdings, and prior major charitable gifts.
+
+**How is Rōmy different from DonorSearch or iWave?**
+DonorSearch and iWave are enterprise tools with pricing and complexity suited for large development offices. Rōmy is designed from the ground up for small nonprofit teams — simpler, faster, and dramatically more affordable, with AI-native research rather than database lookups.
+
+**Does Rōmy replace a CRM?**
+No. Rōmy is a prospect intelligence tool, not a donor management system. It surfaces research on specific individuals and delivers actionable profiles. It works alongside any CRM (Salesforce NPSP, Bloomerang, Little Green Light, etc.).
+
+**What does a Rōmy donor profile include?**
+Each profile includes: estimated giving capacity, known philanthropic giving history, wealth indicators, affinity signals, personal and professional background, suggested connection points, and recommended outreach angles.
+
+**Who are Rōmy's typical customers?**
+Small-to-mid-size nonprofits (typically raising $250K–$5M annually) with lean development teams. Community foundations, human services organizations, arts organizations, faith-based groups, and educational institutions are common users.
+
+## Use Cases
+
+- Identifying new major gift prospects from an existing donor database
+- Qualifying lapsed donors for reengagement
+- Screening event attendees before a solicitation
+- Preparing for a major donor visit
+- Building a pipeline of prospective board members
+- Evaluating inherited donor lists from a predecessor fundraiser
