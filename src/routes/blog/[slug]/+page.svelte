@@ -126,16 +126,74 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
+	<title>{data.post.title} — Rōmy Blog</title>
 	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
+	<meta name="keywords" content="AI donor intelligence, nonprofit fundraising, prospect research, donor prospecting, wealth screening, major gift fundraising, nonprofit AI, {data.post.tag.toLowerCase()}, Rōmy, small nonprofit tools" />
+	<meta property="og:title" content="{data.post.title} — Rōmy Blog" />
 	<meta property="og:description" content={data.post.excerpt} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="{data.post.title} — Rōmy Blog" />
+	<meta property="og:site_name" content="Rōmy" />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
+	<meta property="article:tag" content={data.post.tag} />
+	<meta property="article:author" content="https://getromy.app/" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="{data.post.title} — Rōmy Blog" />
+	<meta name="twitter:description" content={data.post.excerpt} />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
+	<meta name="twitter:site" content="@RomyFindsMoney" />
 	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: data.post.title,
+		description: data.post.excerpt,
+		url: `https://getromy.app/blog/${data.post.slug}`,
+		datePublished: data.post.date,
+		dateModified: data.post.date,
+		image: 'https://getromy.app/og-image.jpg',
+		inLanguage: 'en-US',
+		articleSection: data.post.tag,
+		keywords: ['AI donor intelligence', 'nonprofit fundraising', 'prospect research', 'wealth screening', data.post.tag],
+		author: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app'
+		},
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app',
+			logo: {
+				'@type': 'ImageObject',
+				url: 'https://getromy.app/icon-logo.png'
+			}
+		},
+		mainEntityOfPage: {
+			'@type': 'WebPage',
+			'@id': `https://getromy.app/blog/${data.post.slug}`
+		},
+		isPartOf: {
+			'@type': 'Blog',
+			name: 'Rōmy Blog',
+			url: 'https://getromy.app/blog'
+		}
+	})}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://getromy.app/blog' },
+			{ '@type': 'ListItem', position: 3, name: data.post.title, item: `https://getromy.app/blog/${data.post.slug}` }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
