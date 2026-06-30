@@ -8,6 +8,7 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { PIF_OVERALL } from '$lib/benchmarks';
+	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 
 	let { data } = $props();
 
@@ -18,6 +19,16 @@
 	let heroBadge: HTMLElement;
 	let benchmarksSection: HTMLElement;
 	let blogSection: HTMLElement;
+
+	const jsonLd = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'Dataset',
+		name: 'PIF-Bench — Prospect Intelligence Fidelity Benchmark',
+		description:
+			'Open benchmark comparing AI systems on nonprofit donor prospect research accuracy: Rōmy, Claude, ChatGPT, and Gemini.',
+		url: 'https://getromy.app/labs',
+		creator: { '@type': 'Organization', name: 'GetRomy LLC', url: 'https://getromy.app' }
+	});
 
 	function formatDate(dateStr: string): string {
 		if (!dateStr) return '';
@@ -222,22 +233,17 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Labs — AI Donor Research Benchmarks, PIF-Bench Results & Blog</title>
-	<meta
-		name="description"
-		content="Romy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). See how purpose-built AI donor intelligence compares on accuracy, cost, and speed."
-	/>
-	<meta
-		name="keywords"
-		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Romy, prospect research tool"
-	/>
-	<meta property="og:title" content="Romy Labs — AI Donor Research Benchmarks" />
-	<meta property="og:description" content="PIF-Bench results: Romy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/labs" />
-	<link rel="canonical" href="https://getromy.app/labs" />
-</svelte:head>
+<SeoHead
+	title="Rōmy Labs — AI Donor Research Benchmarks, PIF-Bench Results & Blog"
+	description="Rōmy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). See how purpose-built AI donor intelligence compares on accuracy, cost, and speed."
+	keywords="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Rōmy, Claude vs Rōmy, prospect research tool"
+	url="https://getromy.app/labs"
+	image="https://getromy.app/og-image.jpg"
+>
+	{#snippet extra()}
+		{@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`}
+	{/snippet}
+</SeoHead>
 
 <Footer bind:footerText />
 

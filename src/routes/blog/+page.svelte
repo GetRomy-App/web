@@ -7,6 +7,7 @@
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
+	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 
 	let { data } = $props();
 
@@ -16,6 +17,22 @@
 	let heroDesc: HTMLElement;
 	let heroBadge: HTMLElement;
 	let blogSection: HTMLElement;
+
+	const jsonLd = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		name: 'Rōmy Blog',
+		url: 'https://getromy.app/blog',
+		description:
+			'Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI.',
+		publisher: { '@type': 'Organization', name: 'GetRomy LLC', url: 'https://getromy.app' },
+		blogPost: data.posts.slice(0, 20).map((post) => ({
+			'@type': 'BlogPosting',
+			headline: post.title,
+			datePublished: post.date,
+			url: `https://getromy.app/blog/${post.slug}`
+		}))
+	});
 
 	function formatDate(dateStr: string): string {
 		if (!dateStr) return '';
@@ -99,22 +116,17 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<SeoHead
+	title="Rōmy Blog — AI Donor Research & Nonprofit Fundraising Insights"
+	description="Technical deep-dives, research findings, and field notes on nonprofit fundraising, major donor prospect research, wealth screening, and purpose-built AI for development teams."
+	keywords="nonprofit fundraising blog, donor intelligence, prospect research, major donor prospecting, wealth screening, AI for nonprofits, fundraising insights, planned giving, donor stewardship"
+	url="https://getromy.app/blog"
+	image="https://getromy.app/og-image.jpg"
+>
+	{#snippet extra()}
+		{@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`}
+	{/snippet}
+</SeoHead>
 
 <Footer bind:footerText />
 

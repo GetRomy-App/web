@@ -14,10 +14,35 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 
 - Website: https://getromy.app
 - Product: https://intel.getromy.app
+- Blog: https://getromy.app/blog
+- Benchmarks (PIF-Bench): https://getromy.app/labs
+- Sitemap: https://getromy.app/sitemap.xml
 - Download (macOS): https://github.com/GetRomy-App/web/releases
 - Twitter: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
 - Contact: howard@getromy.app, solomon@getromy.app
+
+## Writing
+
+Field notes and research on nonprofit major-gift fundraising, donor prospect
+research, and AI-powered wealth screening, published most days at
+https://getromy.app/blog. Recent posts:
+
+- She Carries Eleven — https://getromy.app/blog/she-carries-eleven
+- The October She Turned Seventy-Three — https://getromy.app/blog/the-october-she-turned-seventy-three
+- The Reunion Year — https://getromy.app/blog/the-reunion-year
+- The Advisor in Her Town — https://getromy.app/blog/the-advisor-in-her-town
+- She Moved in March — https://getromy.app/blog/she-moved-in-march
+- The First-Generation Donor — https://getromy.app/blog/the-first-generation-donor
+- Your CRM Is a Haunted Spreadsheet — https://getromy.app/blog/your-crm-is-a-haunted-spreadsheet
+- The Gala Is the Worst Place to Meet a Donor — https://getromy.app/blog/the-gala-is-the-worst-place
+- Capacity Scores Are the Astrology of Fundraising — https://getromy.app/blog/capacity-scores-are-the-astrology-of-fundraising
+- The Small Nonprofit Fundraising Gap — and How to Close It — https://getromy.app/blog/small-nonprofit-fundraising-gap
+- What Actually Predicts Giving Capacity — and How Rōmy Scores It — https://getromy.app/blog/understanding-wealth-indicators
+- How We Built a Donor Intelligence Engine Starting at $0.10 per Prospect — https://getromy.app/blog/how-we-built-donor-intelligence
+- PIF-Bench: Benchmarking AI Donor Research — Rōmy vs. ChatGPT, Claude, and Gemini — https://getromy.app/labs/blog/benchmarking-ai-prospect-research
+
+Full archive and index: https://getromy.app/blog
 
 ## Company
 

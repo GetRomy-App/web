@@ -6,8 +6,43 @@
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import { PIF_OVERALL, PIF_DIMENSIONS, EVAL_PROMPT } from '$lib/benchmarks';
+	import { deriveKeywords, truncateDescription } from '$lib/seo';
+	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 
 	let { data } = $props();
+
+	const postUrl = $derived(`https://getromy.app/labs/blog/${data.post.slug}`);
+	const metaDescription = $derived(truncateDescription(data.post.excerpt));
+	const keywords = $derived(
+		deriveKeywords(data.post.title, data.post.tag, ['PIF-Bench', 'AI benchmark'])
+	);
+	const jsonLd = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: data.post.title,
+		description: metaDescription,
+		datePublished: data.post.date,
+		dateModified: data.post.date,
+		url: postUrl,
+		mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+		articleSection: data.post.tag,
+		image: 'https://getromy.app/og-image.jpg',
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app',
+			logo: { '@type': 'ImageObject', url: 'https://getromy.app/icon-logo.png' }
+		},
+		author: { '@type': 'Organization', name: 'Rōmy', url: 'https://getromy.app' }
+	});
+	const breadcrumbJsonLd = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Labs', item: 'https://getromy.app/labs' },
+			{ '@type': 'ListItem', position: 2, name: data.post.title, item: postUrl }
+		]
+	});
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -126,18 +161,21 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<SeoHead
+	title="{data.post.title} — Rōmy Labs"
+	description={metaDescription}
+	{keywords}
+	url={postUrl}
+	type="article"
+	image="https://getromy.app/og-image.jpg"
+	articlePublishedTime={data.post.date}
+	articleSection={data.post.tag}
+>
+	{#snippet extra()}
+		{@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`}
+		{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbJsonLd)}</script>`}
+	{/snippet}
+</SeoHead>
 
 <Footer bind:footerText />
 
