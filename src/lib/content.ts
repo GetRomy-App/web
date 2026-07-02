@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 import Markdoc from '@markdoc/markdoc';
+import { deriveKeywords } from './seo';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content', 'posts');
 
@@ -12,6 +13,7 @@ export interface PostMeta {
 	excerpt: string;
 	tag: string;
 	has_benchmarks: boolean;
+	keywords: string[];
 }
 
 export interface Post extends PostMeta {
@@ -35,13 +37,17 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 		try {
 			const raw = await fs.readFile(filePath, 'utf-8');
 			const { data } = matter(raw);
+			const title = data.title ?? entry.name;
+			const excerpt = data.excerpt ?? '';
+			const tag = data.tag ?? '';
 			posts.push({
 				slug: entry.name,
-				title: data.title ?? entry.name,
+				title,
 				date: data.date ?? '',
-				excerpt: data.excerpt ?? '',
-				tag: data.tag ?? '',
-				has_benchmarks: data.has_benchmarks ?? false
+				excerpt,
+				tag,
+				has_benchmarks: data.has_benchmarks ?? false,
+				keywords: deriveKeywords(title, excerpt, tag)
 			});
 		} catch {
 			// skip entries without index.mdoc
@@ -61,13 +67,18 @@ export async function getPost(slug: string): Promise<Post | null> {
 		const transformed = Markdoc.transform(ast);
 		const html = Markdoc.renderers.html(transformed);
 
+		const title = data.title ?? slug;
+		const excerpt = data.excerpt ?? '';
+		const tag = data.tag ?? '';
+
 		return {
 			slug,
-			title: data.title ?? slug,
+			title,
 			date: data.date ?? '',
-			excerpt: data.excerpt ?? '',
-			tag: data.tag ?? '',
+			excerpt,
+			tag,
 			has_benchmarks: data.has_benchmarks ?? false,
+			keywords: deriveKeywords(title, excerpt, tag),
 			content: html
 		};
 	} catch {
