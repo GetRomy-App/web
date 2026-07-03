@@ -11,10 +11,9 @@
 		description?: string;
 		effective?: string;
 		content: string;
-		canonicalPath: string;
 	}
 
-	let { title, description = '', effective = '', content, canonicalPath }: Props = $props();
+	let { title, description = '', effective = '', content }: Props = $props();
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -54,22 +53,6 @@
 		return dt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 	}
 </script>
-
-<svelte:head>
-	<title>{title} — Rōmy</title>
-	<meta name="title" content="{title} — Rōmy" />
-	{#if description}
-		<meta name="description" content={description} />
-	{/if}
-	<meta name="robots" content="index, follow" />
-	<meta property="og:title" content="{title} — Rōmy" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app{canonicalPath}" />
-	{#if description}
-		<meta property="og:description" content={description} />
-	{/if}
-	<link rel="canonical" href="https://getromy.app{canonicalPath}" />
-</svelte:head>
 
 <Footer bind:footerText />
 

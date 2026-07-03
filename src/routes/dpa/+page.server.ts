@@ -1,11 +1,27 @@
 import type { PageServerLoad } from './$types';
 import { getLegalPage } from '$lib/legal';
 import { error } from '@sveltejs/kit';
+import { breadcrumbList, type SeoData } from '$lib/seo';
 
 export const prerender = true;
 
 export const load: PageServerLoad = async () => {
 	const page = await getLegalPage('dpa');
 	if (!page) throw error(404, 'Page not found');
-	return { page };
+
+	const seo: SeoData = {
+		title: `${page.title} — Rōmy`,
+		description: page.description,
+		path: '/dpa',
+		robots: 'index, follow',
+		jsonLd: [
+			breadcrumbList([
+				{ name: 'Home', path: '/' },
+				{ name: 'Legal', path: '/legal' },
+				{ name: page.title, path: '/dpa' }
+			])
+		]
+	};
+
+	return { page, seo };
 };

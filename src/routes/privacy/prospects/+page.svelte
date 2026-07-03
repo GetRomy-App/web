@@ -9,5 +9,4 @@
 	description={data.page.description}
 	effective={data.page.effective}
 	content={data.page.content}
-	canonicalPath="/privacy/prospects"
 />

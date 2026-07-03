@@ -1,4 +1,48 @@
 User-agent: *
 Allow: /
 
+# AI assistants / answer engines (GEO) — explicitly welcomed so Rōmy can be
+# discovered and cited in AI-generated answers.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: applebot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
 Sitemap: https://getromy.app/sitemap.xml
