@@ -9,6 +9,7 @@
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import ServiceRow from '$lib/components/status/ServiceRow.svelte';
 	import IncidentItem from '$lib/components/status/IncidentItem.svelte';
+	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 
 	import { summarize, computeOverall } from '$lib/status/compute';
 	import { OVERALL_STYLES, relativeTime } from '$lib/status/ui';
@@ -122,20 +123,11 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Status — Rōmy</title>
-	<meta name="title" content="Status — Rōmy" />
-	<meta
-		name="description"
-		content="Live operational status and uptime history for Rōmy — the donor-intelligence app at intel.getromy.app and getromy.app."
-	/>
-	<meta name="robots" content="index, follow" />
-	<meta property="og:title" content="Status — Rōmy" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/status" />
-	<meta property="og:description" content="Live operational status and uptime history for Rōmy." />
-	<link rel="canonical" href="https://getromy.app/status" />
-</svelte:head>
+<SeoHead
+	title="Status — Rōmy"
+	description="Live operational status and uptime history for Rōmy — the donor-intelligence app at intel.getromy.app and getromy.app."
+	canonical="https://getromy.app/status"
+/>
 
 <Footer bind:footerText />
 

@@ -6,8 +6,45 @@
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import { PIF_OVERALL, PIF_DIMENSIONS, EVAL_PROMPT } from '$lib/benchmarks';
+	import { postKeywords } from '$lib/content';
+	import { metaDescription } from '$lib/utils';
 
 	let { data } = $props();
+
+	const description = metaDescription(data.post.excerpt);
+	const keywords = postKeywords(data.post);
+	const postUrl = `https://getromy.app/labs/blog/${data.post.slug}`;
+	const ogImage = 'https://getromy.app/og-image.jpg';
+
+	const jsonLd = [
+		{
+			'@context': 'https://schema.org',
+			'@type': 'BlogPosting',
+			headline: data.post.title,
+			description,
+			datePublished: data.post.date,
+			dateModified: data.post.date,
+			url: postUrl,
+			mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+			image: ogImage,
+			articleSection: data.post.tag,
+			publisher: {
+				'@type': 'Organization',
+				name: 'GetRomy LLC',
+				url: 'https://getromy.app',
+				logo: { '@type': 'ImageObject', url: 'https://getromy.app/icon-logo.png' }
+			}
+		},
+		{
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+				{ '@type': 'ListItem', position: 2, name: 'Labs', item: 'https://getromy.app/labs' },
+				{ '@type': 'ListItem', position: 3, name: data.post.title, item: postUrl }
+			]
+		}
+	];
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -127,16 +164,31 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
+	<title>{data.post.title} — Rōmy Labs</title>
+	<meta name="description" content={description} />
+	<meta name="keywords" content={keywords.join(', ')} />
+	<meta
+		name="robots"
+		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+	/>
 	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
+	<meta property="og:description" content={description} />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta property="og:url" content={postUrl} />
+	<meta property="og:image" content={ogImage} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:site_name" content="Rōmy" />
 	<meta property="article:published_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={ogImage} />
+	<link rel="canonical" href={postUrl} />
+	{#each jsonLd as schema}
+		{@html `<script type="application/ld+json">${JSON.stringify(schema)}</script>`}
+	{/each}
 </svelte:head>
 
 <Footer bind:footerText />
@@ -149,20 +201,36 @@
 			<!-- Header -->
 			<header
 				bind:this={articleHeader}
-				class="pt-48 md:pt-48 pb-12 px-4 md:px-8 border-gray-alpha-100 border-b max-w-3xl mx-auto"
+				class="pt-48 md:pt-48 pb-12 px-4 md:px-8 border-gray-alpha-100 max-w-3xl mx-auto border-b"
 			>
-				<div class="post-meta mb-6 flex items-center gap-3 opacity-0">
+				<div class="post-meta mb-6 gap-3 flex items-center opacity-0">
 					<a
 						href="/labs"
-						class="text-gray-alpha-600 hover:text-foreground inline-flex items-center gap-1 text-sm font-medium transition-colors no-underline"
+						class="text-gray-alpha-600 hover:text-foreground gap-1 text-sm font-medium inline-flex items-center no-underline transition-colors"
 					>
-						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" class="size-3.5" aria-hidden="true">
-							<path d="M15 6C15 6 9 10.4189 9 12C9 13.5812 15 18 15 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="14"
+							height="14"
+							viewBox="0 0 24 24"
+							fill="none"
+							class="size-3.5"
+							aria-hidden="true"
+						>
+							<path
+								d="M15 6C15 6 9 10.4189 9 12C9 13.5812 15 18 15 18"
+								stroke="currentColor"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							></path>
 						</svg>
 						Labs
 					</a>
 					<span class="text-gray-alpha-400 text-xs select-none">//</span>
-					<span class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-2.5 py-0.5 text-xs font-medium">
+					<span
+						class="text-gray-alpha-600 border-gray-alpha-200 px-2.5 py-0.5 text-xs font-medium rounded-full border"
+					>
 						{data.post.tag}
 					</span>
 					<span class="text-gray-alpha-400 text-xs">
@@ -178,7 +246,7 @@
 			<!-- Body -->
 			<div
 				bind:this={articleBody}
-				class="article-content px-4 md:px-8 py-12 opacity-0 max-w-3xl mx-auto"
+				class="article-content px-4 md:px-8 py-12 max-w-3xl mx-auto opacity-0"
 			>
 				{@html data.post.content}
 			</div>
@@ -195,23 +263,27 @@
 							PIF-Bench composite scores — higher is better
 						</p>
 
-						<div class="bench-chart-row flex flex-col gap-3 mb-12">
+						<div class="bench-chart-row gap-3 mb-12 flex flex-col">
 							<h3 class="text-foreground text-base font-medium tracking-tight mb-1">
 								{PIF_OVERALL.label}
 							</h3>
 							<p class="text-gray-alpha-400 text-xs mb-2">{PIF_OVERALL.subtitle}</p>
 							{#each PIF_OVERALL.bars as bar}
-								<div class="flex items-center gap-3">
-									<span class="text-gray-alpha-600 text-xs font-medium w-20 md:w-28 shrink-0 text-right">
+								<div class="gap-3 flex items-center">
+									<span
+										class="text-gray-alpha-600 text-xs font-medium w-20 md:w-28 shrink-0 text-right"
+									>
 										{bar.name}
 									</span>
-									<div class="relative flex-1 h-9 rounded-md overflow-hidden bg-gray-alpha-50">
+									<div class="h-9 rounded-md bg-gray-alpha-50 relative flex-1 overflow-hidden">
 										<div
-											class="bench-bar-fill absolute inset-y-0 left-0 rounded-md"
-											style="width: {bar.score}%; background: {bar.highlight ? 'var(--ds-blue-700)' : 'var(--ds-gray-alpha-200)'}; transform-origin: left center;"
+											class="bench-bar-fill inset-y-0 left-0 rounded-md absolute"
+											style="width: {bar.score}%; background: {bar.highlight
+												? 'var(--ds-blue-700)'
+												: 'var(--ds-gray-alpha-200)'}; transform-origin: left center;"
 										></div>
 										<span
-											class="bench-bar-value absolute inset-y-0 flex items-center text-sm font-medium tabular-nums px-3"
+											class="bench-bar-value inset-y-0 text-sm font-medium px-3 absolute flex items-center tabular-nums"
 											style="left: 0; color: {bar.highlight ? 'white' : 'var(--foreground)'};"
 										>
 											{bar.score}
@@ -226,23 +298,27 @@
 							Dimension Breakdown
 						</h3>
 
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
+						<div class="md:grid-cols-2 gap-x-8 gap-y-10 grid grid-cols-1">
 							{#each PIF_DIMENSIONS as dim}
-								<div class="bench-chart-row flex flex-col gap-2">
+								<div class="bench-chart-row gap-2 flex flex-col">
 									<h4 class="text-foreground text-sm font-medium tracking-tight">{dim.label}</h4>
 									<p class="text-gray-alpha-400 text-xs mb-1">{dim.subtitle}</p>
 									{#each dim.bars as bar}
-										<div class="flex items-center gap-2">
-											<span class="text-gray-alpha-600 text-[11px] font-medium w-16 md:w-20 shrink-0 text-right">
+										<div class="gap-2 flex items-center">
+											<span
+												class="text-gray-alpha-600 font-medium w-16 md:w-20 shrink-0 text-right text-[11px]"
+											>
 												{bar.name}
 											</span>
-											<div class="relative flex-1 h-6 rounded overflow-hidden bg-gray-alpha-50">
+											<div class="h-6 rounded bg-gray-alpha-50 relative flex-1 overflow-hidden">
 												<div
-													class="bench-bar-fill absolute inset-y-0 left-0 rounded"
-													style="width: {bar.score}%; background: {bar.highlight ? 'var(--ds-blue-700)' : 'var(--ds-gray-alpha-200)'}; transform-origin: left center;"
+													class="bench-bar-fill inset-y-0 left-0 rounded absolute"
+													style="width: {bar.score}%; background: {bar.highlight
+														? 'var(--ds-blue-700)'
+														: 'var(--ds-gray-alpha-200)'}; transform-origin: left center;"
 												></div>
 												<span
-													class="bench-bar-value absolute inset-y-0 flex items-center text-[11px] font-medium tabular-nums px-2"
+													class="bench-bar-value inset-y-0 font-medium px-2 absolute flex items-center text-[11px] tabular-nums"
 													style="left: 0; color: {bar.highlight ? 'white' : 'var(--foreground)'};"
 												>
 													{bar.score}
@@ -255,15 +331,20 @@
 						</div>
 
 						<!-- Eval details -->
-						<div class="mt-12 border-gray-alpha-100 border-t pt-8">
+						<div class="mt-12 border-gray-alpha-100 pt-8 border-t">
 							<h3 class="text-foreground text-base font-medium tracking-tight mb-3">
 								Standard prompt used across all systems
 							</h3>
-							<div class="bg-gray-alpha-50 rounded-lg p-4 text-sm text-gray-alpha-600 leading-relaxed font-mono whitespace-pre-wrap">
+							<div
+								class="bg-gray-alpha-50 rounded-lg p-4 text-sm text-gray-alpha-600 leading-relaxed font-mono whitespace-pre-wrap"
+							>
 								{EVAL_PROMPT}
 							</div>
 							<p class="text-gray-alpha-400 text-xs mt-6 leading-relaxed">
-								A human operator ran this prompt in all four systems, then pasted the complete raw outputs (15,000+ words combined) into a Claude Code session. Claude Code (Claude Opus 4.6, 1M context) scored every response against the PIF-Bench framework autonomously. No human editing was applied to scores or analysis.
+								A human operator ran this prompt in all four systems, then pasted the complete raw
+								outputs (15,000+ words combined) into a Claude Code session. Claude Code (Claude
+								Opus 4.6, 1M context) scored every response against the PIF-Bench framework
+								autonomously. No human editing was applied to scores or analysis.
 							</p>
 						</div>
 					</div>
@@ -271,13 +352,27 @@
 			{/if}
 
 			<!-- Back link -->
-			<div class="px-4 md:px-8 pb-16 border-gray-alpha-100 border-t pt-8 max-w-3xl mx-auto">
+			<div class="px-4 md:px-8 pb-16 border-gray-alpha-100 pt-8 max-w-3xl mx-auto border-t">
 				<a
 					href="/labs"
-					class="text-gray-alpha-600 hover:text-foreground inline-flex items-center gap-1.5 text-sm font-medium transition-colors no-underline"
+					class="text-gray-alpha-600 hover:text-foreground gap-1.5 text-sm font-medium inline-flex items-center no-underline transition-colors"
 				>
-					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" class="size-3.5" aria-hidden="true">
-						<path d="M15 6C15 6 9 10.4189 9 12C9 13.5812 15 18 15 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="14"
+						height="14"
+						viewBox="0 0 24 24"
+						fill="none"
+						class="size-3.5"
+						aria-hidden="true"
+					>
+						<path
+							d="M15 6C15 6 9 10.4189 9 12C9 13.5812 15 18 15 18"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						></path>
 					</svg>
 					Back to Labs
 				</a>

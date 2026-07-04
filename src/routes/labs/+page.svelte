@@ -29,7 +29,7 @@
 		{
 			label: 'PIF-Bench Score',
 			subtitle: 'Prospect Intelligence Fidelity — composite accuracy benchmark (0-100)',
-			bars: PIF_OVERALL.bars.map(b => ({
+			bars: PIF_OVERALL.bars.map((b) => ({
 				name: b.name,
 				value: b.score,
 				max: 100,
@@ -42,36 +42,120 @@
 			label: 'Time per Prospect',
 			subtitle: 'From first search to actionable report',
 			bars: [
-				{ name: 'Romy', value: 600, max: 2700, display: '2 – 10+ min', color: 'var(--ds-blue-700)', pct: 22 },
-				{ name: 'Enterprise Tools', value: 900, max: 2700, display: '5 – 15 min', color: 'var(--ds-gray-alpha-200)', pct: 33 },
-				{ name: 'Manual Research', value: 2700, max: 2700, display: '~45 minutes', color: 'var(--ds-gray-alpha-100)', pct: 100 }
+				{
+					name: 'Romy',
+					value: 600,
+					max: 2700,
+					display: '2 – 10+ min',
+					color: 'var(--ds-blue-700)',
+					pct: 22
+				},
+				{
+					name: 'Enterprise Tools',
+					value: 900,
+					max: 2700,
+					display: '5 – 15 min',
+					color: 'var(--ds-gray-alpha-200)',
+					pct: 33
+				},
+				{
+					name: 'Manual Research',
+					value: 2700,
+					max: 2700,
+					display: '~45 minutes',
+					color: 'var(--ds-gray-alpha-100)',
+					pct: 100
+				}
 			]
 		},
 		{
 			label: 'Cost per Report',
 			subtitle: 'Fully loaded cost per full research report, depending on subscription tier',
 			bars: [
-				{ name: 'Romy', value: 5, max: 50, display: '$0.50 – $5', color: 'var(--ds-blue-700)', pct: 10 },
-				{ name: 'Enterprise Tools', value: 15, max: 50, display: '$8 – $15', color: 'var(--ds-gray-alpha-200)', pct: 30 },
-				{ name: 'Manual Research', value: 50, max: 50, display: '$50+', color: 'var(--ds-gray-alpha-100)', pct: 100 }
+				{
+					name: 'Romy',
+					value: 5,
+					max: 50,
+					display: '$0.50 – $5',
+					color: 'var(--ds-blue-700)',
+					pct: 10
+				},
+				{
+					name: 'Enterprise Tools',
+					value: 15,
+					max: 50,
+					display: '$8 – $15',
+					color: 'var(--ds-gray-alpha-200)',
+					pct: 30
+				},
+				{
+					name: 'Manual Research',
+					value: 50,
+					max: 50,
+					display: '$50+',
+					color: 'var(--ds-gray-alpha-100)',
+					pct: 100
+				}
 			]
 		},
 		{
 			label: 'Annual Cost',
 			subtitle: 'For a team researching ~200 prospects / month',
 			bars: [
-				{ name: 'Romy (Growth)', value: 290, max: 50000, display: '$290 / yr', color: 'var(--ds-blue-700)', pct: 4 },
-				{ name: 'Romy (Scale)', value: 1990, max: 50000, display: '$1,990 / yr', color: '#4d7cff', pct: 8 },
-				{ name: 'Enterprise Avg.', value: 30000, max: 50000, display: '$15K – $50K / yr', color: 'var(--ds-gray-alpha-200)', pct: 80 }
+				{
+					name: 'Romy (Growth)',
+					value: 290,
+					max: 50000,
+					display: '$290 / yr',
+					color: 'var(--ds-blue-700)',
+					pct: 4
+				},
+				{
+					name: 'Romy (Scale)',
+					value: 1990,
+					max: 50000,
+					display: '$1,990 / yr',
+					color: '#4d7cff',
+					pct: 8
+				},
+				{
+					name: 'Enterprise Avg.',
+					value: 30000,
+					max: 50000,
+					display: '$15K – $50K / yr',
+					color: 'var(--ds-gray-alpha-200)',
+					pct: 80
+				}
 			]
 		},
 		{
 			label: 'Report Depth',
 			subtitle: 'Sections in a full donor intelligence report',
 			bars: [
-				{ name: 'Romy', value: 16, max: 16, display: '16 sections', color: 'var(--ds-blue-700)', pct: 100 },
-				{ name: 'Enterprise Tools', value: 8, max: 16, display: '5 – 8 sections', color: 'var(--ds-gray-alpha-200)', pct: 50 },
-				{ name: 'Generic AI', value: 4, max: 16, display: '3 – 5 sections', color: 'var(--ds-gray-alpha-100)', pct: 28 }
+				{
+					name: 'Romy',
+					value: 16,
+					max: 16,
+					display: '16 sections',
+					color: 'var(--ds-blue-700)',
+					pct: 100
+				},
+				{
+					name: 'Enterprise Tools',
+					value: 8,
+					max: 16,
+					display: '5 – 8 sections',
+					color: 'var(--ds-gray-alpha-200)',
+					pct: 50
+				},
+				{
+					name: 'Generic AI',
+					value: 4,
+					max: 16,
+					display: '3 – 5 sections',
+					color: 'var(--ds-gray-alpha-100)',
+					pct: 28
+				}
 			]
 		}
 	];
@@ -122,9 +206,23 @@
 
 			const heroTl = gsap.timeline();
 			heroTl
-				.fromTo(heroBadge, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8, ease: 'custom-ease' })
-				.fromTo(titleSplit.lines, { yPercent: 100 }, { yPercent: 0, duration: 1.2, stagger: 0.1, ease: 'custom-ease' }, '-=0.4')
-				.fromTo(descSplit.lines, { yPercent: 100 }, { yPercent: 0, duration: 1.2, stagger: 0.1, ease: 'custom-ease' }, '-=1.0');
+				.fromTo(
+					heroBadge,
+					{ opacity: 0, y: 10 },
+					{ opacity: 1, y: 0, duration: 0.8, ease: 'custom-ease' }
+				)
+				.fromTo(
+					titleSplit.lines,
+					{ yPercent: 100 },
+					{ yPercent: 0, duration: 1.2, stagger: 0.1, ease: 'custom-ease' },
+					'-=0.4'
+				)
+				.fromTo(
+					descSplit.lines,
+					{ yPercent: 100 },
+					{ yPercent: 0, duration: 1.2, stagger: 0.1, ease: 'custom-ease' },
+					'-=1.0'
+				);
 			gsap.set([heroTitle, heroDesc], { opacity: 1 });
 
 			// Benchmark chart rows — animate bars on scroll
@@ -223,19 +321,35 @@
 </script>
 
 <svelte:head>
-	<title>Romy Labs — AI Donor Research Benchmarks, PIF-Bench Results & Blog</title>
+	<title>Rōmy Labs — AI Donor Research Benchmarks, PIF-Bench Results & Blog</title>
 	<meta
 		name="description"
-		content="Romy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). See how purpose-built AI donor intelligence compares on accuracy, cost, and speed."
+		content="Rōmy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). See how purpose-built AI donor intelligence compares on accuracy, cost, and speed."
 	/>
 	<meta
 		name="keywords"
-		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Romy, prospect research tool"
+		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Rōmy, prospect research tool"
 	/>
-	<meta property="og:title" content="Romy Labs — AI Donor Research Benchmarks" />
-	<meta property="og:description" content="PIF-Bench results: Romy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research." />
+	<meta
+		name="robots"
+		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+	/>
+	<meta property="og:title" content="Rōmy Labs — AI Donor Research Benchmarks" />
+	<meta
+		property="og:description"
+		content="PIF-Bench results: Rōmy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research."
+	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/labs" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Rōmy Labs — AI Donor Research Benchmarks" />
+	<meta
+		name="twitter:description"
+		content="PIF-Bench results: Rōmy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0."
+	/>
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 	<link rel="canonical" href="https://getromy.app/labs" />
 </svelte:head>
 
@@ -255,7 +369,7 @@
 
 			<div bind:this={heroBadge} class="mb-6 opacity-0">
 				<span
-					class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-3 py-1 text-xs font-medium tracking-wide uppercase"
+					class="text-gray-alpha-600 border-gray-alpha-200 px-3 py-1 text-xs font-medium tracking-wide rounded-full border uppercase"
 				>
 					Labs
 				</span>
@@ -272,17 +386,15 @@
 				bind:this={heroDesc}
 				class="text-gray-alpha-600 max-w-xl text-lg leading-relaxed md:text-xl text-pretty opacity-0"
 			>
-				How purpose-built AI compares to enterprise tools and manual research.
-				Open benchmarks, technical deep-dives, and lessons from the field.
+				How purpose-built AI compares to enterprise tools and manual research. Open benchmarks,
+				technical deep-dives, and lessons from the field.
 			</p>
 		</section>
 
 		<!-- Benchmarks -->
 		<section bind:this={benchmarksSection} class="w-full">
 			<div class="px-4 md:px-8 py-8">
-				<h2 class="text-foreground text-2xl font-medium tracking-tight md:text-3xl">
-					Benchmarks
-				</h2>
+				<h2 class="text-foreground text-2xl font-medium tracking-tight md:text-3xl">Benchmarks</h2>
 				<p class="text-gray-alpha-600 mt-2 text-lg leading-relaxed text-pretty">
 					Romy vs. enterprise wealth screening platforms and manual prospect research.
 				</p>
@@ -290,7 +402,7 @@
 
 			<div class="divide-gray-alpha-100 border-gray-alpha-100 divide-y border-t">
 				{#each comparisons as comparison}
-					<div class="chart-row px-4 md:px-8 py-8 flex flex-col gap-5">
+					<div class="chart-row px-4 md:px-8 py-8 gap-5 flex flex-col">
 						<div>
 							<h3 class="chart-label text-foreground text-lg font-medium tracking-tight md:text-xl">
 								{comparison.label}
@@ -300,27 +412,34 @@
 							</p>
 						</div>
 
-						<div class="flex flex-col gap-3">
+						<div class="gap-3 flex flex-col">
 							{#each comparison.bars as bar}
-								<div class="flex items-center gap-3">
-									<span class="text-gray-alpha-600 text-xs font-medium w-28 md:w-36 shrink-0 text-right">
+								<div class="gap-3 flex items-center">
+									<span
+										class="text-gray-alpha-600 text-xs font-medium w-28 md:w-36 shrink-0 text-right"
+									>
 										{bar.name}
 									</span>
-									<div class="relative flex-1 h-8 rounded-md overflow-hidden bg-gray-alpha-50">
+									<div class="h-8 rounded-md bg-gray-alpha-50 relative flex-1 overflow-hidden">
 										<div
-											class="bar-fill absolute inset-y-0 left-0 rounded-md"
+											class="bar-fill inset-y-0 left-0 rounded-md absolute"
 											style="width: {bar.pct}%; background: {bar.color}; transform-origin: left center;"
 										></div>
 										<span
-											class="bar-label absolute inset-y-0 flex items-center text-xs font-medium tabular-nums opacity-0"
-											style="left: calc({Math.min(bar.pct, 92)}% + 8px); color: {bar.pct > 50 ? 'transparent' : 'var(--foreground)'};"
+											class="bar-label inset-y-0 text-xs font-medium absolute flex items-center tabular-nums opacity-0"
+											style="left: calc({Math.min(bar.pct, 92)}% + 8px); color: {bar.pct > 50
+												? 'transparent'
+												: 'var(--foreground)'};"
 										>
 											{bar.display}
 										</span>
 										{#if bar.pct > 20}
 											<span
-												class="bar-label absolute inset-y-0 flex items-center text-xs font-medium tabular-nums opacity-0 px-3"
-												style="left: 0; color: {bar.color === 'var(--ds-blue-700)' || bar.color === '#4d7cff' ? 'white' : 'var(--foreground)'};"
+												class="bar-label inset-y-0 text-xs font-medium px-3 absolute flex items-center tabular-nums opacity-0"
+												style="left: 0; color: {bar.color === 'var(--ds-blue-700)' ||
+												bar.color === '#4d7cff'
+													? 'white'
+													: 'var(--foreground)'};"
 											>
 												{bar.display}
 											</span>
@@ -337,9 +456,7 @@
 		<!-- Blog -->
 		<section bind:this={blogSection} class="w-full">
 			<div class="px-4 md:px-8 py-8">
-				<h2 class="text-foreground text-2xl font-medium tracking-tight md:text-3xl">
-					Blog
-				</h2>
+				<h2 class="text-foreground text-2xl font-medium tracking-tight md:text-3xl">Blog</h2>
 				<p class="text-gray-alpha-600 mt-2 text-lg leading-relaxed text-pretty">
 					Technical deep-dives, research findings, and perspectives on nonprofit fundraising.
 				</p>
@@ -349,11 +466,11 @@
 				{#each data.posts as post}
 					<a
 						href="/labs/blog/{post.slug}"
-						class="blog-card group px-4 md:px-8 py-8 flex flex-col gap-3 opacity-0 transition-colors hover:bg-gray-alpha-50 cursor-pointer block no-underline"
+						class="blog-card group px-4 md:px-8 py-8 gap-3 hover:bg-gray-alpha-50 block flex cursor-pointer flex-col no-underline opacity-0 transition-colors"
 					>
-						<div class="flex items-center gap-3">
+						<div class="gap-3 flex items-center">
 							<span
-								class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-2.5 py-0.5 text-xs font-medium"
+								class="text-gray-alpha-600 border-gray-alpha-200 px-2.5 py-0.5 text-xs font-medium rounded-full border"
 							>
 								{post.tag}
 							</span>
@@ -371,7 +488,7 @@
 						</p>
 						<div class="mt-1">
 							<span
-								class="text-gray-alpha-600 group-hover:text-foreground inline-flex items-center gap-1 text-sm font-medium transition-colors"
+								class="text-gray-alpha-600 group-hover:text-foreground gap-1 text-sm font-medium inline-flex items-center transition-colors"
 							>
 								Read more
 								<svg
@@ -380,7 +497,7 @@
 									height="14"
 									viewBox="0 0 24 24"
 									fill="none"
-									class="size-3.5 transition-transform group-hover:translate-x-0.5"
+									class="size-3.5 group-hover:translate-x-0.5 transition-transform"
 									aria-hidden="true"
 								>
 									<path
@@ -408,12 +525,12 @@
 				<p
 					class="text-gray-alpha-600 mb-8 max-w-xl text-lg leading-relaxed md:text-xl text-left text-pretty"
 				>
-					Try Romy on your own prospect list. See how purpose-built donor intelligence
-					compares to your current workflow.
+					Try Romy on your own prospect list. See how purpose-built donor intelligence compares to
+					your current workflow.
 				</p>
 			</div>
 
-			<div class="flex flex-wrap items-center gap-3">
+			<div class="gap-3 flex flex-wrap items-center">
 				<Button href="https://intel.getromy.app" target="_blank" rel="noreferrer" class="w-fit">
 					Get Started
 					<svg
