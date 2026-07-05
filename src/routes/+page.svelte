@@ -42,6 +42,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Rōmy — Donor Intelligence for Small Nonprofits</title>
+</svelte:head>
+
 <Footer bind:footerText />
 
 <Navbar />
