@@ -12,6 +12,7 @@ export interface PostMeta {
 	excerpt: string;
 	tag: string;
 	has_benchmarks: boolean;
+	keywords: string;
 }
 
 export interface Post extends PostMeta {
@@ -41,7 +42,8 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 				date: data.date ?? '',
 				excerpt: data.excerpt ?? '',
 				tag: data.tag ?? '',
-				has_benchmarks: data.has_benchmarks ?? false
+				has_benchmarks: data.has_benchmarks ?? false,
+				keywords: data.keywords ?? ''
 			});
 		} catch {
 			// skip entries without index.mdoc
@@ -68,6 +70,7 @@ export async function getPost(slug: string): Promise<Post | null> {
 			excerpt: data.excerpt ?? '',
 			tag: data.tag ?? '',
 			has_benchmarks: data.has_benchmarks ?? false,
+			keywords: data.keywords ?? '',
 			content: html
 		};
 	} catch {

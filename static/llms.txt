@@ -18,7 +18,28 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 - Twitter: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
 - Contact: howard@getromy.app, solomon@getromy.app
+- Sitemap: https://getromy.app/sitemap.xml
+
+## Writing
+
+Rōmy publishes research, engineering write-ups, and industry analysis on nonprofit fundraising, prospect research, and donor intelligence at https://getromy.app/blog. Key posts:
+
+- Major Gifts Aren't a Wealth Problem. They're a Timing Problem. — https://getromy.app/blog/major-gifts-are-a-timing-problem
+- The Small Nonprofit Fundraising Gap — and How to Close It — https://getromy.app/blog/small-nonprofit-fundraising-gap
+- Capacity Scores Are the Astrology of Fundraising — https://getromy.app/blog/capacity-scores-are-the-astrology-of-fundraising
+- What Actually Predicts Giving Capacity — and How Rōmy Scores It — https://getromy.app/blog/understanding-wealth-indicators
+- Most Boards Are Alumni of Indifference — https://getromy.app/blog/most-boards-are-alumni-of-indifference
+- Nobody Reads Your Annual Report — https://getromy.app/blog/nobody-reads-your-annual-report
+- The Gala Is the Worst Place to Meet a Donor — https://getromy.app/blog/the-gala-is-the-worst-place
+- You Don't Have Donors. You Have Neighbors. — https://getromy.app/blog/you-dont-have-donors-you-have-neighbors
+- How We Built a Donor Intelligence Engine Starting at $0.10 per Prospect — https://getromy.app/blog/how-we-built-donor-intelligence
+
+The blog also carries an ongoing "Field Notes" series — short narrative essays on the human, day-to-day realities of major gift fundraising, donor stewardship, and planned giving — indexed at https://getromy.app/blog.
+
+## Research
+
+PIF-Bench, Rōmy's open benchmark comparing AI-powered donor prospect research systems (Rōmy, ChatGPT, Claude, Gemini) on accuracy, cost, and speed, is published at https://getromy.app/labs.
 
 ## Company
 
-GetRomy LLC
+GetRomy LLC — a donor intelligence company based in Kerrville, Texas.
