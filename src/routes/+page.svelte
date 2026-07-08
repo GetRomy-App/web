@@ -42,6 +42,10 @@
 	});
 </script>
 
+<svelte:head>
+	<link rel="canonical" href="https://getromy.app/" />
+</svelte:head>
+
 <Footer bind:footerText />
 
 <Navbar />

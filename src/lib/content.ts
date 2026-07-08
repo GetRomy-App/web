@@ -11,6 +11,7 @@ export interface PostMeta {
 	date: string;
 	excerpt: string;
 	tag: string;
+	keywords: string;
 	has_benchmarks: boolean;
 }
 
@@ -41,6 +42,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 				date: data.date ?? '',
 				excerpt: data.excerpt ?? '',
 				tag: data.tag ?? '',
+				keywords: data.keywords ?? '',
 				has_benchmarks: data.has_benchmarks ?? false
 			});
 		} catch {
@@ -67,6 +69,7 @@ export async function getPost(slug: string): Promise<Post | null> {
 			date: data.date ?? '',
 			excerpt: data.excerpt ?? '',
 			tag: data.tag ?? '',
+			keywords: data.keywords ?? '',
 			has_benchmarks: data.has_benchmarks ?? false,
 			content: html
 		};

@@ -69,14 +69,19 @@
 	<meta property="og:description" content={description} />
 	<meta property="og:site_name" content="Rōmy" />
 	<meta property="og:locale" content="en_US" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:alt" content="Rōmy — donor intelligence for small nonprofits" />
 
 	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@RomyFindsMoney" />
 	<meta name="twitter:creator" content="@RomyFindsMoney" />
 	<meta name="twitter:url" content={url} />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 
 	<!-- Performance -->
 	<link
@@ -95,8 +100,6 @@
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 	<link rel="manifest" href="/site.webmanifest" />
-
-	<link rel="canonical" href={url} />
 
 	<!-- Structured Data (JSON-LD) -->
 	{@html `<script type="application/ld+json">${JSON.stringify({

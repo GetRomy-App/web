@@ -10,6 +10,12 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 - Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
 - Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
 
+## Blog & research
+
+- Blog: https://getromy.app/blog — field notes on nonprofit fundraising, major-gift prospect research, and donor intelligence
+- Labs: https://getromy.app/labs — PIF-Bench, an open benchmark comparing Rōmy against ChatGPT, Claude, and Gemini on AI donor research accuracy
+- Full article index: https://getromy.app/sitemap.xml
+
 ## Links
 
 - Website: https://getromy.app
