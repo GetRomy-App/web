@@ -100,7 +100,7 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
 	<meta
 		name="description"
 		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
@@ -109,7 +109,7 @@
 		name="keywords"
 		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta property="og:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
 	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
@@ -219,7 +219,7 @@
 				<p
 					class="text-gray-alpha-600 mb-8 max-w-xl text-lg leading-relaxed md:text-xl text-left text-pretty"
 				>
-					Try Romy on your own prospect list. See how purpose-built donor intelligence
+					Try Rōmy on your own prospect list. See how purpose-built donor intelligence
 					compares to your current workflow.
 				</p>
 			</div>
