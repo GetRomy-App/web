@@ -1,4 +1,22 @@
-# Rōmy
+import type { RequestHandler } from './$types';
+import { getAllPosts } from '$lib/content';
+
+export const prerender = true;
+
+export const GET: RequestHandler = async () => {
+	const allPosts = await getAllPosts();
+	const blogPosts = allPosts.filter((p) => !p.has_benchmarks);
+	const labsPosts = allPosts.filter((p) => p.has_benchmarks);
+
+	const blogList = blogPosts
+		.map((p) => `- [${p.title}](https://getromy.app/blog/${p.slug}): ${p.excerpt}`)
+		.join('\n');
+
+	const labsList = labsPosts
+		.map((p) => `- [${p.title}](https://getromy.app/labs/blog/${p.slug}): ${p.excerpt}`)
+		.join('\n');
+
+	const body = `# Rōmy
 
 > Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions.
 
@@ -15,10 +33,26 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 - Website: https://getromy.app
 - Product: https://intel.getromy.app
 - Download (macOS): https://github.com/GetRomy-App/web/releases
+- Blog: https://getromy.app/blog
+- Labs (benchmarks): https://getromy.app/labs
 - Twitter: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
 - Contact: howard@getromy.app, solomon@getromy.app
 
+## Blog
+
+${blogList}
+
+## Labs
+
+${labsList}
+
 ## Company
 
 GetRomy LLC
+`;
+
+	return new Response(body, {
+		headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+	});
+};

@@ -236,7 +236,31 @@
 	<meta property="og:description" content="PIF-Bench results: Romy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/labs" />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Romy Labs — AI Donor Research Benchmarks" />
+	<meta
+		name="twitter:description"
+		content="PIF-Bench results: Romy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research."
+	/>
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 	<link rel="canonical" href="https://getromy.app/labs" />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Dataset',
+		name: 'PIF-Bench — Prospect Intelligence Fidelity Benchmark',
+		description:
+			'Romy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). Open benchmark comparing AI-powered donor prospect research on accuracy, cost, and speed.',
+		url: 'https://getromy.app/labs',
+		creator: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app'
+		}
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
