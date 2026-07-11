@@ -61,7 +61,6 @@
 	{#if description}
 		<meta name="description" content={description} />
 	{/if}
-	<meta name="robots" content="index, follow" />
 	<meta property="og:title" content="{title} — Rōmy" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app{canonicalPath}" />
@@ -78,14 +77,30 @@
 <div bind:this={mainContent} class="main-content px-4 md:px-8 overflow-hidden">
 	<div class="border-gray-alpha-100 flex min-h-screen flex-col items-center border-x">
 		<article class="w-full">
-			<header class="pt-40 md:pt-44 pb-10 px-4 md:px-8 border-gray-alpha-100 border-b max-w-3xl mx-auto w-full">
-				<div class="post-meta mb-6 flex items-center gap-3 flex-wrap">
+			<header
+				class="pt-40 md:pt-44 pb-10 px-4 md:px-8 border-gray-alpha-100 max-w-3xl mx-auto w-full border-b"
+			>
+				<div class="post-meta mb-6 gap-3 flex flex-wrap items-center">
 					<a
 						href="/legal"
-						class="text-gray-alpha-600 hover:text-foreground inline-flex items-center gap-1 text-sm font-medium transition-colors no-underline"
+						class="text-gray-alpha-600 hover:text-foreground gap-1 text-sm font-medium inline-flex items-center no-underline transition-colors"
 					>
-						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" class="size-3.5" aria-hidden="true">
-							<path d="M15 6C15 6 9 10.4189 9 12C9 13.5812 15 18 15 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="14"
+							height="14"
+							viewBox="0 0 24 24"
+							fill="none"
+							class="size-3.5"
+							aria-hidden="true"
+						>
+							<path
+								d="M15 6C15 6 9 10.4189 9 12C9 13.5812 15 18 15 18"
+								stroke="currentColor"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							></path>
 						</svg>
 						Legal
 					</a>
@@ -132,10 +147,18 @@
 		margin-bottom: 0.75rem;
 		scroll-margin-top: 7rem;
 	}
-	.legal-content :global(h1) { font-size: 1.875rem; }
-	.legal-content :global(h2) { font-size: 1.5rem; }
-	.legal-content :global(h3) { font-size: 1.125rem; }
-	.legal-content :global(h4) { font-size: 1rem; }
+	.legal-content :global(h1) {
+		font-size: 1.875rem;
+	}
+	.legal-content :global(h2) {
+		font-size: 1.5rem;
+	}
+	.legal-content :global(h3) {
+		font-size: 1.125rem;
+	}
+	.legal-content :global(h4) {
+		font-size: 1rem;
+	}
 
 	.legal-content :global(p),
 	.legal-content :global(li) {

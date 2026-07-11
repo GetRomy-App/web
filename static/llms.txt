@@ -2,13 +2,27 @@
 
 > Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions.
 
-Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles.
+Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles. It is built as a purpose-built, lower-cost alternative to enterprise wealth-screening platforms such as DonorSearch, iWave, and WealthEngine, which typically cost $15,000-$50,000 per year.
 
 ## Features
 
 - Donor Discovery: AI-powered prospect research with wealth indicators, giving history, and affinity signals
 - Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
 - Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
+- RōmyScore: a normalized 0-100 donor capacity/affinity score with a category breakdown
+- Sourced research: every claim in a Rōmy report links to its source
+
+## Benchmarks
+
+Rōmy publishes PIF-Bench (Prospect Intelligence Fidelity Benchmark), an open comparison of AI systems on donor prospect research accuracy, hallucination rate, and report completeness. Results and methodology: https://getromy.app/labs
+
+## Pages
+
+- Homepage: https://getromy.app
+- Blog (fundraising and prospect research writing): https://getromy.app/blog
+- Labs (benchmarks and technical research): https://getromy.app/labs
+- Sitemap: https://getromy.app/sitemap.xml
+- Status: https://getromy.app/status
 
 ## Links
 
@@ -21,4 +35,4 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 
 ## Company
 
-GetRomy LLC
+GetRomy LLC — a Texas limited liability company based in Kerrville, Texas.
