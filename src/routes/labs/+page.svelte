@@ -42,7 +42,7 @@
 			label: 'Time per Prospect',
 			subtitle: 'From first search to actionable report',
 			bars: [
-				{ name: 'Romy', value: 600, max: 2700, display: '2 – 10+ min', color: 'var(--ds-blue-700)', pct: 22 },
+				{ name: 'Rōmy', value: 600, max: 2700, display: '2 – 10+ min', color: 'var(--ds-blue-700)', pct: 22 },
 				{ name: 'Enterprise Tools', value: 900, max: 2700, display: '5 – 15 min', color: 'var(--ds-gray-alpha-200)', pct: 33 },
 				{ name: 'Manual Research', value: 2700, max: 2700, display: '~45 minutes', color: 'var(--ds-gray-alpha-100)', pct: 100 }
 			]
@@ -51,7 +51,7 @@
 			label: 'Cost per Report',
 			subtitle: 'Fully loaded cost per full research report, depending on subscription tier',
 			bars: [
-				{ name: 'Romy', value: 5, max: 50, display: '$0.50 – $5', color: 'var(--ds-blue-700)', pct: 10 },
+				{ name: 'Rōmy', value: 5, max: 50, display: '$0.50 – $5', color: 'var(--ds-blue-700)', pct: 10 },
 				{ name: 'Enterprise Tools', value: 15, max: 50, display: '$8 – $15', color: 'var(--ds-gray-alpha-200)', pct: 30 },
 				{ name: 'Manual Research', value: 50, max: 50, display: '$50+', color: 'var(--ds-gray-alpha-100)', pct: 100 }
 			]
@@ -60,8 +60,8 @@
 			label: 'Annual Cost',
 			subtitle: 'For a team researching ~200 prospects / month',
 			bars: [
-				{ name: 'Romy (Growth)', value: 290, max: 50000, display: '$290 / yr', color: 'var(--ds-blue-700)', pct: 4 },
-				{ name: 'Romy (Scale)', value: 1990, max: 50000, display: '$1,990 / yr', color: '#4d7cff', pct: 8 },
+				{ name: 'Rōmy (Growth)', value: 290, max: 50000, display: '$290 / yr', color: 'var(--ds-blue-700)', pct: 4 },
+				{ name: 'Rōmy (Scale)', value: 1990, max: 50000, display: '$1,990 / yr', color: '#4d7cff', pct: 8 },
 				{ name: 'Enterprise Avg.', value: 30000, max: 50000, display: '$15K – $50K / yr', color: 'var(--ds-gray-alpha-200)', pct: 80 }
 			]
 		},
@@ -69,7 +69,7 @@
 			label: 'Report Depth',
 			subtitle: 'Sections in a full donor intelligence report',
 			bars: [
-				{ name: 'Romy', value: 16, max: 16, display: '16 sections', color: 'var(--ds-blue-700)', pct: 100 },
+				{ name: 'Rōmy', value: 16, max: 16, display: '16 sections', color: 'var(--ds-blue-700)', pct: 100 },
 				{ name: 'Enterprise Tools', value: 8, max: 16, display: '5 – 8 sections', color: 'var(--ds-gray-alpha-200)', pct: 50 },
 				{ name: 'Generic AI', value: 4, max: 16, display: '3 – 5 sections', color: 'var(--ds-gray-alpha-100)', pct: 28 }
 			]
@@ -223,20 +223,40 @@
 </script>
 
 <svelte:head>
-	<title>Romy Labs — AI Donor Research Benchmarks, PIF-Bench Results & Blog</title>
+	<title>Rōmy Labs — AI Donor Research Benchmarks, PIF-Bench Results & Blog</title>
 	<meta
 		name="description"
-		content="Romy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). See how purpose-built AI donor intelligence compares on accuracy, cost, and speed."
+		content="Rōmy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). See how purpose-built AI donor intelligence compares on accuracy, cost, and speed."
 	/>
 	<meta
 		name="keywords"
-		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Romy, prospect research tool"
+		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Rōmy, prospect research tool, AI donor research"
 	/>
-	<meta property="og:title" content="Romy Labs — AI Donor Research Benchmarks" />
-	<meta property="og:description" content="PIF-Bench results: Romy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research." />
+	<meta
+		name="robots"
+		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+	/>
+	<meta property="og:title" content="Rōmy Labs — AI Donor Research Benchmarks" />
+	<meta property="og:description" content="PIF-Bench results: Rōmy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/labs" />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Rōmy Labs — AI Donor Research Benchmarks" />
+	<meta name="twitter:description" content="PIF-Bench results: Rōmy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research." />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 	<link rel="canonical" href="https://getromy.app/labs" />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Labs', item: 'https://getromy.app/labs' }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
@@ -284,7 +304,7 @@
 					Benchmarks
 				</h2>
 				<p class="text-gray-alpha-600 mt-2 text-lg leading-relaxed text-pretty">
-					Romy vs. enterprise wealth screening platforms and manual prospect research.
+					Rōmy vs. enterprise wealth screening platforms and manual prospect research.
 				</p>
 			</div>
 
@@ -408,7 +428,7 @@
 				<p
 					class="text-gray-alpha-600 mb-8 max-w-xl text-lg leading-relaxed md:text-xl text-left text-pretty"
 				>
-					Try Romy on your own prospect list. See how purpose-built donor intelligence
+					Try Rōmy on your own prospect list. See how purpose-built donor intelligence
 					compares to your current workflow.
 				</p>
 			</div>
