@@ -15,9 +15,96 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 - Website: https://getromy.app
 - Product: https://intel.getromy.app
 - Download (macOS): https://github.com/GetRomy-App/web/releases
+- Blog: https://getromy.app/blog
+- Research & benchmarks: https://getromy.app/labs
 - Twitter: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
 - Contact: howard@getromy.app, solomon@getromy.app
+
+## Research
+
+- PIF-Bench: Rōmy vs. ChatGPT, Claude, and Gemini on AI donor research accuracy: https://getromy.app/labs/blog/benchmarking-ai-prospect-research
+
+## Blog
+
+Field notes, industry analysis, and engineering write-ups on nonprofit fundraising and donor intelligence.
+
+- [The Best Fundraiser You Never Hired](https://getromy.app/blog/the-best-fundraiser-you-never-hired)
+- [The Blue Ribbon at the County Fair](https://getromy.app/blog/the-blue-ribbon-at-the-county-fair)
+- [The Memo Line Is the Whole Story](https://getromy.app/blog/the-memo-line-is-the-whole-story)
+- [The Tuesday Bridge Group](https://getromy.app/blog/the-tuesday-bridge-group)
+- [The Prayer List at the Back of the Bulletin](https://getromy.app/blog/the-prayer-list-at-the-back-of-the-bulletin)
+- [The Address Book in the Drawer](https://getromy.app/blog/the-address-book-in-the-drawer)
+- [The Line at the Bottom of the Reply Card](https://getromy.app/blog/the-line-at-the-bottom-of-the-reply-card)
+- [The Note That Wasn't Sent](https://getromy.app/blog/the-note-that-wasnt-sent)
+- [The Column at the Back of the Magazine](https://getromy.app/blog/the-column-at-the-back-of-the-magazine)
+- [The Ledger Knew in April](https://getromy.app/blog/the-ledger-knew-in-april)
+- [The Desk by the Copier](https://getromy.app/blog/the-desk-by-the-copier)
+- [The Folding Chair on the Corner](https://getromy.app/blog/the-folding-chair-on-the-corner)
+- [The Refrigerator in Chagrin Falls](https://getromy.app/blog/the-refrigerator-in-chagrin-falls)
+- [The Girl on the Dock](https://getromy.app/blog/the-girl-on-the-dock)
+- [The Yellow Legal Pad](https://getromy.app/blog/the-yellow-legal-pad)
+- [The Address in Hobe Sound](https://getromy.app/blog/the-address-in-hobe-sound)
+- [She Carries Eleven](https://getromy.app/blog/she-carries-eleven)
+- [The October She Turned Seventy-Three](https://getromy.app/blog/the-october-she-turned-seventy-three)
+- [The Reunion Year](https://getromy.app/blog/the-reunion-year)
+- [The Advisor in Her Town](https://getromy.app/blog/the-advisor-in-her-town)
+- [She Moved in March](https://getromy.app/blog/she-moved-in-march)
+- [The Three Weeks Before the Phone Call](https://getromy.app/blog/the-three-weeks-before-the-phone-call)
+- [The Photograph on the Bookshelf](https://getromy.app/blog/the-photograph-on-the-bookshelf)
+- [The Christmas Card with the Check Inside](https://getromy.app/blog/the-christmas-card-with-the-check-inside)
+- [The China Goes to the Daughter](https://getromy.app/blog/the-china-goes-to-the-daughter)
+- [The First-Generation Donor](https://getromy.app/blog/the-first-generation-donor)
+- [The Granddaughter at Wesleyan](https://getromy.app/blog/the-granddaughter-at-wesleyan)
+- [The Year the Casseroles Stopped](https://getromy.app/blog/the-year-the-casseroles-stopped)
+- [Her Giving Goes Through Fidelity Now](https://getromy.app/blog/her-giving-goes-through-fidelity-now)
+- [While He Could Still Read His Name](https://getromy.app/blog/while-he-could-still-read-his-name)
+- [The Gala Is the Worst Place to Meet a Donor](https://getromy.app/blog/the-gala-is-the-worst-place)
+- [The Back Row at the Funeral](https://getromy.app/blog/the-back-row-at-the-funeral)
+- [Your CRM Is a Haunted Spreadsheet](https://getromy.app/blog/your-crm-is-a-haunted-spreadsheet)
+- [You Were Hired to Do Hospice Work](https://getromy.app/blog/you-were-hired-to-do-hospice-work)
+- [The Gift Is in the Group Text](https://getromy.app/blog/the-gift-is-in-the-group-text)
+- [The Porch Is the Office](https://getromy.app/blog/the-porch-is-the-office)
+- [The Seven Seconds After You Said the Number](https://getromy.app/blog/the-seven-seconds-after-you-said-the-number)
+- [The Gift Was Decided in the Car](https://getromy.app/blog/the-gift-was-decided-in-the-car)
+- [You Don't Have Donors. You Have Neighbors.](https://getromy.app/blog/you-dont-have-donors-you-have-neighbors)
+- [The Voicemail You Didn't Leave](https://getromy.app/blog/the-voicemail-you-didnt-leave)
+- [She Read Your About Page at 11:47 P.M.](https://getromy.app/blog/she-read-your-about-page)
+- [Nobody Reads Your Annual Report](https://getromy.app/blog/nobody-reads-your-annual-report)
+- [Most Boards Are Alumni of Indifference](https://getromy.app/blog/most-boards-are-alumni-of-indifference)
+- [The Tour Was the Interview](https://getromy.app/blog/the-tour-was-the-interview)
+- [Capacity Scores Are the Astrology of Fundraising](https://getromy.app/blog/capacity-scores-are-the-astrology-of-fundraising)
+- [The Tuesday the Money Landed](https://getromy.app/blog/the-tuesday-the-money-landed)
+- [The Gift in Her Mother's Name](https://getromy.app/blog/the-gift-in-her-mothers-name)
+- [The Spouse You've Never Met](https://getromy.app/blog/the-spouse-youve-never-met)
+- [Nine Years on Autopay](https://getromy.app/blog/nine-years-on-autopay)
+- [The Introduction Is the Gift](https://getromy.app/blog/the-introduction-is-the-gift)
+- [Prospect Research Is a Love Language](https://getromy.app/blog/research-is-a-love-language)
+- [The Donor Nobody Owns](https://getromy.app/blog/the-donor-nobody-owns)
+- [The First Gift Is a Question](https://getromy.app/blog/the-first-gift-is-a-question)
+- [On Asking Too Little](https://getromy.app/blog/on-asking-too-little)
+- [The Room Was the Point](https://getromy.app/blog/the-room-was-the-point)
+- [The Volunteer You Never Looked Up](https://getromy.app/blog/the-volunteer-you-never-looked-up)
+- [The Donor Who Outlasted Four of You](https://getromy.app/blog/the-donor-who-outlasted-four-of-you)
+- [The Trustee Who Said She'd Make Calls](https://getromy.app/blog/the-trustee-who-said-shed-make-calls)
+- [The Kid Who Waved](https://getromy.app/blog/the-kid-who-waved)
+- [The Name on the Gift Line](https://getromy.app/blog/the-name-on-the-gift-line)
+- [The Daughter Was in the Room](https://getromy.app/blog/the-daughter-was-in-the-room)
+- [The Sixteen-Month Job](https://getromy.app/blog/the-sixteen-month-job)
+- [The Donor Who Went Quiet](https://getromy.app/blog/the-donor-who-went-quiet)
+- [On Being Told No](https://getromy.app/blog/on-being-told-no)
+- [Earn the Second Meeting](https://getromy.app/blog/earn-the-second-meeting)
+- [Her First Ask](https://getromy.app/blog/her-first-ask)
+- [On Being Named in the Will](https://getromy.app/blog/on-being-named-in-the-will)
+- [The Eleven-Year Yes](https://getromy.app/blog/the-eleven-year-yes)
+- [The Thank-You Note Is the Whole Job](https://getromy.app/blog/the-thank-you-note-is-the-whole-job)
+- [The Donor Your Wealth Screen Will Miss](https://getromy.app/blog/the-donor-your-wealth-screen-will-miss)
+- [Your Next Major Gift Is Already in Your CRM](https://getromy.app/blog/your-next-major-gift-is-already-in-your-crm)
+- [Permission to Have an Evening](https://getromy.app/blog/permission-to-have-an-evening)
+- [Major Gifts Aren't a Wealth Problem. They're a Timing Problem.](https://getromy.app/blog/major-gifts-are-a-timing-problem)
+- [How We Built a Donor Intelligence Engine Starting at $0.10 per Prospect](https://getromy.app/blog/how-we-built-donor-intelligence)
+- [What Actually Predicts Giving Capacity — and How Rōmy Scores It](https://getromy.app/blog/understanding-wealth-indicators)
+- [The Small Nonprofit Fundraising Gap — and How to Close It](https://getromy.app/blog/small-nonprofit-fundraising-gap)
 
 ## Company
 

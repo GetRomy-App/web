@@ -5,6 +5,7 @@
 	import { gsap, ScrollTrigger, registerGsap } from '$lib/gsap';
 	import ContactModal from '$lib/components/ui/ContactModal.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
+	import { OG_IMAGE } from '$lib/seo';
 
 	let { children } = $props();
 
@@ -37,23 +38,20 @@
 		else lenis.start();
 	});
 
-	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
+	// Title, description, canonical, and OG/Twitter title+description are deliberately
+	// NOT set here — SvelteKit doesn't dedupe <svelte:head> elements across layout and
+	// page, so a layout-level <title>/canonical collides with every page's own and only
+	// one instance survives in the rendered HTML (empirically the layout's, silently
+	// shadowing every page-specific title/canonical site-wide). Those tags belong to
+	// each +page.svelte instead. Only tags with an identical value on every page live here.
 	const description =
-		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
-	const url = 'https://getromy.app/';
+		'Rōmy helps small nonprofits find new major donors for a fraction of the cost of legacy tools — AI-powered prospect research, wealth screening, and giving history built for small teams.';
 </script>
 
 <svelte:head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<title>{title}</title>
-	<meta name="title" content={title} />
-	<meta name="description" content={description} />
-	<meta
-		name="keywords"
-		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
-	/>
 	<meta name="author" content="GetRomy LLC" />
 	<meta
 		name="robots"
@@ -62,21 +60,20 @@
 	<meta name="theme-color" content="#0d0d0e" media="(prefers-color-scheme: dark)" />
 	<meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
 
-	<!-- Open Graph -->
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content={url} />
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
+	<!-- Open Graph / Twitter — site-wide values only; og:title/description/url/type,
+	     twitter:title/description, and canonical are page-specific (see each +page.svelte) -->
 	<meta property="og:site_name" content="Rōmy" />
 	<meta property="og:locale" content="en_US" />
+	<meta property="og:image" content={OG_IMAGE.url} />
+	<meta property="og:image:width" content={String(OG_IMAGE.width)} />
+	<meta property="og:image:height" content={String(OG_IMAGE.height)} />
+	<meta property="og:image:alt" content="Rōmy — donor intelligence for small nonprofits" />
 
-	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@RomyFindsMoney" />
 	<meta name="twitter:creator" content="@RomyFindsMoney" />
-	<meta name="twitter:url" content={url} />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={OG_IMAGE.url} />
+	<meta name="twitter:image:alt" content="Rōmy — donor intelligence for small nonprofits" />
 
 	<!-- Performance -->
 	<link
@@ -95,8 +92,6 @@
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 	<link rel="manifest" href="/site.webmanifest" />
-
-	<link rel="canonical" href={url} />
 
 	<!-- Structured Data (JSON-LD) -->
 	{@html `<script type="application/ld+json">${JSON.stringify({
@@ -142,6 +137,19 @@
 			contactType: 'sales'
 		},
 		sameAs: ['https://x.com/RomyFindsMoney', 'https://github.com/GetRomy-App']
+	})}</script>`}
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: 'Rōmy',
+		url: 'https://getromy.app',
+		description,
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app'
+		}
 	})}</script>`}
 </svelte:head>
 
