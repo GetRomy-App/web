@@ -5,6 +5,7 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import { SITE_URL } from '$lib/seo';
 
 	interface Props {
 		title: string;
@@ -69,6 +70,16 @@
 		<meta property="og:description" content={description} />
 	{/if}
 	<link rel="canonical" href="https://getromy.app{canonicalPath}" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+			{ '@type': 'ListItem', position: 2, name: 'Legal', item: `${SITE_URL}/legal` },
+			{ '@type': 'ListItem', position: 3, name: title, item: `${SITE_URL}${canonicalPath}` }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

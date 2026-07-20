@@ -9,6 +9,11 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import { SITE_URL } from '$lib/seo';
+
+	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
+	const description =
+		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +46,24 @@
 		);
 	});
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="title" content={title} />
+	<meta name="description" content={description} />
+	<meta
+		name="keywords"
+		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
+	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={SITE_URL} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta name="twitter:url" content={SITE_URL} />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<link rel="canonical" href={SITE_URL} />
+</svelte:head>
 
 <Footer bind:footerText />
 
