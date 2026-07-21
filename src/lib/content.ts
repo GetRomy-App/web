@@ -5,6 +5,85 @@ import Markdoc from '@markdoc/markdoc';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content', 'posts');
 
+const KEYWORD_STOPWORDS = new Set([
+	'the',
+	'and',
+	'for',
+	'with',
+	'from',
+	'that',
+	'this',
+	'your',
+	'you',
+	'her',
+	'his',
+	'she',
+	'was',
+	'were',
+	'when',
+	'what',
+	'why',
+	'how',
+	'who',
+	'have',
+	'has',
+	'had',
+	'are',
+	'not',
+	'but',
+	'about',
+	'into',
+	'than',
+	'then',
+	'them',
+	'they',
+	'their',
+	'there',
+	'were',
+	'been',
+	'being',
+	'were',
+	'wasnt',
+	'didnt',
+	'dont',
+	'doesnt',
+	'still',
+	'never',
+	'ever',
+	'only',
+	'just',
+	'over',
+	'after',
+	'before',
+	'while',
+	'goes',
+	'went',
+	'even'
+]);
+
+const BASE_BLOG_KEYWORDS = [
+	'donor intelligence',
+	'nonprofit fundraising',
+	'prospect research',
+	'AI donor research',
+	'wealth screening'
+];
+
+/** Per-post keyword tag built from the base blog terms, the post's category tag, and its most
+ *  distinctive title words — so every post gets a distinct <meta name="keywords"> instead of one
+ *  list repeated across every URL. */
+export function deriveKeywords(title: string, tag: string): string {
+	const titleWords = title
+		.toLowerCase()
+		.replace(/[^a-z0-9\s'-]/g, '')
+		.split(/\s+/)
+		.filter((w) => w.length > 3 && !KEYWORD_STOPWORDS.has(w));
+
+	const combined = [...BASE_BLOG_KEYWORDS, tag.toLowerCase(), ...titleWords].filter(Boolean);
+
+	return Array.from(new Set(combined)).slice(0, 14).join(', ');
+}
+
 export interface PostMeta {
 	slug: string;
 	title: string;
