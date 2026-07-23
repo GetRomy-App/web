@@ -5,6 +5,7 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 
 	interface Props {
 		title: string;
@@ -55,21 +56,12 @@
 	}
 </script>
 
-<svelte:head>
-	<title>{title} — Rōmy</title>
-	<meta name="title" content="{title} — Rōmy" />
-	{#if description}
-		<meta name="description" content={description} />
-	{/if}
-	<meta name="robots" content="index, follow" />
-	<meta property="og:title" content="{title} — Rōmy" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app{canonicalPath}" />
-	{#if description}
-		<meta property="og:description" content={description} />
-	{/if}
-	<link rel="canonical" href="https://getromy.app{canonicalPath}" />
-</svelte:head>
+<SeoHead
+	title="{title} — Rōmy"
+	description={description || `${title} for Rōmy, the donor intelligence platform for small nonprofits.`}
+	path={canonicalPath}
+	type="website"
+/>
 
 <Footer bind:footerText />
 

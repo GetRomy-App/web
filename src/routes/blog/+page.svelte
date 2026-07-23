@@ -7,8 +7,15 @@
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
+	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 
 	let { data } = $props();
+
+	const title = 'Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising';
+	const description =
+		'Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI.';
+	const keywords =
+		'nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights, major donor prospecting, wealth screening';
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -99,21 +106,27 @@
 	});
 </script>
 
+<SeoHead {title} {description} {keywords} path="/blog" type="website" />
+
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		name: 'Rōmy Blog',
+		url: 'https://getromy.app/blog',
+		description,
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app'
+		},
+		blogPost: data.posts.slice(0, 20).map((post) => ({
+			'@type': 'BlogPosting',
+			headline: post.title,
+			url: `https://getromy.app/blog/${post.slug}`,
+			datePublished: post.date
+		}))
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

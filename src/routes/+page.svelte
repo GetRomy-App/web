@@ -9,6 +9,13 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import SeoHead from '$lib/components/seo/SeoHead.svelte';
+
+	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
+	const description =
+		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
+	const keywords =
+		'nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators';
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +48,40 @@
 		);
 	});
 </script>
+
+<SeoHead {title} {description} {keywords} path="/" type="website" />
+
+<svelte:head>
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		name: 'Rōmy',
+		url: 'https://getromy.app',
+		applicationCategory: 'BusinessApplication',
+		operatingSystem: 'macOS, Windows, Linux',
+		description:
+			'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
+		offers: {
+			'@type': 'Offer',
+			price: '0',
+			priceCurrency: 'USD',
+			availability: 'https://schema.org/InStock'
+		},
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app'
+		},
+		featureList: [
+			'AI-powered donor prospect research',
+			'Wealth indicator screening',
+			'Giving history analysis',
+			'Affinity signal detection',
+			'Actionable donor profiles',
+			'No enterprise contracts required'
+		]
+	})}</script>`}
+</svelte:head>
 
 <Footer bind:footerText />
 
