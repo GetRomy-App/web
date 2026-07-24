@@ -68,6 +68,12 @@
 	{#if description}
 		<meta property="og:description" content={description} />
 	{/if}
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content="{title} — Rōmy" />
+	{#if description}
+		<meta name="twitter:description" content={description} />
+	{/if}
 	<link rel="canonical" href="https://getromy.app{canonicalPath}" />
 </svelte:head>
 

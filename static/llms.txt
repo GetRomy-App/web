@@ -18,6 +18,30 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 - Twitter: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
 - Contact: howard@getromy.app, solomon@getromy.app
+- Sitemap: https://getromy.app/sitemap.xml
+
+## Blog
+
+Field notes and industry analysis on nonprofit fundraising, donor prospect research, and AI donor intelligence, at https://getromy.app/blog. Representative posts:
+
+- The Memo Line Is the Whole Story: https://getromy.app/blog/the-memo-line-is-the-whole-story
+- The Best Fundraiser You Never Hired: https://getromy.app/blog/the-best-fundraiser-you-never-hired
+- The Ledger Knew in April: https://getromy.app/blog/the-ledger-knew-in-april
+- The Desk by the Copier: https://getromy.app/blog/the-desk-by-the-copier
+- The Advisor in Her Town: https://getromy.app/blog/the-advisor-in-her-town
+- You Don't Have Donors, You Have Neighbors: https://getromy.app/blog/you-dont-have-donors-you-have-neighbors
+- The First Gift Is a Question: https://getromy.app/blog/the-first-gift-is-a-question
+
+## Research
+
+Benchmark results comparing Rōmy against general-purpose AI assistants on prospect research accuracy (PIF-Bench), at https://getromy.app/labs.
+
+## Policies
+
+- Privacy: https://getromy.app/privacy
+- Security: https://getromy.app/security
+- Terms: https://getromy.app/terms
+- Subprocessors: https://getromy.app/subprocessors
 
 ## Company
 
