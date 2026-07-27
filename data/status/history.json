@@ -1,24 +1,18 @@
 {
-	"schemaVersion": 1,
-	"generatedAt": "2026-07-27T18:06:31.616Z",
+	"schemaVersion": 2,
+	"generatedAt": "2026-07-27T18:17:04.839Z",
 	"degradedThresholdMs": 6000,
 	"services": {
 		"app": {
 			"lastCheck": {
-				"t": 1785175591617,
+				"t": 1785176224839,
 				"ok": true,
 				"status": 200,
-				"ms": 1957,
-				"error": null
+				"ms": 2188,
+				"error": null,
+				"h": "unreachable"
 			},
 			"recent": [
-				{
-					"t": 1783728831950,
-					"ok": true,
-					"status": 200,
-					"ms": 1651,
-					"error": null
-				},
 				{
 					"t": 1783741633433,
 					"ok": true,
@@ -1691,6 +1685,14 @@
 					"status": 200,
 					"ms": 1957,
 					"error": null
+				},
+				{
+					"t": 1785176224839,
+					"ok": true,
+					"status": 200,
+					"ms": 2188,
+					"error": null,
+					"h": "unreachable"
 				}
 			],
 			"daily": {
@@ -1887,29 +1889,23 @@
 					"sumMs": 38223
 				},
 				"2026-07-27": {
-					"up": 7,
-					"total": 7,
+					"up": 8,
+					"total": 8,
 					"degraded": 0,
-					"sumMs": 14488
+					"sumMs": 16676
 				}
 			}
 		},
 		"web": {
 			"lastCheck": {
-				"t": 1785175593574,
+				"t": 1785176227086,
 				"ok": true,
 				"status": 200,
-				"ms": 486,
-				"error": null
+				"ms": 546,
+				"error": null,
+				"h": "ok"
 			},
 			"recent": [
-				{
-					"t": 1783728833601,
-					"ok": true,
-					"status": 200,
-					"ms": 576,
-					"error": null
-				},
 				{
 					"t": 1783741634345,
 					"ok": true,
@@ -3582,6 +3578,14 @@
 					"status": 200,
 					"ms": 486,
 					"error": null
+				},
+				{
+					"t": 1785176227086,
+					"ok": true,
+					"status": 200,
+					"ms": 546,
+					"error": null,
+					"h": "ok"
 				}
 			],
 			"daily": {
@@ -3778,10 +3782,34 @@
 					"sumMs": 10280
 				},
 				"2026-07-27": {
-					"up": 7,
-					"total": 7,
+					"up": 8,
+					"total": 8,
 					"degraded": 0,
-					"sumMs": 4540
+					"sumMs": 5086
+				}
+			}
+		},
+		"web:email": {
+			"lastCheck": {
+				"t": 1785176224839,
+				"ok": true,
+				"ms": 139,
+				"error": null
+			},
+			"recent": [
+				{
+					"t": 1785176224839,
+					"ok": true,
+					"ms": 139,
+					"error": null
+				}
+			],
+			"daily": {
+				"2026-07-27": {
+					"up": 1,
+					"total": 1,
+					"degraded": 0,
+					"sumMs": 139
 				}
 			}
 		}
