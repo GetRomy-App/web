@@ -10,10 +10,34 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 - Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
 - Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
 
+## Keywords
+
+Donor intelligence software, nonprofit prospect research, AI donor research, wealth screening for nonprofits, major gift prospecting, donor discovery platform, philanthropy intelligence, small nonprofit fundraising tools.
+
+## Benchmarks
+
+Rōmy publishes PIF-Bench, an open ground-truth benchmark for AI donor prospect research fidelity, comparing Rōmy against ChatGPT, Claude, and Gemini on factual precision, discovery recall, hallucination rate, capacity estimation, source attribution, and actionability. Full methodology and results: https://getromy.app/labs
+
+## Blog
+
+Field notes, research, and industry analysis on prospect research and major-gift fundraising: https://getromy.app/blog
+
+Representative posts:
+- How We Built a Donor Intelligence Engine Starting at $0.10 per Prospect: https://getromy.app/blog/how-we-built-donor-intelligence
+- The Small Nonprofit Fundraising Gap — and How to Close It: https://getromy.app/blog/small-nonprofit-fundraising-gap
+- Major Gifts Aren't a Wealth Problem. They're a Timing Problem.: https://getromy.app/blog/major-gifts-are-a-timing-problem
+- Capacity Scores Are the Astrology of Fundraising: https://getromy.app/blog/capacity-scores-are-the-astrology-of-fundraising
+- PIF-Bench: Benchmarking AI Donor Research — Rōmy vs. ChatGPT, Claude, and Gemini: https://getromy.app/labs/blog/benchmarking-ai-prospect-research
+
+Full, machine-readable list of posts: https://getromy.app/sitemap.xml
+
 ## Links
 
 - Website: https://getromy.app
 - Product: https://intel.getromy.app
+- Blog: https://getromy.app/blog
+- Labs / benchmarks: https://getromy.app/labs
+- Sitemap: https://getromy.app/sitemap.xml
 - Download (macOS): https://github.com/GetRomy-App/web/releases
 - Twitter: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
