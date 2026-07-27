@@ -13,6 +13,15 @@ Those data commits are tagged `[skip ci]` so they never redeploy the site — th
 page live-refreshes the data in the browser instead, so it's always fresh.
 The green/red uptime bars are measured automatically; you can't set them by hand.
 
+**It checks more than "the page loads."** Each service can expose a deep-health
+endpoint (`/api/health`) reporting every dependency — database, cache, AI
+gateway, billing, email — and those checks get their own rows on the page. A
+service that says it's down counts as down even while its homepage still
+returns 200. **It also pages a human:** sustained failures and error-rate
+spikes open a GitHub issue (label `status-alert`) that mentions the on-call
+and auto-closes on recovery. Contract and details:
+[`data/status/README.md`](data/status/README.md).
+
 **To change what's monitored:** edit `data/status/services.json` (one entry per
 service), then commit.
 
@@ -29,7 +38,7 @@ date: 2026-06-22T14:30:00.000Z   # when it started (UTC)
 resolved:                         # ← LEAVE BLANK while it's ongoing
 severity: major                   # maintenance | minor | major | critical
 status: investigating             # investigating | identified | monitoring | resolved
-affected: [app]                   # service ids from services.json (app, web)
+affected: [app]                   # service ids (app, web) or checks (app:database)
 ---
 **14:30 UTC** — Investigating elevated errors on the Rōmy App.
 ```

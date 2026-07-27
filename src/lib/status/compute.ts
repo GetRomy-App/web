@@ -3,9 +3,12 @@
 // so it must stay free of node-only APIs.
 
 import type {
+	ComponentSummary,
+	HealthTelemetry,
 	ServiceConfig,
 	ServiceState,
 	ServiceSummary,
+	SummaryCore,
 	HistoryDoc,
 	ServiceHistory,
 	DayCell,
@@ -50,9 +53,13 @@ function median(values: number[]): number {
  *   - "down"        when no probe in the window succeeded, or the latest probe
  *                   failed and it isn't a lone blip (>=2 recent failures) — so a
  *                   single transient runner error doesn't read as an outage.
- *   - "degraded"    when the MEDIAN latency of recent healthy probes exceeds the
- *                   threshold, not just one slow ping.
+ *   - "degraded"    when the service's own health endpoint reported degraded on
+ *                   two probes in the window (~20 min sustained), or the MEDIAN
+ *                   latency of recent healthy probes exceeds the threshold —
+ *                   never just one slow ping or one flapping report.
  *   - "operational" otherwise.
+ * A reported deep-health of "down" is recorded as a failed sample by the probe
+ * runner, so the down rules above already cover "page loads, product broken".
  */
 export function currentState(history: ServiceHistory, thresholdMs: number): ServiceState {
 	const window = (history?.recent ?? []).slice(-STATE_WINDOW);
@@ -63,6 +70,9 @@ export function currentState(history: ServiceHistory, thresholdMs: number): Serv
 
 	const latest = window[window.length - 1];
 	if (!latest.ok && window.length - healthy.length >= 2) return 'down';
+
+	const reportedDegraded = window.filter((s) => s.h === 'degraded').length;
+	if (reportedDegraded >= 2 || (reportedDegraded === 1 && window.length === 1)) return 'degraded';
 
 	return median(healthy.map((s) => s.ms)) > thresholdMs ? 'degraded' : 'operational';
 }
@@ -84,12 +94,21 @@ function ratio(up: number, total: number): number | null {
 	return total > 0 ? up / total : null;
 }
 
-export function computeServiceSummary(
-	config: ServiceConfig,
+/**
+ * Dependency samples arrive only while the parent's health endpoint answers,
+ * so a component whose data stops flowing must fall back to "pending" rather
+ * than freeze on its last known colour. ~4 missed cadences counts as stale.
+ */
+const COMPONENT_STALE_MS = 45 * 60 * 1000;
+
+function computeCore(
+	id: string,
+	name: string,
+	description: string,
 	history: ServiceHistory | undefined,
 	thresholdMs: number,
 	nowMs: number
-): ServiceSummary {
+): SummaryCore {
 	const safe: ServiceHistory = history ?? { lastCheck: null, recent: [], daily: {} };
 	const daily = safe.daily ?? {};
 	const recent = safe.recent ?? [];
@@ -133,11 +152,9 @@ export function computeServiceSummary(
 	const spark = recent.slice(-SPARK_POINTS).map((s) => (s.ok ? s.ms : 0));
 
 	return {
-		id: config.id,
-		name: config.name,
-		description: config.description,
-		url: config.url,
-		group: config.group,
+		id,
+		name,
+		description,
 		state: currentState(safe, thresholdMs),
 		responseMs: safe.lastCheck ? safe.lastCheck.ms : null,
 		lastCheckedAt: safe.lastCheck ? safe.lastCheck.t : null,
@@ -151,15 +168,89 @@ export function computeServiceSummary(
 	};
 }
 
+/** Fallback label for a check key the config doesn't name: "ai_gateway" → "AI Gateway". */
+function prettifyKey(key: string): string {
+	return key
+		.split(/[-_\s]+/)
+		.filter(Boolean)
+		.map((word) => (word === 'ai' ? 'AI' : word[0].toUpperCase() + word.slice(1)))
+		.join(' ');
+}
+
+/**
+ * Summaries for the dependency checks a service reports through its health
+ * endpoint. Keys come from the history (whatever the endpoint actually
+ * reported), ordered as declared in config with undeclared extras appended, so
+ * a new check shows up without a config edit and a renamed one ages out.
+ */
+function componentSummaries(
+	config: ServiceConfig,
+	doc: HistoryDoc,
+	thresholdMs: number,
+	nowMs: number
+): ComponentSummary[] {
+	const prefix = `${config.id}:`;
+	const present = Object.keys(doc?.services ?? {})
+		.filter((k) => k.startsWith(prefix))
+		.map((k) => k.slice(prefix.length));
+	if (present.length === 0) return [];
+
+	const declared = Object.keys(config.components ?? {});
+	const ordered = [
+		...declared.filter((k) => present.includes(k)),
+		...present.filter((k) => !declared.includes(k)).sort()
+	];
+
+	return ordered.map((key) => {
+		const id = prefix + key;
+		const label = config.components?.[key];
+		const core = computeCore(
+			id,
+			label?.name ?? prettifyKey(key),
+			label?.description ?? '',
+			doc.services[id],
+			thresholdMs,
+			nowMs
+		);
+		const stale = core.lastCheckedAt !== null && nowMs - core.lastCheckedAt > COMPONENT_STALE_MS;
+		return { ...core, key, state: stale ? 'pending' : core.state };
+	});
+}
+
+/** Is dependency-level telemetry flowing for this service right now? */
+function healthTelemetry(
+	config: ServiceConfig,
+	history: ServiceHistory | undefined
+): HealthTelemetry {
+	if (!config.healthUrl) return 'none';
+	const last = history?.lastCheck;
+	if (!last) return 'none';
+	return last.h && last.h !== 'unreachable' ? 'reporting' : 'unreachable';
+}
+
+export function computeServiceSummary(
+	config: ServiceConfig,
+	doc: HistoryDoc,
+	thresholdMs: number,
+	nowMs: number
+): ServiceSummary {
+	const history = doc?.services?.[config.id];
+	return {
+		...computeCore(config.id, config.name, config.description, history, thresholdMs, nowMs),
+		url: config.url,
+		group: config.group,
+		components: componentSummaries(config, doc, thresholdMs, nowMs),
+		health: healthTelemetry(config, history)
+	};
+}
+
 export function summarize(
 	services: ServiceConfig[],
 	doc: HistoryDoc,
 	nowMs: number
 ): ServiceSummary[] {
 	const threshold = doc?.degradedThresholdMs ?? 2500;
-	return services.map((svc) =>
-		computeServiceSummary(svc, doc?.services?.[svc.id], threshold, nowMs)
-	);
+	return services.map((svc) => computeServiceSummary(svc, doc, threshold, nowMs));
 }
 
 const OVERALL_LABELS: Record<OverallLevel, string> = {

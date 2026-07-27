@@ -39,9 +39,16 @@
 	const pastIncidents = $derived(data.incidents.filter((i) => !i.active));
 	const overallStyle = $derived(OVERALL_STYLES[overall.level]);
 	const generatedMs = $derived(generatedAt ? new Date(generatedAt).getTime() : null);
-	const serviceNames = $derived(
-		Object.fromEntries(data.services.map((s) => [s.id, s.name])) as Record<string, string>
-	);
+	// Incident "affected" chips may reference a service ("app") or one of its
+	// dependency checks ("app:database") — resolve both to display names.
+	const serviceNames = $derived.by(() => {
+		const names: Record<string, string> = {};
+		for (const s of summaries) {
+			names[s.id] = s.name;
+			for (const c of s.components) names[c.id] = `${s.name} — ${c.name}`;
+		}
+		return names;
+	});
 
 	// Preserve config order while grouping services by their "group".
 	const groups = $derived.by(() => {
@@ -180,7 +187,7 @@
 			>
 				<span class="tabular-nums">Updated {relativeTime(generatedMs, now)}</span>
 				<span class="select-none">·</span>
-				<span>Checked automatically every ~10 min</span>
+				<span>Surface and dependency checks every ~10 min</span>
 				{#if live}
 					<span class="select-none">·</span>
 					<span class="text-green-600 gap-1 inline-flex items-center">

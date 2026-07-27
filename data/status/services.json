@@ -3,20 +3,54 @@
 	"branch": "main",
 	"timeoutMs": 15000,
 	"degradedThresholdMs": 6000,
+	"alerts": {
+		"mentions": ["solomonshalom"],
+		"statusPage": "https://getromy.app/status"
+	},
 	"services": [
 		{
 			"id": "app",
 			"name": "Rōmy App",
 			"description": "The Rōmy donor-intelligence application",
 			"url": "https://intel.getromy.app",
-			"group": "Core"
+			"healthUrl": "https://intel.getromy.app/api/health",
+			"group": "Core",
+			"components": {
+				"database": {
+					"name": "Database",
+					"description": "Primary application database — donor records and saved research"
+				},
+				"cache": {
+					"name": "Cache",
+					"description": "Session and hot-lookup cache"
+				},
+				"ai_gateway": {
+					"name": "AI Gateway",
+					"description": "The model provider behind donor research"
+				},
+				"billing": {
+					"name": "Billing",
+					"description": "Payments and subscription provider"
+				},
+				"email": {
+					"name": "Email",
+					"description": "Transactional email delivery"
+				}
+			}
 		},
 		{
 			"id": "web",
 			"name": "Marketing Site",
 			"description": "getromy.app — the public website and blog",
 			"url": "https://getromy.app",
-			"group": "Core"
+			"healthUrl": "https://getromy.app/api/health",
+			"group": "Core",
+			"components": {
+				"email": {
+					"name": "Email (contact form)",
+					"description": "Resend — delivers contact and issue reports"
+				}
+			}
 		}
 	]
 }

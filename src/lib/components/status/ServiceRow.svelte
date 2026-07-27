@@ -13,6 +13,9 @@
 
 	const style = $derived(STATE_STYLES[summary.state]);
 	const windowLabel = $derived(`${Math.min(maxDays, summary.days.length)} days ago`);
+	const showDependencies = $derived(
+		summary.components.length > 0 || summary.health === 'unreachable'
+	);
 </script>
 
 <div class="px-4 md:px-6 py-6">
@@ -74,4 +77,50 @@
 			<span>Today</span>
 		</div>
 	</div>
+
+	<!-- Dependency checks reported by the service's own health endpoint — the
+	     page can say which layer is hurting, not just "the homepage answers". -->
+	{#if showDependencies}
+		<div class="border-gray-alpha-100 mt-4 pt-3 border-t">
+			<div class="mb-1 gap-2 flex items-center justify-between">
+				<span class="text-gray-alpha-400 text-xs font-medium tracking-wide uppercase">
+					Dependencies
+				</span>
+				{#if summary.health === 'unreachable'}
+					<span
+						class="text-gray-alpha-400 text-xs"
+						title="This service's health endpoint isn't answering, so only the page itself is being checked right now."
+					>
+						Surface checks only
+					</span>
+				{/if}
+			</div>
+			{#if summary.components.length > 0}
+				<ul class="m-0 p-0 list-none">
+					{#each summary.components as component (component.id)}
+						{@const componentStyle = STATE_STYLES[component.state]}
+						<li class="gap-4 py-1.5 flex items-center justify-between">
+							<span class="gap-2 min-w-0 flex items-center" title={component.description}>
+								<span class="size-1.5 rounded-full {componentStyle.dot} shrink-0"></span>
+								<span class="text-foreground text-sm truncate">{component.name}</span>
+								<span class="sr-only">{componentStyle.label}</span>
+							</span>
+							<span
+								class="text-gray-alpha-400 gap-3 text-xs flex shrink-0 items-center tabular-nums"
+							>
+								{#if component.responseMs !== null && component.state !== 'pending'}
+									<span>{component.responseMs} ms</span>
+								{/if}
+								<span class="text-gray-alpha-600">{formatUptime(component.uptime.d90)}</span>
+							</span>
+						</li>
+					{/each}
+				</ul>
+			{:else}
+				<p class="text-gray-alpha-400 m-0 text-xs">
+					No dependency telemetry received yet — uptime above reflects the page only.
+				</p>
+			{/if}
+		</div>
+	{/if}
 </div>

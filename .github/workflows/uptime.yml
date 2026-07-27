@@ -5,6 +5,12 @@ name: Uptime Monitor
 # reads that file at build time and also fetches it live from raw.githubusercontent
 # in the browser, so the committed data is the single source of truth.
 #
+# Beyond "does the page load", each service's deep-health endpoint is polled
+# for per-dependency checks (database, cache, AI gateway, billing, email) and
+# error-rate telemetry — contract in data/status/README.md. Sustained failures
+# page a human by opening a GitHub issue (label: status-alert) that mentions
+# the on-call and auto-closes on recovery. No third-party monitoring service.
+#
 # The commit message carries [skip ci] so the data churn never triggers a
 # production redeploy — the live client fetch keeps the page fresh instead.
 
@@ -21,6 +27,7 @@ concurrency:
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   probe:
@@ -39,6 +46,13 @@ jobs:
 
       - name: Run uptime probes
         run: node scripts/uptime-check.mjs
+
+      # Page before persisting: even if the push below loses a race, the
+      # issue (and its notification) is already out.
+      - name: Raise or resolve alerts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/uptime-alert.mjs
 
       - name: Commit updated history
         run: |
