@@ -5,6 +5,7 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -13,7 +14,14 @@
 	let email = $state('');
 	let role = $state<'customer' | 'prospect' | 'other'>('prospect');
 	let requestType = $state<
-		'access' | 'erasure' | 'correction' | 'object' | 'restrict' | 'portability' | 'withdraw' | 'other'
+		| 'access'
+		| 'erasure'
+		| 'correction'
+		| 'object'
+		| 'restrict'
+		| 'portability'
+		| 'withdraw'
+		| 'other'
 	>('erasure');
 	let identifiers = $state('');
 	let nonprofit = $state('');
@@ -53,10 +61,7 @@
 		if (message) {
 			lines.push('Additional context:', message, '');
 		}
-		lines.push(
-			'---',
-			'Sent via the privacy rights form at https://getromy.app/privacy/request'
-		);
+		lines.push('---', 'Sent via the privacy rights form at https://getromy.app/privacy/request');
 
 		const body = encodeURIComponent(lines.join('\n'));
 		const mailto = `mailto:howard@getromy.app?subject=${encodeURIComponent(subject)}&body=${body}`;
@@ -96,18 +101,11 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Privacy rights request — Rōmy</title>
-	<meta name="title" content="Privacy rights request — Rōmy" />
-	<meta
-		name="description"
-		content="Submit a request to access, erase, correct, or object to processing of your personal data held by Rōmy (GetRomy LLC)."
-	/>
-	<meta name="robots" content="index, follow" />
-	<link rel="canonical" href="https://getromy.app/privacy/request" />
-	<meta property="og:title" content="Privacy rights request — Rōmy" />
-	<meta property="og:url" content="https://getromy.app/privacy/request" />
-</svelte:head>
+<Seo
+	title="Privacy rights request — Rōmy"
+	description="Submit a request to access, erase, correct, or object to processing of your personal data held by Rōmy (GetRomy LLC)."
+	path="/privacy/request"
+/>
 
 <Footer bind:footerText />
 
@@ -115,12 +113,12 @@
 
 <div bind:this={mainContent} class="main-content px-4 md:px-8 overflow-hidden">
 	<div class="border-gray-alpha-100 flex min-h-screen flex-col items-center border-x">
-		<div class="w-full max-w-2xl mx-auto pt-40 md:pt-44 pb-16 px-4 md:px-8">
-			<header class="mb-10 border-gray-alpha-100 border-b pb-8">
-				<div class="post-meta mb-6 flex items-center gap-3">
+		<div class="max-w-2xl pt-40 md:pt-44 pb-16 px-4 md:px-8 mx-auto w-full">
+			<header class="mb-10 border-gray-alpha-100 pb-8 border-b">
+				<div class="post-meta mb-6 gap-3 flex items-center">
 					<a
 						href="/legal"
-						class="text-gray-alpha-600 hover:text-foreground inline-flex items-center gap-1 text-sm font-medium transition-colors no-underline"
+						class="text-gray-alpha-600 hover:text-foreground gap-1 text-sm font-medium inline-flex items-center no-underline transition-colors"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -156,32 +154,32 @@
 			</header>
 
 			<form onsubmit={handleSubmit} class="space-y-6">
-				<fieldset class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+				<fieldset class="sm:grid-cols-2 gap-4 grid grid-cols-1">
 					<label class="block">
-						<span class="text-foreground text-xs font-medium block mb-1.5">Your name</span>
+						<span class="text-foreground text-xs font-medium mb-1.5 block">Your name</span>
 						<input
 							type="text"
 							bind:value={name}
 							required
-							class="border-gray-alpha-200 bg-background text-foreground w-full rounded-md border px-3 py-2 text-sm"
+							class="border-gray-alpha-200 bg-background text-foreground rounded-md px-3 py-2 text-sm w-full border"
 						/>
 					</label>
 					<label class="block">
-						<span class="text-foreground text-xs font-medium block mb-1.5">Email</span>
+						<span class="text-foreground text-xs font-medium mb-1.5 block">Email</span>
 						<input
 							type="email"
 							bind:value={email}
 							required
-							class="border-gray-alpha-200 bg-background text-foreground w-full rounded-md border px-3 py-2 text-sm"
+							class="border-gray-alpha-200 bg-background text-foreground rounded-md px-3 py-2 text-sm w-full border"
 						/>
 					</label>
 				</fieldset>
 
 				<label class="block">
-					<span class="text-foreground text-xs font-medium block mb-1.5">I am a</span>
+					<span class="text-foreground text-xs font-medium mb-1.5 block">I am a</span>
 					<select
 						bind:value={role}
-						class="border-gray-alpha-200 bg-background text-foreground w-full rounded-md border px-3 py-2 text-sm"
+						class="border-gray-alpha-200 bg-background text-foreground rounded-md px-3 py-2 text-sm w-full border"
 					>
 						<option value="customer">Rōmy customer (or my organisation is)</option>
 						<option value="prospect"
@@ -192,10 +190,10 @@
 				</label>
 
 				<label class="block">
-					<span class="text-foreground text-xs font-medium block mb-1.5">Type of request</span>
+					<span class="text-foreground text-xs font-medium mb-1.5 block">Type of request</span>
 					<select
 						bind:value={requestType}
-						class="border-gray-alpha-200 bg-background text-foreground w-full rounded-md border px-3 py-2 text-sm"
+						class="border-gray-alpha-200 bg-background text-foreground rounded-md px-3 py-2 text-sm w-full border"
 					>
 						{#each Object.entries(REQUEST_LABELS) as [value, label]}
 							<option {value}>{label}</option>
@@ -205,20 +203,21 @@
 
 				{#if role === 'prospect'}
 					<label class="block">
-						<span class="text-foreground text-xs font-medium block mb-1.5"
-							>Nonprofit that may hold your data <span class="text-gray-alpha-400">(optional)</span></span
+						<span class="text-foreground text-xs font-medium mb-1.5 block"
+							>Nonprofit that may hold your data <span class="text-gray-alpha-400">(optional)</span
+							></span
 						>
 						<input
 							type="text"
 							bind:value={nonprofit}
 							placeholder="e.g. Local Literacy Project"
-							class="border-gray-alpha-200 bg-background text-foreground w-full rounded-md border px-3 py-2 text-sm"
+							class="border-gray-alpha-200 bg-background text-foreground rounded-md px-3 py-2 text-sm w-full border"
 						/>
 					</label>
 				{/if}
 
 				<label class="block">
-					<span class="text-foreground text-xs font-medium block mb-1.5"
+					<span class="text-foreground text-xs font-medium mb-1.5 block"
 						>Identifying information</span
 					>
 					<textarea
@@ -226,7 +225,7 @@
 						required
 						rows="3"
 						placeholder="e.g. previous email address, postal address used by the nonprofit, employer at the time, anything that helps us locate your data"
-						class="border-gray-alpha-200 bg-background text-foreground w-full rounded-md border px-3 py-2 text-sm"
+						class="border-gray-alpha-200 bg-background text-foreground rounded-md px-3 py-2 text-sm w-full border"
 					></textarea>
 					<span class="text-gray-alpha-400 text-xs mt-1 block">
 						We do not need ID documents. Please provide only what is needed to find your data.
@@ -234,17 +233,17 @@
 				</label>
 
 				<label class="block">
-					<span class="text-foreground text-xs font-medium block mb-1.5"
+					<span class="text-foreground text-xs font-medium mb-1.5 block"
 						>Anything else <span class="text-gray-alpha-400">(optional)</span></span
 					>
 					<textarea
 						bind:value={message}
 						rows="4"
-						class="border-gray-alpha-200 bg-background text-foreground w-full rounded-md border px-3 py-2 text-sm"
+						class="border-gray-alpha-200 bg-background text-foreground rounded-md px-3 py-2 text-sm w-full border"
 					></textarea>
 				</label>
 
-				<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-2">
+				<div class="sm:flex-row sm:items-center sm:justify-between gap-3 pt-2 flex flex-col">
 					<p class="text-gray-alpha-400 text-xs">
 						Submitting this form opens your email client with a pre-filled message to
 						howard@getromy.app.
@@ -252,7 +251,7 @@
 					<button
 						type="submit"
 						disabled={submitting}
-						class="bg-foreground text-background hover:bg-ds-blue-700 inline-flex items-center justify-center gap-1 rounded-md px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50"
+						class="bg-foreground text-background hover:bg-ds-blue-700 gap-1 rounded-md px-4 py-2 text-sm font-medium inline-flex items-center justify-center transition-colors disabled:opacity-50"
 					>
 						{submitting ? 'Opening email…' : 'Send request'}
 					</button>
@@ -262,8 +261,9 @@
 			<div class="mt-12 text-gray-alpha-400 text-xs leading-relaxed">
 				<p>
 					Prefer to email us directly? Send your request to
-					<a href="mailto:howard@getromy.app" class="underline underline-offset-2">howard@getromy.app</a>.
-					We respond within 30 days.
+					<a href="mailto:howard@getromy.app" class="underline underline-offset-2"
+						>howard@getromy.app</a
+					>. We respond within 30 days.
 				</p>
 				<p class="mt-2">
 					EU/UK residents may also lodge a complaint with their local data protection authority

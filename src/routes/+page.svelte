@@ -9,6 +9,8 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { softwareApplicationSchema } from '$lib/seo';
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +43,14 @@
 		);
 	});
 </script>
+
+<Seo
+	title="Rōmy — AI Donor Prospect Research for Small Nonprofits"
+	description="AI donor prospect research for small nonprofits. Rōmy surfaces major-donor wealth screening, giving history, and affinity signals at a fraction of the cost."
+	path="/"
+	keywords="nonprofit donor intelligence, donor prospect research, AI prospect research, wealth screening software, major donor identification, giving history analysis, nonprofit fundraising software, small nonprofit tools, donor discovery platform"
+	jsonLd={[softwareApplicationSchema()]}
+/>
 
 <Footer bind:footerText />
 

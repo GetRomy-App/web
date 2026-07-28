@@ -18,6 +18,15 @@ export interface Post extends PostMeta {
 	content: string;
 }
 
+/**
+ * Post bodies open with a `# Title` heading that duplicates the page's own
+ * <h1> (rendered separately from frontmatter). Drop it from the markup so
+ * pages don't ship two <h1>s — previously only hidden via CSS.
+ */
+function stripLeadingH1(html: string): string {
+	return html.replace(/^(\s*<article[^>]*>)?\s*<h1(?:\s[^>]*)?>.*?<\/h1>\s*/, '$1');
+}
+
 export async function getAllPosts(): Promise<PostMeta[]> {
 	let entries: Awaited<ReturnType<typeof fs.readdir>>;
 	try {
@@ -68,7 +77,7 @@ export async function getPost(slug: string): Promise<Post | null> {
 			excerpt: data.excerpt ?? '',
 			tag: data.tag ?? '',
 			has_benchmarks: data.has_benchmarks ?? false,
-			content: html
+			content: stripLeadingH1(html)
 		};
 	} catch {
 		return null;
