@@ -40,7 +40,30 @@
 			}
 		);
 	});
+
+	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
+	const description =
+		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
+	const url = 'https://getromy.app/';
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="title" content={title} />
+	<meta name="description" content={description} />
+	<meta
+		name="keywords"
+		content="nonprofit donor intelligence, donor prospect research software, AI donor research tool, wealth screening for nonprofits, major donor prospecting software, nonprofit fundraising software, donor discovery platform, giving history analysis, affordable donor management software, small nonprofit fundraising tools, philanthropy intelligence platform, fundraising CRM alternative, nonprofit prospect research, donor wealth indicators, find major donors"
+	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={url} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta name="twitter:url" content={url} />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<link rel="canonical" href={url} />
+</svelte:head>
 
 <Footer bind:footerText />
 
