@@ -13,6 +13,10 @@
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
 
+	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
+	const description =
+		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
+
 	onMount(() => {
 		gsap.to(mainContent, {
 			scale: 0.95,
@@ -41,6 +45,19 @@
 		);
 	});
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="description" content={description} />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:url" content="https://getromy.app/" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:url" content="https://getromy.app/" />
+	<link rel="canonical" href="https://getromy.app/" />
+</svelte:head>
 
 <Footer bind:footerText />
 

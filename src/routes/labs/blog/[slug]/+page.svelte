@@ -6,8 +6,40 @@
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import { PIF_OVERALL, PIF_DIMENSIONS, EVAL_PROMPT } from '$lib/benchmarks';
+	import { SITE_URL, DEFAULT_OG_IMAGE, metaDescription, jsonLd, breadcrumbList } from '$lib/seo';
 
 	let { data } = $props();
+
+	const postUrl = $derived(`${SITE_URL}/labs/blog/${data.post.slug}`);
+	const seoDescription = $derived(metaDescription(data.post.excerpt));
+
+	const articleSchema = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: data.post.title,
+		description: seoDescription,
+		url: postUrl,
+		datePublished: data.post.date,
+		dateModified: data.post.date,
+		image: DEFAULT_OG_IMAGE,
+		articleSection: data.post.tag,
+		mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+		author: { '@type': 'Organization', name: 'Rōmy', url: SITE_URL },
+		publisher: {
+			'@type': 'Organization',
+			name: 'Rōmy',
+			url: SITE_URL,
+			logo: { '@type': 'ImageObject', url: `${SITE_URL}/icon-logo.png` }
+		}
+	});
+
+	const breadcrumbSchema = $derived(
+		breadcrumbList([
+			{ name: 'Home', path: '/' },
+			{ name: 'Labs', path: '/labs' },
+			{ name: data.post.title, path: `/labs/blog/${data.post.slug}` }
+		])
+	);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -127,16 +159,25 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
+	<title>{data.post.title} — Rōmy Labs</title>
+	<meta name="description" content={seoDescription} />
 	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
 	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
+	<meta property="og:description" content={seoDescription} />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta property="og:url" content={postUrl} />
+	<meta property="og:image" content={DEFAULT_OG_IMAGE} />
 	<meta property="article:published_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta property="article:publisher" content="https://getromy.app" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={seoDescription} />
+	<meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+	<link rel="canonical" href={postUrl} />
+
+	{@html `<script type="application/ld+json">${jsonLd(articleSchema)}</script>`}
+	{@html `<script type="application/ld+json">${jsonLd(breadcrumbSchema)}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

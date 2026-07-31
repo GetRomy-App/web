@@ -7,8 +7,35 @@
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
+	import { SITE_URL, DEFAULT_OG_IMAGE, jsonLd, breadcrumbList } from '$lib/seo';
 
 	let { data } = $props();
+
+	const blogSchema = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		name: 'Rōmy Blog',
+		url: `${SITE_URL}/blog`,
+		description:
+			'Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI.',
+		publisher: {
+			'@type': 'Organization',
+			name: 'Rōmy',
+			url: SITE_URL,
+			logo: `${SITE_URL}/icon-logo.png`
+		},
+		blogPost: data.posts.slice(0, 20).map((post) => ({
+			'@type': 'BlogPosting',
+			headline: post.title,
+			url: `${SITE_URL}/blog/${post.slug}`,
+			datePublished: post.date
+		}))
+	});
+
+	const breadcrumbSchema = breadcrumbList([
+		{ name: 'Home', path: '/' },
+		{ name: 'Blog', path: '/blog' }
+	]);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -100,20 +127,31 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
 	<meta
 		name="description"
 		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights, major gifts, wealth screening, donor discovery"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta property="og:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
 	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
+	<meta property="og:image" content={DEFAULT_OG_IMAGE} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta
+		name="twitter:description"
+		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising."
+	/>
+	<meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
 	<link rel="canonical" href="https://getromy.app/blog" />
+
+	{@html `<script type="application/ld+json">${jsonLd(blogSchema)}</script>`}
+	{@html `<script type="application/ld+json">${jsonLd(breadcrumbSchema)}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
