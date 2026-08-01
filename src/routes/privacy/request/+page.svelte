@@ -106,7 +106,17 @@
 	<meta name="robots" content="index, follow" />
 	<link rel="canonical" href="https://getromy.app/privacy/request" />
 	<meta property="og:title" content="Privacy rights request — Rōmy" />
+	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/privacy/request" />
+	<meta
+		property="og:description"
+		content="Submit a request to access, erase, correct, or object to processing of your personal data held by Rōmy (GetRomy LLC)."
+	/>
+	<meta name="twitter:title" content="Privacy rights request — Rōmy" />
+	<meta
+		name="twitter:description"
+		content="Submit a request to access, erase, correct, or object to processing of your personal data held by Rōmy (GetRomy LLC)."
+	/>
 </svelte:head>
 
 <Footer bind:footerText />

@@ -100,20 +100,48 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Donor Intelligence & Nonprofit Fundraising Insights</title>
 	<meta
 		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
+		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI — from the team building Rōmy."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, donor intelligence, major gift officer resources, prospect research, AI for nonprofits, fundraising insights, development office strategy, donor relations"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
+	<meta property="og:title" content="Rōmy Blog — Donor Intelligence & Nonprofit Fundraising Insights" />
+	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
+	<meta name="twitter:title" content="Rōmy Blog — Donor Intelligence & Nonprofit Fundraising Insights" />
+	<meta name="twitter:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI." />
 	<link rel="canonical" href="https://getromy.app/blog" />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		name: 'Rōmy Blog',
+		url: 'https://getromy.app/blog',
+		description:
+			'Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI.',
+		publisher: { '@type': 'Organization', name: 'GetRomy LLC', url: 'https://getromy.app' },
+		blogPost: data.posts.slice(0, 20).map((p) => ({
+			'@type': 'BlogPosting',
+			headline: p.title,
+			url: `https://getromy.app/blog/${p.slug}`,
+			datePublished: p.date
+		}))
+	})}</script>`}
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://getromy.app/blog' }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
@@ -219,7 +247,7 @@
 				<p
 					class="text-gray-alpha-600 mb-8 max-w-xl text-lg leading-relaxed md:text-xl text-left text-pretty"
 				>
-					Try Romy on your own prospect list. See how purpose-built donor intelligence
+					Try Rōmy on your own prospect list. See how purpose-built donor intelligence
 					compares to your current workflow.
 				</p>
 			</div>
