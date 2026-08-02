@@ -18,6 +18,13 @@ export interface Post extends PostMeta {
 	content: string;
 }
 
+// Post bodies open with an `# Title` heading that duplicates the page's own
+// <h1> (rendered separately from frontmatter). Drop it so posts don't ship
+// two <h1> elements to crawlers.
+function stripLeadingH1(html: string): string {
+	return html.replace(/<h1(?:\s[^>]*)?>[\s\S]*?<\/h1>/, '');
+}
+
 export async function getAllPosts(): Promise<PostMeta[]> {
 	let entries: Awaited<ReturnType<typeof fs.readdir>>;
 	try {
@@ -59,7 +66,7 @@ export async function getPost(slug: string): Promise<Post | null> {
 
 		const ast = Markdoc.parse(markdocSource);
 		const transformed = Markdoc.transform(ast);
-		const html = Markdoc.renderers.html(transformed);
+		const html = stripLeadingH1(Markdoc.renderers.html(transformed));
 
 		return {
 			slug,

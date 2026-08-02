@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger } from '$lib/gsap';
 
+	import Seo from '$lib/components/Seo.svelte';
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Hero from '$lib/components/landing/Hero.svelte';
 	import Story from '$lib/components/landing/Story.svelte';
@@ -41,6 +42,12 @@
 		);
 	});
 </script>
+
+<Seo
+	title="Rōmy — Donor Intelligence for Small Nonprofits"
+	description="Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams."
+	path="/"
+/>
 
 <Footer bind:footerText />
 

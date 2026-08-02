@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { gsap } from '$lib/gsap';
 
+	import Seo from '$lib/components/Seo.svelte';
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 
@@ -68,18 +69,11 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Legal — Rōmy</title>
-	<meta name="title" content="Legal — Rōmy" />
-	<meta
-		name="description"
-		content="Privacy policy, terms, sub-processors, and other legal documents for Rōmy by GetRomy LLC."
-	/>
-	<meta name="robots" content="index, follow" />
-	<link rel="canonical" href="https://getromy.app/legal" />
-	<meta property="og:title" content="Legal — Rōmy" />
-	<meta property="og:url" content="https://getromy.app/legal" />
-</svelte:head>
+<Seo
+	title="Legal — Rōmy"
+	description="Privacy policy, terms, sub-processors, and other legal documents for Rōmy by GetRomy LLC."
+	path="/legal"
+/>
 
 <Footer bind:footerText />
 
@@ -87,21 +81,23 @@
 
 <div bind:this={mainContent} class="main-content px-4 md:px-8 overflow-hidden">
 	<div class="border-gray-alpha-100 flex min-h-screen flex-col items-center border-x">
-		<div class="w-full max-w-3xl mx-auto pt-40 md:pt-44 pb-16 px-4 md:px-8">
-			<header class="mb-10 border-gray-alpha-100 border-b pb-8">
+		<div class="max-w-3xl pt-40 md:pt-44 pb-16 px-4 md:px-8 mx-auto w-full">
+			<header class="mb-10 border-gray-alpha-100 pb-8 border-b">
 				<h1 class="text-foreground text-3xl font-medium tracking-tight md:text-4xl">Legal</h1>
 				<p class="text-gray-alpha-600 text-base mt-3 max-w-2xl">
 					Policies and agreements for Rōmy. If you can't find what you need, email
-					<a href="mailto:howard@getromy.app" class="underline underline-offset-2">howard@getromy.app</a>.
+					<a href="mailto:howard@getromy.app" class="underline underline-offset-2"
+						>howard@getromy.app</a
+					>.
 				</p>
 			</header>
 
-			<ul class="flex flex-col divide-y divide-gray-alpha-100">
+			<ul class="divide-gray-alpha-100 flex flex-col divide-y">
 				{#each orderedPages as page (page.slug)}
 					<li>
 						<a
 							href={urlFor(page.slug)}
-							class="group flex items-center justify-between gap-4 py-5 no-underline"
+							class="group gap-4 py-5 flex items-center justify-between no-underline"
 						>
 							<div class="min-w-0">
 								<h2
@@ -136,7 +132,7 @@
 				<li>
 					<a
 						href="/privacy/request"
-						class="group flex items-center justify-between gap-4 py-5 no-underline"
+						class="group gap-4 py-5 flex items-center justify-between no-underline"
 					>
 						<div class="min-w-0">
 							<h2
@@ -145,7 +141,8 @@
 								Privacy rights request
 							</h2>
 							<p class="text-gray-alpha-600 text-sm mt-1">
-								Access, erase, correct, or object to processing of your personal data — for customers and Prospects alike.
+								Access, erase, correct, or object to processing of your personal data — for
+								customers and Prospects alike.
 							</p>
 						</div>
 						<svg
@@ -171,7 +168,9 @@
 
 			<div class="mt-12 text-gray-alpha-400 text-xs">
 				GetRomy LLC · Contact:
-				<a href="mailto:howard@getromy.app" class="underline underline-offset-2">howard@getromy.app</a>
+				<a href="mailto:howard@getromy.app" class="underline underline-offset-2"
+					>howard@getromy.app</a
+				>
 				(general / privacy) ·
 				<a href="mailto:solomon@getromy.app" class="underline underline-offset-2"
 					>solomon@getromy.app</a
