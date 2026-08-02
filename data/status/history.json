@@ -1,14 +1,14 @@
 {
 	"schemaVersion": 2,
-	"generatedAt": "2026-08-02T00:11:09.837Z",
+	"generatedAt": "2026-08-02T03:58:45.416Z",
 	"degradedThresholdMs": 6000,
 	"services": {
 		"app": {
 			"lastCheck": {
-				"t": 1785629469838,
+				"t": 1785643125417,
 				"ok": true,
 				"status": 200,
-				"ms": 580,
+				"ms": 2166,
 				"error": null,
 				"h": "unreachable"
 			},
@@ -722,6 +722,14 @@
 					"ms": 580,
 					"error": null,
 					"h": "unreachable"
+				},
+				{
+					"t": 1785643125417,
+					"ok": true,
+					"status": 200,
+					"ms": 2166,
+					"error": null,
+					"h": "unreachable"
 				}
 			],
 			"daily": {
@@ -762,10 +770,10 @@
 					"sumMs": 29139
 				},
 				"2026-08-02": {
-					"up": 1,
-					"total": 1,
+					"up": 2,
+					"total": 2,
 					"degraded": 0,
-					"sumMs": 580
+					"sumMs": 2746
 				}
 			}
 		},
@@ -2811,10 +2819,10 @@
 		},
 		"web": {
 			"lastCheck": {
-				"t": 1785629470456,
+				"t": 1785643127679,
 				"ok": true,
 				"status": 200,
-				"ms": 460,
+				"ms": 370,
 				"error": null,
 				"h": "ok"
 			},
@@ -3394,6 +3402,14 @@
 					"ms": 460,
 					"error": null,
 					"h": "ok"
+				},
+				{
+					"t": 1785643127679,
+					"ok": true,
+					"status": 200,
+					"ms": 370,
+					"error": null,
+					"h": "ok"
 				}
 			],
 			"daily": {
@@ -3434,27 +3450,21 @@
 					"sumMs": 8303
 				},
 				"2026-08-02": {
-					"up": 1,
-					"total": 1,
+					"up": 2,
+					"total": 2,
 					"degraded": 0,
-					"sumMs": 460
+					"sumMs": 830
 				}
 			}
 		},
 		"web:email": {
 			"lastCheck": {
-				"t": 1785629469837,
+				"t": 1785643125416,
 				"ok": true,
-				"ms": 88,
+				"ms": 135,
 				"error": null
 			},
 			"recent": [
-				{
-					"t": 1785261354601,
-					"ok": true,
-					"ms": 57,
-					"error": null
-				},
 				{
 					"t": 1785267567932,
 					"ok": true,
@@ -3808,6 +3818,12 @@
 					"ok": true,
 					"ms": 88,
 					"error": null
+				},
+				{
+					"t": 1785643125416,
+					"ok": true,
+					"ms": 135,
+					"error": null
 				}
 			],
 			"daily": {
@@ -3848,10 +3864,10 @@
 					"sumMs": 1321
 				},
 				"2026-08-02": {
-					"up": 1,
-					"total": 1,
+					"up": 2,
+					"total": 2,
 					"degraded": 0,
-					"sumMs": 88
+					"sumMs": 223
 				}
 			}
 		}
