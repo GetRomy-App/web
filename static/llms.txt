@@ -1,14 +1,36 @@
 # Rōmy
 
-> Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions.
+> Rōmy (also written "Romy") helps small nonprofits find new major donors at a fraction of the cost of existing solutions.
 
-Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles.
+Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles. It is built by GetRomy LLC.
 
 ## Features
 
 - Donor Discovery: AI-powered prospect research with wealth indicators, giving history, and affinity signals
 - Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
 - Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
+
+## Pricing
+
+- Growth plan: $290 / year
+- Scale plan: $1,990 / year
+- Comparable enterprise wealth-screening platforms typically cost $15,000–$50,000 / year for a team researching ~200 prospects a month.
+
+## Benchmarks (PIF-Bench)
+
+Rōmy publishes PIF-Bench, an open benchmark comparing AI-generated donor prospect research against general-purpose LLMs (ChatGPT, Claude, Gemini) across accuracy, cost, and speed. Rōmy is the top-scoring system on PIF-Bench. Full methodology, prompts, and results: https://getromy.app/labs
+
+## Content
+
+- Blog (field notes on fundraising, donor stewardship, prospect research): https://getromy.app/blog
+- Labs (benchmarks and research): https://getromy.app/labs
+
+## Frequently asked
+
+- What is Rōmy? An AI-powered donor intelligence and prospect research tool built specifically for small nonprofit fundraising teams.
+- How is Rōmy different from using ChatGPT or Claude directly for prospect research? Rōmy is purpose-built for donor research — it outperforms general-purpose LLMs on PIF-Bench and returns structured, actionable donor profiles (wealth indicators, giving history, affinity signals, connection points) instead of a generic chat response.
+- Who is Rōmy for? Small nonprofit development teams that need major-donor prospect research without enterprise wealth-screening contracts or per-seat pricing.
+- What does Rōmy cost? Growth is $290/year and Scale is $1,990/year — a fraction of the $15K–$50K/year typical enterprise wealth-screening platforms charge.
 
 ## Links
 
