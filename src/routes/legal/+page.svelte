@@ -69,16 +69,15 @@
 </script>
 
 <svelte:head>
-	<title>Legal — Rōmy</title>
-	<meta name="title" content="Legal — Rōmy" />
-	<meta
-		name="description"
-		content="Privacy policy, terms, sub-processors, and other legal documents for Rōmy by GetRomy LLC."
-	/>
-	<meta name="robots" content="index, follow" />
-	<link rel="canonical" href="https://getromy.app/legal" />
-	<meta property="og:title" content="Legal — Rōmy" />
-	<meta property="og:url" content="https://getromy.app/legal" />
+	<!-- title/description/OG/Twitter/canonical come from page.data.seo, rendered in +layout.svelte -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Legal', item: 'https://getromy.app/legal' }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

@@ -96,18 +96,7 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Privacy rights request — Rōmy</title>
-	<meta name="title" content="Privacy rights request — Rōmy" />
-	<meta
-		name="description"
-		content="Submit a request to access, erase, correct, or object to processing of your personal data held by Rōmy (GetRomy LLC)."
-	/>
-	<meta name="robots" content="index, follow" />
-	<link rel="canonical" href="https://getromy.app/privacy/request" />
-	<meta property="og:title" content="Privacy rights request — Rōmy" />
-	<meta property="og:url" content="https://getromy.app/privacy/request" />
-</svelte:head>
+<!-- title/description/OG/Twitter/canonical come from page.data.seo, rendered in +layout.svelte -->
 
 <Footer bind:footerText />
 

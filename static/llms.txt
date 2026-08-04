@@ -10,10 +10,19 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 - Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
 - Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
 
+## Pricing
+
+- Growth: $290/year
+- Scale: $1,990/year
+- For comparison, enterprise wealth-screening tools typically run $15K–$50K/year.
+
 ## Links
 
 - Website: https://getromy.app
 - Product: https://intel.getromy.app
+- Blog: https://getromy.app/blog
+- Labs (benchmarks & research): https://getromy.app/labs
+- Sitemap: https://getromy.app/sitemap.xml
 - Download (macOS): https://github.com/GetRomy-App/web/releases
 - Twitter: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
@@ -21,4 +30,4 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 
 ## Company
 
-GetRomy LLC
+GetRomy LLC, a Texas limited liability company based in Kerrville, Texas.

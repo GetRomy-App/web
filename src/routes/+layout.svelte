@@ -2,9 +2,11 @@
 	import './layout.css';
 	import { onMount } from 'svelte';
 	import Lenis from 'lenis';
+	import { page } from '$app/state';
 	import { gsap, ScrollTrigger, registerGsap } from '$lib/gsap';
 	import ContactModal from '$lib/components/ui/ContactModal.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
+	import { DEFAULT_SEO, DEFAULT_OG_IMAGE, SITE_URL, type SeoData } from '$lib/seo';
 
 	let { children } = $props();
 
@@ -37,23 +39,24 @@
 		else lenis.start();
 	});
 
-	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
-	const description =
-		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
-	const url = 'https://getromy.app/';
+	// Per-route SEO comes from `page.data.seo` (set by each route's `load`),
+	// falling back to the site default. See $lib/seo.ts for why this indirection
+	// exists — it's what makes <title> actually differ per page.
+	const seo = $derived<SeoData>({ ...DEFAULT_SEO, ...(page.data?.seo as Partial<SeoData> | undefined) });
+	const canonicalUrl = $derived(`${SITE_URL}${seo.path ?? '/'}`);
+	const ogImage = $derived(seo.image ?? DEFAULT_OG_IMAGE);
 </script>
 
 <svelte:head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<title>{title}</title>
-	<meta name="title" content={title} />
-	<meta name="description" content={description} />
-	<meta
-		name="keywords"
-		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
-	/>
+	<title>{seo.title}</title>
+	<meta name="title" content={seo.title} />
+	<meta name="description" content={seo.description} />
+	{#if seo.keywords}
+		<meta name="keywords" content={seo.keywords} />
+	{/if}
 	<meta name="author" content="GetRomy LLC" />
 	<meta
 		name="robots"
@@ -63,20 +66,38 @@
 	<meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
 
 	<!-- Open Graph -->
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content={url} />
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
+	<meta property="og:type" content={seo.type ?? 'website'} />
+	<meta property="og:url" content={canonicalUrl} />
+	<meta property="og:title" content={seo.title} />
+	<meta property="og:description" content={seo.description} />
 	<meta property="og:site_name" content="Rōmy" />
 	<meta property="og:locale" content="en_US" />
+	<meta property="og:image" content={ogImage} />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:alt" content="Rōmy — donor intelligence for small nonprofits" />
+	{#if seo.article}
+		{#if seo.article.publishedTime}
+			<meta property="article:published_time" content={seo.article.publishedTime} />
+		{/if}
+		{#if seo.article.modifiedTime}
+			<meta property="article:modified_time" content={seo.article.modifiedTime} />
+		{/if}
+		{#if seo.article.section}
+			<meta property="article:section" content={seo.article.section} />
+		{/if}
+		<meta property="article:publisher" content={SITE_URL} />
+	{/if}
 
 	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@RomyFindsMoney" />
 	<meta name="twitter:creator" content="@RomyFindsMoney" />
-	<meta name="twitter:url" content={url} />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={description} />
+	<meta name="twitter:url" content={canonicalUrl} />
+	<meta name="twitter:title" content={seo.title} />
+	<meta name="twitter:description" content={seo.description} />
+	<meta name="twitter:image" content={ogImage} />
+	<meta name="twitter:image:alt" content="Rōmy — donor intelligence for small nonprofits" />
 
 	<!-- Performance -->
 	<link
@@ -96,7 +117,7 @@
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 	<link rel="manifest" href="/site.webmanifest" />
 
-	<link rel="canonical" href={url} />
+	<link rel="canonical" href={canonicalUrl} />
 
 	<!-- Structured Data (JSON-LD) -->
 	{@html `<script type="application/ld+json">${JSON.stringify({
