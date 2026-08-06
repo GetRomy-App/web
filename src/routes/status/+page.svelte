@@ -136,11 +136,16 @@
 		name="description"
 		content="Live operational status and uptime history for Rōmy — the donor-intelligence app at intel.getromy.app and getromy.app."
 	/>
-	<meta name="robots" content="index, follow" />
 	<meta property="og:title" content="Status — Rōmy" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/status" />
+	<meta property="og:site_name" content="Rōmy" />
 	<meta property="og:description" content="Live operational status and uptime history for Rōmy." />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Status — Rōmy" />
+	<meta name="twitter:description" content="Live operational status and uptime history for Rōmy." />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 	<link rel="canonical" href="https://getromy.app/status" />
 </svelte:head>
 
