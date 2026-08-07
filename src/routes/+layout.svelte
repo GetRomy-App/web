@@ -69,14 +69,19 @@
 	<meta property="og:description" content={description} />
 	<meta property="og:site_name" content="Rōmy" />
 	<meta property="og:locale" content="en_US" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content={title} />
 
 	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@RomyFindsMoney" />
 	<meta name="twitter:creator" content="@RomyFindsMoney" />
 	<meta name="twitter:url" content={url} />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 
 	<!-- Performance -->
 	<link
@@ -109,9 +114,11 @@
 		description:
 			'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
 		offers: {
-			'@type': 'Offer',
-			price: '0',
+			'@type': 'AggregateOffer',
 			priceCurrency: 'USD',
+			lowPrice: '290',
+			highPrice: '1990',
+			offerCount: '2',
 			availability: 'https://schema.org/InStock'
 		},
 		publisher: {
@@ -142,6 +149,21 @@
 			contactType: 'sales'
 		},
 		sameAs: ['https://x.com/RomyFindsMoney', 'https://github.com/GetRomy-App']
+	})}</script>`}
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: 'Rōmy',
+		alternateName: 'Rōmy Donor Intelligence',
+		url: 'https://getromy.app',
+		description,
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app'
+		},
+		inLanguage: 'en-US'
 	})}</script>`}
 </svelte:head>
 
