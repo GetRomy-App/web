@@ -7,8 +7,16 @@
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
+	import { SITE_URL, DEFAULT_OG_IMAGE, breadcrumbJsonLd, blogItemListJsonLd } from '$lib/seo';
 
 	let { data } = $props();
+
+	const pageUrl = `${SITE_URL}/blog`;
+	const blogLd = $derived(blogItemListJsonLd(data.posts, '/blog', 'Rōmy Blog'));
+	const breadcrumbLd = breadcrumbJsonLd([
+		{ name: 'Home', path: '/' },
+		{ name: 'Blog', path: '/blog' }
+	]);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -107,13 +115,32 @@
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights, major gift fundraising, donor stewardship, wealth screening, planned giving"
+	/>
+	<meta
+		name="robots"
+		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
 	/>
 	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
 	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
+	<meta property="og:url" content={pageUrl} />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta property="og:image" content={DEFAULT_OG_IMAGE} />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@RomyFindsMoney" />
+	<meta name="twitter:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta
+		name="twitter:description"
+		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising."
+	/>
+	<meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+
+	<link rel="canonical" href={pageUrl} />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(blogLd)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

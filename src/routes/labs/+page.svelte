@@ -8,8 +8,16 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { PIF_OVERALL } from '$lib/benchmarks';
+	import { SITE_URL, DEFAULT_OG_IMAGE, breadcrumbJsonLd, blogItemListJsonLd } from '$lib/seo';
 
 	let { data } = $props();
+
+	const pageUrl = `${SITE_URL}/labs`;
+	const labsLd = $derived(blogItemListJsonLd(data.posts, '/labs/blog', 'Rōmy Labs'));
+	const breadcrumbLd = breadcrumbJsonLd([
+		{ name: 'Home', path: '/' },
+		{ name: 'Labs', path: '/labs' }
+	]);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -230,13 +238,32 @@
 	/>
 	<meta
 		name="keywords"
-		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Romy, prospect research tool"
+		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Romy, prospect research tool, AI donor research accuracy, nonprofit AI benchmark"
+	/>
+	<meta
+		name="robots"
+		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
 	/>
 	<meta property="og:title" content="Romy Labs — AI Donor Research Benchmarks" />
 	<meta property="og:description" content="PIF-Bench results: Romy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research." />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/labs" />
-	<link rel="canonical" href="https://getromy.app/labs" />
+	<meta property="og:url" content={pageUrl} />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta property="og:image" content={DEFAULT_OG_IMAGE} />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@RomyFindsMoney" />
+	<meta name="twitter:title" content="Romy Labs — AI Donor Research Benchmarks" />
+	<meta
+		name="twitter:description"
+		content="PIF-Bench results: Romy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research."
+	/>
+	<meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+
+	<link rel="canonical" href={pageUrl} />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(labsLd)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

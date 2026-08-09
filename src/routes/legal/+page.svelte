@@ -78,6 +78,11 @@
 	<meta name="robots" content="index, follow" />
 	<link rel="canonical" href="https://getromy.app/legal" />
 	<meta property="og:title" content="Legal — Rōmy" />
+	<meta property="og:type" content="website" />
+	<meta
+		property="og:description"
+		content="Privacy policy, terms, sub-processors, and other legal documents for Rōmy by GetRomy LLC."
+	/>
 	<meta property="og:url" content="https://getromy.app/legal" />
 </svelte:head>
 
