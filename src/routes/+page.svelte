@@ -13,6 +13,11 @@
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
 
+	const title = 'Rōmy — Donor Intelligence Software for Small Nonprofits';
+	const description =
+		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
+	const url = 'https://getromy.app/';
+
 	onMount(() => {
 		gsap.to(mainContent, {
 			scale: 0.95,
@@ -41,6 +46,24 @@
 		);
 	});
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="title" content={title} />
+	<meta name="description" content={description} />
+	<meta
+		name="keywords"
+		content="donor intelligence software, nonprofit donor intelligence, fundraising software for small nonprofits, prospect research tool, donor discovery platform, wealth screening software, donor giving history, AI donor research, nonprofit fundraising software, major donor prospecting, small nonprofit fundraising tools, donor management software, philanthropy intelligence, fundraising CRM alternative, nonprofit technology, donor wealth indicators, affordable prospect research"
+	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={url} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta name="twitter:url" content={url} />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<link rel="canonical" href={url} />
+</svelte:head>
 
 <Footer bind:footerText />
 

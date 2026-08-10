@@ -10,6 +10,20 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 - Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
 - Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
 
+## Benchmarks
+
+On PIF-Bench (Prospect Intelligence Fidelity), a composite accuracy benchmark for AI-generated donor prospect research, Rōmy scored 94.1 versus Claude 92.3, Gemini 79.1, and ChatGPT 76.9. Full methodology and dimension-level results: https://getromy.app/labs
+
+## Pricing
+
+Rōmy's Growth plan runs $290/year and Scale runs $1,990/year — both well under typical enterprise wealth-screening tools, which run $15K–$50K/year for a team researching ~200 prospects/month. See https://getromy.app/labs for the full cost and speed comparison.
+
+## Content
+
+- Blog (field notes on donor intelligence, prospect research, and nonprofit fundraising): https://getromy.app/blog
+- Labs (benchmarks, research, and methodology): https://getromy.app/labs
+- Sitemap: https://getromy.app/sitemap.xml
+
 ## Links
 
 - Website: https://getromy.app

@@ -36,24 +36,21 @@
 		if (contactModal.open) lenis.stop();
 		else lenis.start();
 	});
-
-	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
-	const description =
-		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
-	const url = 'https://getromy.app/';
 </script>
 
 <svelte:head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<title>{title}</title>
-	<meta name="title" content={title} />
-	<meta name="description" content={description} />
-	<meta
-		name="keywords"
-		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
-	/>
+	<!--
+		Title, description, keywords, canonical, and og:*/twitter:* url/title/description are
+		intentionally NOT set here. svelte:head content from this root layout and from the active
+		+page.svelte both land in <head>, but only one <title>/<meta name="description">/<link
+		rel="canonical"> can be authoritative per page — leaving them here meant every route
+		(all blog posts included) inherited this file's single global title/description/canonical
+		and the per-page ones never won, so search engines saw the whole site as one page. Each
+		route now owns those tags itself; this file only holds what's genuinely identical everywhere.
+	-->
 	<meta name="author" content="GetRomy LLC" />
 	<meta
 		name="robots"
@@ -62,21 +59,17 @@
 	<meta name="theme-color" content="#0d0d0e" media="(prefers-color-scheme: dark)" />
 	<meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
 
-	<!-- Open Graph -->
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content={url} />
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
+	<!-- Open Graph / Twitter defaults that hold for every page; url/title/description are per-route -->
 	<meta property="og:site_name" content="Rōmy" />
 	<meta property="og:locale" content="en_US" />
-
-	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:alt" content="Rōmy — donor intelligence for small nonprofits" />
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@RomyFindsMoney" />
 	<meta name="twitter:creator" content="@RomyFindsMoney" />
-	<meta name="twitter:url" content={url} />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 
 	<!-- Performance -->
 	<link
@@ -95,8 +88,6 @@
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 	<link rel="manifest" href="/site.webmanifest" />
-
-	<link rel="canonical" href={url} />
 
 	<!-- Structured Data (JSON-LD) -->
 	{@html `<script type="application/ld+json">${JSON.stringify({
