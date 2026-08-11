@@ -135,8 +135,55 @@
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
+	<meta property="article:publisher" content="https://getromy.app" />
 	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'TechArticle',
+		headline: data.post.title,
+		description: data.post.excerpt,
+		image: 'https://getromy.app/og-image.jpg',
+		datePublished: data.post.date,
+		dateModified: data.post.date,
+		mainEntityOfPage: {
+			'@type': 'WebPage',
+			'@id': `https://getromy.app/labs/blog/${data.post.slug}`
+		},
+		articleSection: data.post.tag,
+		inLanguage: 'en-US',
+		author: {
+			'@type': 'Organization',
+			name: 'Rōmy',
+			url: 'https://getromy.app'
+		},
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			logo: {
+				'@type': 'ImageObject',
+				url: 'https://getromy.app/icon-logo.png'
+			}
+		}
+	})}</script>`}
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Labs', item: 'https://getromy.app/labs' },
+			{
+				'@type': 'ListItem',
+				position: 3,
+				name: data.post.title,
+				item: `https://getromy.app/labs/blog/${data.post.slug}`
+			}
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
