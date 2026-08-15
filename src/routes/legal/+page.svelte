@@ -5,6 +5,7 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/seo/Seo.svelte';
 
 	let { data } = $props();
 
@@ -68,18 +69,11 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Legal — Rōmy</title>
-	<meta name="title" content="Legal — Rōmy" />
-	<meta
-		name="description"
-		content="Privacy policy, terms, sub-processors, and other legal documents for Rōmy by GetRomy LLC."
-	/>
-	<meta name="robots" content="index, follow" />
-	<link rel="canonical" href="https://getromy.app/legal" />
-	<meta property="og:title" content="Legal — Rōmy" />
-	<meta property="og:url" content="https://getromy.app/legal" />
-</svelte:head>
+<Seo
+	title="Legal"
+	description="Privacy policy, terms, sub-processors, and other legal documents for Rōmy by GetRomy LLC."
+	path="/legal"
+/>
 
 <Footer bind:footerText />
 

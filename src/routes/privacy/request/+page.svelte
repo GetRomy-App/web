@@ -5,6 +5,7 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/seo/Seo.svelte';
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -96,18 +97,11 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Privacy rights request — Rōmy</title>
-	<meta name="title" content="Privacy rights request — Rōmy" />
-	<meta
-		name="description"
-		content="Submit a request to access, erase, correct, or object to processing of your personal data held by Rōmy (GetRomy LLC)."
-	/>
-	<meta name="robots" content="index, follow" />
-	<link rel="canonical" href="https://getromy.app/privacy/request" />
-	<meta property="og:title" content="Privacy rights request — Rōmy" />
-	<meta property="og:url" content="https://getromy.app/privacy/request" />
-</svelte:head>
+<Seo
+	title="Privacy rights request"
+	description="Submit a request to access, erase, correct, or object to processing of your personal data held by Rōmy (GetRomy LLC)."
+	path="/privacy/request"
+/>
 
 <Footer bind:footerText />
 
