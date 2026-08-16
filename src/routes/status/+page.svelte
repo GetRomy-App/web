@@ -129,20 +129,8 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Status — Rōmy</title>
-	<meta name="title" content="Status — Rōmy" />
-	<meta
-		name="description"
-		content="Live operational status and uptime history for Rōmy — the donor-intelligence app at intel.getromy.app and getromy.app."
-	/>
-	<meta name="robots" content="index, follow" />
-	<meta property="og:title" content="Status — Rōmy" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/status" />
-	<meta property="og:description" content="Live operational status and uptime history for Rōmy." />
-	<link rel="canonical" href="https://getromy.app/status" />
-</svelte:head>
+<!-- Title, description, canonical, OG & Twitter tags for this route are rendered once
+     from the root layout — see src/routes/+layout.svelte. -->
 
 <Footer bind:footerText />
 

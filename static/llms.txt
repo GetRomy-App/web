@@ -10,10 +10,41 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 - Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
 - Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
 
+## Benchmarks
+
+Rōmy scored 94.1 on PIF-Bench (Prospect Intelligence Fidelity), a composite accuracy
+benchmark for AI-powered donor research, vs. Claude (92.3), Gemini (79.1), and
+ChatGPT (76.9). Full methodology and per-dimension breakdown: https://getromy.app/labs
+
+## Writing
+
+Field notes, research, and industry perspective on nonprofit fundraising, prospect
+research, and donor intelligence. Full archive: https://getromy.app/blog
+
+Recent posts:
+- The Booth at the Perkins Off Highway 2 — https://getromy.app/blog/the-booth-at-the-perkins-off-highway-2
+- The Auto-Debit at Three A.M. — https://getromy.app/blog/the-auto-debit-at-three-am
+- The Honor Box at the Farm Stand — https://getromy.app/blog/the-honor-box-at-the-farm-stand
+- The Ninth Card — https://getromy.app/blog/the-ninth-card
+- Forty-Two Jars — https://getromy.app/blog/forty-two-jars
+- The Fundraiser Who Never Made a Cold Call — https://getromy.app/blog/the-fundraiser-who-never-made-a-cold-call
+- Capacity Is a Lookup. Timing Is a Discipline. — https://getromy.app/blog/capacity-is-a-lookup-timing-is-a-discipline
+- Your CRM Is a Haunted Spreadsheet — https://getromy.app/blog/your-crm-is-a-haunted-spreadsheet
+- Capacity Scores Are the Astrology of Fundraising — https://getromy.app/blog/capacity-scores-are-the-astrology-of-fundraising
+- Nobody Reads Your Annual Report — https://getromy.app/blog/nobody-reads-your-annual-report
+- Major Gifts Aren't a Wealth Problem. They're a Timing Problem. — https://getromy.app/blog/major-gifts-are-a-timing-problem
+- How We Built a Donor Intelligence Engine Starting at $0.10 per Prospect — https://getromy.app/blog/how-we-built-donor-intelligence
+- What Actually Predicts Giving Capacity — and How Rōmy Scores It — https://getromy.app/blog/understanding-wealth-indicators
+- The Small Nonprofit Fundraising Gap — and How to Close It — https://getromy.app/blog/small-nonprofit-fundraising-gap
+
+Machine-readable sitemap of every page and post: https://getromy.app/sitemap.xml
+
 ## Links
 
 - Website: https://getromy.app
 - Product: https://intel.getromy.app
+- Blog: https://getromy.app/blog
+- Labs / Benchmarks: https://getromy.app/labs
 - Download (macOS): https://github.com/GetRomy-App/web/releases
 - Twitter: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
