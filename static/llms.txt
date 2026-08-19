@@ -19,6 +19,18 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 - GitHub: https://github.com/GetRomy-App
 - Contact: howard@getromy.app, solomon@getromy.app
 
+## Research & Writing
+
+- Blog: https://getromy.app/blog
+- Labs (benchmarks): https://getromy.app/labs
+- Understanding wealth indicators: https://getromy.app/blog/understanding-wealth-indicators
+- Your next major gift is already in your CRM: https://getromy.app/blog/your-next-major-gift-is-already-in-your-crm
+- The small nonprofit fundraising gap: https://getromy.app/blog/small-nonprofit-fundraising-gap
+- Capacity is a lookup, timing is a discipline: https://getromy.app/blog/capacity-is-a-lookup-timing-is-a-discipline
+- Major gifts are a timing problem: https://getromy.app/blog/major-gifts-are-a-timing-problem
+- Benchmarking AI prospect research (PIF-Bench): https://getromy.app/labs/blog/benchmarking-ai-prospect-research
+- How we built donor intelligence: https://getromy.app/blog/how-we-built-donor-intelligence
+
 ## Company
 
 GetRomy LLC
