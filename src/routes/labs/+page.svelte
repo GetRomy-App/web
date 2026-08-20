@@ -8,6 +8,7 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { PIF_OVERALL } from '$lib/benchmarks';
+	import { contactModal } from '$lib/stores/contact.svelte';
 
 	let { data } = $props();
 
@@ -408,14 +409,14 @@
 				<p
 					class="text-gray-alpha-600 mb-8 max-w-xl text-lg leading-relaxed md:text-xl text-left text-pretty"
 				>
-					Try Romy on your own prospect list. See how purpose-built donor intelligence
+					Try Rōmy on your own prospect list. See how purpose-built donor intelligence
 					compares to your current workflow.
 				</p>
 			</div>
 
 			<div class="flex flex-wrap items-center gap-3">
-				<Button href="https://intel.getromy.app" target="_blank" rel="noreferrer" class="w-fit">
-					Get Started
+				<Button onclick={() => contactModal.showWaitlist()} class="w-fit">
+					Learn More
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="16"

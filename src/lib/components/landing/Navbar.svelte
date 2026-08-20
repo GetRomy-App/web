@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Button from '$lib/components/ui/Button.svelte';
-	import { productUrl, fallbackReleaseUrl } from '$lib/release';
+	import { fallbackReleaseUrl } from '$lib/release';
 	import { toggleTheme, isDark } from '$lib/theme';
 	import { contactModal } from '$lib/stores/contact.svelte';
 
@@ -184,8 +184,8 @@
 			>
 				Download
 			</Button>
-			<Button class="h-7 text-xs" href={productUrl} target="_blank" rel="noreferrer">
-				Get Started
+			<Button class="h-7 text-xs" onclick={() => contactModal.showWaitlist()}>
+				Learn More
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="12"
