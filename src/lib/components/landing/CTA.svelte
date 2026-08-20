@@ -3,7 +3,6 @@
 	import { gsap, SplitText } from '$lib/gsap';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '../ui/Grid.svelte';
-	import { productUrl } from '$lib/release';
 	import { contactModal } from '$lib/stores/contact.svelte';
 
 	let ctaSection: HTMLElement;
@@ -80,8 +79,8 @@
 	</div>
 
 	<div class="gap-3 flex flex-wrap items-center">
-		<Button href={productUrl} target="_blank" rel="noreferrer" class="w-fit">
-			Get Started
+		<Button onclick={() => contactModal.showWaitlist()} class="w-fit">
+			Learn More
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="16"

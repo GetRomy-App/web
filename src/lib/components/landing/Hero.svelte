@@ -4,8 +4,8 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '../ui/Grid.svelte';
 	import OrganicBackground from '../ui/OrganicBackground.svelte';
-	import { productUrl } from '$lib/release';
 	import { isDark } from '$lib/theme';
+	import { contactModal } from '$lib/stores/contact.svelte';
 
 	let heroTitle: HTMLElement;
 	let heroDesc: HTMLElement;
@@ -120,8 +120,8 @@
 	</p>
 
 	<div bind:this={heroButtons} class="gap-4 sm:flex-row flex flex-col items-center opacity-0">
-		<Button class="group" size="lg" href={productUrl} target="_blank" rel="noreferrer">
-			Get Started
+		<Button class="group" size="lg" onclick={() => contactModal.showWaitlist()}>
+			Learn More
 			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="size-4" aria-hidden="true">
 				<path d="M9 6C9 6 15 10.4189 15 12C15 13.5812 9 18 9 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
 			</svg>

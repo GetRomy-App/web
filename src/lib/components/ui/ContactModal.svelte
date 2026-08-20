@@ -9,6 +9,7 @@
 
 	let name = $state('');
 	let email = $state('');
+	let organization = $state('');
 	let message = $state('');
 	let company = $state(''); // honeypot — must stay empty
 	let status = $state<Status>('idle');
@@ -18,21 +19,53 @@
 	let firstFieldEl: HTMLInputElement | undefined = $state();
 	let restoreFocusTo: HTMLElement | null = null;
 
-	const copy = $derived(
-		contactModal.kind === 'issue'
-			? {
-					title: 'Report an issue',
-					subtitle: 'Tell us what went wrong. We’ll look into it and follow up by email.',
-					button: 'Send report',
-					placeholder: 'What happened? Where did you see it?'
-				}
-			: {
-					title: 'Get in touch',
-					subtitle: 'Send us a note and we’ll get back to you by email.',
-					button: 'Send message',
-					placeholder: 'How can we help?'
-				}
-	);
+	const isWaitlist = $derived(contactModal.kind === 'waitlist');
+	const firstName = $derived(name.trim().split(/\s+/)[0] ?? '');
+
+	const copy = $derived.by(() => {
+		const greeting = firstName ? `Thanks, ${firstName} — ` : 'Thanks — ';
+
+		if (contactModal.kind === 'waitlist') {
+			return {
+				title: 'Join the waitlist',
+				subtitle:
+					'Rōmy’s next version is on the way. Tell us a little about your nonprofit and we’ll add you to the list.',
+				button: 'Join the waitlist',
+				placeholder: 'What are you hoping Rōmy can help you with? (optional)',
+				note: 'We’ll only email you about Rōmy.',
+				messageRequired: false,
+				showOrganization: true,
+				successTitle: 'You’re on the list',
+				successBody: `${greeting}you’re on the email list for the next version of Rōmy. We’ll write as soon as it’s ready to try.`
+			};
+		}
+
+		if (contactModal.kind === 'issue') {
+			return {
+				title: 'Report an issue',
+				subtitle: 'Tell us what went wrong. We’ll look into it and follow up by email.',
+				button: 'Send report',
+				placeholder: 'What happened? Where did you see it?',
+				note: 'Goes straight to our inbox.',
+				messageRequired: true,
+				showOrganization: false,
+				successTitle: 'Message sent',
+				successBody: `${greeting}we’ve got it and will reply to your email shortly.`
+			};
+		}
+
+		return {
+			title: 'Get in touch',
+			subtitle: 'Send us a note and we’ll get back to you by email.',
+			button: 'Send message',
+			placeholder: 'How can we help?',
+			note: 'Goes straight to our inbox.',
+			messageRequired: true,
+			showOrganization: false,
+			successTitle: 'Message sent',
+			successBody: `${greeting}we’ve got it and will reply to your email shortly.`
+		};
+	});
 
 	function reduceMotion(): boolean {
 		return browser && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -48,6 +81,7 @@
 				if (status === 'success') {
 					name = '';
 					email = '';
+					organization = '';
 					message = '';
 				}
 				status = 'idle';
@@ -93,19 +127,24 @@
 		if (status === 'submitting') return;
 		errorMsg = '';
 
-		if (!name.trim() || !email.trim() || !message.trim()) {
+		if (!name.trim() || !email.trim()) {
+			errorMsg = 'Please add your name and email.';
+			return;
+		}
+		if (copy.messageRequired && !message.trim()) {
 			errorMsg = 'Please add your name, email, and a message.';
 			return;
 		}
 
 		status = 'submitting';
 		try {
-			const res = await fetch('/api/contact', {
+			const res = await fetch(isWaitlist ? '/api/waitlist' : '/api/contact', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
 					name,
 					email,
+					organization,
 					message,
 					company,
 					kind: contactModal.kind,
@@ -194,10 +233,9 @@
 							></path>
 						</svg>
 					</div>
-					<h2 class="text-foreground text-lg font-medium tracking-tight">Message sent</h2>
+					<h2 class="text-foreground text-lg font-medium tracking-tight">{copy.successTitle}</h2>
 					<p class="text-gray-alpha-600 mt-2 max-w-xs text-sm leading-relaxed mx-auto">
-						Thanks{name ? `, ${name.split(' ')[0]}` : ''} — we’ve got it and will reply to your email
-						shortly.
+						{copy.successBody}
 					</p>
 					<button
 						type="button"
@@ -249,11 +287,31 @@
 						/>
 					</label>
 
+					{#if copy.showOrganization}
+						<label class="block">
+							<span class="text-foreground mb-1.5 text-xs font-medium block">
+								Organization <span class="text-gray-alpha-400 font-normal">(optional)</span>
+							</span>
+							<input
+								type="text"
+								bind:value={organization}
+								autocomplete="organization"
+								maxlength="200"
+								class="border-gray-alpha-200 bg-background text-foreground rounded-md px-3 py-2 text-sm w-full border"
+							/>
+						</label>
+					{/if}
+
 					<label class="block">
-						<span class="text-foreground mb-1.5 text-xs font-medium block">Message</span>
+						<span class="text-foreground mb-1.5 text-xs font-medium block">
+							Message
+							{#if !copy.messageRequired}
+								<span class="text-gray-alpha-400 font-normal">(optional)</span>
+							{/if}
+						</span>
 						<textarea
 							bind:value={message}
-							required
+							required={copy.messageRequired}
 							rows="4"
 							maxlength="5000"
 							placeholder={copy.placeholder}
@@ -266,7 +324,7 @@
 					{/if}
 
 					<div class="gap-3 pt-1 flex items-center justify-between">
-						<p class="text-gray-alpha-400 text-xs">Goes straight to our inbox.</p>
+						<p class="text-gray-alpha-400 text-xs">{copy.note}</p>
 						<button
 							type="submit"
 							disabled={status === 'submitting'}
