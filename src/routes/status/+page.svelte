@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { gsap } from '$lib/gsap';
 
+	import Seo from '$lib/components/Seo.svelte';
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
@@ -129,20 +130,12 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Status — Rōmy</title>
-	<meta name="title" content="Status — Rōmy" />
-	<meta
-		name="description"
-		content="Live operational status and uptime history for Rōmy — the donor-intelligence app at intel.getromy.app and getromy.app."
-	/>
-	<meta name="robots" content="index, follow" />
-	<meta property="og:title" content="Status — Rōmy" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/status" />
-	<meta property="og:description" content="Live operational status and uptime history for Rōmy." />
-	<link rel="canonical" href="https://getromy.app/status" />
-</svelte:head>
+<Seo
+	title="Status — Rōmy"
+	description="Live operational status and uptime history for Rōmy — the donor-intelligence app at intel.getromy.app and getromy.app."
+	path="/status"
+	type="website"
+/>
 
 <Footer bind:footerText />
 
