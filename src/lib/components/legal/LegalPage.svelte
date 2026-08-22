@@ -65,6 +65,8 @@
 	<meta property="og:title" content="{title} — Rōmy" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app{canonicalPath}" />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
 	{#if description}
 		<meta property="og:description" content={description} />
 	{/if}

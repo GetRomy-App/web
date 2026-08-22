@@ -19,6 +19,16 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 - GitHub: https://github.com/GetRomy-App
 - Contact: howard@getromy.app, solomon@getromy.app
 
+## Blog
+
+- Blog index: https://getromy.app/blog — field notes and perspectives on major-gift fundraising, donor prospect research, and small nonprofit development work.
+- Full post list: https://getromy.app/sitemap.xml
+
+## Research
+
+- Labs index: https://getromy.app/labs — open benchmarks comparing AI systems on donor prospect research.
+- PIF-Bench: https://getromy.app/labs/blog/benchmarking-ai-prospect-research — Rōmy scored 94.6 vs. Claude 92.2, ChatGPT 79.9, and Gemini 76.0 on a ground-truth prospect-research fidelity benchmark.
+
 ## Company
 
-GetRomy LLC
+GetRomy LLC. Also referred to as "Romy" (without the macron) in plain-text contexts — same entity.
