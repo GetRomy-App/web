@@ -224,20 +224,45 @@
 </script>
 
 <svelte:head>
-	<title>Romy Labs — AI Donor Research Benchmarks, PIF-Bench Results & Blog</title>
+	<title>Rōmy Labs — AI Donor Research Benchmarks, PIF-Bench Results & Blog</title>
 	<meta
 		name="description"
-		content="Romy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). See how purpose-built AI donor intelligence compares on accuracy, cost, and speed."
+		content="Rōmy scored 94.6 on PIF-Bench vs. ChatGPT (79.9), Claude (92.2), and Gemini (76.0). See how purpose-built AI donor intelligence compares on accuracy, cost, and speed."
 	/>
 	<meta
 		name="keywords"
-		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Romy, prospect research tool"
+		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, wealth screening accuracy, PIF-Bench, donor intelligence cost comparison, ChatGPT vs Claude vs Gemini for fundraising, prospect research tool accuracy"
 	/>
-	<meta property="og:title" content="Romy Labs — AI Donor Research Benchmarks" />
-	<meta property="og:description" content="PIF-Bench results: Romy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research." />
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+	<meta property="og:title" content="Rōmy Labs — AI Donor Research Benchmarks" />
+	<meta property="og:description" content="PIF-Bench results: Rōmy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0. Open benchmarks for AI-powered prospect research." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/labs" />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content="Rōmy Labs — AI Donor Research Benchmarks" />
+	<meta name="twitter:description" content="PIF-Bench results: Rōmy 94.6, Claude 92.2, ChatGPT 79.9, Gemini 76.0." />
 	<link rel="canonical" href="https://getromy.app/labs" />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Dataset',
+		name: 'PIF-Bench: Prospect Intelligence Fidelity Benchmark',
+		description:
+			'A seven-dimension benchmark scoring AI systems (Rōmy, Claude, ChatGPT, Gemini) on donor prospect research fidelity — factual precision, hallucination rate, and actionability.',
+		url: 'https://getromy.app/labs',
+		creator: { '@type': 'Organization', name: 'GetRomy LLC', url: 'https://getromy.app' }
+	})}</script>`}
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Labs', item: 'https://getromy.app/labs' }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

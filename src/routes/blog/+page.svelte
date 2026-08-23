@@ -101,20 +101,55 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
 	<meta
 		name="description"
 		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, donor intelligence platform, prospect research tool, AI for nonprofits, major donor fundraising insights, donor stewardship, planned giving, wealth screening, fundraising strategy"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+	<meta property="og:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
 	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta name="twitter:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
 	<link rel="canonical" href="https://getromy.app/blog" />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		name: 'Rōmy Blog',
+		url: 'https://getromy.app/blog',
+		description:
+			'Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI.',
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			logo: { '@type': 'ImageObject', url: 'https://getromy.app/icon-logo.png' }
+		},
+		blogPost: data.posts.slice(0, 20).map((post) => ({
+			'@type': 'BlogPosting',
+			headline: post.title,
+			datePublished: post.date,
+			url: `https://getromy.app/blog/${post.slug}`
+		}))
+	})}</script>`}
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://getromy.app/blog' }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
