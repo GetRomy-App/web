@@ -61,7 +61,6 @@
 	{#if description}
 		<meta name="description" content={description} />
 	{/if}
-	<meta name="robots" content="index, follow" />
 	<meta property="og:title" content="{title} — Rōmy" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app{canonicalPath}" />
