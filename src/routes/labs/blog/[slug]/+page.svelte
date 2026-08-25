@@ -127,16 +127,56 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
+	<title>{data.post.title} — Rōmy Labs</title>
 	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
+	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, PIF-Bench, {data.post.tag.toLowerCase()}" />
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 	<meta property="og:title" content={data.post.title} />
 	<meta property="og:description" content={data.post.excerpt} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
 	<meta property="article:published_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@RomyFindsMoney" />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={data.post.excerpt} />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: data.post.title,
+		description: data.post.excerpt,
+		datePublished: data.post.date,
+		dateModified: data.post.date,
+		articleSection: data.post.tag,
+		image: 'https://getromy.app/og-image.jpg',
+		mainEntityOfPage: {
+			'@type': 'WebPage',
+			'@id': `https://getromy.app/labs/blog/${data.post.slug}`
+		},
+		author: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app'
+		},
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app',
+			logo: {
+				'@type': 'ImageObject',
+				url: 'https://getromy.app/icon-logo.png'
+			}
+		}
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

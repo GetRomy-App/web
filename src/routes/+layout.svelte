@@ -52,7 +52,7 @@
 	<meta name="description" content={description} />
 	<meta
 		name="keywords"
-		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
+		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators, donor prospect research software, AI wealth screening for nonprofits, affordable donor intelligence, major gift prospecting tool, nonprofit development software, donor capacity indicators, alternative to DonorSearch, alternative to iWave, alternative to WealthEngine"
 	/>
 	<meta name="author" content="GetRomy LLC" />
 	<meta
@@ -69,14 +69,20 @@
 	<meta property="og:description" content={description} />
 	<meta property="og:site_name" content="Rōmy" />
 	<meta property="og:locale" content="en_US" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:alt" content="Rōmy — Donor Intelligence for Small Nonprofits" />
 
 	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@RomyFindsMoney" />
 	<meta name="twitter:creator" content="@RomyFindsMoney" />
 	<meta name="twitter:url" content={url} />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
+	<meta name="twitter:image:alt" content="Rōmy — Donor Intelligence for Small Nonprofits" />
 
 	<!-- Performance -->
 	<link

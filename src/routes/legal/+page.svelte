@@ -79,6 +79,12 @@
 	<link rel="canonical" href="https://getromy.app/legal" />
 	<meta property="og:title" content="Legal — Rōmy" />
 	<meta property="og:url" content="https://getromy.app/legal" />
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:description" content="Privacy policy, terms, sub-processors, and other legal documents for Rōmy by GetRomy LLC." />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content="Legal — Rōmy" />
 </svelte:head>
 
 <Footer bind:footerText />

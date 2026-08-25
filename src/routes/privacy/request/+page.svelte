@@ -107,6 +107,8 @@
 	<link rel="canonical" href="https://getromy.app/privacy/request" />
 	<meta property="og:title" content="Privacy rights request — Rōmy" />
 	<meta property="og:url" content="https://getromy.app/privacy/request" />
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="Rōmy" />
 </svelte:head>
 
 <Footer bind:footerText />
