@@ -6,8 +6,28 @@
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import { PIF_OVERALL, PIF_DIMENSIONS, EVAL_PROMPT } from '$lib/benchmarks';
+	import { OG_IMAGE, deriveKeywords, buildArticleLd, buildBreadcrumbLd } from '$lib/seo';
 
 	let { data } = $props();
+
+	const keywords = $derived(deriveKeywords(data.post.title, data.post.tag));
+	const articleLd = $derived(
+		buildArticleLd({
+			title: data.post.title,
+			excerpt: data.post.excerpt,
+			date: data.post.date,
+			tag: data.post.tag,
+			slug: data.post.slug,
+			path: `/blog/${data.post.slug}`
+		})
+	);
+	const breadcrumbLd = $derived(
+		buildBreadcrumbLd([
+			{ name: 'Home', path: '/' },
+			{ name: 'Blog', path: '/blog' },
+			{ name: data.post.title, path: `/blog/${data.post.slug}` }
+		])
+	);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -126,16 +146,28 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
+	<title>{data.post.title} — Rōmy Blog</title>
 	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
+	<meta name="keywords" content={keywords} />
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 	<meta property="og:title" content={data.post.title} />
 	<meta property="og:description" content={data.post.excerpt} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta property="og:image" content={OG_IMAGE} />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
+	<meta property="article:tag" content={data.post.tag} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={data.post.excerpt} />
+	<meta name="twitter:image" content={OG_IMAGE} />
 	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(articleLd)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
