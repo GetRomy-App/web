@@ -2,7 +2,11 @@
 
 > Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions.
 
-Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles.
+Rōmy is a donor intelligence platform built for small nonprofit development teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles a fundraiser can act on the same day.
+
+## Who it's for
+
+Small nonprofit development shops (often one or two people) who need major-donor prospect research but cannot afford enterprise wealth-screening platforms or per-seat licensing.
 
 ## Features
 
@@ -10,12 +14,23 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 - Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
 - Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
 
+## Benchmarks
+
+Rōmy is benchmarked against ChatGPT, Claude, and Gemini on PIF-Bench (Prospect Intelligence Fidelity), a composite accuracy benchmark for AI-generated donor research reports covering factual precision, discovery recall, hallucination rate, capacity estimation, source attribution, structural completeness, and actionability. Full methodology and results: https://getromy.app/labs
+
+## Content
+
+- Blog (fundraising strategy, prospect research, donor psychology): https://getromy.app/blog
+- Labs (AI research benchmarks and technical deep-dives): https://getromy.app/labs
+
 ## Links
 
 - Website: https://getromy.app
 - Product: https://intel.getromy.app
+- Blog: https://getromy.app/blog
+- Labs & benchmarks: https://getromy.app/labs
 - Download (macOS): https://github.com/GetRomy-App/web/releases
-- Twitter: https://x.com/RomyFindsMoney
+- Twitter/X: https://x.com/RomyFindsMoney
 - GitHub: https://github.com/GetRomy-App
 - Contact: howard@getromy.app, solomon@getromy.app
 
