@@ -6,8 +6,18 @@
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import { PIF_OVERALL, PIF_DIMENSIONS, EVAL_PROMPT } from '$lib/benchmarks';
+	import {
+		SITE,
+		DEFAULT_OG_IMAGE,
+		metaDescription,
+		blogPostingJsonLd,
+		breadcrumbList
+	} from '$lib/seo';
 
 	let { data } = $props();
+
+	const postUrl = `${SITE}/blog/${data.post.slug}`;
+	const description = metaDescription(data.post.excerpt);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -126,16 +136,41 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
-	<meta name="description" content={data.post.excerpt} />
+	<title>{data.post.title} — Rōmy Blog</title>
+	<meta name="description" content={description} />
 	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
 	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
+	<meta property="og:description" content={description} />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
+	<meta property="og:url" content={postUrl} />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta property="og:image" content={DEFAULT_OG_IMAGE} />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
 	<meta property="article:published_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+	<link rel="canonical" href={postUrl} />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(
+		blogPostingJsonLd({
+			headline: data.post.title,
+			description: description,
+			url: postUrl,
+			datePublished: data.post.date,
+			section: data.post.tag
+		})
+	)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(
+		breadcrumbList([
+			{ name: 'Home', url: SITE },
+			{ name: 'Blog', url: `${SITE}/blog` },
+			{ name: data.post.title, url: postUrl }
+		])
+	)}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
