@@ -136,7 +136,7 @@
 			<img
 				bind:this={previewImg}
 				src="/screenshot.webp"
-				alt="Preview of Rōmy"
+				alt="Rōmy donor intelligence dashboard showing AI-generated prospect research, wealth indicators, and giving history for a nonprofit donor"
 				decoding="async"
 				class="screenshot-img h-auto w-full rounded-md opacity-0"
 			/>
