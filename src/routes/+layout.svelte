@@ -36,20 +36,25 @@
 		if (contactModal.open) lenis.stop();
 		else lenis.start();
 	});
-
-	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
-	const description =
-		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
-	const url = 'https://getromy.app/';
 </script>
 
 <svelte:head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<title>{title}</title>
-	<meta name="title" content={title} />
-	<meta name="description" content={description} />
+	<!--
+		Site-wide defaults only. Title, description, canonical, and per-page
+		Open Graph/Twitter tags (og:title, og:description, og:url, og:type,
+		twitter:title, twitter:description, twitter:url) are intentionally
+		NOT set here — each route defines its own in its <svelte:head>.
+		A <title> element is unique per document, so an unconditional one
+		here would win over every page's own title (browsers and crawlers
+		use the first <title> in the document); the same duplication problem
+		applies to rel="canonical", which Google ignores entirely when more
+		than one appears on a page. Keeping only truly global, non-conflicting
+		tags here — and letting the home page set its own copies of the rest
+		— keeps every route's title/description/canonical accurate for SEO.
+	-->
 	<meta
 		name="keywords"
 		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
@@ -62,21 +67,17 @@
 	<meta name="theme-color" content="#0d0d0e" media="(prefers-color-scheme: dark)" />
 	<meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
 
-	<!-- Open Graph -->
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content={url} />
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
+	<!-- Open Graph / Twitter: values constant across every route -->
 	<meta property="og:site_name" content="Rōmy" />
 	<meta property="og:locale" content="en_US" />
-
-	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:alt" content="Rōmy — Donor Intelligence for Small Nonprofits" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 	<meta name="twitter:site" content="@RomyFindsMoney" />
 	<meta name="twitter:creator" content="@RomyFindsMoney" />
-	<meta name="twitter:url" content={url} />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={description} />
 
 	<!-- Performance -->
 	<link
@@ -95,8 +96,6 @@
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 	<link rel="manifest" href="/site.webmanifest" />
-
-	<link rel="canonical" href={url} />
 
 	<!-- Structured Data (JSON-LD) -->
 	{@html `<script type="application/ld+json">${JSON.stringify({
