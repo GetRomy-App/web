@@ -61,7 +61,6 @@
 	{#if description}
 		<meta name="description" content={description} />
 	{/if}
-	<meta name="robots" content="index, follow" />
 	<meta property="og:title" content="{title} — Rōmy" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app{canonicalPath}" />
@@ -69,6 +68,22 @@
 		<meta property="og:description" content={description} />
 	{/if}
 	<link rel="canonical" href="https://getromy.app{canonicalPath}" />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Legal', item: 'https://getromy.app/legal' },
+			{
+				'@type': 'ListItem',
+				position: 3,
+				name: title,
+				item: `https://getromy.app${canonicalPath}`
+			}
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

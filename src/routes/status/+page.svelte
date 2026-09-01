@@ -136,12 +136,21 @@
 		name="description"
 		content="Live operational status and uptime history for Rōmy — the donor-intelligence app at intel.getromy.app and getromy.app."
 	/>
-	<meta name="robots" content="index, follow" />
 	<meta property="og:title" content="Status — Rōmy" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/status" />
 	<meta property="og:description" content="Live operational status and uptime history for Rōmy." />
 	<link rel="canonical" href="https://getromy.app/status" />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Status', item: 'https://getromy.app/status' }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

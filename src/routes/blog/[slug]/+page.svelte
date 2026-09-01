@@ -6,8 +6,11 @@
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import { PIF_OVERALL, PIF_DIMENSIONS, EVAL_PROMPT } from '$lib/benchmarks';
+	import { deriveKeywords } from '$lib/content';
 
 	let { data } = $props();
+
+	const postUrl = `https://getromy.app/blog/${data.post.slug}`;
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -128,14 +131,47 @@
 <svelte:head>
 	<title>{data.post.title} — Romy Blog</title>
 	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
+	<meta name="keywords" content={deriveKeywords(data.post.title, data.post.tag)} />
 	<meta property="og:title" content={data.post.title} />
 	<meta property="og:description" content={data.post.excerpt} />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
+	<meta property="og:url" content={postUrl} />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
+	<meta property="article:publisher" content="https://getromy.app" />
+	<link rel="canonical" href={postUrl} />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: data.post.title,
+		description: data.post.excerpt,
+		image: 'https://getromy.app/og-image.jpg',
+		datePublished: data.post.date,
+		dateModified: data.post.date,
+		url: postUrl,
+		mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+		articleSection: data.post.tag,
+		keywords: deriveKeywords(data.post.title, data.post.tag),
+		author: { '@type': 'Organization', name: 'GetRomy LLC', url: 'https://getromy.app' },
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app',
+			logo: { '@type': 'ImageObject', url: 'https://getromy.app/icon-logo.png' }
+		}
+	})}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://getromy.app/blog' },
+			{ '@type': 'ListItem', position: 3, name: data.post.title, item: postUrl }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

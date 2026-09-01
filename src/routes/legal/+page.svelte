@@ -75,10 +75,24 @@
 		name="description"
 		content="Privacy policy, terms, sub-processors, and other legal documents for Rōmy by GetRomy LLC."
 	/>
-	<meta name="robots" content="index, follow" />
 	<link rel="canonical" href="https://getromy.app/legal" />
 	<meta property="og:title" content="Legal — Rōmy" />
+	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/legal" />
+	<meta
+		property="og:description"
+		content="Privacy policy, terms, sub-processors, and other legal documents for Rōmy by GetRomy LLC."
+	/>
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Legal', item: 'https://getromy.app/legal' }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

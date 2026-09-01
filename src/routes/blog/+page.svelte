@@ -115,6 +115,26 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
 	<link rel="canonical" href="https://getromy.app/blog" />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://getromy.app/blog' }
+		]
+	})}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'ItemList',
+		itemListElement: data.posts.map((post: { slug: string; title: string }, i: number) => ({
+			'@type': 'ListItem',
+			position: i + 1,
+			url: `https://getromy.app/blog/${post.slug}`,
+			name: post.title
+		}))
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

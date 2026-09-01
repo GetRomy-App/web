@@ -103,10 +103,30 @@
 		name="description"
 		content="Submit a request to access, erase, correct, or object to processing of your personal data held by Rōmy (GetRomy LLC)."
 	/>
-	<meta name="robots" content="index, follow" />
 	<link rel="canonical" href="https://getromy.app/privacy/request" />
 	<meta property="og:title" content="Privacy rights request — Rōmy" />
+	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/privacy/request" />
+	<meta
+		property="og:description"
+		content="Submit a request to access, erase, correct, or object to processing of your personal data held by Rōmy (GetRomy LLC)."
+	/>
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Legal', item: 'https://getromy.app/legal' },
+			{
+				'@type': 'ListItem',
+				position: 3,
+				name: 'Privacy rights request',
+				item: 'https://getromy.app/privacy/request'
+			}
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
