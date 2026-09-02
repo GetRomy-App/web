@@ -8,8 +8,22 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
+	import { SITE, OG_IMAGE, breadcrumbJsonLd, blogJsonLd } from '$lib/seo';
 
 	let { data } = $props();
+
+	const jsonLdBreadcrumb = breadcrumbJsonLd([
+		{ name: 'Home', url: SITE },
+		{ name: 'Blog', url: `${SITE}/blog` }
+	]);
+	const jsonLdBlog = blogJsonLd({
+		name: 'Rōmy Blog',
+		description:
+			'Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI.',
+		url: `${SITE}/blog`,
+		posts: data.posts,
+		basePath: '/blog'
+	});
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -69,9 +83,23 @@
 
 			const heroTl = gsap.timeline();
 			heroTl
-				.fromTo(heroBadge, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8, ease: 'custom-ease' })
-				.fromTo(titleSplit.lines, { yPercent: 100 }, { yPercent: 0, duration: 1.2, stagger: 0.1, ease: 'custom-ease' }, '-=0.4')
-				.fromTo(descSplit.lines, { yPercent: 100 }, { yPercent: 0, duration: 1.2, stagger: 0.1, ease: 'custom-ease' }, '-=1.0');
+				.fromTo(
+					heroBadge,
+					{ opacity: 0, y: 10 },
+					{ opacity: 1, y: 0, duration: 0.8, ease: 'custom-ease' }
+				)
+				.fromTo(
+					titleSplit.lines,
+					{ yPercent: 100 },
+					{ yPercent: 0, duration: 1.2, stagger: 0.1, ease: 'custom-ease' },
+					'-=0.4'
+				)
+				.fromTo(
+					descSplit.lines,
+					{ yPercent: 100 },
+					{ yPercent: 0, duration: 1.2, stagger: 0.1, ease: 'custom-ease' },
+					'-=1.0'
+				);
 			gsap.set([heroTitle, heroDesc], { opacity: 1 });
 
 			const blogCards = blogSection.querySelectorAll('.blog-card');
@@ -101,20 +129,42 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
 	<meta
 		name="description"
 		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights, major donor research, wealth screening blog, nonprofit development strategy"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
+	<meta
+		property="og:title"
+		content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising"
+	/>
+	<meta
+		property="og:description"
+		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising."
+	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
+	<meta property="og:image" content={OG_IMAGE} />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta
+		name="twitter:title"
+		content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising"
+	/>
+	<meta
+		name="twitter:description"
+		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising."
+	/>
+	<meta name="twitter:image" content={OG_IMAGE} />
 	<link rel="canonical" href="https://getromy.app/blog" />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdBreadcrumb)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(jsonLdBlog)}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
@@ -133,7 +183,7 @@
 
 			<div bind:this={heroBadge} class="mb-6 opacity-0">
 				<span
-					class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-3 py-1 text-xs font-medium tracking-wide uppercase"
+					class="text-gray-alpha-600 border-gray-alpha-200 px-3 py-1 text-xs font-medium tracking-wide rounded-full border uppercase"
 				>
 					Blog
 				</span>
@@ -150,8 +200,8 @@
 				bind:this={heroDesc}
 				class="text-gray-alpha-600 max-w-xl text-lg leading-relaxed md:text-xl text-pretty opacity-0"
 			>
-				Technical deep-dives, research findings, and perspectives on
-				nonprofit fundraising and AI donor intelligence.
+				Technical deep-dives, research findings, and perspectives on nonprofit fundraising and AI
+				donor intelligence.
 			</p>
 		</section>
 
@@ -161,11 +211,11 @@
 				{#each data.posts as post}
 					<a
 						href="/blog/{post.slug}"
-						class="blog-card group px-4 md:px-8 py-8 flex flex-col gap-3 opacity-0 transition-colors hover:bg-gray-alpha-50 cursor-pointer block no-underline"
+						class="blog-card group px-4 md:px-8 py-8 gap-3 hover:bg-gray-alpha-50 block flex cursor-pointer flex-col no-underline opacity-0 transition-colors"
 					>
-						<div class="flex items-center gap-3">
+						<div class="gap-3 flex items-center">
 							<span
-								class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-2.5 py-0.5 text-xs font-medium"
+								class="text-gray-alpha-600 border-gray-alpha-200 px-2.5 py-0.5 text-xs font-medium rounded-full border"
 							>
 								{post.tag}
 							</span>
@@ -183,7 +233,7 @@
 						</p>
 						<div class="mt-1">
 							<span
-								class="text-gray-alpha-600 group-hover:text-foreground inline-flex items-center gap-1 text-sm font-medium transition-colors"
+								class="text-gray-alpha-600 group-hover:text-foreground gap-1 text-sm font-medium inline-flex items-center transition-colors"
 							>
 								Read more
 								<svg
@@ -192,7 +242,7 @@
 									height="14"
 									viewBox="0 0 24 24"
 									fill="none"
-									class="size-3.5 transition-transform group-hover:translate-x-0.5"
+									class="size-3.5 group-hover:translate-x-0.5 transition-transform"
 									aria-hidden="true"
 								>
 									<path
@@ -220,12 +270,12 @@
 				<p
 					class="text-gray-alpha-600 mb-8 max-w-xl text-lg leading-relaxed md:text-xl text-left text-pretty"
 				>
-					Try Rōmy on your own prospect list. See how purpose-built donor intelligence
-					compares to your current workflow.
+					Try Rōmy on your own prospect list. See how purpose-built donor intelligence compares to
+					your current workflow.
 				</p>
 			</div>
 
-			<div class="flex flex-wrap items-center gap-3">
+			<div class="gap-3 flex flex-wrap items-center">
 				<Button onclick={() => contactModal.showWaitlist()} class="w-fit">
 					Learn More
 					<svg

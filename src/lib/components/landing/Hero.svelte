@@ -46,7 +46,11 @@
 
 			tl = gsap.timeline();
 			const isMobile = window.innerWidth < 768;
-			titleSplit = new SplitText(heroTitle, { type: 'lines', mask: 'lines', linesClass: isMobile ? 'pb-1' : 'pb-4' });
+			titleSplit = new SplitText(heroTitle, {
+				type: 'lines',
+				mask: 'lines',
+				linesClass: isMobile ? 'pb-1' : 'pb-4'
+			});
 			descSplit = new SplitText(heroDesc, { type: 'lines', mask: 'lines' });
 
 			tl.fromTo(
@@ -122,23 +126,37 @@
 	<div bind:this={heroButtons} class="gap-4 sm:flex-row flex flex-col items-center opacity-0">
 		<Button class="group" size="lg" onclick={() => contactModal.showWaitlist()}>
 			Learn More
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="size-4" aria-hidden="true">
-				<path d="M9 6C9 6 15 10.4189 15 12C15 13.5812 9 18 9 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="16"
+				height="16"
+				viewBox="0 0 24 24"
+				fill="none"
+				class="size-4"
+				aria-hidden="true"
+			>
+				<path
+					d="M9 6C9 6 15 10.4189 15 12C15 13.5812 9 18 9 18"
+					stroke="currentColor"
+					stroke-width="1.5"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				></path>
 			</svg>
 		</Button>
 	</div>
 </section>
 
 <section class="px-4 md:px-8 py-8 relative w-full overflow-hidden">
-	<div class="relative rounded-xl overflow-hidden">
+	<div class="rounded-xl relative overflow-hidden">
 		<OrganicBackground />
-		<div class="relative z-10 p-5 sm:p-8">
+		<div class="p-5 sm:p-8 relative z-10">
 			<img
 				bind:this={previewImg}
 				src="/screenshot.webp"
-				alt="Preview of Rōmy"
+				alt="Rōmy donor intelligence dashboard showing AI-powered prospect research, wealth indicators, and giving history for a nonprofit major donor"
 				decoding="async"
-				class="screenshot-img h-auto w-full rounded-md opacity-0"
+				class="screenshot-img rounded-md h-auto w-full opacity-0"
 			/>
 		</div>
 	</div>
