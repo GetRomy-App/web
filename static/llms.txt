@@ -2,13 +2,29 @@
 
 > Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions.
 
-Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles.
+Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles. Rōmy is built specifically for nonprofits with budgets under $2M that cannot justify the $15,000–$50,000/year cost of enterprise donor-intelligence platforms like DonorSearch, iWave, or WealthEngine.
 
 ## Features
 
 - Donor Discovery: AI-powered prospect research with wealth indicators, giving history, and affinity signals
 - Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
 - Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
+- RōmyScore: A giving-capacity and inclination score, distinct from raw wealth screening, that separates prospects who can give from prospects who will give
+
+## Pricing
+
+- Growth: $290/year ($29/mo) — 500 credits/month, RōmyScore 2.0, batch enrichment, 10 knowledge sources
+- Pro: $890/year ($89/mo) — 1,000 credits/month, priority support, advanced analytics, 50 knowledge sources
+- Scale: $1,990/year ($199/mo) — 5,000 credits/month, dedicated support, full analytics, unlimited knowledge sources
+
+## Benchmarks
+
+Rōmy scored 94.1 on PIF-Bench (Prospect Intelligence Fidelity Benchmark), an open evaluation of AI-powered donor prospect research, ahead of Claude (92.3), Gemini (79.1), and ChatGPT (76.9). Full methodology and results: https://getromy.app/labs
+
+## Content
+
+- Blog: https://getromy.app/blog — research and perspectives on nonprofit fundraising, prospect research, and donor intelligence
+- Labs: https://getromy.app/labs — open AI benchmarks for donor prospect research
 
 ## Links
 
