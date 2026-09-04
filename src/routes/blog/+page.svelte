@@ -8,6 +8,7 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
+	import { breadcrumbJsonLd } from '$lib/seo';
 
 	let { data } = $props();
 
@@ -23,6 +24,11 @@
 		const d = new Date(dateStr);
 		return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 	}
+
+	const crumbsJsonLd = breadcrumbJsonLd([
+		{ name: 'Home', path: '/' },
+		{ name: 'Blog', path: '/blog' }
+	]);
 
 	onMount(() => {
 		let splits: SplitText[] = [];
@@ -101,20 +107,27 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
 	<meta
 		name="description"
 		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights, major donor prospecting, wealth screening, small nonprofit fundraising software"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta property="og:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
 	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
+	<meta name="twitter:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta
+		name="twitter:description"
+		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising."
+	/>
 	<link rel="canonical" href="https://getromy.app/blog" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(crumbsJsonLd)}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

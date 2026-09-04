@@ -6,8 +6,21 @@
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import { PIF_OVERALL, PIF_DIMENSIONS, EVAL_PROMPT } from '$lib/benchmarks';
+	import { deriveKeywords, postJsonLd, breadcrumbJsonLd } from '$lib/seo';
 
 	let { data } = $props();
+
+	const keywords = $derived(deriveKeywords(data.post));
+	const articleJsonLd = $derived(
+		postJsonLd({ ...data.post, path: `/labs/blog/${data.post.slug}` })
+	);
+	const crumbsJsonLd = $derived(
+		breadcrumbJsonLd([
+			{ name: 'Home', path: '/' },
+			{ name: 'Labs', path: '/labs' },
+			{ name: data.post.title, path: `/labs/blog/${data.post.slug}` }
+		])
+	);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -127,16 +140,22 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
+	<title>{data.post.title} — Rōmy Labs</title>
 	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
+	<meta name="keywords" content={keywords} />
 	<meta property="og:title" content={data.post.title} />
 	<meta property="og:description" content={data.post.excerpt} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={data.post.excerpt} />
 	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(articleJsonLd)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(crumbsJsonLd)}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
