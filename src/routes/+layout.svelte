@@ -37,23 +37,19 @@
 		else lenis.start();
 	});
 
-	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
-	const description =
-		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
-	const url = 'https://getromy.app/';
+	// Only sitewide, route-independent defaults live here. Per-page title, description,
+	// keywords, canonical, Open Graph and Twitter tags belong in each route's own
+	// <svelte:head> (or LegalPage.svelte) — putting page copy here caused every route to
+	// emit a *second*, conflicting set of these tags (this layout's plus the page's own),
+	// including a canonical link that always pointed at "/". Social scrapers and search
+	// engines take the first tag they see for a given property, so every non-homepage URL
+	// was at risk of being represented — or canonicalized — as the homepage instead of itself.
 </script>
 
 <svelte:head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<title>{title}</title>
-	<meta name="title" content={title} />
-	<meta name="description" content={description} />
-	<meta
-		name="keywords"
-		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
-	/>
 	<meta name="author" content="GetRomy LLC" />
 	<meta
 		name="robots"
@@ -62,21 +58,13 @@
 	<meta name="theme-color" content="#0d0d0e" media="(prefers-color-scheme: dark)" />
 	<meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
 
-	<!-- Open Graph -->
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content={url} />
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
+	<!-- Open Graph / Twitter fields shared by every page; pages set og:title, og:description,
+	     og:url, og:type and twitter:title/description themselves. -->
 	<meta property="og:site_name" content="Rōmy" />
 	<meta property="og:locale" content="en_US" />
-
-	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@RomyFindsMoney" />
 	<meta name="twitter:creator" content="@RomyFindsMoney" />
-	<meta name="twitter:url" content={url} />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={description} />
 
 	<!-- Performance -->
 	<link
@@ -96,39 +84,8 @@
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 	<link rel="manifest" href="/site.webmanifest" />
 
-	<link rel="canonical" href={url} />
-
-	<!-- Structured Data (JSON-LD) -->
-	{@html `<script type="application/ld+json">${JSON.stringify({
-		'@context': 'https://schema.org',
-		'@type': 'SoftwareApplication',
-		name: 'Rōmy',
-		url: 'https://getromy.app',
-		applicationCategory: 'BusinessApplication',
-		operatingSystem: 'macOS, Windows, Linux',
-		description:
-			'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
-		offers: {
-			'@type': 'Offer',
-			price: '0',
-			priceCurrency: 'USD',
-			availability: 'https://schema.org/InStock'
-		},
-		publisher: {
-			'@type': 'Organization',
-			name: 'GetRomy LLC',
-			url: 'https://getromy.app'
-		},
-		featureList: [
-			'AI-powered donor prospect research',
-			'Wealth indicator screening',
-			'Giving history analysis',
-			'Affinity signal detection',
-			'Actionable donor profiles',
-			'No enterprise contracts required'
-		]
-	})}</script>`}
-
+	<!-- Structured Data (JSON-LD) — the organization entity is the same on every page,
+	     so it's safe (and recommended) to repeat sitewide, unlike the tags above. -->
 	{@html `<script type="application/ld+json">${JSON.stringify({
 		'@context': 'https://schema.org',
 		'@type': 'Organization',
