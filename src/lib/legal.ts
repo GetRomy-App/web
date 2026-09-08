@@ -72,6 +72,16 @@ export async function getLegalPage(slug: string): Promise<LegalPage | null> {
 	}
 }
 
+/** Builds the shared SEO payload each legal route hands to the root layout via `load()`. */
+export function legalSeo(page: LegalPageMeta, canonicalPath: string) {
+	return {
+		title: `${page.title} — Rōmy`,
+		description: page.description || undefined,
+		url: `https://getromy.app${canonicalPath}`,
+		type: 'website' as const
+	};
+}
+
 export async function getAllLegalPages(): Promise<LegalPageMeta[]> {
 	let entries: Awaited<ReturnType<typeof fs.readdir>>;
 	try {

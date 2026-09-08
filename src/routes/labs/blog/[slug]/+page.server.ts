@@ -12,5 +12,16 @@ export async function entries() {
 export const load: PageServerLoad = async ({ params }) => {
 	const post = await getPost(params.slug);
 	if (!post || !post.has_benchmarks) throw error(404, 'Post not found');
-	return { post };
+	return {
+		post,
+		seo: {
+			title: `${post.title} — Rōmy Labs`,
+			description: post.excerpt,
+			keywords: `donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, ${post.tag.toLowerCase()}`,
+			url: `https://getromy.app/labs/blog/${post.slug}`,
+			type: 'article' as const,
+			publishedTime: post.date,
+			section: post.tag
+		}
+	};
 };
