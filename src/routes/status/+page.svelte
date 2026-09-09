@@ -15,8 +15,14 @@
 	import type { HistoryDoc, ServiceSummary, OverallStatus } from '$lib/status/types';
 	import { productUrl } from '$lib/release';
 	import { contactModal } from '$lib/stores/contact.svelte';
+	import { breadcrumbJsonLd } from '$lib/seo';
 
 	let { data } = $props();
+
+	const breadcrumbLd = breadcrumbJsonLd([
+		{ name: 'Home', path: '/' },
+		{ name: 'Status', path: '/status' }
+	]);
 
 	// The prerendered load data is stable for this page instance; capture it once
 	// so seeding $state from it doesn't trip the "reference captures initial value"
@@ -136,12 +142,18 @@
 		name="description"
 		content="Live operational status and uptime history for Rōmy — the donor-intelligence app at intel.getromy.app and getromy.app."
 	/>
-	<meta name="robots" content="index, follow" />
+	<meta name="keywords" content="Rōmy status, Rōmy uptime, donor intelligence platform status" />
+	<meta
+		name="robots"
+		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+	/>
 	<meta property="og:title" content="Status — Rōmy" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/status" />
 	<meta property="og:description" content="Live operational status and uptime history for Rōmy." />
 	<link rel="canonical" href="https://getromy.app/status" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

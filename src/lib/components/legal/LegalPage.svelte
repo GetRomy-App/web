@@ -5,6 +5,7 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import { breadcrumbJsonLd } from '$lib/seo';
 
 	interface Props {
 		title: string;
@@ -15,6 +16,14 @@
 	}
 
 	let { title, description = '', effective = '', content, canonicalPath }: Props = $props();
+
+	const breadcrumbLd = $derived(
+		breadcrumbJsonLd([
+			{ name: 'Home', path: '/' },
+			{ name: 'Legal', path: '/legal' },
+			{ name: title, path: canonicalPath }
+		])
+	);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -61,7 +70,11 @@
 	{#if description}
 		<meta name="description" content={description} />
 	{/if}
-	<meta name="robots" content="index, follow" />
+	<meta name="keywords" content="{title}, Rōmy legal, GetRomy LLC, donor intelligence platform policy" />
+	<meta
+		name="robots"
+		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+	/>
 	<meta property="og:title" content="{title} — Rōmy" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app{canonicalPath}" />
@@ -69,6 +82,8 @@
 		<meta property="og:description" content={description} />
 	{/if}
 	<link rel="canonical" href="https://getromy.app{canonicalPath}" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

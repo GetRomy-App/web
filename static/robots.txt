@@ -1,4 +1,28 @@
 User-agent: *
 Allow: /
 
+# Explicitly allow the major AI/answer-engine crawlers (GEO): they already
+# match the wildcard rule above, but naming them keeps that intentional as
+# the file evolves, rather than something a future disallow rule breaks by accident.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://getromy.app/sitemap.xml

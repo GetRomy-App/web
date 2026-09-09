@@ -5,8 +5,14 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import { breadcrumbJsonLd } from '$lib/seo';
 
 	let { data } = $props();
+
+	const breadcrumbLd = breadcrumbJsonLd([
+		{ name: 'Home', path: '/' },
+		{ name: 'Legal', path: '/legal' }
+	]);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -75,10 +81,20 @@
 		name="description"
 		content="Privacy policy, terms, sub-processors, and other legal documents for Rōmy by GetRomy LLC."
 	/>
-	<meta name="robots" content="index, follow" />
+	<meta
+		name="keywords"
+		content="Rōmy legal, GetRomy LLC privacy policy, Rōmy terms of service, donor intelligence platform compliance"
+	/>
+	<meta
+		name="robots"
+		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+	/>
 	<link rel="canonical" href="https://getromy.app/legal" />
 	<meta property="og:title" content="Legal — Rōmy" />
+	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/legal" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

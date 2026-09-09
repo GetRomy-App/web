@@ -5,6 +5,12 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import { breadcrumbJsonLd } from '$lib/seo';
+
+	const breadcrumbLd = breadcrumbJsonLd([
+		{ name: 'Home', path: '/' },
+		{ name: 'Privacy rights request', path: '/privacy/request' }
+	]);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -103,10 +109,17 @@
 		name="description"
 		content="Submit a request to access, erase, correct, or object to processing of your personal data held by Rōmy (GetRomy LLC)."
 	/>
-	<meta name="robots" content="index, follow" />
+	<meta name="keywords" content="Rōmy privacy rights request, GetRomy LLC data request, GDPR access request" />
+	<meta
+		name="robots"
+		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+	/>
 	<link rel="canonical" href="https://getromy.app/privacy/request" />
 	<meta property="og:title" content="Privacy rights request — Rōmy" />
+	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/privacy/request" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
