@@ -2,6 +2,7 @@
 	import './layout.css';
 	import { onMount } from 'svelte';
 	import Lenis from 'lenis';
+	import { page } from '$app/state';
 	import { gsap, ScrollTrigger, registerGsap } from '$lib/gsap';
 	import ContactModal from '$lib/components/ui/ContactModal.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
@@ -39,44 +40,30 @@
 
 	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
 	const description =
-		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
+		'Rōmy helps small nonprofits find major donors for a fraction of the cost of legacy tools. AI-powered prospect research, wealth screening, and giving history.';
 	const url = 'https://getromy.app/';
+	const ogImage = 'https://getromy.app/og-image.jpg';
+
+	// The tags below describe the product itself — they belong only on the homepage.
+	// Every other route (blog posts, labs, legal pages, status) defines its own
+	// title/description/canonical/JSON-LD in its own <svelte:head>; rendering the
+	// homepage's tags there too created duplicate <title>/<meta description>/
+	// rel=canonical/JSON-LD on every page, which made Google treat the homepage as
+	// the canonical version of the whole site instead of indexing each page on its
+	// own terms.
+	let isHome = $derived(page.url.pathname === '/');
 </script>
 
 <svelte:head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<title>{title}</title>
-	<meta name="title" content={title} />
-	<meta name="description" content={description} />
-	<meta
-		name="keywords"
-		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
-	/>
-	<meta name="author" content="GetRomy LLC" />
 	<meta
 		name="robots"
 		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
 	/>
 	<meta name="theme-color" content="#0d0d0e" media="(prefers-color-scheme: dark)" />
 	<meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
-
-	<!-- Open Graph -->
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content={url} />
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
-	<meta property="og:site_name" content="Rōmy" />
-	<meta property="og:locale" content="en_US" />
-
-	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:site" content="@RomyFindsMoney" />
-	<meta name="twitter:creator" content="@RomyFindsMoney" />
-	<meta name="twitter:url" content={url} />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={description} />
 
 	<!-- Performance -->
 	<link
@@ -96,39 +83,7 @@
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 	<link rel="manifest" href="/site.webmanifest" />
 
-	<link rel="canonical" href={url} />
-
-	<!-- Structured Data (JSON-LD) -->
-	{@html `<script type="application/ld+json">${JSON.stringify({
-		'@context': 'https://schema.org',
-		'@type': 'SoftwareApplication',
-		name: 'Rōmy',
-		url: 'https://getromy.app',
-		applicationCategory: 'BusinessApplication',
-		operatingSystem: 'macOS, Windows, Linux',
-		description:
-			'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
-		offers: {
-			'@type': 'Offer',
-			price: '0',
-			priceCurrency: 'USD',
-			availability: 'https://schema.org/InStock'
-		},
-		publisher: {
-			'@type': 'Organization',
-			name: 'GetRomy LLC',
-			url: 'https://getromy.app'
-		},
-		featureList: [
-			'AI-powered donor prospect research',
-			'Wealth indicator screening',
-			'Giving history analysis',
-			'Affinity signal detection',
-			'Actionable donor profiles',
-			'No enterprise contracts required'
-		]
-	})}</script>`}
-
+	<!-- Organization identity — safe and useful on every page, unlike the homepage-only tags below. -->
 	{@html `<script type="application/ld+json">${JSON.stringify({
 		'@context': 'https://schema.org',
 		'@type': 'Organization',
@@ -143,6 +98,72 @@
 		},
 		sameAs: ['https://x.com/RomyFindsMoney', 'https://github.com/GetRomy-App']
 	})}</script>`}
+
+	{#if isHome}
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		<meta
+			name="keywords"
+			content="donor intelligence software, nonprofit donor research tool, AI prospect research, donor wealth screening, small nonprofit fundraising software, major donor prospecting tool, donor discovery platform, giving history lookup, philanthropy intelligence, nonprofit fundraising CRM, affordable wealth screening, donor management software, nonprofit technology, capacity ratings alternative, donor prospect list builder"
+		/>
+		<meta name="author" content="GetRomy LLC" />
+
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:site_name" content="Rōmy" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1920" />
+		<meta property="og:image:height" content="1080" />
+		<meta property="og:image:alt" content={title} />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@RomyFindsMoney" />
+		<meta name="twitter:creator" content="@RomyFindsMoney" />
+		<meta name="twitter:url" content={url} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+
+		<link rel="canonical" href={url} />
+
+		<!-- Structured Data (JSON-LD) -->
+		{@html `<script type="application/ld+json">${JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'SoftwareApplication',
+			name: 'Rōmy',
+			url: 'https://getromy.app',
+			applicationCategory: 'BusinessApplication',
+			operatingSystem: 'macOS, Windows, Linux',
+			description:
+				'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
+			image: ogImage,
+			offers: {
+				'@type': 'Offer',
+				price: '0',
+				priceCurrency: 'USD',
+				availability: 'https://schema.org/InStock'
+			},
+			publisher: {
+				'@type': 'Organization',
+				name: 'GetRomy LLC',
+				url: 'https://getromy.app'
+			},
+			featureList: [
+				'AI-powered donor prospect research',
+				'Wealth indicator screening',
+				'Giving history analysis',
+				'Affinity signal detection',
+				'Actionable donor profiles',
+				'No enterprise contracts required'
+			]
+		})}</script>`}
+	{/if}
 </svelte:head>
 
 {@render children()}

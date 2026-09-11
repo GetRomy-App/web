@@ -51,6 +51,74 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 	return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
+/** Extra search terms per post tag, layered on top of the core product keywords below. */
+const TAG_KEYWORDS: Record<string, string> = {
+	'Field Notes':
+		'major donor fundraising stories, donor stewardship, planned giving, donor relationships, nonprofit development officer',
+	Industry:
+		'nonprofit fundraising trends, philanthropy industry analysis, fundraising strategy, nonprofit sector insights',
+	Research:
+		'AI donor research benchmark, prospect research accuracy, donor intelligence testing, fundraising AI evaluation',
+	Engineering:
+		'donor intelligence software engineering, fundraising technology build, AI product development, nonprofit software architecture',
+	'Data Science':
+		'donor data science, wealth screening models, predictive fundraising analytics, giving capacity modeling'
+};
+
+const STOPWORDS = new Set([
+	'the',
+	'a',
+	'an',
+	'and',
+	'or',
+	'of',
+	'to',
+	'in',
+	'on',
+	'at',
+	'is',
+	'are',
+	'for',
+	'with',
+	'your',
+	'you',
+	'was',
+	'her',
+	'his',
+	'it',
+	'its',
+	'be',
+	'as',
+	'by',
+	'who',
+	'that',
+	'this',
+	'not',
+	'we',
+	'has',
+	'have'
+]);
+
+/**
+ * Per-post SEO keyword list: core product terms + tag-specific phrases + a few
+ * distinctive words pulled from the post's own title. Doesn't touch the post's
+ * title/excerpt/body — only the <meta name="keywords"> generated from them.
+ */
+export function getPostKeywords(post: Pick<PostMeta, 'title' | 'tag'>): string {
+	const base =
+		'donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening';
+	const tagKeywords = TAG_KEYWORDS[post.tag] ?? post.tag.toLowerCase();
+	const titlePhrase = post.title
+		.toLowerCase()
+		.replace(/[^a-z0-9\s]/g, '')
+		.split(/\s+/)
+		.filter((w) => w.length > 3 && !STOPWORDS.has(w))
+		.slice(0, 5)
+		.join(' ');
+
+	return [base, tagKeywords, titlePhrase].filter(Boolean).join(', ');
+}
+
 export async function getPost(slug: string): Promise<Post | null> {
 	const filePath = path.join(CONTENT_DIR, slug, 'index.mdoc');
 	try {
