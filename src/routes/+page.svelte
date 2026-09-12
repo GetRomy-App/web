@@ -40,7 +40,46 @@
 			}
 		);
 	});
+
+	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
+	const description =
+		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
+	const url = 'https://getromy.app/';
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="title" content={title} />
+	<meta name="description" content={description} />
+	<meta
+		name="keywords"
+		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
+	/>
+	<meta
+		name="robots"
+		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+	/>
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={url} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@RomyFindsMoney" />
+	<meta name="twitter:creator" content="@RomyFindsMoney" />
+	<meta name="twitter:url" content={url} />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
+
+	<link rel="canonical" href={url} />
+</svelte:head>
 
 <Footer bind:footerText />
 
