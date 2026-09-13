@@ -42,6 +42,37 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Rōmy — Donor Intelligence for Small Nonprofits</title>
+	<meta name="title" content="Rōmy — Donor Intelligence for Small Nonprofits" />
+	<meta
+		name="description"
+		content="Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams."
+	/>
+	<meta
+		name="keywords"
+		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
+	/>
+	<link rel="canonical" href="https://getromy.app/" />
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://getromy.app/" />
+	<meta property="og:title" content="Rōmy — Donor Intelligence for Small Nonprofits" />
+	<meta
+		property="og:description"
+		content="Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams."
+	/>
+
+	<!-- Twitter -->
+	<meta name="twitter:url" content="https://getromy.app/" />
+	<meta name="twitter:title" content="Rōmy — Donor Intelligence for Small Nonprofits" />
+	<meta
+		name="twitter:description"
+		content="Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams."
+	/>
+</svelte:head>
+
 <Footer bind:footerText />
 
 <Navbar />
