@@ -2,6 +2,7 @@
 	import './layout.css';
 	import { onMount } from 'svelte';
 	import Lenis from 'lenis';
+	import { page } from '$app/state';
 	import { gsap, ScrollTrigger, registerGsap } from '$lib/gsap';
 	import ContactModal from '$lib/components/ui/ContactModal.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
@@ -37,10 +38,23 @@
 		else lenis.start();
 	});
 
-	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
-	const description =
+	const DEFAULT_TITLE = 'Rōmy — Donor Intelligence for Small Nonprofits';
+	const DEFAULT_DESCRIPTION =
 		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
-	const url = 'https://getromy.app/';
+	const DEFAULT_KEYWORDS =
+		'nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators';
+	const DEFAULT_IMAGE = 'https://getromy.app/og-image.jpg';
+
+	// Every route's <title>/description/og/twitter tags are driven from here — the single
+	// place they're rendered — so a page-level svelte:head can't silently duplicate or lose
+	// to these instead of overriding them (see `seo` on each route's load return).
+	let seo = $derived(page.data.seo);
+	let title = $derived(seo?.title ?? DEFAULT_TITLE);
+	let description = $derived(seo?.description ?? DEFAULT_DESCRIPTION);
+	let keywords = $derived(seo?.keywords ?? DEFAULT_KEYWORDS);
+	let ogType = $derived(seo?.type ?? 'website');
+	let image = $derived(seo?.image ?? DEFAULT_IMAGE);
+	let url = $derived(`https://getromy.app${seo?.path ?? '/'}`);
 </script>
 
 <svelte:head>
@@ -50,10 +64,7 @@
 	<title>{title}</title>
 	<meta name="title" content={title} />
 	<meta name="description" content={description} />
-	<meta
-		name="keywords"
-		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
-	/>
+	<meta name="keywords" content={keywords} />
 	<meta name="author" content="GetRomy LLC" />
 	<meta
 		name="robots"
@@ -63,20 +74,27 @@
 	<meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
 
 	<!-- Open Graph -->
-	<meta property="og:type" content="website" />
+	<meta property="og:type" content={ogType} />
 	<meta property="og:url" content={url} />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 	<meta property="og:site_name" content="Rōmy" />
 	<meta property="og:locale" content="en_US" />
 
+	<meta property="og:image" content={image} />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:alt" content={title} />
+
 	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@RomyFindsMoney" />
 	<meta name="twitter:creator" content="@RomyFindsMoney" />
 	<meta name="twitter:url" content={url} />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={image} />
+	<meta name="twitter:image:alt" content={title} />
 
 	<!-- Performance -->
 	<link

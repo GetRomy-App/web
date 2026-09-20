@@ -4,7 +4,9 @@ declare global {
 	namespace App {
 		// interface Error {}
 		// interface Locals {}
-		// interface PageData {}
+		interface PageData {
+			seo?: import('$lib/seo').SeoData;
+		}
 		// interface PageState {}
 		// interface Platform {}
 	}
