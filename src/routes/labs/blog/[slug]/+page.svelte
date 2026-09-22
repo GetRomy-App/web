@@ -127,16 +127,64 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
+	<title>{data.post.title} — Rōmy Labs</title>
 	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
+	<meta name="keywords" content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, PIF-Bench, {data.post.tag.toLowerCase()}, {data.post.title.toLowerCase()}" />
 	<meta property="og:title" content={data.post.title} />
 	<meta property="og:description" content={data.post.excerpt} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
 	<meta property="article:published_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
+	<meta property="article:publisher" content="https://getromy.app" />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={data.post.excerpt} />
 	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: data.post.title,
+		description: data.post.excerpt,
+		datePublished: data.post.date,
+		dateModified: data.post.date,
+		mainEntityOfPage: {
+			'@type': 'WebPage',
+			'@id': `https://getromy.app/labs/blog/${data.post.slug}`
+		},
+		url: `https://getromy.app/labs/blog/${data.post.slug}`,
+		image: 'https://getromy.app/og-image.jpg',
+		articleSection: data.post.tag,
+		author: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app'
+		},
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app',
+			logo: {
+				'@type': 'ImageObject',
+				url: 'https://getromy.app/icon-logo.png'
+			}
+		}
+	})}</script>`}
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Labs', item: 'https://getromy.app/labs' },
+			{
+				'@type': 'ListItem',
+				position: 3,
+				name: data.post.title,
+				item: `https://getromy.app/labs/blog/${data.post.slug}`
+			}
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
