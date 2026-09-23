@@ -1,30 +1,20 @@
 {
 	"schemaVersion": 2,
-	"generatedAt": "2026-09-23T14:59:04.674Z",
+	"generatedAt": "2026-09-23T18:58:28.371Z",
 	"degradedThresholdMs": 6000,
 	"services": {
 		"app": {
 			"lastCheck": {
-				"t": 1790175544675,
+				"t": 1790189908372,
 				"ok": true,
 				"status": 200,
-				"ms": 2359,
+				"ms": 2677,
 				"error": null,
 				"h": "ok",
-				"err": 7,
+				"err": 4,
 				"errT": 25
 			},
 			"recent": [
-				{
-					"t": 1787600958316,
-					"ok": true,
-					"status": 200,
-					"ms": 1842,
-					"error": null,
-					"h": "ok",
-					"err": 1,
-					"errT": 25
-				},
 				{
 					"t": 1787602504737,
 					"ok": true,
@@ -2414,6 +2404,16 @@
 					"h": "ok",
 					"err": 7,
 					"errT": 25
+				},
+				{
+					"t": 1790189908372,
+					"ok": true,
+					"status": 200,
+					"ms": 2677,
+					"error": null,
+					"h": "ok",
+					"err": 4,
+					"errT": 25
 				}
 			],
 			"daily": {
@@ -2766,27 +2766,21 @@
 					"sumMs": 8748
 				},
 				"2026-09-23": {
-					"up": 4,
-					"total": 4,
+					"up": 5,
+					"total": 5,
 					"degraded": 0,
-					"sumMs": 7706
+					"sumMs": 10383
 				}
 			}
 		},
 		"app:database": {
 			"lastCheck": {
-				"t": 1790175544674,
+				"t": 1790189908371,
 				"ok": true,
-				"ms": 454,
+				"ms": 86,
 				"error": null
 			},
 			"recent": [
-				{
-					"t": 1789366393748,
-					"ok": true,
-					"ms": 34,
-					"error": null
-				},
 				{
 					"t": 1789390847461,
 					"ok": true,
@@ -3140,6 +3134,12 @@
 					"ok": true,
 					"ms": 454,
 					"error": null
+				},
+				{
+					"t": 1790189908371,
+					"ok": true,
+					"ms": 86,
+					"error": null
 				}
 			],
 			"daily": {
@@ -3492,27 +3492,21 @@
 					"sumMs": 329
 				},
 				"2026-09-23": {
-					"up": 4,
-					"total": 4,
+					"up": 5,
+					"total": 5,
 					"degraded": 0,
-					"sumMs": 881
+					"sumMs": 967
 				}
 			}
 		},
 		"app:cache": {
 			"lastCheck": {
-				"t": 1790175544674,
+				"t": 1790189908371,
 				"ok": true,
-				"ms": 92,
+				"ms": 97,
 				"error": null
 			},
 			"recent": [
-				{
-					"t": 1789366393748,
-					"ok": true,
-					"ms": 42,
-					"error": null
-				},
 				{
 					"t": 1789390847461,
 					"ok": true,
@@ -3866,6 +3860,12 @@
 					"ok": true,
 					"ms": 92,
 					"error": null
+				},
+				{
+					"t": 1790189908371,
+					"ok": true,
+					"ms": 97,
+					"error": null
 				}
 			],
 			"daily": {
@@ -4218,27 +4218,21 @@
 					"sumMs": 376
 				},
 				"2026-09-23": {
-					"up": 4,
-					"total": 4,
+					"up": 5,
+					"total": 5,
 					"degraded": 0,
-					"sumMs": 263
+					"sumMs": 360
 				}
 			}
 		},
 		"app:ai_gateway": {
 			"lastCheck": {
-				"t": 1790175544674,
+				"t": 1790189908371,
 				"ok": true,
-				"ms": 337,
+				"ms": 253,
 				"error": null
 			},
 			"recent": [
-				{
-					"t": 1789366393748,
-					"ok": true,
-					"ms": 93,
-					"error": null
-				},
 				{
 					"t": 1789390847461,
 					"ok": true,
@@ -4592,6 +4586,12 @@
 					"ok": true,
 					"ms": 337,
 					"error": null
+				},
+				{
+					"t": 1790189908371,
+					"ok": true,
+					"ms": 253,
+					"error": null
 				}
 			],
 			"daily": {
@@ -4944,27 +4944,21 @@
 					"sumMs": 841
 				},
 				"2026-09-23": {
-					"up": 4,
-					"total": 4,
+					"up": 5,
+					"total": 5,
 					"degraded": 0,
-					"sumMs": 766
+					"sumMs": 1019
 				}
 			}
 		},
 		"app:billing": {
 			"lastCheck": {
-				"t": 1790175544674,
+				"t": 1790189908371,
 				"ok": true,
-				"ms": 312,
+				"ms": 341,
 				"error": null
 			},
 			"recent": [
-				{
-					"t": 1789366393748,
-					"ok": true,
-					"ms": 69,
-					"error": null
-				},
 				{
 					"t": 1789390847461,
 					"ok": true,
@@ -5318,6 +5312,12 @@
 					"ok": true,
 					"ms": 312,
 					"error": null
+				},
+				{
+					"t": 1790189908371,
+					"ok": true,
+					"ms": 341,
+					"error": null
 				}
 			],
 			"daily": {
@@ -5670,27 +5670,21 @@
 					"sumMs": 1103
 				},
 				"2026-09-23": {
-					"up": 4,
-					"total": 4,
+					"up": 5,
+					"total": 5,
 					"degraded": 0,
-					"sumMs": 764
+					"sumMs": 1105
 				}
 			}
 		},
 		"app:email": {
 			"lastCheck": {
-				"t": 1790175544674,
+				"t": 1790189908371,
 				"ok": true,
-				"ms": 218,
+				"ms": 169,
 				"error": null
 			},
 			"recent": [
-				{
-					"t": 1789366393748,
-					"ok": true,
-					"ms": 92,
-					"error": null
-				},
 				{
 					"t": 1789390847461,
 					"ok": true,
@@ -6046,6 +6040,12 @@
 					"ok": true,
 					"ms": 218,
 					"error": null
+				},
+				{
+					"t": 1790189908371,
+					"ok": true,
+					"ms": 169,
+					"error": null
 				}
 			],
 			"daily": {
@@ -6398,31 +6398,23 @@
 					"sumMs": 5846
 				},
 				"2026-09-23": {
-					"up": 4,
-					"total": 4,
+					"up": 5,
+					"total": 5,
 					"degraded": 0,
-					"sumMs": 1437
+					"sumMs": 1606
 				}
 			}
 		},
 		"web": {
 			"lastCheck": {
-				"t": 1790175547576,
+				"t": 1790189911601,
 				"ok": true,
 				"status": 200,
-				"ms": 778,
+				"ms": 604,
 				"error": null,
 				"h": "ok"
 			},
 			"recent": [
-				{
-					"t": 1787600960710,
-					"ok": true,
-					"status": 200,
-					"ms": 560,
-					"error": null,
-					"h": "ok"
-				},
 				{
 					"t": 1787602509254,
 					"ok": true,
@@ -8334,6 +8326,14 @@
 					"ms": 778,
 					"error": null,
 					"h": "ok"
+				},
+				{
+					"t": 1790189911601,
+					"ok": true,
+					"status": 200,
+					"ms": 604,
+					"error": null,
+					"h": "ok"
 				}
 			],
 			"daily": {
@@ -8686,27 +8686,21 @@
 					"sumMs": 2630
 				},
 				"2026-09-23": {
-					"up": 4,
-					"total": 4,
+					"up": 5,
+					"total": 5,
 					"degraded": 0,
-					"sumMs": 2951
+					"sumMs": 3555
 				}
 			}
 		},
 		"web:email": {
 			"lastCheck": {
-				"t": 1790175544674,
+				"t": 1790189908371,
 				"ok": true,
-				"ms": 73,
+				"ms": 64,
 				"error": null
 			},
 			"recent": [
-				{
-					"t": 1789366393748,
-					"ok": true,
-					"ms": 109,
-					"error": null
-				},
 				{
 					"t": 1789390847461,
 					"ok": true,
@@ -9060,6 +9054,12 @@
 					"ok": true,
 					"ms": 73,
 					"error": null
+				},
+				{
+					"t": 1790189908371,
+					"ok": true,
+					"ms": 64,
+					"error": null
 				}
 			],
 			"daily": {
@@ -9412,10 +9412,10 @@
 					"sumMs": 1925
 				},
 				"2026-09-23": {
-					"up": 4,
-					"total": 4,
+					"up": 5,
+					"total": 5,
 					"degraded": 0,
-					"sumMs": 1833
+					"sumMs": 1897
 				}
 			}
 		}
