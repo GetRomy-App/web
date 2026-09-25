@@ -40,7 +40,71 @@
 			}
 		);
 	});
+
+	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
+	const description =
+		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
+	const url = 'https://getromy.app/';
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="title" content={title} />
+	<meta name="description" content={description} />
+	<meta
+		name="keywords"
+		content="nonprofit donor intelligence, donor prospect research software, wealth screening for nonprofits, AI donor research tool, major donor discovery platform, giving history analysis, affordable donor intelligence, prospect research for small nonprofits, nonprofit fundraising software, donor wealth indicators, philanthropy intelligence platform, nonprofit CRM alternative, find major donors, donor discovery AI, small nonprofit fundraising tools"
+	/>
+	<meta
+		name="robots"
+		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+	/>
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={url} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+
+	<!-- Twitter -->
+	<meta name="twitter:url" content={url} />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+
+	<link rel="canonical" href={url} />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		name: 'Rōmy',
+		url: 'https://getromy.app',
+		applicationCategory: 'BusinessApplication',
+		operatingSystem: 'macOS, Windows, Linux',
+		description:
+			'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
+		image: 'https://getromy.app/og-image.jpg',
+		offers: {
+			'@type': 'Offer',
+			price: '0',
+			priceCurrency: 'USD',
+			availability: 'https://schema.org/InStock'
+		},
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			url: 'https://getromy.app'
+		},
+		featureList: [
+			'AI-powered donor prospect research',
+			'Wealth indicator screening',
+			'Giving history analysis',
+			'Affinity signal detection',
+			'Actionable donor profiles',
+			'No enterprise contracts required'
+		]
+	})}</script>`}
+</svelte:head>
 
 <Footer bind:footerText />
 

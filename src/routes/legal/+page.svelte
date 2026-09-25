@@ -75,10 +75,23 @@
 		name="description"
 		content="Privacy policy, terms, sub-processors, and other legal documents for Rōmy by GetRomy LLC."
 	/>
-	<meta name="robots" content="index, follow" />
+	<meta
+		name="robots"
+		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+	/>
 	<link rel="canonical" href="https://getromy.app/legal" />
 	<meta property="og:title" content="Legal — Rōmy" />
+	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/legal" />
+	<meta
+		property="og:description"
+		content="Privacy policy, terms, sub-processors, and other legal documents for Rōmy by GetRomy LLC."
+	/>
+	<meta name="twitter:title" content="Legal — Rōmy" />
+	<meta
+		name="twitter:description"
+		content="Privacy policy, terms, sub-processors, and other legal documents for Rōmy by GetRomy LLC."
+	/>
 </svelte:head>
 
 <Footer bind:footerText />

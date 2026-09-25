@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://getromy.app/sitemap.xml
+
+# LLM context file (for AI assistants and answer engines): https://getromy.app/llms.txt

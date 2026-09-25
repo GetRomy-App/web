@@ -101,20 +101,41 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
 	<meta
 		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
+		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, donor prospect research, wealth screening, and purpose-built AI — from the team building Rōmy."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, donor intelligence, donor prospect research, AI for nonprofits, wealth screening, major donor fundraising, fundraising insights, nonprofit development"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
+	<meta
+		name="robots"
+		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+	/>
+	<meta property="og:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta
+		property="og:description"
+		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, donor prospect research, and purpose-built AI."
+	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
+	<meta name="twitter:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta
+		name="twitter:description"
+		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, donor prospect research, and purpose-built AI."
+	/>
 	<link rel="canonical" href="https://getromy.app/blog" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Rōmy', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://getromy.app/blog' }
+		]
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
