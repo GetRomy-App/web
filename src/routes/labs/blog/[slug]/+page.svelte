@@ -21,6 +21,45 @@
 		return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 	}
 
+	/** Search snippets truncate past ~160 chars; keep the long-form excerpt intact for the page itself. */
+	function truncate(text: string, max = 160): string {
+		if (text.length <= max) return text;
+		const cut = text.slice(0, max + 1).replace(/\s+\S*$/, '');
+		return `${cut}…`;
+	}
+
+	const metaDescription = $derived(truncate(data.post.excerpt));
+	const postUrl = $derived(`https://getromy.app/labs/blog/${data.post.slug}`);
+
+	const articleLd = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'TechArticle',
+		headline: data.post.title,
+		description: metaDescription,
+		datePublished: data.post.date,
+		dateModified: data.post.date,
+		url: postUrl,
+		mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+		image: 'https://getromy.app/og-image.jpg',
+		articleSection: data.post.tag,
+		author: { '@type': 'Organization', name: 'Rōmy', url: 'https://getromy.app' },
+		publisher: {
+			'@type': 'Organization',
+			name: 'GetRomy LLC',
+			logo: { '@type': 'ImageObject', url: 'https://getromy.app/icon-logo.png' }
+		}
+	});
+
+	const breadcrumbLd = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' },
+			{ '@type': 'ListItem', position: 2, name: 'Labs', item: 'https://getromy.app/labs' },
+			{ '@type': 'ListItem', position: 3, name: data.post.title, item: postUrl }
+		]
+	});
+
 	onMount(() => {
 		let splits: SplitText[] = [];
 		let mounted = true;
@@ -127,16 +166,21 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
+	<title>{data.post.title} — Rōmy Labs</title>
+	<meta name="description" content={metaDescription} />
 	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
 	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
+	<meta property="og:description" content={metaDescription} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
 	<meta property="article:published_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={metaDescription} />
 	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(articleLd)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
