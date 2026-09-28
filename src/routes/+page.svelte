@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Seo from '$lib/components/seo/Seo.svelte';
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger } from '$lib/gsap';
@@ -41,6 +42,44 @@
 		);
 	});
 </script>
+
+<Seo
+	title="Rōmy — Donor Intelligence & Prospect Research for Small Nonprofits"
+	description="Rōmy is AI donor intelligence for small nonprofits: find new major donors with wealth indicators, giving history, and affinity signals — at a fraction of the cost of enterprise prospect research tools."
+	path="/"
+	keywords="donor intelligence, prospect research software, nonprofit prospect research, major donor prospecting, wealth screening, AI donor research, fundraising software for small nonprofits, donor discovery, giving history, affinity signals, philanthropy intelligence, nonprofit fundraising, affordable wealth screening, donor research tool"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'SoftwareApplication',
+			'@id': 'https://getromy.app/#software',
+			name: 'Rōmy',
+			url: 'https://getromy.app/',
+			image: 'https://getromy.app/og-image.jpg',
+			applicationCategory: 'BusinessApplication',
+			applicationSubCategory: 'Donor intelligence and nonprofit prospect research',
+			operatingSystem: 'macOS, Windows, Linux',
+			description:
+				'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
+			audience: { '@type': 'Audience', audienceType: 'Small nonprofit fundraising teams' },
+			offers: {
+				'@type': 'Offer',
+				price: '0',
+				priceCurrency: 'USD',
+				availability: 'https://schema.org/InStock'
+			},
+			publisher: { '@id': 'https://getromy.app/#organization' },
+			featureList: [
+				'AI-powered donor prospect research',
+				'Wealth indicator screening',
+				'Giving history analysis',
+				'Affinity signal detection',
+				'Actionable donor profiles',
+				'No enterprise contracts required'
+			]
+		}
+	]}
+/>
 
 <Footer bind:footerText />
 
