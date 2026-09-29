@@ -4,11 +4,26 @@
 
 Rōmy is a donor intelligence platform built for small nonprofit teams. It uses AI-powered prospect research to surface wealth indicators, giving histories, and affinity signals — then distills them into actionable donor profiles.
 
+## What Rōmy is
+
+- Category: donor intelligence, nonprofit prospect research, and wealth screening software
+- Audience: small nonprofit development teams and fundraisers with budgets under $2M
+- Alternative to: enterprise donor research platforms such as DonorSearch, iWave, and WealthEngine, which typically cost $15K–$50K per year
+- Platforms: macOS, Windows, Linux
+
 ## Features
 
 - Donor Discovery: AI-powered prospect research with wealth indicators, giving history, and affinity signals
 - Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
 - Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
+
+## Key pages
+
+- Blog (fundraising field notes and research): https://getromy.app/blog
+- Labs (PIF-Bench benchmarks and AI donor research comparisons): https://getromy.app/labs
+- Status: https://getromy.app/status
+- Security: https://getromy.app/security
+- Sitemap: https://getromy.app/sitemap.xml
 
 ## Links
 

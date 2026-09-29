@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
 
+	import Seo from '$lib/components/seo/Seo.svelte';
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
@@ -100,22 +101,41 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Rōmy Blog — Donor Research & Nonprofit Fundraising Insights"
+	description="Field notes and research on major gifts, donor prospect research, wealth screening, and AI for small nonprofit fundraising teams."
+	path="/blog"
+	keywords="nonprofit fundraising blog, major gifts strategy, donor prospect research, wealth screening, donor retention, AI for nonprofits, small nonprofit fundraising, donor intelligence"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'CollectionPage',
+			'@id': 'https://getromy.app/blog#page',
+			url: 'https://getromy.app/blog',
+			name: 'Rōmy Blog',
+			isPartOf: { '@id': 'https://getromy.app/#website' },
+			publisher: { '@id': 'https://getromy.app/#organization' }
+		},
+		{
+			'@context': 'https://schema.org',
+			'@type': 'ItemList',
+			itemListElement: data.posts.slice(0, 50).map((post: { slug: string; title: string }, i: number) => ({
+				'@type': 'ListItem',
+				position: i + 1,
+				url: `https://getromy.app/blog/${post.slug}`,
+				name: post.title
+			}))
+		},
+		{
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Rōmy', item: 'https://getromy.app/' },
+				{ '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://getromy.app/blog' }
+			]
+		}
+	]}
+/>
 
 <Footer bind:footerText />
 
