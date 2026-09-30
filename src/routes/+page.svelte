@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Seo from '$lib/components/seo/Seo.svelte';
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger } from '$lib/gsap';
@@ -41,6 +42,45 @@
 		);
 	});
 </script>
+
+<Seo
+	title="Rōmy — AI Donor Research & Prospect Intelligence for Small Nonprofits"
+	description="Rōmy is donor intelligence software for small nonprofits. Find new major donors with AI prospect research, wealth indicators, giving history, and affinity signals — at a fraction of the cost of DonorSearch or iWave."
+	path="/"
+	keywords="donor intelligence, nonprofit donor research, prospect research software, AI prospect research, major donor software, wealth screening, donor discovery, donor database, fundraising software for small nonprofits, affordable wealth screening, DonorSearch alternative, iWave alternative, major gifts prospecting, philanthropy intelligence"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'SoftwareApplication',
+			'@id': 'https://getromy.app/#software',
+			name: 'Rōmy',
+			url: 'https://getromy.app',
+			image: 'https://getromy.app/og-image.jpg',
+			applicationCategory: 'BusinessApplication',
+			applicationSubCategory: 'Donor intelligence and prospect research',
+			operatingSystem: 'macOS, Windows, Linux',
+			description:
+				'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
+			offers: {
+				'@type': 'Offer',
+				price: '0',
+				priceCurrency: 'USD',
+				availability: 'https://schema.org/InStock'
+			},
+			audience: { '@type': 'Audience', audienceType: 'Small nonprofits and development teams' },
+			publisher: { '@id': 'https://getromy.app/#organization' },
+			featureList: [
+				'AI-powered donor prospect research',
+				'Wealth indicator screening',
+				'Giving history analysis',
+				'Affinity signal detection',
+				'Actionable donor profiles',
+				'No enterprise contracts required'
+			]
+		}
+	]}
+/>
+
 
 <Footer bind:footerText />
 

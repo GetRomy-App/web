@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Seo from '$lib/components/seo/Seo.svelte';
 	import '../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
@@ -100,22 +101,37 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Rōmy Blog — Donor Research, Major Gifts & Nonprofit Fundraising Insights"
+	description="Technical deep-dives, research findings, and field notes on major gift fundraising, donor prospect research, wealth screening, and purpose-built AI for nonprofits."
+	path="/blog"
+	keywords="nonprofit fundraising blog, major gifts fundraising, donor prospect research, wealth screening, donor intelligence, AI for nonprofits, fundraising insights, major gift officer, donor cultivation, small nonprofit fundraising"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'Blog',
+			'@id': 'https://getromy.app/blog#blog',
+			name: 'Rōmy Blog',
+			url: 'https://getromy.app/blog',
+			inLanguage: 'en-US',
+			publisher: { '@id': 'https://getromy.app/#organization' },
+			blogPost: data.posts.slice(0, 25).map((p) => ({
+				'@type': 'BlogPosting',
+				headline: p.title,
+				url: `https://getromy.app/blog/${p.slug}`,
+				datePublished: p.date
+			}))
+		},
+		{
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Rōmy', item: 'https://getromy.app/' },
+				{ '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://getromy.app/blog' }
+			]
+		}
+	]}
+/>
 
 <Footer bind:footerText />
 
