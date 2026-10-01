@@ -64,7 +64,10 @@ export function articleSchema(opts: {
 		articleSection: opts.section,
 		inLanguage: 'en-US',
 		author: organizationRef,
-		publisher: { ...organizationRef, logo: { '@type': 'ImageObject', url: `${SITE_URL}/icon-logo.png` } },
+		publisher: {
+			...organizationRef,
+			logo: { '@type': 'ImageObject', url: `${SITE_URL}/icon-logo.png` }
+		},
 		isPartOf: { '@type': 'Blog', name: `${SITE_NAME} Blog`, url: `${SITE_URL}/blog` }
 	};
 }
