@@ -2,6 +2,7 @@
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger } from '$lib/gsap';
+	import { SITE_URL, jsonLd } from '$lib/seo';
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Hero from '$lib/components/landing/Hero.svelte';
@@ -9,6 +10,55 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+
+	const title = 'Rōmy — AI Donor Intelligence & Prospect Research for Small Nonprofits';
+	const description =
+		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
+	const url = `${SITE_URL}/`;
+	const keywords =
+		'nonprofit donor intelligence, donor prospect research, AI prospect research, wealth screening alternative, major donor prospecting, fundraising software for small nonprofits, donor discovery platform, giving history, affinity signals, donor wealth indicators, nonprofit fundraising, affordable prospect research, philanthropy intelligence';
+
+	const appSchema = {
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		'@id': `${SITE_URL}/#software`,
+		name: 'Rōmy',
+		alternateName: 'Rōmy Donor Intelligence',
+		url: SITE_URL,
+		image: `${SITE_URL}/og-image.jpg`,
+		applicationCategory: 'BusinessApplication',
+		applicationSubCategory: 'Donor prospect research and nonprofit fundraising software',
+		operatingSystem: 'macOS, Windows, Linux',
+		description,
+		offers: {
+			'@type': 'Offer',
+			price: '0',
+			priceCurrency: 'USD',
+			availability: 'https://schema.org/InStock'
+		},
+		audience: { '@type': 'Audience', audienceType: 'Small nonprofit fundraising teams' },
+		publisher: { '@id': `${SITE_URL}/#organization` },
+		featureList: [
+			'AI-powered donor prospect research',
+			'Wealth indicator screening',
+			'Giving history analysis',
+			'Affinity signal detection',
+			'Actionable donor profiles',
+			'No enterprise contracts required'
+		]
+	};
+
+	const pageSchema = {
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		'@id': `${url}#webpage`,
+		url,
+		name: title,
+		description,
+		isPartOf: { '@id': `${SITE_URL}/#website` },
+		about: { '@id': `${SITE_URL}/#software` },
+		inLanguage: 'en-US'
+	};
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +91,23 @@
 		);
 	});
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="title" content={title} />
+	<meta name="description" content={description} />
+	<meta name="keywords" content={keywords} />
+	<link rel="canonical" href={url} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={url} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta name="twitter:url" content={url} />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	{@html jsonLd(appSchema)}
+	{@html jsonLd(pageSchema)}
+</svelte:head>
 
 <Footer bind:footerText />
 

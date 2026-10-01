@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
 
+	import { jsonLd, breadcrumbs } from '$lib/seo';
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
@@ -101,20 +102,58 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Donor Research, Major Gifts & Nonprofit Fundraising Insights</title>
+	<meta
+		name="title"
+		content="Rōmy Blog — Donor Research, Major Gifts & Nonprofit Fundraising Insights"
+	/>
 	<meta
 		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
+		content="Field notes and perspectives on nonprofit fundraising, major gifts, donor stewardship, and AI-powered prospect research — from the team behind Rōmy."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, major gifts, donor stewardship, donor retention, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
+	<meta
+		property="og:title"
+		content="Rōmy Blog — Donor Research, Major Gifts & Nonprofit Fundraising Insights"
+	/>
+	<meta
+		property="og:description"
+		content="Field notes and perspectives on nonprofit fundraising, major gifts, donor stewardship, and AI-powered prospect research."
+	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
+	<meta name="twitter:title" content="Rōmy Blog — Nonprofit Fundraising & Donor Research" />
+	<meta
+		name="twitter:description"
+		content="Field notes and perspectives on nonprofit fundraising, major gifts, and AI-powered prospect research."
+	/>
 	<link rel="canonical" href="https://getromy.app/blog" />
+	{@html jsonLd({
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		'@id': 'https://getromy.app/blog#blog',
+		name: 'Rōmy Blog',
+		url: 'https://getromy.app/blog',
+		description:
+			'Field notes and perspectives on nonprofit fundraising, major gifts, donor stewardship, and AI-powered prospect research.',
+		inLanguage: 'en-US',
+		publisher: { '@id': 'https://getromy.app/#organization' },
+		blogPost: data.posts.slice(0, 20).map((post) => ({
+			'@type': 'BlogPosting',
+			headline: post.title.slice(0, 110),
+			url: `https://getromy.app/blog/${post.slug}`,
+			datePublished: post.date
+		}))
+	})}
+	{@html jsonLd(
+		breadcrumbs([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	)}
 </svelte:head>
 
 <Footer bind:footerText />

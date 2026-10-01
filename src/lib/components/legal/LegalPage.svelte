@@ -61,12 +61,15 @@
 	{#if description}
 		<meta name="description" content={description} />
 	{/if}
-	<meta name="robots" content="index, follow" />
 	<meta property="og:title" content="{title} — Rōmy" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app{canonicalPath}" />
 	{#if description}
 		<meta property="og:description" content={description} />
+	{/if}
+	<meta name="twitter:title" content="{title} — Rōmy" />
+	{#if description}
+		<meta name="twitter:description" content={description} />
 	{/if}
 	<link rel="canonical" href="https://getromy.app{canonicalPath}" />
 </svelte:head>

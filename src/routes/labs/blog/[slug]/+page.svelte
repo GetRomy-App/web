@@ -4,10 +4,15 @@
 	import { gsap, SplitText } from '$lib/gsap';
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
+	import { SITE_URL, metaDescription, jsonLd, articleSchema, breadcrumbs } from '$lib/seo';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import { PIF_OVERALL, PIF_DIMENSIONS, EVAL_PROMPT } from '$lib/benchmarks';
 
 	let { data } = $props();
+
+	const path = $derived(`/labs/blog/${data.post.slug}`);
+	const url = $derived(`${SITE_URL}${path}`);
+	const description = $derived(metaDescription(data.post.excerpt));
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -127,16 +132,31 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
+	<title>{data.post.title} — Rōmy Labs</title>
+	<meta name="title" content="{data.post.title} — Rōmy Labs" />
+	<meta name="description" content={description} />
+	<meta
+		name="keywords"
+		content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, major gifts, donor stewardship, {data.post.tag.toLowerCase()}"
+	/>
+	<link rel="canonical" href={url} />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta property="og:url" content={url} />
+	<meta property="og:title" content={data.post.title} />
+	<meta property="og:description" content={description} />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta property="article:author" content="GetRomy LLC" />
+	<meta name="twitter:url" content={url} />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={description} />
+	{@html jsonLd(articleSchema({ title: data.post.title, description, path, date: data.post.date, section: data.post.tag }))}
+	{@html jsonLd(breadcrumbs([
+		{ name: 'Rōmy', path: '/' },
+		{ name: 'Labs', path: '/labs' },
+		{ name: data.post.title, path }
+	]))}
 </svelte:head>
 
 <Footer bind:footerText />
