@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { articleLd, breadcrumbLd } from '$lib/seo';
 	import '../../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, SplitText } from '$lib/gsap';
@@ -125,18 +127,29 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title="{data.post.title} — Rōmy Blog"
+	socialTitle={data.post.title}
+	description={data.post.excerpt}
+	path={`/blog/${data.post.slug}`}
+	type="article"
+	published={data.post.date}
+	section={data.post.tag}
+	jsonLd={[
+		articleLd({
+			title: data.post.title,
+			excerpt: data.post.excerpt,
+			date: data.post.date,
+			tag: data.post.tag,
+			path: `/blog/${data.post.slug}`
+		}),
+		breadcrumbLd([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Blog', path: '/blog' },
+			{ name: data.post.title, path: `/blog/${data.post.slug}` }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { collectionLd, breadcrumbLd } from '$lib/seo';
 	import '../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
@@ -100,22 +102,25 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Rōmy Blog — Donor Prospect Research & Nonprofit Major Gift Fundraising"
+	socialTitle="Rōmy Blog — Nonprofit Fundraising & Donor Research"
+	description="Field notes and research on major gifts, donor discovery, wealth screening, and purpose-built AI for small nonprofit fundraising teams."
+	path="/blog"
+	jsonLd={[
+		collectionLd({
+			name: 'Rōmy Blog',
+			description:
+				'Field notes and research on major gifts, donor discovery, and AI prospect research for small nonprofits.',
+			path: '/blog',
+			items: data.posts.map((p) => ({ title: p.title, path: `/blog/${p.slug}` }))
+		}),
+		breadcrumbLd([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 

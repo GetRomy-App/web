@@ -68,6 +68,7 @@
 	{#if description}
 		<meta property="og:description" content={description} />
 	{/if}
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
 	<link rel="canonical" href="https://getromy.app{canonicalPath}" />
 </svelte:head>
 

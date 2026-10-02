@@ -9,6 +9,38 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/seo/Seo.svelte';
+
+	const title = 'Rōmy — Donor Intelligence & Prospect Research for Small Nonprofits';
+	const description =
+		'Rōmy is AI donor intelligence for small nonprofits: find new major donors with wealth indicators, giving history, and affinity signals at a fraction of the cost of enterprise tools.';
+
+	const appLd = {
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		'@id': 'https://getromy.app/#software',
+		name: 'Rōmy',
+		url: 'https://getromy.app',
+		applicationCategory: 'BusinessApplication',
+		applicationSubCategory: 'Donor prospect research and wealth screening software',
+		operatingSystem: 'macOS, Windows, Linux',
+		description,
+		offers: {
+			'@type': 'Offer',
+			price: '0',
+			priceCurrency: 'USD',
+			availability: 'https://schema.org/InStock'
+		},
+		publisher: { '@id': 'https://getromy.app/#organization' },
+		featureList: [
+			'AI-powered donor prospect research',
+			'Wealth indicator screening',
+			'Giving history analysis',
+			'Affinity signal detection',
+			'Actionable donor profiles',
+			'No enterprise contracts required'
+		]
+	};
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +73,8 @@
 		);
 	});
 </script>
+
+<Seo {title} {description} path="/" jsonLd={[appLd]} />
 
 <Footer bind:footerText />
 
