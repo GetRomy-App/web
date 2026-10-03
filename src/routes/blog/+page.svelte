@@ -101,7 +101,7 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
 	<meta
 		name="description"
 		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
@@ -110,10 +110,16 @@
 		name="keywords"
 		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta property="og:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
 	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
+	<meta property="og:site_name" content="Rōmy" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@RomyFindsMoney" />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 	<link rel="canonical" href="https://getromy.app/blog" />
 </svelte:head>
 
