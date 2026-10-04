@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { SITE_URL, ORG_ID, breadcrumbs } from '$lib/seo';
 	import '../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
@@ -100,22 +102,26 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Rōmy Blog — Donor Research, Major Gifts & Nonprofit Fundraising Insights"
+	description="Essays and field notes on major gift fundraising, donor prospect research, wealth screening, and purpose-built AI for small nonprofit development teams."
+	path="/blog"
+	keywords="nonprofit fundraising blog, major gifts strategy, donor prospect research, donor intelligence, wealth screening, AI for nonprofits, fundraising insights, development director advice"
+	jsonLd={[
+		{
+			'@type': 'CollectionPage',
+			'@id': `${SITE_URL}/blog#webpage`,
+			url: `${SITE_URL}/blog`,
+			name: 'Rōmy Blog',
+			isPartOf: { '@id': `${SITE_URL}/#website` },
+			publisher: { '@id': ORG_ID }
+		},
+		breadcrumbs([
+			{ name: 'Home', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 

@@ -1,6 +1,10 @@
 {
   "name": "Rōmy",
   "short_name": "Rōmy",
+  "description": "AI donor intelligence and prospect research for small nonprofits.",
+  "start_url": "/",
+  "lang": "en-US",
+  "categories": ["business", "productivity"],
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
