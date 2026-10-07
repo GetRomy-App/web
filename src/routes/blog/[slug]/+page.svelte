@@ -3,6 +3,8 @@
 	import { onMount } from 'svelte';
 	import { gsap, SplitText } from '$lib/gsap';
 
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { SITE_URL, snippet, titleWithBrand } from '$lib/seo';
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import { PIF_OVERALL, PIF_DIMENSIONS, EVAL_PROMPT } from '$lib/benchmarks';
@@ -125,18 +127,40 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title={titleWithBrand(data.post.title, 'Rōmy Blog')}
+	description={data.post.excerpt}
+	path="/blog/{data.post.slug}"
+	type="article"
+	published={data.post.date}
+	section={data.post.tag}
+	keywords="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'Article',
+			headline: data.post.title.slice(0, 110),
+			description: snippet(data.post.excerpt, 300),
+			datePublished: data.post.date,
+			dateModified: data.post.date,
+			articleSection: data.post.tag,
+			inLanguage: 'en-US',
+			image: `${SITE_URL}/og-image.jpg`,
+			mainEntityOfPage: `${SITE_URL}/blog/${data.post.slug}`,
+			author: { '@id': 'https://getromy.app/#organization' },
+			publisher: { '@id': 'https://getromy.app/#organization' }
+		},
+		{
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Rōmy', item: `${SITE_URL}/` },
+				{ '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+				{ '@type': 'ListItem', position: 3, name: data.post.title, item: `${SITE_URL}/blog/${data.post.slug}` }
+			]
+		}
+	]}
+/>
 
 <Footer bind:footerText />
 
