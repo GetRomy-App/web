@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Seo from '$lib/components/seo/Seo.svelte';
 	import '../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
@@ -100,22 +101,23 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Rōmy Blog — AI Donor Research & Nonprofit Fundraising Insights"
+	description="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, major gifts, prospect research, and purpose-built AI for donor intelligence."
+	path="/blog"
+	keywords="nonprofit fundraising blog, major gifts strategy, donor intelligence, prospect research, AI for nonprofits, donor stewardship, small nonprofit fundraising"
+	jsonLd={[
+		{
+			'@type': 'Blog',
+			'@id': 'https://getromy.app/blog#blog',
+			name: 'Rōmy Blog',
+			url: 'https://getromy.app/blog',
+			inLanguage: 'en-US',
+			publisher: { '@id': 'https://getromy.app/#organization' }
+		},
+		{ '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://getromy.app/' }, { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://getromy.app/blog' }] }
+	]}
+/>
 
 <Footer bind:footerText />
 
