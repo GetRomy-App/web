@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Seo from '$lib/components/Seo.svelte';
+	import { SITE, organizationId, breadcrumbs } from '$lib/seo';
 	import '../../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, SplitText } from '$lib/gsap';
@@ -125,18 +127,43 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title="{data.post.title} | Rōmy Blog"
+	description={data.post.excerpt}
+	path="/blog/{data.post.slug}"
+	type="article"
+	published={data.post.date}
+	section={data.post.tag}
+	keywords={[data.post.tag.toLowerCase(), data.post.title.toLowerCase(), 'donor intelligence', 'nonprofit fundraising', 'prospect research', 'AI donor research', 'wealth screening']}
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'BlogPosting',
+			'@id': `${SITE}/blog/${data.post.slug}#article`,
+			headline: data.post.title,
+			description: data.post.excerpt,
+			image: `${SITE}/og-image.jpg`,
+			datePublished: data.post.date,
+			dateModified: data.post.date,
+			articleSection: data.post.tag,
+			inLanguage: 'en-US',
+			mainEntityOfPage: `${SITE}/blog/${data.post.slug}`,
+			url: `${SITE}/blog/${data.post.slug}`,
+			author: { '@type': 'Organization', name: 'Rōmy', '@id': organizationId() },
+			publisher: {
+				'@type': 'Organization',
+				'@id': organizationId(),
+				name: 'Rōmy',
+				logo: { '@type': 'ImageObject', url: `${SITE}/icon-logo.png` }
+			}
+		},
+		breadcrumbs([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Blog', path: '/blog' },
+			{ name: data.post.title, path: `/blog/${data.post.slug}` }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 
