@@ -5,7 +5,7 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
-	import { PIF_OVERALL, PIF_DIMENSIONS, EVAL_PROMPT } from '$lib/benchmarks';
+	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
 	let { data } = $props();
 
@@ -190,38 +190,41 @@
 							Results
 						</h2>
 						<p class="text-gray-alpha-400 text-sm mb-8">
-							PIF-Bench composite scores — higher is better
+							{PIF_VERSION} — higher is better
 						</p>
 
-						<div class="bench-chart-row flex flex-col gap-3 mb-12">
-							<h3 class="text-foreground text-base font-medium tracking-tight mb-1">
-								{PIF_OVERALL.label}
-							</h3>
-							<p class="text-gray-alpha-400 text-xs mb-2">{PIF_OVERALL.subtitle}</p>
-							{#each PIF_OVERALL.bars as bar}
-								<div class="flex items-center gap-3">
-									<span class="text-gray-alpha-600 text-xs font-medium w-20 md:w-28 shrink-0 text-right">
-										{bar.name}
-									</span>
-									<div class="relative flex-1 h-9 rounded-md overflow-hidden bg-gray-alpha-50">
-										<div
-											class="bench-bar-fill absolute inset-y-0 left-0 rounded-md"
-											style="width: {bar.score}%; background: {bar.highlight ? 'var(--ds-blue-700)' : 'var(--ds-gray-alpha-200)'}; transform-origin: left center;"
-										></div>
-										<span
-											class="bench-bar-value absolute inset-y-0 flex items-center text-sm font-medium tabular-nums px-3"
-											style="left: 0; color: {bar.highlight ? 'white' : 'var(--foreground)'};"
-										>
-											{bar.score}
+						{#each PIF_HEADLINE as chart}
+							<div class="bench-chart-row flex flex-col gap-3 mb-12">
+								<h3 class="text-foreground text-base font-medium tracking-tight mb-1">
+									{chart.label}
+								</h3>
+								<p class="text-gray-alpha-400 text-xs mb-2">{chart.subtitle}</p>
+								{#each chart.bars as bar}
+									<div class="flex items-center gap-3">
+										<span class="text-gray-alpha-600 text-xs font-medium w-24 md:w-32 shrink-0 text-right">
+											{bar.name}
 										</span>
+										<div class="relative flex-1 h-9 rounded-md overflow-hidden bg-gray-alpha-50">
+											<div
+												class="bench-bar-fill absolute inset-y-0 left-0 rounded-md"
+												style="width: {bar.score}%; background: {bar.highlight ? 'var(--ds-blue-700)' : 'var(--ds-gray-alpha-200)'}; transform-origin: left center;"
+											></div>
+											<span
+												class="bench-bar-value absolute inset-y-0 flex items-center text-sm font-medium tabular-nums px-3"
+												style="left: 0; color: {bar.highlight ? 'white' : 'var(--foreground)'};"
+											>
+												{bar.score}%
+											</span>
+										</div>
 									</div>
-								</div>
-							{/each}
-						</div>
+								{/each}
+							</div>
+						{/each}
 
-						<h3 class="text-foreground text-lg font-medium tracking-tight mb-6">
-							Dimension Breakdown
+						<h3 class="text-foreground text-lg font-medium tracking-tight mb-2">
+							Packet track by area
 						</h3>
+						<p class="text-gray-alpha-400 text-xs mb-6">Share of each area's tasks completed with every check met.</p>
 
 						<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
 							{#each PIF_DIMENSIONS as dim}
@@ -230,7 +233,7 @@
 									<p class="text-gray-alpha-400 text-xs mb-1">{dim.subtitle}</p>
 									{#each dim.bars as bar}
 										<div class="flex items-center gap-2">
-											<span class="text-gray-alpha-600 text-[11px] font-medium w-16 md:w-20 shrink-0 text-right">
+											<span class="text-gray-alpha-600 text-[11px] font-medium w-24 md:w-28 shrink-0 text-right">
 												{bar.name}
 											</span>
 											<div class="relative flex-1 h-6 rounded overflow-hidden bg-gray-alpha-50">
@@ -242,7 +245,7 @@
 													class="bench-bar-value absolute inset-y-0 flex items-center text-[11px] font-medium tabular-nums px-2"
 													style="left: 0; color: {bar.highlight ? 'white' : 'var(--foreground)'};"
 												>
-													{bar.score}
+													{bar.score}%
 												</span>
 											</div>
 										</div>
@@ -253,13 +256,14 @@
 
 						<div class="mt-12 border-gray-alpha-100 border-t pt-8">
 							<h3 class="text-foreground text-base font-medium tracking-tight mb-3">
-								Standard prompt used across all systems
+								An example live-track prompt
 							</h3>
 							<div class="bg-gray-alpha-50 rounded-lg p-4 text-sm text-gray-alpha-600 leading-relaxed font-mono whitespace-pre-wrap">
 								{EVAL_PROMPT}
 							</div>
 							<p class="text-gray-alpha-400 text-xs mt-6 leading-relaxed">
-								A human operator ran this prompt in all four systems, then pasted the complete raw outputs (15,000+ words combined) into a Claude Code session. Claude Code (Claude Opus 4.6, 1M context) scored every response against the PIF-Bench framework autonomously. No human editing was applied to scores or analysis.
+								{PIF_METHOD_NOTE}
+								<a href={PIF_REPO} class="underline hover:text-foreground">Read the rubrics and every verdict on GitHub.</a>
 							</p>
 						</div>
 					</div>

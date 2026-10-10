@@ -1,5 +1,11 @@
+// PIF-Bench v2 — October 2026. Every figure below comes from the published runs in
+// github.com/getromy-app/pif-bench (leaderboard/packet-2026-10 and leaderboard/live-2026-04-25),
+// graded by a blind judge against rubrics written before any system ran. Update them from those
+// reports only — never by hand.
+
 export interface BenchmarkBar {
 	name: string;
+	/** 0–100, the bar's length. */
 	score: number;
 	highlight: boolean;
 }
@@ -10,108 +16,72 @@ export interface BenchmarkDimension {
 	bars: BenchmarkBar[];
 }
 
-export const PIF_OVERALL: BenchmarkDimension = {
-	label: 'Overall PIF-Score',
-	subtitle: 'Average across 5 prospects (Scott, Powell Jobs, Gund, Hastings, Smith)',
+export const PIF_VERSION = 'PIF-Bench v2 · October 2026';
+export const PIF_REPO = 'https://github.com/getromy-app/pif-bench';
+
+/** Live track: four products' April 2026 reports on four real prospects, re-graded blind. */
+export const PIF_LIVE: BenchmarkDimension = {
+	label: 'Live track — share of checks met',
+	subtitle:
+		'Donor reports each product wrote on April 25, 2026 for four real philanthropists, graded on 59 dated, sourced checks. No product met every check for any prospect.',
 	bars: [
-		{ name: 'Romy', score: 94.1, highlight: true },
-		{ name: 'Claude', score: 92.3, highlight: false },
-		{ name: 'Gemini', score: 79.1, highlight: false },
-		{ name: 'ChatGPT', score: 76.9, highlight: false }
+		{ name: 'Claude.ai', score: 83, highlight: false },
+		{ name: 'Rōmy', score: 74, highlight: true },
+		{ name: 'Gemini', score: 67, highlight: false },
+		{ name: 'ChatGPT', score: 60, highlight: false }
 	]
 };
 
-export const PIF_DIMENSIONS: BenchmarkDimension[] = [
-	{
-		label: 'Factual Precision',
-		subtitle: 'Percentage of stated facts verified against public records',
-		bars: [
-			{ name: 'Romy', score: 94, highlight: true },
-			{ name: 'Claude', score: 93, highlight: false },
-			{ name: 'Gemini', score: 84, highlight: false },
-			{ name: 'ChatGPT', score: 84, highlight: false }
-		]
-	},
-	{
-		label: 'Discovery Recall',
-		subtitle: 'Percentage of known facts the system found',
-		bars: [
-			{ name: 'Romy', score: 96, highlight: true },
-			{ name: 'Claude', score: 94, highlight: false },
-			{ name: 'Gemini', score: 72, highlight: false },
-			{ name: 'ChatGPT', score: 63, highlight: false }
-		]
-	},
-	{
-		label: 'Hallucination Rate',
-		subtitle: 'Inverted: higher = fewer fabricated claims',
-		bars: [
-			{ name: 'Romy', score: 93, highlight: true },
-			{ name: 'Claude', score: 93, highlight: false },
-			{ name: 'ChatGPT', score: 87, highlight: false },
-			{ name: 'Gemini', score: 85, highlight: false }
-		]
-	},
-	{
-		label: 'Capacity Estimation',
-		subtitle: 'Accuracy and calibration of giving capacity estimate',
-		bars: [
-			{ name: 'Romy', score: 92, highlight: true },
-			{ name: 'Claude', score: 93, highlight: false },
-			{ name: 'Gemini', score: 76, highlight: false },
-			{ name: 'ChatGPT', score: 69, highlight: false }
-		]
-	},
-	{
-		label: 'Source Attribution',
-		subtitle: 'Percentage of claims with traceable citations',
-		bars: [
-			{ name: 'Romy', score: 94, highlight: true },
-			{ name: 'Claude', score: 85, highlight: false },
-			{ name: 'ChatGPT', score: 80, highlight: false },
-			{ name: 'Gemini', score: 76, highlight: false }
-		]
-	},
-	{
-		label: 'Structural Completeness',
-		subtitle: 'Coverage of sections a fundraiser needs',
-		bars: [
-			{ name: 'Romy', score: 100, highlight: true },
-			{ name: 'Claude', score: 89, highlight: false },
-			{ name: 'ChatGPT', score: 74, highlight: false },
-			{ name: 'Gemini', score: 72, highlight: false }
-		]
-	},
-	{
-		label: 'Actionability',
-		subtitle: 'Could a fundraiser make a qualified ask from this report?',
-		bars: [
-			{ name: 'Romy', score: 95, highlight: true },
-			{ name: 'Claude', score: 95, highlight: false },
-			{ name: 'Gemini', score: 76, highlight: false },
-			{ name: 'ChatGPT', score: 66, highlight: false }
-		]
-	}
-];
-
-export const PIF_WEIGHTS = {
-	fp: 0.20,
-	dr: 0.10,
-	hr: 0.25,
-	cea: 0.15,
-	sa: 0.10,
-	sc: 0.05,
-	act: 0.15
+/** Packet track: models on 20 synthetic development-office tasks. */
+export const PIF_PACKET: BenchmarkDimension = {
+	label: 'Packet track — tasks completed with every check met',
+	subtitle:
+		'20 tasks across prospect research, grants, gift compliance, major gifts, donor data and finance (259 checks), one attempt per model.',
+	bars: [
+		{ name: 'GPT-6.1 Sol', score: 95, highlight: false },
+		{ name: 'Muse Spark 1.3', score: 95, highlight: false },
+		{ name: 'Claude Opus 5.5', score: 95, highlight: false },
+		{ name: 'Gemini 3.8 Flash', score: 70, highlight: false },
+		{ name: 'MiniMax M3', score: 65, highlight: false },
+		{ name: 'Gemini 3.1 Pro', score: 55, highlight: false }
+	]
 };
 
-export const EVAL_PROMPT = `Research MacKenzie Scott as a potential major donor prospect for a mid-sized education nonprofit based in Atlanta, Georgia. Provide a comprehensive donor intelligence report including:
+export const PIF_HEADLINE: BenchmarkDimension[] = [PIF_LIVE, PIF_PACKET];
+
+/** Packet track, all-pass rate by area. */
+const area = (label: string, subtitle: string, s: [number, number, number, number, number, number]): BenchmarkDimension => ({
+	label,
+	subtitle,
+	bars: PIF_PACKET.bars.map((b, i) => ({ name: b.name, score: s[i]!, highlight: false }))
+});
+
+export const PIF_DIMENSIONS: BenchmarkDimension[] = [
+	area('Prospect research', 'Namesake screening, a donor who has died, an ethics-screened profile, a sparse record', [100, 100, 100, 75, 100, 75]),
+	area('Foundations & grants', '990-PF fit assessment, RFP compliance, grant-report variances', [100, 100, 100, 33, 33, 33]),
+	area('Gift compliance', 'Gala receipts, a DAF grant for a gala table, stock-gift valuation, restricted endowments', [100, 100, 100, 75, 75, 50]),
+	area('Major gifts', 'Portfolio moves review, campaign gift range chart, solicitation plan', [100, 67, 67, 67, 67, 67]),
+	area('Donor data', 'Duplicates and households, gift-batch reconciliation, LYBUNT/SYBUNT retention', [100, 100, 100, 100, 33, 67]),
+	area('Finance & governance', 'Form 990 ratios, the public support test, a conflict-of-interest review', [67, 100, 100, 67, 67, 33])
+];
+
+export const PIF_JUDGE = {
+	fixtureVerdicts: 662,
+	fixtureAccuracy: '100%',
+	testRetest: '99.6%'
+};
+
+export const EVAL_PROMPT = `Research Agnes Gund as a potential major donor prospect for a nonprofit arts education program serving public school students in New York City. Provide a comprehensive donor intelligence report including:
 
 1. Personal and professional background
 2. Wealth indicators and asset profile
 3. Known philanthropic giving history with specific amounts and recipient organizations
 4. Cause areas and giving philosophy
-5. Estimated giving capacity for a single gift to an education nonprofit
+5. Estimated giving capacity for a single gift to an arts education nonprofit
 6. Recommended ask amount and engagement strategy
 7. Key connection points and potential red flags
 
 Cite your sources for every factual claim.`;
+
+export const PIF_METHOD_NOTE =
+	'Every check is a pass/fail test written before any system ran. Each report was graded blind — system names and citation tags removed, one deliverable at a time — by a judge whose accuracy was measured on planted errors mixed into the same pool (662 of 662 verdicts correct; 99.6% agreement with an independent second judging). All deliverables, verdicts and reasoning are published in the PIF-Bench repository.';
