@@ -9,6 +9,7 @@
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
 
+	import Seo from '$lib/components/Seo.svelte';
 	let { data } = $props();
 
 	let mainContent: HTMLElement;
@@ -100,22 +101,32 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Rōmy Blog — Donor Research, Major Gifts & Nonprofit Fundraising Insights"
+	description="Essays and field notes on major gift fundraising, donor prospect research, wealth screening, and purpose-built AI for small nonprofit development teams."
+	ogTitle="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising"
+	path="/blog"
+	keywords="nonprofit fundraising blog, major gifts fundraising, donor prospect research, wealth screening, donor retention, AI for nonprofits, fundraising insights, donor intelligence"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'Blog',
+			'@id': 'https://getromy.app/blog#blog',
+			name: 'Rōmy Blog',
+			url: 'https://getromy.app/blog',
+			inLanguage: 'en-US',
+			publisher: { '@id': 'https://getromy.app/#organization' }
+		},
+		{
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Rōmy', item: 'https://getromy.app/' },
+				{ '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://getromy.app/blog' }
+			]
+		}
+	]}
+/>
 
 <Footer bind:footerText />
 

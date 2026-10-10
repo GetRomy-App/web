@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../app.css';
+	import Seo from '$lib/components/Seo.svelte';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger } from '$lib/gsap';
 
@@ -41,6 +42,45 @@
 		);
 	});
 </script>
+
+<Seo
+	title="Rōmy — AI Donor Intelligence & Prospect Research for Small Nonprofits"
+	description="Rōmy is donor intelligence software that helps small nonprofits find new major donors. AI-powered prospect research, wealth indicators, and giving history at a fraction of the cost of existing solutions."
+	path="/"
+	keywords="donor intelligence, nonprofit prospect research, major donor prospecting, wealth screening alternative, DonorSearch alternative, iWave alternative, AI donor research, fundraising software for small nonprofits, affordable prospect research, donor discovery, giving history, wealth indicators, nonprofit fundraising tools"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'SoftwareApplication',
+			'@id': 'https://getromy.app/#software',
+			name: 'Rōmy',
+			alternateName: 'Rōmy Donor Intelligence',
+			url: 'https://getromy.app/',
+			image: 'https://getromy.app/og-image.jpg',
+			applicationCategory: 'BusinessApplication',
+			applicationSubCategory: 'Donor prospect research software',
+			operatingSystem: 'macOS, Windows, Linux',
+			audience: { '@type': 'Audience', audienceType: 'Small nonprofit fundraising teams' },
+			description:
+				'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
+			offers: {
+				'@type': 'Offer',
+				price: '0',
+				priceCurrency: 'USD',
+				availability: 'https://schema.org/InStock'
+			},
+			publisher: { '@id': 'https://getromy.app/#organization' },
+			featureList: [
+				'AI-powered donor prospect research',
+				'Wealth indicator screening',
+				'Giving history analysis',
+				'Affinity signal detection',
+				'Actionable donor profiles',
+				'No enterprise contracts required'
+			]
+		}
+	]}
+/>
 
 <Footer bind:footerText />
 

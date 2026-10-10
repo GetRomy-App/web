@@ -7,6 +7,8 @@
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
+	import { toMetaDescription } from '$lib/seo';
+	import Seo from '$lib/components/Seo.svelte';
 	let { data } = $props();
 
 	let mainContent: HTMLElement;
@@ -126,18 +128,48 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title="{data.post.title} — Rōmy Labs"
+	description={data.post.excerpt}
+	ogTitle={data.post.title}
+	path="/labs/blog/{data.post.slug}"
+	type="article"
+	publishedTime={data.post.date}
+	section={data.post.tag}
+	keywords="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, PIF-Bench, donor intelligence, {data.post.tag.toLowerCase()}"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'TechArticle',
+			'@id': `https://getromy.app/labs/blog/${data.post.slug}#article`,
+			headline: data.post.title,
+			description: toMetaDescription(data.post.excerpt, 300),
+			datePublished: data.post.date,
+			dateModified: data.post.date,
+			articleSection: data.post.tag,
+			image: 'https://getromy.app/og-image.jpg',
+			inLanguage: 'en-US',
+			url: `https://getromy.app/labs/blog/${data.post.slug}`,
+			mainEntityOfPage: `https://getromy.app/labs/blog/${data.post.slug}`,
+			author: { '@id': 'https://getromy.app/#organization' },
+			publisher: { '@id': 'https://getromy.app/#organization' }
+		},
+		{
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Rōmy', item: 'https://getromy.app/' },
+				{ '@type': 'ListItem', position: 2, name: 'Labs', item: 'https://getromy.app/labs' },
+				{
+					'@type': 'ListItem',
+					position: 3,
+					name: data.post.title,
+					item: `https://getromy.app/labs/blog/${data.post.slug}`
+				}
+			]
+		}
+	]}
+/>
 
 <Footer bind:footerText />
 
