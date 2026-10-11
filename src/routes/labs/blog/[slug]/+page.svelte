@@ -5,6 +5,8 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { articleLd, breadcrumbs, DEFAULT_KEYWORDS } from '$lib/seo';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
 	let { data } = $props();
@@ -126,18 +128,30 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title={data.post.title}
+	titleSuffix="Rōmy Labs"
+	description={data.post.excerpt}
+	path={`/labs/blog/${data.post.slug}`}
+	type="article"
+	published={data.post.date}
+	section={data.post.tag}
+	keywords={`${DEFAULT_KEYWORDS}, ${data.post.tag.toLowerCase()}`}
+	jsonLd={[
+		articleLd({
+			title: data.post.title,
+			description: data.post.excerpt,
+			path: `/labs/blog/${data.post.slug}`,
+			date: data.post.date,
+			section: data.post.tag
+		}),
+		breadcrumbs([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Labs', path: '/labs' },
+			{ name: data.post.title, path: `/labs/blog/${data.post.slug}` }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 
