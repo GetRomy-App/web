@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { gsap, SplitText } from '$lib/gsap';
 
+	import Seo from '$lib/components/Seo.svelte';
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
@@ -126,18 +127,44 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title="{data.post.title} | Rōmy Labs"
+	description={data.post.excerpt}
+	path="/labs/blog/{data.post.slug}"
+	type="article"
+	published={data.post.date}
+	tag={data.post.tag}
+	keywords="{data.post.title}, PIF-Bench, AI benchmark, donor intelligence, nonprofit fundraising, major gift fundraising, donor prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'TechArticle',
+			headline: data.post.title,
+			description: data.post.excerpt,
+			datePublished: data.post.date,
+			dateModified: data.post.date,
+			articleSection: data.post.tag,
+			inLanguage: 'en-US',
+			image: 'https://getromy.app/og-image.jpg',
+			mainEntityOfPage: { '@type': 'WebPage', '@id': `https://getromy.app/labs/blog/${data.post.slug}` },
+			author: { '@type': 'Organization', name: 'Rōmy', url: 'https://getromy.app' },
+			publisher: {
+				'@type': 'Organization',
+				name: 'GetRomy LLC',
+				logo: { '@type': 'ImageObject', url: 'https://getromy.app/icon-logo.png' }
+			}
+		},
+		{
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Rōmy', item: 'https://getromy.app/' },
+				{ '@type': 'ListItem', position: 2, name: 'Labs', item: 'https://getromy.app/labs' },
+				{ '@type': 'ListItem', position: 3, name: data.post.title, item: `https://getromy.app/labs/blog/${data.post.slug}` }
+			]
+		}
+	]}
+/>
 
 <Footer bind:footerText />
 
