@@ -5,9 +5,21 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import { metaDescription, articleJsonLd, jsonLd } from '$lib/seo';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
 	let { data } = $props();
+
+	const postUrl = $derived(`https://getromy.app/labs/blog/${data.post.slug}`);
+	const postTitle = $derived(`${data.post.title} — Rōmy Labs`);
+	const postDescription = $derived(metaDescription(data.post.excerpt));
+	const structuredData = $derived(
+		articleJsonLd({
+			...data.post,
+			url: postUrl,
+			section: { name: 'Labs', url: 'https://getromy.app/labs' }
+		})
+	);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -127,16 +139,25 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
+	<title>{postTitle}</title>
+	<meta name="description" content={postDescription} />
+	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, major gifts, donor stewardship, {data.post.tag.toLowerCase()}" />
+	<meta name="author" content="Rōmy" />
 	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
+	<meta property="og:description" content={postDescription} />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta property="og:url" content={postUrl} />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta property="article:tag" content={data.post.tag} />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={postDescription} />
+	<meta name="twitter:url" content={postUrl} />
+	<link rel="canonical" href={postUrl} />
+	{#each structuredData as block}
+		{@html jsonLd(block)}
+	{/each}
 </svelte:head>
 
 <Footer bind:footerText />
