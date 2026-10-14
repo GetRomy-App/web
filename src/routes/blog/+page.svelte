@@ -101,20 +101,29 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Donor Research, Prospect Research & Major Gift Fundraising</title>
 	<meta
 		name="description"
 		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, donor research, prospect research, major gift fundraising, donor stewardship, donor retention, wealth screening, AI for nonprofits, fundraising insights"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta property="og:title" content="Rōmy Blog — Donor Research, Prospect Research & Major Gift Fundraising" />
 	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
 	<link rel="canonical" href="https://getromy.app/blog" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		name: 'Rōmy Blog',
+		url: 'https://getromy.app/blog',
+		description:
+			'Perspectives on nonprofit fundraising, donor research, prospect research, and purpose-built AI.',
+		publisher: { '@type': 'Organization', name: 'GetRomy LLC', url: 'https://getromy.app' }
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

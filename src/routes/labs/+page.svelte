@@ -231,7 +231,7 @@
 	/>
 	<meta
 		name="keywords"
-		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, PIF-Bench, rubric-graded benchmark, gift compliance AI, ChatGPT vs Rōmy, prospect research tool"
+		content="donor research benchmark, AI prospect research comparison, best AI for fundraising, nonprofit fundraising AI, PIF-Bench, rubric-graded benchmark, gift compliance AI, ChatGPT vs Rōmy, Claude vs Rōmy, Gemini vs Rōmy, prospect research tool"
 	/>
 	<meta property="og:title" content="Rōmy Labs — PIF-Bench v2" />
 	<meta property="og:description" content="An open, rubric-graded benchmark of AI on nonprofit development work. Live track: Claude.ai 83%, Rōmy 74%, Gemini 67%, ChatGPT 60% of checks met." />
