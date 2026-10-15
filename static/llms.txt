@@ -10,6 +10,27 @@ Rōmy is a donor intelligence platform built for small nonprofit teams. It uses 
 - Fraction of the Cost: No enterprise contracts or per-seat licensing — donor intelligence at a price built for small nonprofits
 - Ready to Act On: Every prospect comes with connection points, giving capacity, and outreach angles
 
+## Key pages
+
+- [Rōmy Blog](https://getromy.app/blog): Essays and research on nonprofit fundraising, major gifts, donor prospect research, and AI for small development teams. RSS: https://getromy.app/rss.xml
+- [Rōmy Labs — PIF-Bench v2](https://getromy.app/labs): An open, rubric-graded benchmark of AI systems (Rōmy, Claude.ai, ChatGPT, Gemini) on nonprofit development-office tasks
+- [Status](https://getromy.app/status): Live operational status and uptime history
+- [Legal, privacy and security documents](https://getromy.app/legal)
+
+## Essential reading
+
+- [The Small Nonprofit Fundraising Gap — and How to Close It](https://getromy.app/blog/small-nonprofit-fundraising-gap): Why organizations with budgets under $2M are priced out of enterprise prospect research tools
+- [What Actually Predicts Giving Capacity — and How Rōmy Scores It](https://getromy.app/blog/understanding-wealth-indicators): Separating capacity from inclination in wealth indicators
+- [How We Built a Donor Intelligence Engine Starting at $0.10 per Prospect](https://getromy.app/blog/how-we-built-donor-intelligence): The unit economics of affordable donor intelligence
+- [Major Gifts Aren't a Wealth Problem. They're a Timing Problem.](https://getromy.app/blog/major-gifts-are-a-timing-problem): Why timing, not capacity, wins major gifts
+- [Your Next Major Gift Is Already in Your CRM](https://getromy.app/blog/your-next-major-gift-is-already-in-your-crm): Re-engaging prospects you have already met
+- [The Donor Your Wealth Screen Will Miss](https://getromy.app/blog/the-donor-your-wealth-screen-will-miss): The limits of wealth screening for quiet donors
+- [PIF-Bench v2: How Often Does AI Get Nonprofit Development Work Completely Right?](https://getromy.app/labs/blog/benchmarking-ai-prospect-research): Benchmark methodology and results
+
+## Topics covered
+
+Donor prospect research, major donor identification, wealth screening, giving capacity vs. inclination, donor retention and stewardship, planned giving, small-nonprofit fundraising, and AI benchmarks for development work.
+
 ## Links
 
 - Website: https://getromy.app
