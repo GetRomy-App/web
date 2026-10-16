@@ -17,5 +17,7 @@
   ],
   "theme_color": "#000000",
   "background_color": "#000000",
-  "display": "standalone"
+  "display": "standalone",
+  "description": "Donor intelligence for small nonprofits: AI prospect research, wealth indicators and giving history.",
+  "start_url": "/"
 }

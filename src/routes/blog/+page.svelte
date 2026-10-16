@@ -9,7 +9,13 @@
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
 
+	import { jsonLd, breadcrumbs, SITE_URL, OG_IMAGE, OG_IMAGE_ALT } from '$lib/seo';
+
 	let { data } = $props();
+
+	const pageTitle = 'Rōmy Blog — Donor Research, Major Gifts & Nonprofit Fundraising';
+	const pageDescription =
+		'Field notes and research on major donor prospecting, donor stewardship and AI-powered prospect research for small nonprofit fundraising teams.';
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -101,20 +107,45 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
+	<title>{pageTitle}</title>
+	<meta name="description" content={pageDescription} />
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, donor intelligence, major donor prospecting, prospect research, donor stewardship, AI for nonprofits, fundraising insights"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
+	<link rel="canonical" href="{SITE_URL}/blog" />
+	<meta property="og:title" content={pageTitle} />
+	<meta property="og:description" content={pageDescription} />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
+	<meta property="og:url" content="{SITE_URL}/blog" />
+	<meta property="og:image" content={OG_IMAGE} />
+	<meta property="og:image:alt" content={OG_IMAGE_ALT} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={pageTitle} />
+	<meta name="twitter:description" content={pageDescription} />
+	<meta name="twitter:image" content={OG_IMAGE} />
+	{@html jsonLd({
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		'@id': `${SITE_URL}/blog#blog`,
+		url: `${SITE_URL}/blog`,
+		name: 'Rōmy Blog',
+		description: pageDescription,
+		inLanguage: 'en-US',
+		publisher: { '@id': `${SITE_URL}/#organization` },
+		blogPost: data.posts.slice(0, 20).map((p) => ({
+			'@type': 'BlogPosting',
+			headline: p.title,
+			url: `${SITE_URL}/blog/${p.slug}`,
+			datePublished: p.date
+		}))
+	})}
+	{@html jsonLd(
+		breadcrumbs([
+			{ name: 'Home', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	)}
 </svelte:head>
 
 <Footer bind:footerText />

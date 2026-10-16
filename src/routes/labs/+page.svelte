@@ -10,6 +10,8 @@
 	import { PIF_HEADLINE } from '$lib/benchmarks';
 	import { contactModal } from '$lib/stores/contact.svelte';
 
+	import { jsonLd, breadcrumbs, SITE_URL, OG_IMAGE, OG_IMAGE_ALT } from '$lib/seo';
+
 	let { data } = $props();
 
 	let mainContent: HTMLElement;
@@ -233,11 +235,41 @@
 		name="keywords"
 		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, PIF-Bench, rubric-graded benchmark, gift compliance AI, ChatGPT vs Rōmy, prospect research tool"
 	/>
+	<link rel="canonical" href="{SITE_URL}/labs" />
 	<meta property="og:title" content="Rōmy Labs — PIF-Bench v2" />
-	<meta property="og:description" content="An open, rubric-graded benchmark of AI on nonprofit development work. Live track: Claude.ai 83%, Rōmy 74%, Gemini 67%, ChatGPT 60% of checks met." />
+	<meta
+		property="og:description"
+		content="An open, rubric-graded benchmark of AI on nonprofit development work. Live track: Claude.ai 83%, Rōmy 74%, Gemini 67%, ChatGPT 60% of checks met."
+	/>
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/labs" />
-	<link rel="canonical" href="https://getromy.app/labs" />
+	<meta property="og:url" content="{SITE_URL}/labs" />
+	<meta property="og:image" content={OG_IMAGE} />
+	<meta property="og:image:alt" content={OG_IMAGE_ALT} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Rōmy Labs — PIF-Bench v2" />
+	<meta
+		name="twitter:description"
+		content="An open, rubric-graded benchmark of AI on nonprofit development work."
+	/>
+	<meta name="twitter:image" content={OG_IMAGE} />
+	{@html jsonLd({
+		'@context': 'https://schema.org',
+		'@type': 'CollectionPage',
+		'@id': `${SITE_URL}/labs#page`,
+		url: `${SITE_URL}/labs`,
+		name: 'Rōmy Labs — PIF-Bench v2',
+		description:
+			'An open, rubric-graded benchmark of AI systems on nonprofit development-office work.',
+		inLanguage: 'en-US',
+		isPartOf: { '@id': `${SITE_URL}/#website` },
+		publisher: { '@id': `${SITE_URL}/#organization` }
+	})}
+	{@html jsonLd(
+		breadcrumbs([
+			{ name: 'Home', path: '/' },
+			{ name: 'Labs', path: '/labs' }
+		])
+	)}
 </svelte:head>
 
 <Footer bind:footerText />

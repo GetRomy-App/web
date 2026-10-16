@@ -65,6 +65,9 @@
 	<meta property="og:title" content="{title} — Rōmy" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app{canonicalPath}" />
+	<meta property="og:image" content="https://getromy.app/og-image.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="https://getromy.app/og-image.jpg" />
 	{#if description}
 		<meta property="og:description" content={description} />
 	{/if}
