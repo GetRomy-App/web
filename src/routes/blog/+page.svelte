@@ -5,11 +5,16 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import { SITE_URL, jsonLd } from '$lib/seo';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
 
 	let { data } = $props();
+
+	const blogTitle = 'Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising';
+	const blogDescription =
+		'Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI.';
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -101,20 +106,48 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
+	<title>{blogTitle}</title>
+	<meta name="description" content={blogDescription} />
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights, major gifts, donor stewardship"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
+	<link rel="canonical" href="{SITE_URL}/blog" />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
+	<meta property="og:url" content="{SITE_URL}/blog" />
+	<meta property="og:title" content={blogTitle} />
+	<meta property="og:description" content={blogDescription} />
+	<meta name="twitter:title" content={blogTitle} />
+	<meta name="twitter:description" content={blogDescription} />
+	{@html jsonLd({
+		'@context': 'https://schema.org',
+		'@graph': [
+			{
+				'@type': 'CollectionPage',
+				'@id': `${SITE_URL}/blog#page`,
+				url: `${SITE_URL}/blog`,
+				name: blogTitle,
+				description: blogDescription,
+				isPartOf: { '@id': `${SITE_URL}/#website` },
+				mainEntity: {
+					'@type': 'ItemList',
+					itemListElement: data.posts.slice(0, 50).map((p, i) => ({
+						'@type': 'ListItem',
+						position: i + 1,
+						url: `${SITE_URL}/blog/${p.slug}`,
+						name: p.title
+					}))
+				}
+			},
+			{
+				'@type': 'BreadcrumbList',
+				itemListElement: [
+					{ '@type': 'ListItem', position: 1, name: 'Rōmy', item: SITE_URL },
+					{ '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` }
+				]
+			}
+		]
+	})}
 </svelte:head>
 
 <Footer bind:footerText />

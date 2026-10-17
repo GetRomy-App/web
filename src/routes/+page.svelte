@@ -9,6 +9,11 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import { SITE_URL, jsonLd } from '$lib/seo';
+
+	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
+	const description =
+		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +46,50 @@
 		);
 	});
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="title" content={title} />
+	<meta name="description" content={description} />
+	<meta
+		name="keywords"
+		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
+	/>
+	<link rel="canonical" href="{SITE_URL}/" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="{SITE_URL}/" />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	{@html jsonLd({
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		'@id': `${SITE_URL}/#software`,
+		name: 'Rōmy',
+		url: SITE_URL,
+		image: `${SITE_URL}/screenshot.png`,
+		applicationCategory: 'BusinessApplication',
+		applicationSubCategory: 'Nonprofit donor prospect research',
+		operatingSystem: 'macOS, Windows, Linux',
+		description,
+		offers: {
+			'@type': 'Offer',
+			price: '0',
+			priceCurrency: 'USD',
+			availability: 'https://schema.org/InStock'
+		},
+		publisher: { '@id': `${SITE_URL}/#organization` },
+		featureList: [
+			'AI-powered donor prospect research',
+			'Wealth indicator screening',
+			'Giving history analysis',
+			'Affinity signal detection',
+			'Actionable donor profiles',
+			'No enterprise contracts required'
+		]
+	})}
+</svelte:head>
 
 <Footer bind:footerText />
 
