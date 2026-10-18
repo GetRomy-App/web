@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger } from '$lib/gsap';
 
+	import Seo from '$lib/components/Seo.svelte';
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Hero from '$lib/components/landing/Hero.svelte';
 	import Story from '$lib/components/landing/Story.svelte';
@@ -41,6 +42,44 @@
 		);
 	});
 </script>
+
+<Seo
+	title="Rōmy — Donor Intelligence for Small Nonprofits"
+	description="Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history."
+	path="/"
+	keywords="nonprofit donor intelligence, donor research software, prospect research tool, wealth screening alternative, AI donor research, major donor prospecting, small nonprofit fundraising software, fundraising CRM, donor discovery platform"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'SoftwareApplication',
+			'@id': 'https://getromy.app/#software',
+			name: 'Rōmy',
+			url: 'https://getromy.app/',
+			image: 'https://getromy.app/og-image.jpg',
+			applicationCategory: 'BusinessApplication',
+			applicationSubCategory: 'Donor intelligence and prospect research',
+			operatingSystem: 'macOS, Windows, Linux',
+			description:
+				'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
+			audience: { '@type': 'Audience', audienceType: 'Small nonprofit development teams' },
+			offers: {
+				'@type': 'Offer',
+				price: '0',
+				priceCurrency: 'USD',
+				availability: 'https://schema.org/InStock'
+			},
+			publisher: { '@id': 'https://getromy.app/#organization' },
+			featureList: [
+				'AI-powered donor prospect research',
+				'Wealth indicator screening',
+				'Giving history analysis',
+				'Affinity signal detection',
+				'Actionable donor profiles',
+				'No enterprise contracts required'
+			]
+		}
+	]}
+/>
 
 <Footer bind:footerText />
 

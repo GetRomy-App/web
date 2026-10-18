@@ -3,6 +3,8 @@
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
 
+	import Seo from '$lib/components/Seo.svelte';
+	import { breadcrumbs, blogPostingLd } from '$lib/seo';
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
@@ -100,22 +102,27 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Rōmy Blog — Donor Research & Major Gift Fundraising for Small Nonprofits"
+	description="Field notes on major gifts, donor research, prospect research, and relationship-driven fundraising for small nonprofit development teams, from the team behind Rōmy."
+	path="/blog"
+	keywords="nonprofit fundraising blog, major gift fundraising, donor research, prospect research, donor stewardship, small nonprofit fundraising, donor intelligence"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'Blog',
+			'@id': 'https://getromy.app/blog#blog',
+			name: 'Rōmy Blog',
+			url: 'https://getromy.app/blog',
+			inLanguage: 'en-US',
+			publisher: { '@id': 'https://getromy.app/#organization' }
+		},
+		breadcrumbs([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 
