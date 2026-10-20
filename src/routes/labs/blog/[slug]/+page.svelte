@@ -7,7 +7,10 @@
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
+	import { jsonLdScript, breadcrumbs, metaDescription, SITE_URL, DEFAULT_OG_IMAGE } from '$lib/seo';
+
 	let { data } = $props();
+	const description = $derived(metaDescription(data.post.excerpt));
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -127,16 +130,43 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
+	<title>{data.post.title} — Rōmy Labs</title>
+	<meta name="description" content={description} />
+	<meta name="keywords" content="donor intelligence, nonprofit fundraising, major gift fundraising, prospect research, AI donor research, {data.post.tag.toLowerCase()}" />
+	<meta property="og:title" content="{data.post.title} — Rōmy Labs" />
+	<meta property="og:description" content={description} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
+	<meta property="article:author" content="GetRomy LLC" />
 	<meta property="article:section" content={data.post.tag} />
+	<meta property="article:tag" content={data.post.tag} />
+	<meta name="twitter:title" content="{data.post.title} — Rōmy Labs" />
+	<meta name="twitter:description" content={description} />
 	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+	{@html jsonLdScript({
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		'@id': `https://getromy.app/labs/blog/${data.post.slug}#article`,
+		headline: data.post.title,
+		description,
+		datePublished: data.post.date,
+		dateModified: data.post.date,
+		articleSection: data.post.tag,
+		inLanguage: 'en-US',
+		image: DEFAULT_OG_IMAGE,
+		mainEntityOfPage: `https://getromy.app/labs/blog/${data.post.slug}`,
+		author: { '@id': `${SITE_URL}/#organization` },
+		publisher: { '@id': `${SITE_URL}/#organization` }
+	})}
+	{@html jsonLdScript(
+		breadcrumbs([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Labs', path: '/labs' },
+			{ name: data.post.title, path: `/labs/blog/${data.post.slug}` }
+		])
+	)}
 </svelte:head>
 
 <Footer bind:footerText />

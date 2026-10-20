@@ -9,6 +9,8 @@
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
 
+	import { jsonLdScript, breadcrumbs, SITE_URL } from '$lib/seo';
+
 	let { data } = $props();
 
 	let mainContent: HTMLElement;
@@ -101,20 +103,49 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Donor Stories & Major Gift Fundraising Insights for Nonprofits</title>
 	<meta
 		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
+		content="Field notes and perspectives on major gift fundraising, donor relationships, prospect research, and AI for small nonprofits, from the team behind Rōmy."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="major gift fundraising, donor stewardship, donor relationships, nonprofit fundraising blog, prospect research, AI for nonprofits, donor intelligence"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
+	<meta property="og:title" content="Rōmy Blog — Donor Stories & Major Gift Fundraising Insights" />
+	<meta
+		property="og:description"
+		content="Field notes and perspectives on major gift fundraising, donor relationships, and prospect research for small nonprofits."
+	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
+	<meta name="twitter:title" content="Rōmy Blog — Donor Stories & Major Gift Fundraising Insights" />
+	<meta
+		name="twitter:description"
+		content="Field notes and perspectives on major gift fundraising, donor relationships, and prospect research for small nonprofits."
+	/>
 	<link rel="canonical" href="https://getromy.app/blog" />
+	{@html jsonLdScript({
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		'@id': `${SITE_URL}/blog#blog`,
+		name: 'Rōmy Blog',
+		url: `${SITE_URL}/blog`,
+		inLanguage: 'en-US',
+		publisher: { '@id': `${SITE_URL}/#organization` },
+		blogPost: data.posts.slice(0, 50).map((post) => ({
+			'@type': 'BlogPosting',
+			headline: post.title,
+			url: `${SITE_URL}/blog/${post.slug}`,
+			datePublished: post.date
+		}))
+	})}
+	{@html jsonLdScript(
+		breadcrumbs([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	)}
 </svelte:head>
 
 <Footer bind:footerText />
