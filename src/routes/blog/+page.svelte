@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { breadcrumbs, articleSchema, SITE_URL, ORG_ID, WEBSITE_ID } from '$lib/seo';
 	import '../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
@@ -100,22 +102,30 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Rōmy Blog — Donor Retention, Major Gifts & Nonprofit Fundraising Insights"
+	description="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
+	path="/blog"
+	keywords="nonprofit fundraising blog, donor retention, major gifts, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'Blog',
+			'@id': `${SITE_URL}/blog#blog`,
+			url: `${SITE_URL}/blog`,
+			name: 'Rōmy Blog',
+			description:
+				'Perspectives on nonprofit fundraising, donor retention, major gifts, and AI donor intelligence.',
+			inLanguage: 'en-US',
+			publisher: { '@id': ORG_ID },
+			isPartOf: { '@id': WEBSITE_ID }
+		},
+		breadcrumbs([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 

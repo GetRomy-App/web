@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { breadcrumbs, articleSchema, SITE_URL, ORG_ID, WEBSITE_ID } from '$lib/seo';
 	import '../../../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, SplitText } from '$lib/gsap';
@@ -126,18 +128,23 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title="{data.post.title} — Rōmy Labs"
+	description={data.post.excerpt}
+	path="/labs/blog/{data.post.slug}"
+	type="article"
+	published={data.post.date}
+	section={data.post.tag}
+	keywords="{data.post.title.toLowerCase()}, {data.post.tag.toLowerCase()}, AI prospect research benchmark, donor intelligence, nonprofit fundraising AI"
+	jsonLd={[
+		articleSchema({ ...data.post, basePath: '/labs/blog' }),
+		breadcrumbs([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Labs', path: '/labs' },
+			{ name: data.post.title, path: `/labs/blog/${data.post.slug}` }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 
