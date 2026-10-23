@@ -9,6 +9,7 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +42,13 @@
 		);
 	});
 </script>
+
+<SeoHead
+	title="Rōmy — Donor Intelligence for Small Nonprofits"
+	description="Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams."
+	path="/"
+	keywords="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators, DonorSearch alternative, iWave alternative, WealthEngine alternative"
+/>
 
 <Footer bind:footerText />
 
