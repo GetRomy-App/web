@@ -10,6 +10,11 @@
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 
+	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
+	const description =
+		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
+	const url = 'https://getromy.app/';
+
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
 
@@ -41,6 +46,54 @@
 		);
 	});
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="title" content={title} />
+	<meta name="description" content={description} />
+	<meta
+		name="keywords"
+		content="donor intelligence, nonprofit donor research, prospect research software, AI prospect research for nonprofits, major donor prospecting, wealth screening alternative, affordable wealth screening, donor discovery platform, nonprofit fundraising software, small nonprofit fundraising tools, giving history, donor wealth indicators, major gifts software, DonorSearch alternative, iWave alternative, WealthEngine alternative"
+	/>
+	<link rel="canonical" href={url} />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={url} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta name="twitter:url" content={url} />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		'@id': 'https://getromy.app/#software',
+		name: 'Rōmy',
+		url: 'https://getromy.app',
+		image: 'https://getromy.app/og-image.jpg',
+		applicationCategory: 'BusinessApplication',
+		applicationSubCategory: 'Donor intelligence and prospect research software',
+		audience: { '@type': 'Audience', audienceType: 'Small nonprofit fundraising teams' },
+		operatingSystem: 'macOS, Windows, Linux, Web',
+		description,
+		offers: {
+			'@type': 'Offer',
+			price: '0',
+			priceCurrency: 'USD',
+			availability: 'https://schema.org/InStock'
+		},
+		publisher: { '@id': 'https://getromy.app/#organization' },
+		featureList: [
+			'AI-powered donor prospect research',
+			'Wealth indicator screening',
+			'Giving history analysis',
+			'Affinity signal detection',
+			'Actionable donor profiles',
+			'No enterprise contracts required'
+		]
+	})}</script>`}
+</svelte:head>
 
 <Footer bind:footerText />
 

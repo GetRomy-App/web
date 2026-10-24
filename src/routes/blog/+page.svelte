@@ -101,20 +101,38 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Donor Research, Major Gifts & Nonprofit Fundraising Insights</title>
 	<meta
 		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
+		content="Field notes and research on donor research, major gift fundraising, prospect research, and purpose-built AI for small nonprofits, from the team behind Rōmy."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, major gift fundraising, donor research, prospect research, donor intelligence, AI for nonprofits, fundraising insights, donor stewardship, small nonprofit fundraising"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
+	<meta property="og:title" content="Rōmy Blog — Donor Research, Major Gifts & Nonprofit Fundraising Insights" />
+	<meta property="og:description" content="Field notes and research on donor research, major gift fundraising, and purpose-built AI for small nonprofits." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
 	<link rel="canonical" href="https://getromy.app/blog" />
+	<link rel="alternate" type="application/rss+xml" title="Rōmy Blog" href="/blog/rss.xml" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		'@id': 'https://getromy.app/blog#blog',
+		name: 'Rōmy Blog',
+		url: 'https://getromy.app/blog',
+		description:
+			'Field notes and research on donor research, major gift fundraising, and purpose-built AI for small nonprofits.',
+		inLanguage: 'en-US',
+		publisher: { '@id': 'https://getromy.app/#organization' },
+		blogPost: data.posts.slice(0, 50).map((p) => ({
+			'@type': 'BlogPosting',
+			headline: p.title,
+			url: `https://getromy.app/blog/${p.slug}`,
+			datePublished: p.date
+		}))
+	})}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />

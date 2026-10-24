@@ -126,7 +126,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
+	<title>{data.post.title} — Rōmy Blog</title>
 	<meta name="description" content={data.post.excerpt} />
 	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
 	<meta property="og:title" content={data.post.title} />
@@ -134,8 +134,47 @@
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
+	<meta property="article:author" content="Rōmy" />
 	<meta property="article:section" content={data.post.tag} />
 	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@graph': [
+			{
+				'@type': 'BlogPosting',
+				'@id': 'https://getromy.app/blog/' + data.post.slug + '#article',
+				headline: data.post.title,
+				description: data.post.excerpt,
+				datePublished: data.post.date,
+				dateModified: data.post.date,
+				articleSection: data.post.tag,
+				inLanguage: 'en-US',
+				image: 'https://getromy.app/og-image.jpg',
+				mainEntityOfPage: 'https://getromy.app/blog/' + data.post.slug,
+				author: { '@id': 'https://getromy.app/#organization' },
+				publisher: { '@id': 'https://getromy.app/#organization' }
+			},
+			{
+				'@type': 'BreadcrumbList',
+				itemListElement: [
+					{ '@type': 'ListItem', position: 1, name: 'Rōmy', item: 'https://getromy.app/' },
+					{
+						'@type': 'ListItem',
+						position: 2,
+						name: 'Blog',
+						item: 'https://getromy.app/None'
+					},
+					{
+						'@type': 'ListItem',
+						position: 3,
+						name: data.post.title,
+						item: 'https://getromy.app/blog/' + data.post.slug
+					}
+				]
+			}
+		]
+	}).replace(/</g, '\\u003c')}</script>`}
 </svelte:head>
 
 <Footer bind:footerText />
