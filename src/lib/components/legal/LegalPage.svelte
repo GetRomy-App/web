@@ -65,6 +65,7 @@
 	<meta property="og:title" content="{title} — Rōmy" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app{canonicalPath}" />
+	<meta name="twitter:title" content="{title} — Rōmy" />
 	{#if description}
 		<meta property="og:description" content={description} />
 	{/if}
