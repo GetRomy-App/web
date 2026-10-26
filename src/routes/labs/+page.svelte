@@ -237,6 +237,7 @@
 	<meta property="og:description" content="An open, rubric-graded benchmark of AI on nonprofit development work. Live track: Claude.ai 83%, Rōmy 74%, Gemini 67%, ChatGPT 60% of checks met." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/labs" />
+	<meta name="twitter:title" content="Rōmy Labs — PIF-Bench v2" />
 	<link rel="canonical" href="https://getromy.app/labs" />
 </svelte:head>
 

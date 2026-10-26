@@ -141,6 +141,7 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/status" />
 	<meta property="og:description" content="Live operational status and uptime history for Rōmy." />
+	<meta name="twitter:title" content="Status — Rōmy" />
 	<link rel="canonical" href="https://getromy.app/status" />
 </svelte:head>
 

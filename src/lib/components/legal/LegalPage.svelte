@@ -68,6 +68,7 @@
 	{#if description}
 		<meta property="og:description" content={description} />
 	{/if}
+	<meta name="twitter:title" content="{title} — Rōmy" />
 	<link rel="canonical" href="https://getromy.app{canonicalPath}" />
 </svelte:head>
 

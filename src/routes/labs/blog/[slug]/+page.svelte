@@ -9,6 +9,11 @@
 
 	let { data } = $props();
 
+	import { SITE, OG_IMAGE, snippet, jsonLd } from '$lib/seo';
+
+	const url = $derived(`${SITE}/labs/blog/${data.post.slug}`);
+	const description = $derived(snippet(data.post.excerpt));
+
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
 	let articleHeader: HTMLElement;
@@ -127,16 +132,52 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
+	<title>{data.post.title} — Rōmy Labs</title>
+	<meta name="title" content="{data.post.title} — Rōmy Labs" />
+	<meta name="description" content={description} />
+	<meta
+		name="keywords"
+		content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, major gift fundraising, {data.post.tag.toLowerCase()}"
+	/>
 	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
+	<meta property="og:description" content={description} />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta property="og:url" content={url} />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
+	<meta property="article:author" content="{SITE}" />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={description} />
+	<link rel="canonical" href={url} />
+
+	{@html jsonLd({
+		'@context': 'https://schema.org',
+		'@graph': [
+			{
+				'@type': 'BlogPosting',
+				'@id': `${url}#article`,
+				headline: data.post.title,
+				description,
+				image: OG_IMAGE,
+				datePublished: data.post.date,
+				dateModified: data.post.date,
+				articleSection: data.post.tag,
+				inLanguage: 'en-US',
+				mainEntityOfPage: url,
+				author: { '@id': `${SITE}/#organization` },
+				publisher: { '@id': `${SITE}/#organization` }
+			},
+			{
+				'@type': 'BreadcrumbList',
+				itemListElement: [
+					{ '@type': 'ListItem', position: 1, name: 'Rōmy', item: SITE },
+					{ '@type': 'ListItem', position: 2, name: 'Labs', item: `${SITE}/labs` },
+					{ '@type': 'ListItem', position: 3, name: data.post.title, item: url }
+				]
+			}
+		]
+	})}
 </svelte:head>
 
 <Footer bind:footerText />
