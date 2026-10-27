@@ -5,6 +5,8 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import SeoHead from '$lib/components/seo/SeoHead.svelte';
+	import { SITE_URL, breadcrumbs } from '$lib/seo';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
@@ -100,22 +102,35 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<SeoHead
+	title="Rōmy Blog — Donor Research, Major Gifts & Nonprofit Fundraising Insights"
+	ogTitle="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising"
+	description="Essays and field notes on major gifts, donor stewardship, prospect research, and AI for small nonprofit fundraising teams, from the makers of Rōmy."
+	path="/blog"
+	keywords="nonprofit fundraising blog, major gifts, donor stewardship, donor retention, prospect research, wealth screening, AI for nonprofits, fundraising insights"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'Blog',
+			'@id': `${SITE_URL}/blog#blog`,
+			url: `${SITE_URL}/blog`,
+			name: 'Rōmy Blog',
+			description: 'Essays and field notes on major gifts, donor stewardship, and AI prospect research for small nonprofits.',
+			inLanguage: 'en-US',
+			publisher: { '@id': `${SITE_URL}/#organization` },
+			blogPost: data.posts.slice(0, 50).map((p: { slug: string; title: string; date: string }) => ({
+				'@type': 'BlogPosting',
+				headline: p.title,
+				url: `${SITE_URL}/blog/${p.slug}`,
+				datePublished: p.date
+			}))
+		},
+		breadcrumbs([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 
