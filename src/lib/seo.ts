@@ -4,7 +4,10 @@ export const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
 /** Collapse whitespace and trim to a SERP-friendly length, cutting on a word boundary. */
 export function metaDescription(text: string, max = 158): string {
-	const clean = text.replace(/[*_`#>]/g, '').replace(/\s+/g, ' ').trim();
+	const clean = text
+		.replace(/[*_`#>]/g, '')
+		.replace(/\s+/g, ' ')
+		.trim();
 	if (clean.length <= max) return clean;
 	const cut = clean.slice(0, max - 1);
 	const lastSpace = cut.lastIndexOf(' ');
