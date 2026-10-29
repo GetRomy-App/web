@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { SITE_URL, metaDescription, jsonLd, articleSchema, breadcrumbs } from '$lib/seo';
 	import '../../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, SplitText } from '$lib/gsap';
@@ -123,19 +124,38 @@
 			splits.forEach((s) => s.revert());
 		};
 	});
+
+	const path = $derived(`/blog/${data.post.slug}`);
+	const description = $derived(metaDescription(data.post.excerpt));
+	const pageTitle = $derived(`${data.post.title} — Rōmy Blog`);
+	const keywords = $derived(
+		`donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, ${data.post.tag.toLowerCase()}`
+	);
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
+	<title>{pageTitle}</title>
+	<meta name="description" content={description} />
+	<meta name="keywords" content="{keywords}" />
+	<link rel="canonical" href="{SITE_URL}{path}" />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
+	<meta property="og:url" content="{SITE_URL}{path}" />
+	<meta property="og:title" content={data.post.title} />
+	<meta property="og:description" content={description} />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
+	<meta property="article:author" content="GetRomy LLC" />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={description} />
+	{@html jsonLd(articleSchema({ path, title: data.post.title, description, date: data.post.date, section: data.post.tag }))}
+	{@html jsonLd(
+		breadcrumbs([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Blog', path: '/blog' },
+			{ name: data.post.title, path }
+		])
+	)}
 </svelte:head>
 
 <Footer bind:footerText />
