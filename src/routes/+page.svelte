@@ -9,6 +9,8 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { SITE } from '$lib/seo';
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +43,44 @@
 		);
 	});
 </script>
+
+<Seo
+	title="Rōmy — Donor Intelligence for Small Nonprofits"
+	description="Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams."
+	path="/"
+	keywords="nonprofit donor intelligence, donor prospect research, wealth screening for nonprofits, AI prospect research, major donor prospecting, affordable WealthEngine alternative, DonorSearch alternative, fundraising software for small nonprofits, donor discovery platform, giving history, wealth indicators, philanthropy intelligence"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'SoftwareApplication',
+			'@id': `${SITE}/#software`,
+			name: 'Rōmy',
+			url: SITE,
+			image: `${SITE}/og-image.jpg`,
+			applicationCategory: 'BusinessApplication',
+			applicationSubCategory: 'Donor prospect research and wealth screening',
+			operatingSystem: 'macOS, Windows, Linux',
+			description:
+				'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
+			offers: {
+				'@type': 'Offer',
+				price: '0',
+				priceCurrency: 'USD',
+				availability: 'https://schema.org/InStock'
+			},
+			publisher: { '@id': `${SITE}/#organization` },
+			audience: { '@type': 'Audience', audienceType: 'Small nonprofit fundraising teams' },
+			featureList: [
+				'AI-powered donor prospect research',
+				'Wealth indicator screening',
+				'Giving history analysis',
+				'Affinity signal detection',
+				'Actionable donor profiles',
+				'No enterprise contracts required'
+			]
+		}
+	]}
+/>
 
 <Footer bind:footerText />
 

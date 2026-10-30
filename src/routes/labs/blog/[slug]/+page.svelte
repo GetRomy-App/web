@@ -5,6 +5,8 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { SITE, OG_IMAGE, metaDescription, breadcrumbs } from '$lib/seo';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
 	let { data } = $props();
@@ -14,6 +16,9 @@
 	let articleHeader: HTMLElement;
 	let articleBody: HTMLElement;
 	let chartsSection: HTMLElement;
+
+	const description = $derived(metaDescription(data.post.excerpt));
+	const path = $derived(`/labs/blog/${data.post.slug}`);
 
 	function formatDate(dateStr: string): string {
 		if (!dateStr) return '';
@@ -126,18 +131,39 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title="{data.post.title} — Rōmy Labs"
+	ogTitle={data.post.title}
+	{description}
+	{path}
+	type="article"
+	published={data.post.date}
+	section={data.post.tag}
+	keywords="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, PIF-Bench, {data.post.tag.toLowerCase()}"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'TechArticle',
+			'@id': `${SITE}${path}#article`,
+			headline: data.post.title.slice(0, 110),
+			description,
+			datePublished: data.post.date,
+			dateModified: data.post.date,
+			articleSection: data.post.tag,
+			inLanguage: 'en-US',
+			image: OG_IMAGE,
+			url: `${SITE}${path}`,
+			mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}${path}` },
+			author: { '@id': `${SITE}/#organization` },
+			publisher: { '@id': `${SITE}/#organization` }
+		},
+		breadcrumbs([
+			{ name: 'Home', path: '/' },
+			{ name: 'Labs', path: '/labs' },
+			{ name: data.post.title, path }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 
