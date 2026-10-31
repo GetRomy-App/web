@@ -5,6 +5,7 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import { SITE, OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT, jsonLd, breadcrumbs } from '$lib/seo';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { PIF_HEADLINE } from '$lib/benchmarks';
@@ -238,6 +239,38 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/labs" />
 	<link rel="canonical" href="https://getromy.app/labs" />
+	<meta property="og:image" content={OG_IMAGE} />
+	<meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+	<meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Rōmy Labs — PIF-Bench v2" />
+	<meta name="twitter:description" content="An open, rubric-graded benchmark of AI on nonprofit development work. Live track: Claude.ai 83%, Rōmy 74%, Gemini 67%, ChatGPT 60% of checks met." />
+	<meta name="twitter:image" content={OG_IMAGE} />
+	{@html jsonLd({
+		'@context': 'https://schema.org',
+		'@type': 'CollectionPage',
+		'@id': `${SITE}/labs#collection`,
+		url: `${SITE}/labs`,
+		name: 'Rōmy Labs',
+		description: 'An open, rubric-graded benchmark of AI on nonprofit development work. Live track: Claude.ai 83%, Rōmy 74%, Gemini 67%, ChatGPT 60% of checks met.',
+		inLanguage: 'en-US',
+		publisher: { '@id': `${SITE}/#organization` },
+		mainEntity: {
+			'@type': 'ItemList',
+			itemListElement: data.posts.map((post: { slug: string; title: string }, i: number) => ({
+				'@type': 'ListItem',
+				position: i + 1,
+				url: `${SITE}/labs/blog/${post.slug}`,
+				name: post.title
+			}))
+		}
+	})}
+	{@html jsonLd(
+		breadcrumbs([
+			{ name: 'Home', path: '/' },
+			{ name: 'Rōmy Labs', path: '/labs' }
+		])
+	)}
 </svelte:head>
 
 <Footer bind:footerText />

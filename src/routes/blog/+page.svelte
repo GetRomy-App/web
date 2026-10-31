@@ -4,6 +4,7 @@
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
+	import { SITE, OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT, jsonLd, breadcrumbs } from '$lib/seo';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
@@ -101,20 +102,53 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
 	<meta
 		name="description"
 		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, major gift fundraising, donor stewardship, donor retention, donor intelligence, prospect research, AI for nonprofits, small nonprofit fundraising, fundraising insights"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta property="og:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
 	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
 	<link rel="canonical" href="https://getromy.app/blog" />
+	<meta property="og:image" content={OG_IMAGE} />
+	<meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+	<meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
+	<meta name="twitter:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI." />
+	<meta name="twitter:image" content={OG_IMAGE} />
+	<link rel="alternate" type="application/rss+xml" title="Rōmy Blog" href="https://getromy.app/blog/rss.xml" />
+	{@html jsonLd({
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		'@id': `${SITE}/blog#collection`,
+		url: `${SITE}/blog`,
+		name: 'Rōmy Blog',
+		description: 'Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI.',
+		inLanguage: 'en-US',
+		publisher: { '@id': `${SITE}/#organization` },
+		mainEntity: {
+			'@type': 'ItemList',
+			itemListElement: data.posts.map((post: { slug: string; title: string }, i: number) => ({
+				'@type': 'ListItem',
+				position: i + 1,
+				url: `${SITE}/blog/${post.slug}`,
+				name: post.title
+			}))
+		}
+	})}
+	{@html jsonLd(
+		breadcrumbs([
+			{ name: 'Home', path: '/' },
+			{ name: 'Rōmy Blog', path: '/blog' }
+		])
+	)}
 </svelte:head>
 
 <Footer bind:footerText />

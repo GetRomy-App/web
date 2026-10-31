@@ -9,6 +9,12 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import { jsonLd, SITE, OG_IMAGE, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '$lib/seo';
+
+	const title = 'Rōmy — Donor Intelligence & AI Prospect Research for Small Nonprofits';
+	const description =
+		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
+	const url = `${SITE}/`;
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +47,65 @@
 		);
 	});
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="title" content={title} />
+	<meta name="description" content={description} />
+	<meta
+		name="keywords"
+		content="nonprofit donor intelligence, donor intelligence software, AI prospect research, prospect research tool, major donor prospecting, wealth screening alternative, donor discovery platform, nonprofit fundraising software, small nonprofit fundraising, affordable DonorSearch alternative, affordable iWave alternative, giving history, donor wealth indicators, fundraising CRM, philanthropy intelligence"
+	/>
+	<link rel="canonical" href={url} />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={url} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:image" content={OG_IMAGE} />
+	<meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+	<meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
+	<meta property="og:image:alt" content="Rōmy — donor intelligence for small nonprofits" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:url" content={url} />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={OG_IMAGE} />
+
+	<link rel="dns-prefetch" href="//api.github.com" />
+	<link rel="preconnect" href="//api.github.com" crossorigin="anonymous" />
+
+	{@html jsonLd({
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		'@id': `${SITE}/#software`,
+		name: 'Rōmy',
+		url: SITE,
+		image: OG_IMAGE,
+		applicationCategory: 'BusinessApplication',
+		applicationSubCategory: 'Donor intelligence and prospect research',
+		operatingSystem: 'macOS, Windows, Linux',
+		description:
+			'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
+		audience: { '@type': 'Audience', audienceType: 'Small nonprofit fundraising teams' },
+		offers: {
+			'@type': 'Offer',
+			price: '0',
+			priceCurrency: 'USD',
+			availability: 'https://schema.org/InStock'
+		},
+		publisher: { '@id': `${SITE}/#organization` },
+		featureList: [
+			'AI-powered donor prospect research',
+			'Wealth indicator screening',
+			'Giving history analysis',
+			'Affinity signal detection',
+			'Actionable donor profiles',
+			'No enterprise contracts required'
+		]
+	})}
+</svelte:head>
 
 <Footer bind:footerText />
 
