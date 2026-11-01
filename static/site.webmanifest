@@ -1,6 +1,9 @@
 {
   "name": "Rōmy",
   "short_name": "Rōmy",
+  "description": "Donor intelligence for small nonprofits.",
+  "start_url": "/",
+  "lang": "en-US",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
