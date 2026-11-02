@@ -9,6 +9,55 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { SITE_URL, ORG_ID, WEBSITE_ID } from '$lib/seo';
+
+	const description =
+		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
+
+	const jsonLd = [
+		{
+			'@context': 'https://schema.org',
+			'@type': 'SoftwareApplication',
+			'@id': `${SITE_URL}/#software`,
+			name: 'Rōmy',
+			alternateName: 'Rōmy Donor Intelligence',
+			url: SITE_URL,
+			applicationCategory: 'BusinessApplication',
+			applicationSubCategory: 'Donor prospect research and wealth screening software',
+			operatingSystem: 'macOS, Windows, Linux',
+			inLanguage: 'en-US',
+			description,
+			audience: { '@type': 'Audience', audienceType: 'Small nonprofits and fundraising teams' },
+			offers: {
+				'@type': 'Offer',
+				price: '0',
+				priceCurrency: 'USD',
+				availability: 'https://schema.org/InStock'
+			},
+			publisher: { '@id': ORG_ID },
+			image: `${SITE_URL}/og-image.jpg`,
+			screenshot: `${SITE_URL}/screenshot.png`,
+			featureList: [
+				'AI-powered donor prospect research',
+				'Wealth indicator screening',
+				'Giving history analysis',
+				'Affinity signal detection',
+				'Actionable donor profiles',
+				'No enterprise contracts required'
+			]
+		},
+		{
+			'@context': 'https://schema.org',
+			'@type': 'WebPage',
+			'@id': `${SITE_URL}/#webpage`,
+			url: SITE_URL,
+			name: 'Rōmy — Affordable Donor Research for Small Nonprofits',
+			isPartOf: { '@id': WEBSITE_ID },
+			about: { '@id': `${SITE_URL}/#software` },
+			primaryImageOfPage: `${SITE_URL}/og-image.jpg`
+		}
+	];
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +90,14 @@
 		);
 	});
 </script>
+
+<Seo
+	title="Rōmy — Affordable Donor Research for Small Nonprofits"
+	{description}
+	path="/"
+	keywords="donor prospect research, nonprofit donor intelligence, wealth screening for nonprofits, major donor prospecting, AI donor research, affordable fundraising software, small nonprofit fundraising tools, donor discovery"
+	{jsonLd}
+/>
 
 <Footer bind:footerText />
 

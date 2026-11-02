@@ -5,11 +5,50 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { SITE_URL, ORG_ID, WEBSITE_ID, breadcrumbs } from '$lib/seo';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
 
 	let { data } = $props();
+
+	const jsonLd = $derived([
+		{
+			'@context': 'https://schema.org',
+			'@type': 'Blog',
+			'@id': `${SITE_URL}/blog#blog`,
+			url: `${SITE_URL}/blog`,
+			name: 'Rōmy Blog',
+			description:
+				'Essays and field notes on major gift fundraising, donor prospect research, and stewardship for small nonprofit teams.',
+			inLanguage: 'en-US',
+			isPartOf: { '@id': WEBSITE_ID },
+			publisher: { '@id': ORG_ID },
+			blogPost: data.posts.slice(0, 30).map((p: { slug: string; title: string; date: string }) => ({
+				'@type': 'BlogPosting',
+				headline: p.title.slice(0, 110),
+				url: `${SITE_URL}/blog/${p.slug}`,
+				datePublished: p.date
+			}))
+		},
+		{
+			'@context': 'https://schema.org',
+			'@type': 'ItemList',
+			itemListOrder: 'https://schema.org/ItemListOrderDescending',
+			numberOfItems: data.posts.length,
+			itemListElement: data.posts.slice(0, 50).map((p: { slug: string; title: string }, i: number) => ({
+				'@type': 'ListItem',
+				position: i + 1,
+				url: `${SITE_URL}/blog/${p.slug}`,
+				name: p.title
+			}))
+		},
+		breadcrumbs([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	]);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -100,22 +139,14 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Rōmy Blog — Donor Research & Major Gift Fundraising for Nonprofits"
+	description="Essays and field notes on major gift fundraising, donor prospect research, wealth screening, and stewardship — written for small nonprofit development teams."
+	socialTitle="Rōmy Blog — Donor Research & Major Gift Fundraising"
+	path="/blog"
+	keywords="nonprofit fundraising blog, major gift fundraising, donor prospect research, donor stewardship, wealth screening, small nonprofit fundraising, fundraising insights"
+	{jsonLd}
+/>
 
 <Footer bind:footerText />
 

@@ -5,9 +5,44 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { SITE_URL, ORG_ID, WEBSITE_ID, DEFAULT_OG_IMAGE, breadcrumbs, clamp, wordCount } from '$lib/seo';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
 	let { data } = $props();
+
+	const url = $derived(`${SITE_URL}/blog/${data.post.slug}`);
+	const postTitle = $derived(`${data.post.title} | Rōmy Blog`);
+	const postDescription = $derived(clamp(data.post.excerpt || data.post.title, 200));
+	const keywords = $derived(
+		['donor intelligence', 'nonprofit fundraising', 'major gift fundraising', data.post.tag.toLowerCase()].filter(Boolean).join(', ')
+	);
+	const jsonLd = $derived([
+		{
+			'@context': 'https://schema.org',
+			'@type': 'BlogPosting',
+			'@id': `${url}#article`,
+			headline: data.post.title.slice(0, 110),
+			name: data.post.title,
+			description: data.post.excerpt,
+			url,
+			mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+			datePublished: data.post.date,
+			dateModified: data.post.date,
+			inLanguage: 'en-US',
+			articleSection: data.post.tag,
+			wordCount: wordCount(data.post.content),
+			image: [DEFAULT_OG_IMAGE.url],
+			isPartOf: { '@id': WEBSITE_ID },
+			author: { '@id': ORG_ID },
+			publisher: { '@id': ORG_ID }
+		},
+		breadcrumbs([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Rōmy Blog', path: '/blog' },
+			{ name: data.post.title, path: `/blog/${data.post.slug}` }
+		])
+	]);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -125,18 +160,17 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title="{postTitle}"
+	description={postDescription}
+	socialTitle={data.post.title}
+	path="/blog/{data.post.slug}"
+	type="article"
+	published={data.post.date}
+	section={data.post.tag}
+	keywords={keywords}
+	jsonLd={jsonLd}
+/>
 
 <Footer bind:footerText />
 
