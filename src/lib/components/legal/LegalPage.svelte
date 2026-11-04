@@ -64,6 +64,7 @@
 	<meta name="robots" content="index, follow" />
 	<meta property="og:title" content="{title} — Rōmy" />
 	<meta property="og:type" content="website" />
+	<meta name="twitter:title" content="{title} — Rōmy" />
 	<meta property="og:url" content="https://getromy.app{canonicalPath}" />
 	{#if description}
 		<meta property="og:description" content={description} />

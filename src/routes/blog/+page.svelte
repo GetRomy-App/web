@@ -9,6 +9,7 @@
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
 
+	import { jsonLd } from '$lib/seo';
 	let { data } = $props();
 
 	let mainContent: HTMLElement;
@@ -101,20 +102,39 @@
 </script>
 
 <svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
+	<title>Rōmy Blog — Major Donor Fundraising, Prospect Research & Donor Stewardship</title>
 	<meta
 		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
+		content="Field notes and research on major donor fundraising, prospect research, donor stewardship, and purpose-built AI for small nonprofit development teams."
 	/>
 	<meta
 		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
+		content="nonprofit fundraising blog, major donor fundraising, donor intelligence, prospect research, donor stewardship, AI for nonprofits, fundraising insights"
 	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
+	<meta property="og:title" content="Rōmy Blog — Major Donor Fundraising, Prospect Research & Donor Stewardship" />
+	<meta property="og:description" content="Field notes and research on major donor fundraising, prospect research, and donor stewardship for small nonprofits." />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://getromy.app/blog" />
+	<meta name="twitter:title" content="Rōmy Blog — Major Donor Fundraising & Prospect Research" />
+	<meta name="twitter:description" content="Field notes and research on major donor fundraising, prospect research, and donor stewardship for small nonprofits." />
 	<link rel="canonical" href="https://getromy.app/blog" />
+	{@html jsonLd({
+		'@context': 'https://schema.org',
+		'@type': 'CollectionPage',
+		name: 'Rōmy Blog',
+		url: 'https://getromy.app/blog',
+		description: 'Field notes and research on major donor fundraising, prospect research, and donor stewardship for small nonprofits.',
+		isPartOf: { '@type': 'WebSite', name: 'Rōmy', url: 'https://getromy.app/' },
+		mainEntity: {
+			'@type': 'ItemList',
+			itemListElement: (data.posts ?? []).slice(0, 50).map((p: { slug: string; title: string }, i: number) => ({
+				'@type': 'ListItem',
+				position: i + 1,
+				url: `https://getromy.app/blog/${p.slug}`,
+				name: p.title
+			}))
+		}
+	})}
 </svelte:head>
 
 <Footer bind:footerText />

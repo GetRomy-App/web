@@ -2,6 +2,7 @@
 	import '../../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, SplitText } from '$lib/gsap';
+	import { metaDescription, jsonLd, articleSchema } from '$lib/seo';
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
@@ -126,16 +127,26 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
+	<title>{data.post.title} — Rōmy Blog</title>
+	<meta name="description" content={metaDescription(data.post.excerpt)} />
+	<meta
+		name="keywords"
+		content="donor intelligence, nonprofit fundraising, major donor fundraising, prospect research, donor stewardship, AI donor research, {data.post.tag.toLowerCase()}"
+	/>
 	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
+	<meta property="og:description" content={metaDescription(data.post.excerpt, 200)} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
 	<meta property="article:published_time" content={data.post.date} />
+	<meta property="article:modified_time" content={data.post.date} />
 	<meta property="article:section" content={data.post.tag} />
+	<meta property="article:author" content="Rōmy" />
+	<meta name="twitter:title" content={data.post.title} />
+	<meta name="twitter:description" content={metaDescription(data.post.excerpt, 200)} />
 	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
+	{#each articleSchema({ path: `/blog/${data.post.slug}`, section: 'blog', title: data.post.title, excerpt: data.post.excerpt, date: data.post.date, tag: data.post.tag }) as schema}
+		{@html jsonLd(schema)}
+	{/each}
 </svelte:head>
 
 <Footer bind:footerText />
