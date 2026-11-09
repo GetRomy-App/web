@@ -1,31 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Button from '$lib/components/ui/Button.svelte';
-	import { fallbackReleaseUrl } from '$lib/release';
 	import { toggleTheme, isDark } from '$lib/theme';
 	import { contactModal } from '$lib/stores/contact.svelte';
 
-	const RELEASE_TAG = 'v1.0.0';
-	const BASE = `https://github.com/GetRomy-App/web/releases/download/${RELEASE_TAG}`;
-
-	let downloadUrl = $state(fallbackReleaseUrl);
 	let menuOpen = $state(false);
 	let menuRef: HTMLDivElement | undefined = $state();
 
 	onMount(() => {
-		const ua = (navigator.userAgent || '').toLowerCase();
-		const platform = (navigator.platform || '').toLowerCase();
-		const uaData = (navigator as any).userAgentData;
-		const plat = uaData?.platform?.toLowerCase() || platform;
-
-		if (plat.includes('mac') || ua.includes('mac')) {
-			downloadUrl = `${BASE}/Romy.dmg`;
-		} else if (plat.includes('win') || ua.includes('win')) {
-			downloadUrl = `${BASE}/Romy_x64.msi`;
-		} else if (plat.includes('linux') || (ua.includes('linux') && !ua.includes('android'))) {
-			downloadUrl = `${BASE}/Romy.deb`;
-		}
-
 		function onDocClick(e: MouseEvent) {
 			if (!menuOpen) return;
 			if (menuRef && !menuRef.contains(e.target as Node)) {
@@ -175,15 +157,6 @@
 				{/if}
 			</div>
 
-			<Button
-				class="h-7 text-xs"
-				variant="ghost"
-				href={downloadUrl}
-				target="_blank"
-				rel="noreferrer"
-			>
-				Download
-			</Button>
 			<Button class="h-7 text-xs" onclick={() => contactModal.showWaitlist()}>
 				Learn More
 				<svg
