@@ -13,10 +13,11 @@
 	import { summarize, computeOverall } from '$lib/status/compute';
 	import { OVERALL_STYLES, relativeTime } from '$lib/status/ui';
 	import type { HistoryDoc, ServiceSummary, OverallStatus } from '$lib/status/types';
-	import { productUrl } from '$lib/release';
 	import { contactModal } from '$lib/stores/contact.svelte';
 
 	let { data } = $props();
+
+	const productUrl = 'https://intel.getromy.app';
 
 	// The prerendered load data is stable for this page instance; capture it once
 	// so seeding $state from it doesn't trip the "reference captures initial value"
