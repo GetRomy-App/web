@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Seo from '$lib/components/Seo.svelte';
 	import '../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
@@ -100,22 +101,22 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	path="/blog"
+	title="Rōmy Blog — AI Donor Research, Prospect Research & Major Gifts Fundraising"
+	description="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, major gifts, and purpose-built AI."
+	keywords="nonprofit fundraising blog, major gifts fundraising, donor intelligence, prospect research, AI for nonprofits, donor stewardship, fundraising insights"
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'Blog',
+			name: 'Rōmy Blog',
+			url: 'https://getromy.app/blog',
+			inLanguage: 'en-US',
+			publisher: { '@id': 'https://getromy.app/#organization' }
+		}
+	]}
+/>
 
 <Footer bind:footerText />
 

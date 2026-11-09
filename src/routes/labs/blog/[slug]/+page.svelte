@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Seo from '$lib/components/Seo.svelte';
 	import '../../../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, SplitText } from '$lib/gsap';
@@ -126,18 +127,31 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	path="/labs/blog/{data.post.slug}"
+	type="article"
+	title="{data.post.title} — Rōmy Labs"
+	description={data.post.excerpt}
+	keywords="donor intelligence, nonprofit fundraising, AI benchmark, prospect research, AI donor research, PIF-Bench, {data.post.tag.toLowerCase()}"
+	published={data.post.date}
+	section={data.post.tag}
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'TechArticle',
+			headline: data.post.title,
+			description: data.post.excerpt,
+			datePublished: data.post.date,
+			dateModified: data.post.date,
+			articleSection: data.post.tag,
+			inLanguage: 'en-US',
+			mainEntityOfPage: `https://getromy.app/labs/blog/${data.post.slug}`,
+			image: 'https://getromy.app/og-image.jpg',
+			author: { '@id': 'https://getromy.app/#organization' },
+			publisher: { '@id': 'https://getromy.app/#organization' }
+		}
+	]}
+/>
 
 <Footer bind:footerText />
 
