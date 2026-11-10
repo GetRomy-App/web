@@ -15,6 +15,7 @@ export default config({
 				tag: fields.select({
 					label: 'Tag',
 					options: [
+						{ label: 'Field Notes', value: 'Field Notes' },
 						{ label: 'Engineering', value: 'Engineering' },
 						{ label: 'Research', value: 'Research' },
 						{ label: 'Data Science', value: 'Data Science' },
@@ -22,6 +23,21 @@ export default config({
 					],
 					defaultValue: 'Engineering'
 				}),
+				has_benchmarks: fields.checkbox({ label: 'Labs / benchmark post', defaultValue: false }),
+				seo_title: fields.text({
+					label: 'SEO title',
+					description: 'Search-result title, ≤55 characters. The site appends the brand.'
+				}),
+				description: fields.text({
+					label: 'Meta description',
+					description: '130–158 characters. Lead with the primary keyword.',
+					multiline: true
+				}),
+				keywords: fields.array(fields.text({ label: 'Keyword' }), {
+					label: 'SEO keywords',
+					itemLabel: (props) => props.value
+				}),
+				updated: fields.date({ label: 'Last updated (optional)' }),
 				content: fields.markdoc({ label: 'Content' })
 			}
 		}),

@@ -31,7 +31,7 @@
 		class="max-w-3xl border-gray-alpha-200 bg-background/60 p-2 backdrop-blur-md rounded-xl flex w-full items-center justify-between border"
 	>
 		<a href="/" aria-label="Rōmy home" class="gap-0.5 ml-2 flex items-center no-underline">
-			<img src="/icon-logo.png" alt="" class="size-6" />
+			<img src="/icon-logo.png" alt="" width="24" height="24" class="size-6" />
 			<span class="text-foreground text-base font-medium tracking-tight">Rōmy</span>
 		</a>
 		<div class="gap-0.5 flex items-center">

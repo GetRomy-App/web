@@ -5,9 +5,38 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { CORE_KEYWORDS, articleSchema, breadcrumbSchema, graph, metaDescription } from '$lib/seo';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
 	let { data } = $props();
+
+	const path = $derived(`/labs/blog/${data.post.slug}`);
+	const seoDescription = $derived(data.post.description || metaDescription(data.post.excerpt));
+	const seoKeywords = $derived([
+		...data.post.keywords,
+		...CORE_KEYWORDS.slice(0, 4)
+	].filter((k, i, a) => a.indexOf(k) === i));
+	const postSchema = $derived(
+		graph(
+			articleSchema({
+				path,
+				headline: data.post.title,
+				description: seoDescription,
+				datePublished: data.post.date,
+				dateModified: data.post.updated,
+				section: data.post.tag,
+				keywords: seoKeywords,
+				wordCount: data.wordCount,
+				type: 'TechArticle'
+			}),
+			breadcrumbSchema([
+				{ name: 'Rōmy', path: '/' },
+				{ name: 'Labs', path: '/labs' },
+				{ name: data.post.title, path }
+			])
+		)
+	);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -126,18 +155,19 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title="{data.post.seo_title} | Rōmy Labs"
+	ogTitle={data.post.title}
+	description={seoDescription}
+	{path}
+	type="article"
+	keywords={seoKeywords}
+	publishedTime={data.post.date}
+	modifiedTime={data.post.updated}
+	section={data.post.tag}
+	tags={data.post.keywords.slice(0, 6)}
+	schema={postSchema}
+/>
 
 <Footer bind:footerText />
 
@@ -165,9 +195,9 @@
 					<span class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-2.5 py-0.5 text-xs font-medium">
 						{data.post.tag}
 					</span>
-					<span class="text-gray-alpha-400 text-xs">
+					<time class="text-gray-alpha-400 text-xs" datetime={data.post.date}>
 						{formatDate(data.post.date)}
-					</span>
+					</time>
 				</div>
 
 				<h1 class="text-foreground text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">

@@ -136,7 +136,7 @@
 			<img
 				bind:this={previewImg}
 				src="/screenshot.webp"
-				alt="Preview of Rōmy"
+				alt="Rōmy donor intelligence app — AI prospect research for small nonprofits"
 				decoding="async"
 				class="screenshot-img h-auto w-full rounded-md opacity-0"
 			/>

@@ -97,7 +97,7 @@ export async function GET() {
 	for (const post of blogPosts) {
 		entries.push({
 			path: `/blog/${post.slug}`,
-			lastmod: toDate(post.date),
+			lastmod: toDate(post.updated || post.date),
 			changefreq: 'monthly',
 			priority: '0.7'
 		});
@@ -106,7 +106,7 @@ export async function GET() {
 	for (const post of labsPosts) {
 		entries.push({
 			path: `/labs/blog/${post.slug}`,
-			lastmod: toDate(post.date),
+			lastmod: toDate(post.updated || post.date),
 			changefreq: 'monthly',
 			priority: '0.7'
 		});

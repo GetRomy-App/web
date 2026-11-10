@@ -12,10 +12,35 @@ export interface PostMeta {
 	excerpt: string;
 	tag: string;
 	has_benchmarks: boolean;
+	/** Search-optimised <title> (brand appended by the page). Falls back to `title`. */
+	seo_title: string;
+	/** Meta description (≤158 chars). Falls back to a trimmed `excerpt`. */
+	description: string;
+	/** Target search phrases for this post. */
+	keywords: string[];
+	/** Last substantive update (YYYY-MM-DD). Falls back to `date`. */
+	updated: string;
 }
 
 export interface Post extends PostMeta {
 	content: string;
+}
+
+function seoFields(data: Record<string, unknown>, title: string, date: string) {
+	const keywords = Array.isArray(data.keywords)
+		? (data.keywords as unknown[]).map(String)
+		: typeof data.keywords === 'string'
+			? data.keywords
+					.split(',')
+					.map((k) => k.trim())
+					.filter(Boolean)
+			: [];
+	return {
+		seo_title: typeof data.seo_title === 'string' && data.seo_title ? data.seo_title : title,
+		description: typeof data.description === 'string' ? data.description : '',
+		keywords,
+		updated: typeof data.updated === 'string' && data.updated ? data.updated : date
+	};
 }
 
 export async function getAllPosts(): Promise<PostMeta[]> {
@@ -41,7 +66,8 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 				date: data.date ?? '',
 				excerpt: data.excerpt ?? '',
 				tag: data.tag ?? '',
-				has_benchmarks: data.has_benchmarks ?? false
+				has_benchmarks: data.has_benchmarks ?? false,
+				...seoFields(data, data.title ?? entry.name, data.date ?? '')
 			});
 		} catch {
 			// skip entries without index.mdoc
@@ -68,6 +94,7 @@ export async function getPost(slug: string): Promise<Post | null> {
 			excerpt: data.excerpt ?? '',
 			tag: data.tag ?? '',
 			has_benchmarks: data.has_benchmarks ?? false,
+			...seoFields(data, data.title ?? slug, data.date ?? ''),
 			content: html
 		};
 	} catch {
