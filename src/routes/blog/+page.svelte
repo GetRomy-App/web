@@ -5,6 +5,8 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { SITE_URL, breadcrumbLd, graph, isoDate, truncate } from '$lib/seo';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
@@ -98,24 +100,52 @@
 			splits.forEach((s) => s.revert());
 		};
 	});
+
+	const blogSchema = $derived(
+		graph(
+			{
+				'@type': 'Blog',
+				'@id': `${SITE_URL}/blog#blog`,
+				name: 'Rōmy Blog',
+				url: `${SITE_URL}/blog`,
+				description:
+					'Field notes on major gifts, donor stewardship, prospect research, and small-nonprofit fundraising.',
+				inLanguage: 'en-US',
+				publisher: { '@id': `${SITE_URL}/#organization` },
+				isPartOf: { '@id': `${SITE_URL}/#website` },
+				blogPost: data.posts.map((p) => ({
+					'@type': 'BlogPosting',
+					headline: p.title,
+					url: `${SITE_URL}/blog/${p.slug}`,
+					datePublished: isoDate(p.date),
+					description: p.seo_description || truncate(p.excerpt, 160)
+				}))
+			},
+			breadcrumbLd([
+				{ name: 'Home', path: '/' },
+				{ name: 'Blog', path: '/blog' }
+			])
+		)
+	);
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Nonprofit Fundraising Blog: Major Gifts & Donor Research | Rōmy"
+	socialTitle="Rōmy Blog: Field Notes on Major Gifts, Donors & Fundraising"
+	description="Field notes for small-shop fundraisers on major gifts, donor stewardship, prospect research, planned giving, lapsed donors, and the timing of the ask."
+	path="/blog"
+	keywords={[
+		'nonprofit fundraising blog',
+		'major gift fundraising',
+		'donor stewardship',
+		'prospect research',
+		'donor retention',
+		'planned giving',
+		'fundraising for small nonprofits',
+		'development director advice'
+	]}
+	schema={blogSchema}
+/>
 
 <Footer bind:footerText />
 

@@ -136,7 +136,9 @@
 			<img
 				bind:this={previewImg}
 				src="/screenshot.webp"
-				alt="Preview of Rōmy"
+				alt="Rōmy donor prospect research dashboard showing a prospect profile with wealth indicators and giving history"
+				width="2966"
+				height="1850"
 				decoding="async"
 				class="screenshot-img h-auto w-full rounded-md opacity-0"
 			/>

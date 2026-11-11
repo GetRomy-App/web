@@ -12,10 +12,23 @@ export interface PostMeta {
 	excerpt: string;
 	tag: string;
 	has_benchmarks: boolean;
+	/** Optional SEO overrides. Visible copy (title/excerpt) is never changed for SEO. */
+	seo_title: string;
+	seo_description: string;
+	keywords: string[];
 }
 
 export interface Post extends PostMeta {
 	content: string;
+	wordCount: number;
+}
+
+function seoFields(data: Record<string, unknown>) {
+	return {
+		seo_title: typeof data.seo_title === 'string' ? data.seo_title : '',
+		seo_description: typeof data.seo_description === 'string' ? data.seo_description : '',
+		keywords: Array.isArray(data.keywords) ? data.keywords.map(String) : []
+	};
 }
 
 export async function getAllPosts(): Promise<PostMeta[]> {
@@ -41,7 +54,8 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 				date: data.date ?? '',
 				excerpt: data.excerpt ?? '',
 				tag: data.tag ?? '',
-				has_benchmarks: data.has_benchmarks ?? false
+				has_benchmarks: data.has_benchmarks ?? false,
+				...seoFields(data)
 			});
 		} catch {
 			// skip entries without index.mdoc
@@ -68,9 +82,21 @@ export async function getPost(slug: string): Promise<Post | null> {
 			excerpt: data.excerpt ?? '',
 			tag: data.tag ?? '',
 			has_benchmarks: data.has_benchmarks ?? false,
-			content: html
+			...seoFields(data),
+			content: html,
+			wordCount: markdocSource.split(/\s+/).filter(Boolean).length
 		};
 	} catch {
 		return null;
+	}
+}
+
+/** Raw Markdown body (frontmatter stripped) for machine-readable feeds such as /llms-full.txt. */
+export async function getPostMarkdown(slug: string): Promise<string> {
+	try {
+		const raw = await fs.readFile(path.join(CONTENT_DIR, slug, 'index.mdoc'), 'utf-8');
+		return matter(raw).content.trim();
+	} catch {
+		return '';
 	}
 }

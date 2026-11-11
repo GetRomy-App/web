@@ -5,6 +5,8 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { breadcrumbLd, graph, isoDate } from '$lib/seo';
 
 	interface Props {
 		title: string;
@@ -55,21 +57,26 @@
 	}
 </script>
 
-<svelte:head>
-	<title>{title} — Rōmy</title>
-	<meta name="title" content="{title} — Rōmy" />
-	{#if description}
-		<meta name="description" content={description} />
-	{/if}
-	<meta name="robots" content="index, follow" />
-	<meta property="og:title" content="{title} — Rōmy" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app{canonicalPath}" />
-	{#if description}
-		<meta property="og:description" content={description} />
-	{/if}
-	<link rel="canonical" href="https://getromy.app{canonicalPath}" />
-</svelte:head>
+<Seo
+	title="{title} | Rōmy"
+	description={description || `${title} for Rōmy, the donor intelligence platform by GetRomy LLC.`}
+	path={canonicalPath}
+	schema={graph(
+		{
+			'@type': 'WebPage',
+			name: title,
+			url: `https://getromy.app${canonicalPath}`,
+			dateModified: isoDate(effective),
+			isPartOf: { '@id': 'https://getromy.app/#website' },
+			publisher: { '@id': 'https://getromy.app/#organization' }
+		},
+		breadcrumbLd([
+			{ name: 'Home', path: '/' },
+			{ name: 'Legal', path: '/legal' },
+			{ name: title, path: canonicalPath }
+		])
+	)}
+/>
 
 <Footer bind:footerText />
 

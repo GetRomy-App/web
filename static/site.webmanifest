@@ -1,6 +1,11 @@
 {
-  "name": "Rōmy",
+  "name": "Rōmy: AI Donor Prospect Research for Small Nonprofits",
   "short_name": "Rōmy",
+  "description": "AI prospect research that helps small nonprofits find major donors: wealth indicators, giving history, and affinity signals.",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["business", "productivity"],
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

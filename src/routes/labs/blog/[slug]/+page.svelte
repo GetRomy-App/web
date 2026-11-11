@@ -5,9 +5,40 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { SITE_NAME, articleLd, breadcrumbLd, graph, truncate } from '$lib/seo';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
 	let { data } = $props();
+
+	const postPath = $derived(`/labs/blog/${data.post.slug}`);
+	const seoTitle = $derived(`${data.post.seo_title || data.post.title} | ${SITE_NAME}`);
+	const seoDescription = $derived(data.post.seo_description || truncate(data.post.excerpt, 160));
+	const postKeywords = $derived(
+		data.post.keywords.length
+			? data.post.keywords
+			: ['nonprofit fundraising', 'major gift fundraising', 'donor prospect research', data.post.tag.toLowerCase()]
+	);
+	const postSchema = $derived(
+		graph(
+			articleLd({
+				type: 'TechArticle',
+				path: postPath,
+				headline: data.post.title,
+				description: seoDescription,
+				date: data.post.date,
+				section: data.post.tag,
+				keywords: postKeywords,
+				about: postKeywords.slice(0, 3),
+				wordCount: data.post.wordCount
+			}),
+			breadcrumbLd([
+				{ name: 'Home', path: '/' },
+				{ name: 'Labs', path: '/labs' },
+				{ name: data.post.title, path: postPath }
+			])
+		)
+	);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -126,18 +157,17 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title={seoTitle}
+	socialTitle={data.post.title}
+	description={seoDescription}
+	path={postPath}
+	type="article"
+	published={data.post.date}
+	section={data.post.tag}
+	keywords={postKeywords}
+	schema={postSchema}
+/>
 
 <Footer bind:footerText />
 

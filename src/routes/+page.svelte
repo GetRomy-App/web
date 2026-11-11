@@ -9,6 +9,33 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import {
+		CORE_KEYWORDS,
+		HOME_DESCRIPTION,
+		HOME_TITLE,
+		SITE_URL,
+		softwareLd
+	} from '$lib/seo';
+
+	const homeSchema = {
+		'@context': 'https://schema.org',
+		'@graph': [
+			softwareLd,
+			{
+				'@type': 'WebPage',
+				'@id': `${SITE_URL}/#webpage`,
+				url: `${SITE_URL}/`,
+				name: HOME_TITLE,
+				description: HOME_DESCRIPTION,
+				inLanguage: 'en-US',
+				isPartOf: { '@id': `${SITE_URL}/#website` },
+				about: { '@id': `${SITE_URL}/#software` },
+				primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE_URL}/og-image.jpg` },
+				mainEntity: { '@id': `${SITE_URL}/#software` }
+			}
+		]
+	};
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +68,19 @@
 		);
 	});
 </script>
+
+<Seo
+	title={HOME_TITLE}
+	description={HOME_DESCRIPTION}
+	path="/"
+	keywords={[
+		...CORE_KEYWORDS,
+		'nonprofit donor research',
+		'giving history',
+		'affinity signals'
+	]}
+	schema={homeSchema}
+/>
 
 <Footer bind:footerText />
 
