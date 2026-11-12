@@ -1,4 +1,40 @@
+# Rōmy — https://getromy.app
+# Everything public is open to search engines and to AI answer engines.
+
 User-agent: *
 Allow: /
+Disallow: /api/
+
+# Search engines
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: DuckDuckBot
+User-agent: Applebot
+Allow: /
+Disallow: /api/
+
+# AI search, assistants and answer engines — welcome to read, cite and link.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: anthropic-ai
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Amazonbot
+User-agent: meta-externalagent
+User-agent: MistralAI-User
+User-agent: DuckAssistBot
+User-agent: cohere-ai
+User-agent: YouBot
+User-agent: CCBot
+Allow: /
+Disallow: /api/
 
 Sitemap: https://getromy.app/sitemap.xml
+
+# Machine-readable summary for language models: https://getromy.app/llms.txt

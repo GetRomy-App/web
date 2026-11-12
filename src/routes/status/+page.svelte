@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../../app.css';
+	import Seo from '$lib/components/seo/Seo.svelte';
 	import { onMount } from 'svelte';
 	import { gsap } from '$lib/gsap';
 
@@ -130,20 +131,12 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Status — Rōmy</title>
-	<meta name="title" content="Status — Rōmy" />
-	<meta
-		name="description"
-		content="Live operational status and uptime history for Rōmy — the donor-intelligence app at intel.getromy.app and getromy.app."
-	/>
-	<meta name="robots" content="index, follow" />
-	<meta property="og:title" content="Status — Rōmy" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/status" />
-	<meta property="og:description" content="Live operational status and uptime history for Rōmy." />
-	<link rel="canonical" href="https://getromy.app/status" />
-</svelte:head>
+<Seo
+	title="Rōmy Status — Live Uptime & Incident History"
+	description="Live operational status and uptime history for Rōmy — the donor-intelligence app at intel.getromy.app and getromy.app."
+	socialDescription="Live operational status and uptime history for Rōmy."
+	path="/status"
+/>
 
 <Footer bind:footerText />
 

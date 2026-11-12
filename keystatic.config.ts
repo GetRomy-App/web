@@ -15,12 +15,41 @@ export default config({
 				tag: fields.select({
 					label: 'Tag',
 					options: [
+						{ label: 'Field Notes', value: 'Field Notes' },
 						{ label: 'Engineering', value: 'Engineering' },
 						{ label: 'Research', value: 'Research' },
 						{ label: 'Data Science', value: 'Data Science' },
 						{ label: 'Industry', value: 'Industry' }
 					],
 					defaultValue: 'Engineering'
+				}),
+				has_benchmarks: fields.checkbox({
+					label: 'Benchmark post (published under /labs)',
+					defaultValue: false
+				}),
+				// Search-only metadata — never shown on the page. See $lib/content.ts.
+				seo_title: fields.text({
+					label: 'Search title',
+					description:
+						'The <title> tag: "<Post title>: <what a fundraiser would search for>". 50–65 characters; " | Rōmy" is added automatically.'
+				}),
+				seo_description: fields.text({
+					label: 'Search description',
+					description: 'Meta description, 140–160 characters. Plain statement of what the post teaches.',
+					multiline: true
+				}),
+				keywords: fields.array(fields.text({ label: 'Keyword phrase' }), {
+					label: 'Search keywords',
+					description: '5–8 lowercase phrases a fundraiser would search for.',
+					itemLabel: (props) => props.value
+				}),
+				about: fields.array(fields.text({ label: 'Topic' }), {
+					label: 'Topics (schema.org "about")',
+					itemLabel: (props) => props.value
+				}),
+				updated: fields.date({
+					label: 'Last substantially updated',
+					description: 'Optional. Only set when the post itself changes.'
 				}),
 				content: fields.markdoc({ label: 'Content' })
 			}

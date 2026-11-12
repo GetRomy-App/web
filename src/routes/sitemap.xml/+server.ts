@@ -73,7 +73,7 @@ export async function GET() {
 	const entries: Entry[] = [
 		{
 			path: '/',
-			lastmod: newest(allPosts.map((p) => toDate(p.date))),
+			lastmod: newest(allPosts.map((p) => toDate(p.updated) ?? toDate(p.date))),
 			changefreq: 'weekly',
 			priority: '1.0'
 		},
@@ -97,7 +97,7 @@ export async function GET() {
 	for (const post of blogPosts) {
 		entries.push({
 			path: `/blog/${post.slug}`,
-			lastmod: toDate(post.date),
+			lastmod: toDate(post.updated) ?? toDate(post.date),
 			changefreq: 'monthly',
 			priority: '0.7'
 		});
@@ -106,7 +106,7 @@ export async function GET() {
 	for (const post of labsPosts) {
 		entries.push({
 			path: `/labs/blog/${post.slug}`,
-			lastmod: toDate(post.date),
+			lastmod: toDate(post.updated) ?? toDate(post.date),
 			changefreq: 'monthly',
 			priority: '0.7'
 		});

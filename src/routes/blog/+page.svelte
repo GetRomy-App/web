@@ -8,8 +8,39 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { ORG_ID, WEBSITE_ID, absoluteUrl, breadcrumbSchema, graph, isoDate } from '$lib/seo';
 
 	let { data } = $props();
+
+	const description =
+		'Field notes and research on major gifts, donor stewardship, planned giving and prospect research — written for small nonprofit fundraising teams by Rōmy.';
+
+	const jsonLd = $derived(
+		graph(
+			{
+				'@type': 'Blog',
+				'@id': `${absoluteUrl('/blog')}#blog`,
+				url: absoluteUrl('/blog'),
+				name: 'Rōmy Blog',
+				description,
+				inLanguage: 'en-US',
+				publisher: { '@id': ORG_ID },
+				isPartOf: { '@id': WEBSITE_ID },
+				blogPost: data.posts.map((post) => ({
+					'@type': 'BlogPosting',
+					'@id': `${absoluteUrl(`/blog/${post.slug}`)}#article`,
+					url: absoluteUrl(`/blog/${post.slug}`),
+					headline: post.title,
+					datePublished: isoDate(post.date)
+				}))
+			},
+			breadcrumbSchema([
+				{ name: 'Home', path: '/' },
+				{ name: 'Blog', path: '/blog' }
+			])
+		)
+	);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -100,22 +131,24 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Nonprofit Fundraising Blog: Major Gifts, Stewardship & Prospect Research | Rōmy"
+	{description}
+	path="/blog"
+	socialTitle="Rōmy Blog — Field Notes on Major Gifts, Stewardship & Prospect Research"
+	keywords={[
+		'nonprofit fundraising blog',
+		'major gift fundraising',
+		'donor stewardship',
+		'prospect research',
+		'planned giving',
+		'donor retention',
+		'donor intelligence',
+		'small nonprofit fundraising',
+		'AI for nonprofits'
+	]}
+	{jsonLd}
+/>
 
 <Footer bind:footerText />
 
@@ -169,15 +202,15 @@
 							>
 								{post.tag}
 							</span>
-							<span class="text-gray-alpha-400 text-xs">
+							<time datetime={post.date} class="text-gray-alpha-400 text-xs">
 								{formatDate(post.date)}
-							</span>
+							</time>
 						</div>
-						<h3
+						<h2
 							class="text-foreground text-xl font-medium tracking-tight md:text-2xl group-hover:text-blue-700 transition-colors"
 						>
 							{post.title}
-						</h3>
+						</h2>
 						<p class="text-gray-alpha-600 max-w-2xl text-base leading-relaxed text-pretty">
 							{post.excerpt}
 						</p>

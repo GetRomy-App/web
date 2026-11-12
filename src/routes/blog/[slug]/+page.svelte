@@ -7,7 +7,63 @@
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import {
+		ORG_ID,
+		WEBSITE_ID,
+		DEFAULT_OG_IMAGE,
+		absoluteUrl,
+		breadcrumbSchema,
+		clip,
+		graph,
+		isoDate
+	} from '$lib/seo';
+
 	let { data } = $props();
+
+	const path = $derived(`/blog/${data.post.slug}`);
+	const baseTitle = $derived(data.post.seo_title || data.post.title);
+	const seoTitle = $derived(baseTitle.includes('Rōmy') ? baseTitle : `${baseTitle} | Rōmy`);
+	const seoDescription = $derived(data.post.seo_description || clip(data.post.excerpt, 160));
+	const keywords = $derived(
+		data.post.keywords.length
+			? data.post.keywords
+			: ['nonprofit fundraising', 'prospect research', 'donor intelligence']
+	);
+	const published = $derived(isoDate(data.post.date));
+	const modified = $derived(isoDate(data.post.updated) ?? published);
+
+	const jsonLd = $derived(
+		graph(
+			{
+				'@type': 'BlogPosting',
+				'@id': `${absoluteUrl(path)}#article`,
+				mainEntityOfPage: { '@type': 'WebPage', '@id': absoluteUrl(path) },
+				url: absoluteUrl(path),
+				headline: data.post.title,
+				alternativeHeadline: data.post.seo_title || undefined,
+				description: seoDescription,
+				abstract: data.post.excerpt || undefined,
+				datePublished: published,
+				dateModified: modified,
+				inLanguage: 'en-US',
+				articleSection: data.post.tag || undefined,
+				keywords: keywords.join(', '),
+				about: data.post.about.map((name) => ({ '@type': 'Thing', name })),
+				wordCount: data.post.wordCount,
+				image: DEFAULT_OG_IMAGE,
+				isAccessibleForFree: true,
+				author: { '@id': ORG_ID },
+				publisher: { '@id': ORG_ID },
+				isPartOf: { '@id': WEBSITE_ID }
+			},
+			breadcrumbSchema([
+				{ name: 'Home', path: '/' },
+				{ name: 'Blog', path: '/blog' },
+				{ name: data.post.title, path }
+			])
+		)
+	);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -125,18 +181,19 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title={seoTitle}
+	description={seoDescription}
+	{path}
+	type="article"
+	socialTitle={data.post.title}
+	{keywords}
+	{published}
+	{modified}
+	section={data.post.tag}
+	tags={data.post.keywords}
+	{jsonLd}
+/>
 
 <Footer bind:footerText />
 
@@ -164,9 +221,9 @@
 					<span class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-2.5 py-0.5 text-xs font-medium">
 						{data.post.tag}
 					</span>
-					<span class="text-gray-alpha-400 text-xs">
+					<time datetime={data.post.date} class="text-gray-alpha-400 text-xs">
 						{formatDate(data.post.date)}
-					</span>
+					</time>
 				</div>
 
 				<h1 class="text-foreground text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
@@ -268,6 +325,35 @@
 						</div>
 					</div>
 				</div>
+			{/if}
+
+			<!-- Keep reading: internal links to neighbouring posts -->
+			{#if data.related.length}
+				<nav
+					aria-label="More from the Rōmy blog"
+					class="px-4 md:px-8 border-gray-alpha-100 border-t pt-8 pb-4 max-w-3xl mx-auto"
+				>
+					<h2 class="text-gray-alpha-600 mb-4 text-xs font-medium tracking-wide uppercase">
+						Keep reading
+					</h2>
+					<ul class="divide-gray-alpha-100 flex flex-col divide-y">
+						{#each data.related as item}
+							<li>
+								<a
+									href="/blog/{item.slug}"
+									class="group flex items-baseline justify-between gap-4 py-3 no-underline"
+								>
+									<span
+										class="text-foreground group-hover:text-blue-700 text-base font-medium tracking-tight transition-colors"
+									>
+										{item.title}
+									</span>
+									<span class="text-gray-alpha-400 shrink-0 text-xs">{item.tag}</span>
+								</a>
+							</li>
+						{/each}
+					</ul>
+				</nav>
 			{/if}
 
 			<!-- Back link -->
