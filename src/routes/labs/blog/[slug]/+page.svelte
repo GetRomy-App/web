@@ -1,4 +1,7 @@
 <script lang="ts">
+	import Seo from '$lib/components/Seo.svelte';
+	import { articleSchema, breadcrumbSchema, clip } from '$lib/seo';
+
 	import '../../../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, SplitText } from '$lib/gsap';
@@ -8,6 +11,20 @@
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
 	let { data } = $props();
+
+	const postDescription = $derived(data.post.seo_description || clip(data.post.excerpt, 158));
+	const postKeywords = $derived(
+		data.post.keywords.length
+			? data.post.keywords
+			: [
+					'donor intelligence',
+					'nonprofit fundraising',
+					'prospect research',
+					'AI donor research',
+					'wealth screening',
+					data.post.tag.toLowerCase()
+				].filter(Boolean)
+	);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -126,18 +143,33 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title="{data.post.seo_title || data.post.title} | Rōmy Labs"
+	socialTitle={data.post.title}
+	description={postDescription}
+	path="/labs/blog/{data.post.slug}"
+	type="article"
+	published={data.post.date}
+	section={data.post.tag}
+	keywords={postKeywords}
+	jsonLd={[
+		articleSchema({
+			type: 'TechArticle',
+			path: `/labs/blog/${data.post.slug}`,
+			headline: data.post.title,
+			description: postDescription,
+			date: data.post.date,
+			section: data.post.tag,
+			keywords: postKeywords,
+			wordCount: data.post.wordCount
+		}),
+		breadcrumbSchema([
+			{ name: 'Home', path: '/' },
+			{ name: 'Labs', path: '/labs' },
+			{ name: data.post.title, path: `/labs/blog/${data.post.slug}` }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 
@@ -165,9 +197,9 @@
 					<span class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-2.5 py-0.5 text-xs font-medium">
 						{data.post.tag}
 					</span>
-					<span class="text-gray-alpha-400 text-xs">
+					<time datetime={data.post.date} class="text-gray-alpha-400 text-xs">
 						{formatDate(data.post.date)}
-					</span>
+					</time>
 				</div>
 
 				<h1 class="text-foreground text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
@@ -269,6 +301,28 @@
 						</div>
 					</div>
 				</div>
+			{/if}
+
+			<!-- Keep reading: onward links so every article is reachable from its neighbours -->
+			{#if data.post.related.length}
+				<nav
+					aria-label="Keep reading"
+					class="px-4 md:px-8 py-10 border-gray-alpha-100 border-t max-w-3xl mx-auto"
+				>
+					<h2 class="text-foreground text-lg font-medium tracking-tight mb-4">Keep reading</h2>
+					<ul class="flex flex-col gap-3">
+						{#each data.post.related as related}
+							<li>
+								<a
+									href="/labs/blog/{related.slug}"
+									class="text-gray-alpha-600 hover:text-blue-700 text-base font-medium transition-colors no-underline"
+								>
+									{related.title}
+								</a>
+							</li>
+						{/each}
+					</ul>
+				</nav>
 			{/if}
 
 			<!-- Back link -->

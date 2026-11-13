@@ -22,6 +22,20 @@ export default config({
 					],
 					defaultValue: 'Engineering'
 				}),
+				seo_title: fields.text({
+					label: 'SEO title',
+					description:
+						'Search-result title (aim for under 60 characters). The on-page headline stays the Title above.'
+				}),
+				seo_description: fields.text({
+					label: 'SEO description',
+					description: 'Search-result snippet (aim for under 160 characters).',
+					multiline: true
+				}),
+				keywords: fields.array(fields.text({ label: 'Keyword' }), {
+					label: 'Keywords',
+					itemLabel: (props) => props.value
+				}),
 				content: fields.markdoc({ label: 'Content' })
 			}
 		}),
