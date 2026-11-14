@@ -59,7 +59,10 @@ export async function getPost(slug: string): Promise<Post | null> {
 
 		const ast = Markdoc.parse(markdocSource);
 		const transformed = Markdoc.transform(ast);
-		const html = Markdoc.renderers.html(transformed);
+		// The page template renders the title as the only <h1>; drop the body's duplicate leading H1.
+		const html = Markdoc.renderers
+			.html(transformed)
+			.replace(/^(<article>)?\s*<h1[^>]*>[\s\S]*?<\/h1>/, '$1');
 
 		return {
 			slug,
@@ -70,6 +73,16 @@ export async function getPost(slug: string): Promise<Post | null> {
 			has_benchmarks: data.has_benchmarks ?? false,
 			content: html
 		};
+	} catch {
+		return null;
+	}
+}
+
+/** Raw Markdoc body (frontmatter stripped) — used for llms-full.txt. */
+export async function getPostSource(slug: string): Promise<string | null> {
+	try {
+		const raw = await fs.readFile(path.join(CONTENT_DIR, slug, 'index.mdoc'), 'utf-8');
+		return matter(raw).content.trim();
 	} catch {
 		return null;
 	}
