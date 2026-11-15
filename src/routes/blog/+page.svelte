@@ -1,4 +1,10 @@
 <script lang="ts">
+	import Seo from '$lib/components/Seo.svelte';
+	import { blogSchema, breadcrumbSchema, clip } from '$lib/seo';
+
+	const blogDescription =
+		'Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI.';
+
 	import '../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
@@ -100,22 +106,42 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Rōmy Blog — Nonprofit Fundraising, Major Gifts & AI Donor Research"
+	socialTitle="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising"
+	description={blogDescription}
+	path="/blog"
+	keywords={[
+		'nonprofit fundraising blog',
+		'major gift fundraising',
+		'donor stewardship',
+		'donor retention',
+		'planned giving',
+		'prospect research',
+		'donor intelligence',
+		'AI for nonprofits',
+		'small nonprofit fundraising',
+		'development director advice',
+		'fundraising insights'
+	]}
+	jsonLd={[
+		blogSchema({
+			path: '/blog',
+			name: 'Rōmy Blog',
+			description: blogDescription,
+			posts: data.posts.map((post) => ({
+				title: post.title,
+				path: `/blog/${post.slug}`,
+				date: post.date,
+				description: post.seo_description || clip(post.excerpt, 158)
+			}))
+		}),
+		breadcrumbSchema([
+			{ name: 'Home', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 
@@ -173,11 +199,11 @@
 								{formatDate(post.date)}
 							</span>
 						</div>
-						<h3
+						<h2
 							class="text-foreground text-xl font-medium tracking-tight md:text-2xl group-hover:text-blue-700 transition-colors"
 						>
 							{post.title}
-						</h3>
+						</h2>
 						<p class="text-gray-alpha-600 max-w-2xl text-base leading-relaxed text-pretty">
 							{post.excerpt}
 						</p>

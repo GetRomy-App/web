@@ -136,7 +136,10 @@
 			<img
 				bind:this={previewImg}
 				src="/screenshot.webp"
-				alt="Preview of Rōmy"
+				alt="Rōmy donor intelligence app showing an AI-researched wealth profile of a prospective donor"
+				width="2966"
+				height="1850"
+				fetchpriority="high"
 				decoding="async"
 				class="screenshot-img h-auto w-full rounded-md opacity-0"
 			/>
