@@ -12,10 +12,62 @@ export interface PostMeta {
 	excerpt: string;
 	tag: string;
 	has_benchmarks: boolean;
+	/** Search-facing title (no brand suffix). Falls back to `title`. */
+	seo_title: string;
+	/** ≤158-char search snippet. Falls back to `excerpt`. */
+	seo_description: string;
+	keywords: string[];
 }
 
 export interface Post extends PostMeta {
 	content: string;
+	/** Raw Markdoc body (used for llms-full.txt). */
+	source: string;
+	wordCount: number;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function toMeta(slug: string, data: Record<string, any>): PostMeta {
+	const title = data.title ?? slug;
+	const excerpt = data.excerpt ?? '';
+	return {
+		slug,
+		title,
+		date: data.date ?? '',
+		excerpt,
+		tag: data.tag ?? '',
+		has_benchmarks: data.has_benchmarks ?? false,
+		seo_title: data.seo_title || title,
+		seo_description: data.seo_description || excerpt,
+		keywords: Array.isArray(data.keywords) ? data.keywords.map(String) : []
+	};
+}
+
+export function postPath(post: Pick<PostMeta, 'slug' | 'has_benchmarks'>): string {
+	return post.has_benchmarks ? `/labs/blog/${post.slug}` : `/blog/${post.slug}`;
+}
+
+/**
+ * Pick related posts for internal linking: shared keywords weigh most, then same tag,
+ * then recency. Deterministic so prerendered pages are stable.
+ */
+export function relatedPosts(current: PostMeta, all: PostMeta[], count = 3): PostMeta[] {
+	const kw = new Set(current.keywords);
+	return all
+		.filter((p) => p.slug !== current.slug && p.has_benchmarks === current.has_benchmarks)
+		.map((p) => {
+			const shared = p.keywords.filter((k) => kw.has(k)).length;
+			const score = shared * 10 + (p.tag === current.tag ? 1 : 0);
+			return { p, score };
+		})
+		.sort(
+			(a, b) =>
+				b.score - a.score ||
+				new Date(b.p.date).getTime() - new Date(a.p.date).getTime() ||
+				a.p.slug.localeCompare(b.p.slug)
+		)
+		.slice(0, count)
+		.map(({ p }) => p);
 }
 
 export async function getAllPosts(): Promise<PostMeta[]> {
@@ -35,14 +87,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 		try {
 			const raw = await fs.readFile(filePath, 'utf-8');
 			const { data } = matter(raw);
-			posts.push({
-				slug: entry.name,
-				title: data.title ?? entry.name,
-				date: data.date ?? '',
-				excerpt: data.excerpt ?? '',
-				tag: data.tag ?? '',
-				has_benchmarks: data.has_benchmarks ?? false
-			});
+			posts.push(toMeta(entry.name, data));
 		} catch {
 			// skip entries without index.mdoc
 		}
@@ -62,13 +107,10 @@ export async function getPost(slug: string): Promise<Post | null> {
 		const html = Markdoc.renderers.html(transformed);
 
 		return {
-			slug,
-			title: data.title ?? slug,
-			date: data.date ?? '',
-			excerpt: data.excerpt ?? '',
-			tag: data.tag ?? '',
-			has_benchmarks: data.has_benchmarks ?? false,
-			content: html
+			...toMeta(slug, data),
+			content: html,
+			source: markdocSource.trim(),
+			wordCount: markdocSource.split(/\s+/).filter(Boolean).length
 		};
 	} catch {
 		return null;

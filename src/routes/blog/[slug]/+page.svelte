@@ -5,6 +5,8 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { articleLd, breadcrumbLd, isoDate, SITE_URL } from '$lib/seo';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
 	let { data } = $props();
@@ -14,6 +16,27 @@
 	let articleHeader: HTMLElement;
 	let articleBody: HTMLElement;
 	let chartsSection: HTMLElement;
+
+	const path = $derived(`/blog/${data.post.slug}`);
+	const jsonLd = $derived([
+		articleLd({
+			path,
+			headline: data.post.title,
+			alternativeHeadline:
+				data.post.seo_title !== data.post.title ? data.post.seo_title : undefined,
+			description: data.post.seo_description,
+			date: data.post.date,
+			section: data.post.tag,
+			keywords: data.post.keywords,
+			wordCount: data.post.wordCount,
+			isPartOf: { '@type': 'Blog', '@id': `${SITE_URL}/blog#blog`, name: 'Rōmy Blog' }
+		}),
+		breadcrumbLd([
+			{ name: 'Home', path: '/' },
+			{ name: 'Blog', path: '/blog' },
+			{ name: data.post.title, path }
+		])
+	]);
 
 	function formatDate(dateStr: string): string {
 		if (!dateStr) return '';
@@ -125,18 +148,17 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title={data.post.seo_title}
+	description={data.post.seo_description}
+	{path}
+	type="article"
+	keywords={data.post.keywords}
+	published={data.post.date}
+	section={data.post.tag}
+	tags={data.post.keywords}
+	{jsonLd}
+/>
 
 <Footer bind:footerText />
 
@@ -164,9 +186,9 @@
 					<span class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-2.5 py-0.5 text-xs font-medium">
 						{data.post.tag}
 					</span>
-					<span class="text-gray-alpha-400 text-xs">
+					<time class="text-gray-alpha-400 text-xs" datetime={isoDate(data.post.date)}>
 						{formatDate(data.post.date)}
-					</span>
+					</time>
 				</div>
 
 				<h1 class="text-foreground text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
@@ -268,6 +290,40 @@
 						</div>
 					</div>
 				</div>
+			{/if}
+
+			<!-- Related reading (internal links) -->
+			{#if data.related.length}
+				<nav
+					aria-labelledby="related-heading"
+					class="border-gray-alpha-100 border-t px-4 md:px-8 py-10 max-w-3xl mx-auto"
+				>
+					<h2
+						id="related-heading"
+						class="text-foreground text-lg font-medium tracking-tight mb-4"
+					>
+						Keep reading
+					</h2>
+					<ul class="divide-gray-alpha-100 divide-y">
+						{#each data.related as rel (rel.slug)}
+							<li>
+								<a
+									href="/blog/{rel.slug}"
+									class="group flex flex-col gap-1 py-4 no-underline"
+								>
+									<span
+										class="text-foreground text-base font-medium tracking-tight group-hover:text-blue-700 transition-colors"
+									>
+										{rel.title}
+									</span>
+									<span class="text-gray-alpha-600 text-sm leading-relaxed">
+										{rel.seo_description}
+									</span>
+								</a>
+							</li>
+						{/each}
+					</ul>
+				</nav>
 			{/if}
 
 			<!-- Back link -->

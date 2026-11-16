@@ -8,6 +8,11 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { SITE_URL, ORG_ID, WEBSITE_ID, isoDate, breadcrumbLd } from '$lib/seo';
+
+	const blogDescription =
+		'Field notes and research on major gift fundraising, donor stewardship, prospect research, and AI donor intelligence for small nonprofit development teams.';
 
 	let { data } = $props();
 
@@ -17,6 +22,31 @@
 	let heroDesc: HTMLElement;
 	let heroBadge: HTMLElement;
 	let blogSection: HTMLElement;
+
+	const jsonLd = $derived([
+		{
+			'@context': 'https://schema.org',
+			'@type': 'Blog',
+			'@id': `${SITE_URL}/blog#blog`,
+			url: `${SITE_URL}/blog`,
+			name: 'Rōmy Blog',
+			description: blogDescription,
+			inLanguage: 'en-US',
+			isPartOf: { '@id': WEBSITE_ID },
+			publisher: { '@id': ORG_ID },
+			blogPost: data.posts.map((p) => ({
+				'@type': 'BlogPosting',
+				headline: p.title,
+				url: `${SITE_URL}/blog/${p.slug}`,
+				datePublished: isoDate(p.date),
+				description: p.seo_description
+			}))
+		},
+		breadcrumbLd([
+			{ name: 'Home', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	]);
 
 	function formatDate(dateStr: string): string {
 		if (!dateStr) return '';
@@ -100,22 +130,22 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Nonprofit Fundraising Blog: Major Gifts & Donor Research"
+	description={blogDescription}
+	path="/blog"
+	keywords={[
+		'nonprofit fundraising blog',
+		'major gift fundraising',
+		'donor stewardship',
+		'prospect research',
+		'donor retention',
+		'planned giving',
+		'small nonprofit fundraising',
+		'ai donor intelligence'
+	]}
+	{jsonLd}
+/>
 
 <Footer bind:footerText />
 
@@ -169,15 +199,15 @@
 							>
 								{post.tag}
 							</span>
-							<span class="text-gray-alpha-400 text-xs">
+							<time class="text-gray-alpha-400 text-xs" datetime={isoDate(post.date)}>
 								{formatDate(post.date)}
-							</span>
+							</time>
 						</div>
-						<h3
+						<h2
 							class="text-foreground text-xl font-medium tracking-tight md:text-2xl group-hover:text-blue-700 transition-colors"
 						>
 							{post.title}
-						</h3>
+						</h2>
 						<p class="text-gray-alpha-600 max-w-2xl text-base leading-relaxed text-pretty">
 							{post.excerpt}
 						</p>

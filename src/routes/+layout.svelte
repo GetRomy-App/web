@@ -5,6 +5,16 @@
 	import { gsap, ScrollTrigger, registerGsap } from '$lib/gsap';
 	import ContactModal from '$lib/components/ui/ContactModal.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
+	import {
+		SITE_URL,
+		SITE_NAME,
+		ORG_NAME,
+		ORG_ID,
+		WEBSITE_ID,
+		DEFAULT_DESCRIPTION,
+		DEFAULT_OG_IMAGE,
+		jsonLdScript
+	} from '$lib/seo';
 
 	let { children } = $props();
 
@@ -37,46 +47,61 @@
 		else lenis.start();
 	});
 
-	const title = 'Rōmy — Donor Intelligence for Small Nonprofits';
-	const description =
-		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth indicators, and giving history — at a price built for small teams.';
-	const url = 'https://getromy.app/';
+	const siteGraph = {
+		'@context': 'https://schema.org',
+		'@graph': [
+			{
+				'@type': 'Organization',
+				'@id': ORG_ID,
+				name: SITE_NAME,
+				legalName: ORG_NAME,
+				alternateName: ['Romy', 'GetRomy', 'Rōmy Donor Intelligence'],
+				url: SITE_URL,
+				logo: {
+					'@type': 'ImageObject',
+					url: `${SITE_URL}/icon-logo.png`
+				},
+				image: DEFAULT_OG_IMAGE,
+				description:
+					'Rōmy builds AI donor intelligence and prospect research software for small nonprofits.',
+				knowsAbout: [
+					'Prospect research',
+					'Donor intelligence',
+					'Wealth screening',
+					'Major gift fundraising',
+					'Donor stewardship',
+					'Planned giving',
+					'Nonprofit fundraising'
+				],
+				contactPoint: {
+					'@type': 'ContactPoint',
+					email: 'solomon@getromy.app',
+					contactType: 'sales',
+					availableLanguage: 'English'
+				},
+				sameAs: ['https://x.com/RomyFindsMoney', 'https://github.com/GetRomy-App']
+			},
+			{
+				'@type': 'WebSite',
+				'@id': WEBSITE_ID,
+				url: SITE_URL,
+				name: SITE_NAME,
+				alternateName: 'Romy',
+				description: DEFAULT_DESCRIPTION,
+				inLanguage: 'en-US',
+				publisher: { '@id': ORG_ID }
+			}
+		]
+	};
 </script>
 
 <svelte:head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-	<title>{title}</title>
-	<meta name="title" content={title} />
-	<meta name="description" content={description} />
-	<meta
-		name="keywords"
-		content="nonprofit donor intelligence, fundraising software, prospect research tool, donor discovery platform, wealth screening, giving history, AI donor research, nonprofit fundraising, major donor prospecting, small nonprofit tools, donor management, philanthropy intelligence, fundraising CRM, nonprofit technology, donor wealth indicators"
-	/>
-	<meta name="author" content="GetRomy LLC" />
-	<meta
-		name="robots"
-		content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-	/>
+	<!-- Page-specific title/description/canonical/OG live in $lib/components/Seo.svelte. -->
+	<meta name="author" content={SITE_NAME} />
+	<meta name="application-name" content={SITE_NAME} />
+	<meta name="apple-mobile-web-app-title" content={SITE_NAME} />
 	<meta name="theme-color" content="#0d0d0e" media="(prefers-color-scheme: dark)" />
 	<meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
-
-	<!-- Open Graph -->
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content={url} />
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
-	<meta property="og:site_name" content="Rōmy" />
-	<meta property="og:locale" content="en_US" />
-
-	<!-- Twitter -->
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:site" content="@RomyFindsMoney" />
-	<meta name="twitter:creator" content="@RomyFindsMoney" />
-	<meta name="twitter:url" content={url} />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={description} />
 
 	<!-- Performance -->
 	<link
@@ -86,8 +111,6 @@
 		type="font/woff2"
 		crossorigin
 	/>
-	<link rel="dns-prefetch" href="//api.github.com" />
-	<link rel="preconnect" href="//api.github.com" crossorigin />
 
 	<!-- Favicons -->
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -96,53 +119,12 @@
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 	<link rel="manifest" href="/site.webmanifest" />
 
-	<link rel="canonical" href={url} />
+	<!-- Feeds & AI-readable summaries -->
+	<link rel="alternate" type="application/rss+xml" title="Rōmy Blog" href="/blog/rss.xml" />
+	<link rel="alternate" type="text/plain" title="LLM summary" href="/llms.txt" />
 
-	<!-- Structured Data (JSON-LD) -->
-	{@html `<script type="application/ld+json">${JSON.stringify({
-		'@context': 'https://schema.org',
-		'@type': 'SoftwareApplication',
-		name: 'Rōmy',
-		url: 'https://getromy.app',
-		applicationCategory: 'BusinessApplication',
-		operatingSystem: 'macOS, Windows, Linux',
-		description:
-			'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
-		offers: {
-			'@type': 'Offer',
-			price: '0',
-			priceCurrency: 'USD',
-			availability: 'https://schema.org/InStock'
-		},
-		publisher: {
-			'@type': 'Organization',
-			name: 'GetRomy LLC',
-			url: 'https://getromy.app'
-		},
-		featureList: [
-			'AI-powered donor prospect research',
-			'Wealth indicator screening',
-			'Giving history analysis',
-			'Affinity signal detection',
-			'Actionable donor profiles',
-			'No enterprise contracts required'
-		]
-	})}</script>`}
-
-	{@html `<script type="application/ld+json">${JSON.stringify({
-		'@context': 'https://schema.org',
-		'@type': 'Organization',
-		name: 'GetRomy LLC',
-		url: 'https://getromy.app',
-		logo: 'https://getromy.app/icon-logo.png',
-		description: 'Donor intelligence platform for small nonprofits',
-		contactPoint: {
-			'@type': 'ContactPoint',
-			email: 'solomon@getromy.app',
-			contactType: 'sales'
-		},
-		sameAs: ['https://x.com/RomyFindsMoney', 'https://github.com/GetRomy-App']
-	})}</script>`}
+	<!-- Structured Data (JSON-LD): site-wide Organization + WebSite -->
+	{@html jsonLdScript(siteGraph)}
 </svelte:head>
 
 {@render children()}

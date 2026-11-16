@@ -9,6 +9,11 @@
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { PIF_HEADLINE } from '$lib/benchmarks';
 	import { contactModal } from '$lib/stores/contact.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { SITE_URL, ORG_ID, WEBSITE_ID, isoDate, breadcrumbLd } from '$lib/seo';
+
+	const labsDescription =
+		'PIF-Bench v2: an open, blind-graded benchmark of AI prospect research on 25 nonprofit development tasks. Claude.ai 83%, Rōmy 74%, Gemini 67%, ChatGPT 60%.';
 
 	let { data } = $props();
 
@@ -19,6 +24,32 @@
 	let heroBadge: HTMLElement;
 	let benchmarksSection: HTMLElement;
 	let blogSection: HTMLElement;
+
+	const jsonLd = $derived([
+		{
+			'@context': 'https://schema.org',
+			'@type': 'CollectionPage',
+			'@id': `${SITE_URL}/labs`,
+			url: `${SITE_URL}/labs`,
+			name: 'Rōmy Labs — PIF-Bench v2',
+			description: labsDescription,
+			isPartOf: { '@id': WEBSITE_ID },
+			publisher: { '@id': ORG_ID },
+			mainEntity: {
+				'@type': 'ItemList',
+				itemListElement: data.posts.map((p, i) => ({
+					'@type': 'ListItem',
+					position: i + 1,
+					url: `${SITE_URL}/labs/blog/${p.slug}`,
+					name: p.title
+				}))
+			}
+		},
+		breadcrumbLd([
+			{ name: 'Home', path: '/' },
+			{ name: 'Labs', path: '/labs' }
+		])
+	]);
 
 	function formatDate(dateStr: string): string {
 		if (!dateStr) return '';
@@ -223,22 +254,21 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Rōmy Labs — PIF-Bench v2: AI Benchmarks for Nonprofit Development Work</title>
-	<meta
-		name="description"
-		content="PIF-Bench v2 grades AI systems on 25 real development-office tasks with 331 pass/fail checks written before any system ran, graded blind. On real prospects, no product met every check; Claude.ai met 83%, Rōmy 74%, Gemini 67%, ChatGPT 60%."
-	/>
-	<meta
-		name="keywords"
-		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, PIF-Bench, rubric-graded benchmark, gift compliance AI, ChatGPT vs Rōmy, prospect research tool"
-	/>
-	<meta property="og:title" content="Rōmy Labs — PIF-Bench v2" />
-	<meta property="og:description" content="An open, rubric-graded benchmark of AI on nonprofit development work. Live track: Claude.ai 83%, Rōmy 74%, Gemini 67%, ChatGPT 60% of checks met." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/labs" />
-	<link rel="canonical" href="https://getromy.app/labs" />
-</svelte:head>
+<Seo
+	title="PIF-Bench v2: AI Prospect Research Benchmark"
+	description={labsDescription}
+	path="/labs"
+	keywords={[
+		'ai prospect research benchmark',
+		'donor research benchmark',
+		'ai for nonprofit fundraising',
+		'pif-bench',
+		'chatgpt vs claude vs gemini for nonprofits',
+		'prospect research tool comparison',
+		'gift compliance ai'
+	]}
+	{jsonLd}
+/>
 
 <Footer bind:footerText />
 
@@ -358,9 +388,9 @@
 							>
 								{post.tag}
 							</span>
-							<span class="text-gray-alpha-400 text-xs">
+							<time class="text-gray-alpha-400 text-xs" datetime={isoDate(post.date)}>
 								{formatDate(post.date)}
-							</span>
+							</time>
 						</div>
 						<h3
 							class="text-foreground text-xl font-medium tracking-tight md:text-2xl group-hover:text-blue-700 transition-colors"

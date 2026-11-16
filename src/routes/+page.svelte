@@ -9,6 +9,64 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import {
+		SITE_URL,
+		ORG_ID,
+		WEBSITE_ID,
+		SOFTWARE_ID,
+		DEFAULT_DESCRIPTION,
+		DEFAULT_OG_IMAGE
+	} from '$lib/seo';
+
+	const homeJsonLd = [
+		{
+			'@context': 'https://schema.org',
+			'@type': 'WebPage',
+			'@id': `${SITE_URL}/#webpage`,
+			url: `${SITE_URL}/`,
+			name: 'Rōmy — AI Prospect Research & Donor Intelligence',
+			description: DEFAULT_DESCRIPTION,
+			isPartOf: { '@id': WEBSITE_ID },
+			about: { '@id': SOFTWARE_ID },
+			primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE_URL}/screenshot.png` },
+			inLanguage: 'en-US'
+		},
+		{
+			'@context': 'https://schema.org',
+			'@type': 'SoftwareApplication',
+			'@id': SOFTWARE_ID,
+			name: 'Rōmy',
+			alternateName: 'Romy',
+			url: SITE_URL,
+			applicationCategory: 'BusinessApplication',
+			applicationSubCategory: 'Nonprofit prospect research and donor intelligence',
+			operatingSystem: 'Web browser (macOS, Windows, Linux)',
+			description:
+				'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
+			image: DEFAULT_OG_IMAGE,
+			screenshot: `${SITE_URL}/screenshot.png`,
+			audience: {
+				'@type': 'Audience',
+				audienceType: 'Small nonprofits, development directors, major gift officers, prospect researchers'
+			},
+			offers: {
+				'@type': 'Offer',
+				price: '0',
+				priceCurrency: 'USD',
+				availability: 'https://schema.org/InStock'
+			},
+			publisher: { '@id': ORG_ID },
+			featureList: [
+				'AI-powered donor prospect research',
+				'Wealth indicator screening',
+				'Giving history analysis',
+				'Affinity signal detection',
+				'Actionable donor profiles',
+				'No enterprise contracts required'
+			]
+		}
+	];
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +99,24 @@
 		);
 	});
 </script>
+
+<Seo
+	title="Rōmy — AI Prospect Research & Donor Intelligence"
+	titleSuffix={false}
+	description={DEFAULT_DESCRIPTION}
+	path="/"
+	keywords={[
+		'prospect research software',
+		'donor intelligence',
+		'ai prospect research',
+		'wealth screening for nonprofits',
+		'major donor prospecting',
+		'small nonprofit fundraising',
+		'donor research tool',
+		'giving history'
+	]}
+	jsonLd={homeJsonLd}
+/>
 
 <Footer bind:footerText />
 
