@@ -5,6 +5,8 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { SITE_URL, ORG_ID, breadcrumbLd } from '$lib/seo';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
@@ -100,22 +102,47 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Rōmy Blog — Nonprofit Fundraising, Major Gifts & Donor Research"
+	socialTitle="Rōmy Blog — Nonprofit Fundraising, Major Gifts & Donor Research"
+	description="Field notes and research on nonprofit fundraising: major gifts, donor stewardship, prospect research, wealth screening, and purpose-built AI for small development teams."
+	socialDescription="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
+	path="/blog"
+	keywords={[
+		'nonprofit fundraising blog',
+		'major gift fundraising',
+		'donor stewardship',
+		'donor retention',
+		'prospect research',
+		'donor intelligence',
+		'wealth screening',
+		'AI for nonprofits',
+		'small nonprofit fundraising'
+	]}
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'Blog',
+			'@id': `${SITE_URL}/blog#blog`,
+			url: `${SITE_URL}/blog`,
+			name: 'Rōmy Blog',
+			description:
+				'Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI.',
+			inLanguage: 'en-US',
+			publisher: { '@id': ORG_ID },
+			blogPost: data.posts.slice(0, 25).map((post) => ({
+				'@type': 'BlogPosting',
+				headline: post.title,
+				url: `${SITE_URL}/blog/${post.slug}`,
+				datePublished: post.date
+			}))
+		},
+		breadcrumbLd([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 
@@ -169,15 +196,15 @@
 							>
 								{post.tag}
 							</span>
-							<span class="text-gray-alpha-400 text-xs">
+							<time datetime={post.date} class="text-gray-alpha-400 text-xs">
 								{formatDate(post.date)}
-							</span>
+							</time>
 						</div>
-						<h3
+						<h2
 							class="text-foreground text-xl font-medium tracking-tight md:text-2xl group-hover:text-blue-700 transition-colors"
 						>
 							{post.title}
-						</h3>
+						</h2>
 						<p class="text-gray-alpha-600 max-w-2xl text-base leading-relaxed text-pretty">
 							{post.excerpt}
 						</p>

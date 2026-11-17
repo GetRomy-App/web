@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { getPost, getAllPosts } from '$lib/content';
+import { getPost, getAllPosts, getRelatedPosts } from '$lib/content';
 import { error } from '@sveltejs/kit';
 
 export const prerender = true;
@@ -12,5 +12,12 @@ export async function entries() {
 export const load: PageServerLoad = async ({ params }) => {
 	const post = await getPost(params.slug);
 	if (!post || post.has_benchmarks) throw error(404, 'Post not found');
-	return { post };
+	const pool = (await getAllPosts()).filter((p) => !p.has_benchmarks);
+	const related = getRelatedPosts(post, pool).map(({ slug, title, tag, date }) => ({
+		slug,
+		title,
+		tag,
+		date
+	}));
+	return { post, related };
 };

@@ -18,9 +18,31 @@ export default config({
 						{ label: 'Engineering', value: 'Engineering' },
 						{ label: 'Research', value: 'Research' },
 						{ label: 'Data Science', value: 'Data Science' },
-						{ label: 'Industry', value: 'Industry' }
+						{ label: 'Industry', value: 'Industry' },
+						{ label: 'Field Notes', value: 'Field Notes' }
 					],
 					defaultValue: 'Engineering'
+				}),
+				seo_title: fields.text({
+					label: 'SEO title',
+					description:
+						'Search-facing <title> (max ~60 characters). Keep the post title, then add the topic people search for. The on-page headline is unchanged.'
+				}),
+				seo_description: fields.text({
+					label: 'SEO description',
+					description:
+						'Search-snippet description (max ~160 characters). Falls back to a trimmed excerpt when empty.',
+					multiline: true
+				}),
+				keywords: fields.array(fields.text({ label: 'Keyword' }), {
+					label: 'Keywords',
+					description:
+						'4–6 topic phrases. Reuse existing ones where they fit — shared keywords drive the "Keep reading" links.',
+					itemLabel: (props) => props.value
+				}),
+				has_benchmarks: fields.checkbox({
+					label: 'Benchmark post (published under /labs)',
+					defaultValue: false
 				}),
 				content: fields.markdoc({ label: 'Content' })
 			}

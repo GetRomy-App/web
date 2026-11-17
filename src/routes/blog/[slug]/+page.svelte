@@ -5,6 +5,8 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { articleLd, breadcrumbLd } from '$lib/seo';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
 	let { data } = $props();
@@ -125,18 +127,34 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title="{data.post.seoTitle || data.post.title} | Rōmy Blog"
+	socialTitle={data.post.seoTitle || data.post.title}
+	description={data.post.seoDescription}
+	path="/blog/{data.post.slug}"
+	type="article"
+	keywords={data.post.keywords}
+	publishedTime={data.post.date}
+	section={data.post.tag}
+	jsonLd={[
+		articleLd({
+			path: `/blog/${data.post.slug}`,
+			headline: data.post.title,
+			description: data.post.seoDescription,
+			date: data.post.date,
+			section: data.post.tag,
+			keywords: data.post.keywords,
+			wordCount: data.post.wordCount,
+			blogName: 'Rōmy Blog',
+			blogPath: '/blog'
+		}),
+		breadcrumbLd([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Blog', path: '/blog' },
+			{ name: data.post.title, path: `/blog/${data.post.slug}` }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 
@@ -164,9 +182,9 @@
 					<span class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-2.5 py-0.5 text-xs font-medium">
 						{data.post.tag}
 					</span>
-					<span class="text-gray-alpha-400 text-xs">
+					<time datetime={data.post.date} class="text-gray-alpha-400 text-xs">
 						{formatDate(data.post.date)}
-					</span>
+					</time>
 				</div>
 
 				<h1 class="text-foreground text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
@@ -268,6 +286,30 @@
 						</div>
 					</div>
 				</div>
+			{/if}
+
+			<!-- Related reading (internal links) -->
+			{#if data.related?.length}
+				<nav
+					aria-label="Related posts"
+					class="px-4 md:px-8 border-gray-alpha-100 border-t pt-8 pb-10 max-w-3xl mx-auto"
+				>
+					<h2 class="text-foreground text-sm font-medium tracking-wide uppercase mb-4">
+						Keep reading
+					</h2>
+					<ul class="flex flex-col gap-3 list-none p-0 m-0">
+						{#each data.related as related (related.slug)}
+							<li>
+								<a
+									href="/blog/{related.slug}"
+									class="text-gray-alpha-600 hover:text-blue-700 text-base font-medium tracking-tight transition-colors no-underline"
+								>
+									{related.title}
+								</a>
+							</li>
+						{/each}
+					</ul>
+				</nav>
 			{/if}
 
 			<!-- Back link -->
