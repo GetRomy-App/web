@@ -1,5 +1,7 @@
 <script lang="ts">
 	import '../../app.css';
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { absoluteUrl, breadcrumbSchema, BLOG_ID, ORGANIZATION_ID, WEBSITE_ID } from '$lib/seo';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
 
@@ -98,24 +100,46 @@
 			splits.forEach((s) => s.revert());
 		};
 	});
+
+	const blogSchema = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		'@id': BLOG_ID,
+		url: absoluteUrl('/blog'),
+		name: 'Rōmy Blog',
+		description:
+			'Field notes and essays on nonprofit fundraising: major gifts, donor stewardship, prospect research, planned giving, and donor retention.',
+		inLanguage: 'en-US',
+		isPartOf: { '@id': WEBSITE_ID },
+		publisher: { '@id': ORGANIZATION_ID },
+		blogPost: data.posts.map((post) => ({
+			'@type': 'BlogPosting',
+			headline: post.title,
+			url: absoluteUrl(`/blog/${post.slug}`),
+			datePublished: post.date,
+			...(post.keywords.length ? { keywords: post.keywords.join(', ') } : {})
+		}))
+	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Rōmy Blog — Nonprofit Fundraising, Major Gifts & Donor Research"
+	description="Field notes and essays on nonprofit fundraising: major gifts, donor stewardship, prospect research, planned giving, and donor retention — from the team behind Rōmy."
+	socialDescription="Field notes and essays on major gifts, donor stewardship, and prospect research for small nonprofit teams."
+	path="/blog"
+	keywords={[
+		'nonprofit fundraising blog',
+		'major gift fundraising',
+		'donor stewardship',
+		'prospect research',
+		'donor retention',
+		'planned giving',
+		'donor intelligence',
+		'AI for nonprofits',
+		'small nonprofit fundraising'
+	]}
+	schema={[blogSchema, breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Blog', path: '/blog' }])]}
+/>
 
 <Footer bind:footerText />
 

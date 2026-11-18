@@ -1,5 +1,7 @@
 <script lang="ts">
 	import '../../../app.css';
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { articleSchema, breadcrumbSchema, metaDescription, postTitle, BLOG_ID } from '$lib/seo';
 	import { onMount } from 'svelte';
 	import { gsap, SplitText } from '$lib/gsap';
 
@@ -123,20 +125,44 @@
 			splits.forEach((s) => s.revert());
 		};
 	});
+
+	const description = $derived(metaDescription(data.post.excerpt));
+	// The post's own search phrases first, then the themes every post on this blog shares.
+	const keywords = $derived([
+		...data.post.keywords,
+		'nonprofit fundraising',
+		'major gift fundraising',
+		'donor intelligence'
+	]);
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title={postTitle(data.post.title, data.post.seoTopic)}
+	socialTitle={data.post.title}
+	description={description}
+	path="/blog/{data.post.slug}"
+	type="article"
+	keywords={keywords}
+	article={{ published: data.post.date, section: data.post.tag, tags: data.post.keywords }}
+	schema={[
+		articleSchema({
+			path: `/blog/${data.post.slug}`,
+			title: data.post.title,
+			description,
+			date: data.post.date,
+			section: data.post.tag,
+			keywords,
+			about: data.post.seoTopic || undefined,
+			wordCount: data.post.wordCount,
+			partOf: { type: 'Blog', id: BLOG_ID, name: 'Rōmy Blog', path: '/blog' }
+		}),
+		breadcrumbSchema([
+			{ name: 'Home', path: '/' },
+			{ name: 'Blog', path: '/blog' },
+			{ name: data.post.title, path: `/blog/${data.post.slug}` }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 
@@ -164,9 +190,9 @@
 					<span class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-2.5 py-0.5 text-xs font-medium">
 						{data.post.tag}
 					</span>
-					<span class="text-gray-alpha-400 text-xs">
+					<time datetime={data.post.date} class="text-gray-alpha-400 text-xs">
 						{formatDate(data.post.date)}
-					</span>
+					</time>
 				</div>
 
 				<h1 class="text-foreground text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
@@ -268,6 +294,31 @@
 						</div>
 					</div>
 				</div>
+			{/if}
+
+			<!-- Related posts: internal links so every post is reachable from another post -->
+			{#if data.related.length}
+				<nav
+					aria-label="More from the Rōmy blog"
+					class="px-4 md:px-8 py-10 border-gray-alpha-100 border-t max-w-3xl mx-auto"
+				>
+					<h2 class="text-gray-alpha-600 mb-4 text-sm font-medium">Keep reading</h2>
+					<ul class="flex flex-col gap-3">
+						{#each data.related as post}
+							<li>
+								<a
+									href="/blog/{post.slug}"
+									class="text-foreground hover:text-blue-700 text-lg font-medium tracking-tight transition-colors no-underline"
+								>
+									{post.title}
+								</a>
+								{#if post.seoTopic}
+									<span class="text-gray-alpha-400 block text-sm">{post.seoTopic}</span>
+								{/if}
+							</li>
+						{/each}
+					</ul>
+				</nav>
 			{/if}
 
 			<!-- Back link -->

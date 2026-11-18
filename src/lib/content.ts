@@ -12,10 +12,20 @@ export interface PostMeta {
 	excerpt: string;
 	tag: string;
 	has_benchmarks: boolean;
+	/** Short search-facing topic appended to the <title> (frontmatter `seo_topic`). */
+	seoTopic: string;
+	/** Search phrases the post answers (frontmatter `keywords`). */
+	keywords: string[];
 }
 
 export interface Post extends PostMeta {
 	content: string;
+	wordCount: number;
+}
+
+function toKeywords(value: unknown): string[] {
+	if (!Array.isArray(value)) return [];
+	return value.filter((k): k is string => typeof k === 'string' && k.trim().length > 0);
 }
 
 export async function getAllPosts(): Promise<PostMeta[]> {
@@ -41,7 +51,9 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 				date: data.date ?? '',
 				excerpt: data.excerpt ?? '',
 				tag: data.tag ?? '',
-				has_benchmarks: data.has_benchmarks ?? false
+				has_benchmarks: data.has_benchmarks ?? false,
+				seoTopic: data.seo_topic ?? '',
+				keywords: toKeywords(data.keywords)
 			});
 		} catch {
 			// skip entries without index.mdoc
@@ -59,7 +71,11 @@ export async function getPost(slug: string): Promise<Post | null> {
 
 		const ast = Markdoc.parse(markdocSource);
 		const transformed = Markdoc.transform(ast);
-		const html = Markdoc.renderers.html(transformed);
+		// The body repeats the title as a leading "# Heading", which the page hides in
+		// favour of its own <h1>. Drop it from the markup so each post has a single h1.
+		const html = Markdoc.renderers
+			.html(transformed)
+			.replace(/^(\s*<article>)?\s*<h1[^>]*>[\s\S]*?<\/h1>/, '$1');
 
 		return {
 			slug,
@@ -68,9 +84,26 @@ export async function getPost(slug: string): Promise<Post | null> {
 			excerpt: data.excerpt ?? '',
 			tag: data.tag ?? '',
 			has_benchmarks: data.has_benchmarks ?? false,
-			content: html
+			seoTopic: data.seo_topic ?? '',
+			keywords: toKeywords(data.keywords),
+			content: html,
+			wordCount: markdocSource.split(/\s+/).filter(Boolean).length
 		};
 	} catch {
 		return null;
 	}
+}
+
+/**
+ * A few posts to link from the foot of an article: the ones published just
+ * before it (wrapping round), so every post is reachable from another post.
+ */
+export function getRelatedPosts(posts: PostMeta[], slug: string, count = 3): PostMeta[] {
+	const index = posts.findIndex((p) => p.slug === slug);
+	if (index === -1 || posts.length < 2) return [];
+	const related: PostMeta[] = [];
+	for (let i = 1; i < posts.length && related.length < count; i++) {
+		related.push(posts[(index + i) % posts.length]);
+	}
+	return related;
 }

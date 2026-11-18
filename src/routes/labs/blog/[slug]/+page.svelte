@@ -1,5 +1,7 @@
 <script lang="ts">
 	import '../../../../app.css';
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { absoluteUrl, articleSchema, breadcrumbSchema, metaDescription, postTitle } from '$lib/seo';
 	import { onMount } from 'svelte';
 	import { gsap, SplitText } from '$lib/gsap';
 
@@ -124,20 +126,44 @@
 			splits.forEach((s) => s.revert());
 		};
 	});
+
+	const description = $derived(metaDescription(data.post.excerpt, 260));
+	const keywords = $derived([
+		...data.post.keywords,
+		'AI donor research',
+		'prospect research',
+		'nonprofit fundraising'
+	]);
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title={postTitle(data.post.title, data.post.seoTopic, 'Rōmy Labs')}
+	socialTitle={data.post.title}
+	description={description}
+	path="/labs/blog/{data.post.slug}"
+	type="article"
+	keywords={keywords}
+	article={{ published: data.post.date, section: data.post.tag, tags: data.post.keywords }}
+	schema={[
+		articleSchema({
+			type: 'TechArticle',
+			path: `/labs/blog/${data.post.slug}`,
+			title: data.post.title,
+			description,
+			date: data.post.date,
+			section: data.post.tag,
+			keywords,
+			about: data.post.seoTopic || undefined,
+			wordCount: data.post.wordCount,
+			partOf: { type: 'WebPage', id: absoluteUrl('/labs'), name: 'Rōmy Labs', path: '/labs' }
+		}),
+		breadcrumbSchema([
+			{ name: 'Home', path: '/' },
+			{ name: 'Labs', path: '/labs' },
+			{ name: data.post.title, path: `/labs/blog/${data.post.slug}` }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 

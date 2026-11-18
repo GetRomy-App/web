@@ -1,5 +1,7 @@
 <script lang="ts">
 	import '../app.css';
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import { SITE_DESCRIPTION, softwareSchema } from '$lib/seo';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger } from '$lib/gsap';
 
@@ -41,6 +43,28 @@
 		);
 	});
 </script>
+
+<Seo
+	title="AI Donor Prospect Research for Small Nonprofits | Rōmy"
+	socialTitle="Rōmy — Donor Intelligence for Small Nonprofits"
+	description={SITE_DESCRIPTION}
+	path="/"
+	keywords={[
+		'AI donor prospect research',
+		'donor intelligence platform',
+		'prospect research tool for small nonprofits',
+		'affordable wealth screening',
+		'wealth screening software',
+		'major donor prospecting',
+		'find major donors',
+		'donor research software',
+		'AI for nonprofit fundraising',
+		'giving history and wealth indicators',
+		'nonprofit fundraising software',
+		'Rōmy'
+	]}
+	schema={[softwareSchema()]}
+/>
 
 <Footer bind:footerText />
 

@@ -22,6 +22,16 @@ export default config({
 					],
 					defaultValue: 'Engineering'
 				}),
+				seo_topic: fields.text({
+					label: 'SEO topic',
+					description:
+						'Short search-facing topic (≈35 characters) appended to the page title, e.g. "Donor Thank-You Notes".'
+				}),
+				keywords: fields.array(fields.text({ label: 'Keyword' }), {
+					label: 'Keywords',
+					description: 'Three to five search phrases this post answers.',
+					itemLabel: (props) => props.value
+				}),
 				content: fields.markdoc({ label: 'Content' })
 			}
 		}),
