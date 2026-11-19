@@ -5,9 +5,15 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { articleLd, breadcrumbLd, snippet } from '$lib/seo';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
 	let { data } = $props();
+
+	const postPath = $derived(`/labs/blog/${data.post.slug}`);
+	const seoTitle = $derived(`${data.post.seo_title || data.post.title} | Rōmy Labs`);
+	const description = $derived(data.post.description || snippet(data.post.excerpt));
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -126,18 +132,34 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title={seoTitle}
+	{description}
+	path={postPath}
+	ogTitle={data.post.title}
+	type="article"
+	keywords={data.post.keywords}
+	published={data.post.date}
+	modified={data.post.updated || data.post.date}
+	section={data.post.tag}
+	jsonLd={[
+		articleLd({
+			path: postPath,
+			title: data.post.title,
+			description,
+			date: data.post.date,
+			updated: data.post.updated,
+			section: data.post.tag,
+			keywords: data.post.keywords,
+			wordCount: data.post.wordCount
+		}),
+		breadcrumbLd([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Labs', path: '/labs' },
+			{ name: data.post.title, path: postPath }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 
@@ -165,9 +187,9 @@
 					<span class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-2.5 py-0.5 text-xs font-medium">
 						{data.post.tag}
 					</span>
-					<span class="text-gray-alpha-400 text-xs">
+					<time class="text-gray-alpha-400 text-xs" datetime={data.post.date}>
 						{formatDate(data.post.date)}
-					</span>
+					</time>
 				</div>
 
 				<h1 class="text-foreground text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">

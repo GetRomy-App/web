@@ -1,4 +1,25 @@
+# Rōmy — https://getromy.app
+# Search engines and AI answer engines are welcome to crawl and cite this site.
+
 User-agent: *
 Allow: /
+Disallow: /api/
+
+# Explicitly welcome AI search / answer-engine crawlers (GEO)
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Bingbot
+User-agent: DuckAssistBot
+User-agent: CCBot
+Allow: /
+Disallow: /api/
 
 Sitemap: https://getromy.app/sitemap.xml

@@ -12,10 +12,26 @@ export interface PostMeta {
 	excerpt: string;
 	tag: string;
 	has_benchmarks: boolean;
+	/** Optional SEO overrides (frontmatter). Fall back to title / excerpt. */
+	seo_title: string;
+	description: string;
+	keywords: string[];
+	updated: string;
 }
 
 export interface Post extends PostMeta {
 	content: string;
+	wordCount: number;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function seoFields(data: Record<string, any>) {
+	return {
+		seo_title: typeof data.seo_title === 'string' ? data.seo_title : '',
+		description: typeof data.description === 'string' ? data.description : '',
+		keywords: Array.isArray(data.keywords) ? data.keywords.map(String) : [],
+		updated: data.updated ? String(data.updated) : ''
+	};
 }
 
 export async function getAllPosts(): Promise<PostMeta[]> {
@@ -41,7 +57,8 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 				date: data.date ?? '',
 				excerpt: data.excerpt ?? '',
 				tag: data.tag ?? '',
-				has_benchmarks: data.has_benchmarks ?? false
+				has_benchmarks: data.has_benchmarks ?? false,
+				...seoFields(data)
 			});
 		} catch {
 			// skip entries without index.mdoc
@@ -68,7 +85,9 @@ export async function getPost(slug: string): Promise<Post | null> {
 			excerpt: data.excerpt ?? '',
 			tag: data.tag ?? '',
 			has_benchmarks: data.has_benchmarks ?? false,
-			content: html
+			...seoFields(data),
+			content: html,
+			wordCount: markdocSource.split(/\s+/).filter((w) => /\w/.test(w)).length
 		};
 	} catch {
 		return null;

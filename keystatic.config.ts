@@ -18,9 +18,23 @@ export default config({
 						{ label: 'Engineering', value: 'Engineering' },
 						{ label: 'Research', value: 'Research' },
 						{ label: 'Data Science', value: 'Data Science' },
-						{ label: 'Industry', value: 'Industry' }
+						{ label: 'Industry', value: 'Industry' },
+						{ label: 'Field Notes', value: 'Field Notes' }
 					],
 					defaultValue: 'Engineering'
+				}),
+				seo_title: fields.text({
+					label: 'SEO title',
+					description: 'Search-result title, max 58 chars. " | Rōmy" is appended. Defaults to Title.'
+				}),
+				description: fields.text({
+					label: 'Meta description',
+					description: '140–158 chars shown in search results. Defaults to a trimmed Excerpt.',
+					multiline: true
+				}),
+				keywords: fields.array(fields.text({ label: 'Keyword' }), {
+					label: 'SEO keywords',
+					itemLabel: (props) => props.value
 				}),
 				content: fields.markdoc({ label: 'Content' })
 			}

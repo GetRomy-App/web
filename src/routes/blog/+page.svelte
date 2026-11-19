@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Seo from '$lib/components/Seo.svelte';
+	import { SITE_URL, ORG_ID, WEBSITE_ID, breadcrumbLd, snippet } from '$lib/seo';
 	import '../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
@@ -100,22 +102,46 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Nonprofit Fundraising Blog: Major Gifts & Prospect Research | Rōmy"
+	description="Field notes and essays for small-shop fundraisers on major gifts, donor stewardship, prospect research, planned giving and the donors your CRM misses."
+	path="/blog"
+	ogTitle="The Rōmy Blog — Field notes on nonprofit fundraising"
+	keywords={[
+		'nonprofit fundraising blog',
+		'major gift fundraising',
+		'donor stewardship',
+		'prospect research',
+		'small nonprofit fundraising',
+		'planned giving',
+		'donor retention'
+	]}
+	jsonLd={[
+		{
+			'@context': 'https://schema.org',
+			'@type': 'Blog',
+			'@id': `${SITE_URL}/blog#blog`,
+			url: `${SITE_URL}/blog`,
+			name: 'The Rōmy Blog',
+			description:
+				'Field notes and essays on major gifts, donor stewardship and prospect research for small nonprofits.',
+			publisher: { '@id': ORG_ID },
+			isPartOf: { '@id': WEBSITE_ID },
+			inLanguage: 'en-US',
+			blogPost: data.posts.slice(0, 50).map((p) => ({
+				'@type': 'BlogPosting',
+				headline: p.title,
+				url: `${SITE_URL}/blog/${p.slug}`,
+				datePublished: p.date,
+				description: p.description || snippet(p.excerpt)
+			}))
+		},
+		breadcrumbLd([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 
