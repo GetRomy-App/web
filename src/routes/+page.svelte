@@ -1,4 +1,15 @@
 <script lang="ts">
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import {
+		HOME_TITLE,
+		HOME_DESCRIPTION,
+		CORE_KEYWORDS,
+		softwareLd,
+		SITE_URL,
+		WEBSITE_ID,
+		SOFTWARE_ID,
+		ORG_ID
+	} from '$lib/seo';
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger } from '$lib/gsap';
@@ -40,7 +51,29 @@
 			}
 		);
 	});
+
+	const homePageLd = {
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		'@id': `${SITE_URL}/#webpage`,
+		url: `${SITE_URL}/`,
+		name: HOME_TITLE,
+		description: HOME_DESCRIPTION,
+		isPartOf: { '@id': WEBSITE_ID },
+		about: { '@id': SOFTWARE_ID },
+		publisher: { '@id': ORG_ID },
+		primaryImageOfPage: `${SITE_URL}/og-image.png`,
+		inLanguage: 'en-US'
+	};
 </script>
+
+<Seo
+	title={HOME_TITLE}
+	description={HOME_DESCRIPTION}
+	path="/"
+	keywords={CORE_KEYWORDS}
+	jsonLd={[softwareLd, homePageLd]}
+/>
 
 <Footer bind:footerText />
 

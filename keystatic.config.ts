@@ -22,6 +22,19 @@ export default config({
 					],
 					defaultValue: 'Engineering'
 				}),
+				seo_title: fields.text({
+					label: 'SEO title',
+					description: 'Search-tuned <title>, max 55 chars, no brand (" — Rōmy" is appended).'
+				}),
+				seo_description: fields.text({
+					label: 'SEO description',
+					description: 'Meta description, 140–158 chars. Falls back to the excerpt.',
+					multiline: true
+				}),
+				keywords: fields.array(fields.text({ label: 'Keyword' }), {
+					label: 'SEO keywords',
+					itemLabel: (props) => props.value
+				}),
 				content: fields.markdoc({ label: 'Content' })
 			}
 		}),

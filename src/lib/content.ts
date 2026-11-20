@@ -12,10 +12,26 @@ export interface PostMeta {
 	excerpt: string;
 	tag: string;
 	has_benchmarks: boolean;
+	/** Optional search-tuned <title> (brand suffix is appended by the page). */
+	seo_title: string;
+	/** Optional 140–158 char meta description; falls back to a clipped excerpt. */
+	seo_description: string;
+	keywords: string[];
 }
 
 export interface Post extends PostMeta {
 	content: string;
+	/** Markdoc source, for llms-full.txt and word counts. */
+	source: string;
+	wordCount: number;
+}
+
+function seoFields(data: Record<string, unknown>) {
+	return {
+		seo_title: typeof data.seo_title === 'string' ? data.seo_title : '',
+		seo_description: typeof data.seo_description === 'string' ? data.seo_description : '',
+		keywords: Array.isArray(data.keywords) ? data.keywords.map(String) : []
+	};
 }
 
 export async function getAllPosts(): Promise<PostMeta[]> {
@@ -41,7 +57,8 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 				date: data.date ?? '',
 				excerpt: data.excerpt ?? '',
 				tag: data.tag ?? '',
-				has_benchmarks: data.has_benchmarks ?? false
+				has_benchmarks: data.has_benchmarks ?? false,
+				...seoFields(data)
 			});
 		} catch {
 			// skip entries without index.mdoc
@@ -68,7 +85,10 @@ export async function getPost(slug: string): Promise<Post | null> {
 			excerpt: data.excerpt ?? '',
 			tag: data.tag ?? '',
 			has_benchmarks: data.has_benchmarks ?? false,
-			content: html
+			...seoFields(data),
+			content: html,
+			source: markdocSource.trim(),
+			wordCount: markdocSource.split(/\s+/).filter(Boolean).length
 		};
 	} catch {
 		return null;
