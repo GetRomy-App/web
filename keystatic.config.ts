@@ -12,6 +12,12 @@ export default config({
 				title: fields.slug({ name: { label: 'Title' } }),
 				date: fields.date({ label: 'Date', validation: { isRequired: true } }),
 				excerpt: fields.text({ label: 'Excerpt', multiline: true }),
+				seo_description: fields.text({
+					label: 'SEO description',
+					description:
+						'Optional. The ~150-character summary search engines show. Leave blank to derive it from the excerpt.',
+					multiline: true
+				}),
 				tag: fields.select({
 					label: 'Tag',
 					options: [

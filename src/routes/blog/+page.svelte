@@ -8,6 +8,12 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { SITE_URL, ORG_ID, WEBSITE_ID, BLOG_ID, breadcrumbs, isoDate, postDescription } from '$lib/seo';
+
+	const seoTitle = 'Major Gift Fundraising & Prospect Research Blog | Rōmy';
+	const seoDesc =
+		'Field notes and research on major gift fundraising, donor stewardship, planned giving, prospect research and AI donor intelligence for small nonprofits.';
 
 	let { data } = $props();
 
@@ -100,22 +106,49 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title={seoTitle}
+	description={seoDesc}
+	path="/blog"
+	socialTitle="The Rōmy Blog: Field Notes on Major Gift Fundraising"
+	keywords={[
+		'major gift fundraising blog',
+		'nonprofit fundraising blog',
+		'prospect research',
+		'donor stewardship',
+		'planned giving',
+		'donor intelligence',
+		'development officer advice',
+		'small nonprofit fundraising',
+		'AI for nonprofits'
+	]}
+	schema={[
+		{
+			'@type': ['Blog', 'CollectionPage'],
+			'@id': BLOG_ID,
+			url: `${SITE_URL}/blog`,
+			name: 'The Rōmy Blog',
+			headline: seoTitle,
+			description: seoDesc,
+			inLanguage: 'en-US',
+			isPartOf: { '@id': WEBSITE_ID },
+			publisher: { '@id': ORG_ID },
+			about: ['Major gift fundraising', 'Prospect research', 'Donor stewardship', 'Nonprofit fundraising'],
+			blogPost: data.posts.map((p) => ({
+				'@type': 'BlogPosting',
+				'@id': `${SITE_URL}/blog/${p.slug}#article`,
+				headline: p.title,
+				url: `${SITE_URL}/blog/${p.slug}`,
+				datePublished: isoDate(p.date),
+				description: postDescription(p)
+			}))
+		},
+		breadcrumbs([
+			{ name: 'Home', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 

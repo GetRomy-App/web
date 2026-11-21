@@ -5,9 +5,25 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import {
+		SITE_URL,
+		ORG_ID,
+		DEFAULT_OG_IMAGE,
+		breadcrumbs,
+		isoDate,
+		keywordsForPost,
+		postDescription,
+		seoTitle,
+		topicsFor
+	} from '$lib/seo';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
 	let { data } = $props();
+
+	const url = $derived(`${SITE_URL}/labs/blog/${data.post.slug}`);
+	const description = $derived(postDescription(data.post));
+	const keywords = $derived(keywordsForPost(data.post));
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -126,18 +142,56 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title={seoTitle(data.post.title, data.post.tag, 'Rōmy Labs')}
+	description={description}
+	path="/labs/blog/{data.post.slug}"
+	socialTitle={data.post.title}
+	type="article"
+	{keywords}
+	article={{
+		published: isoDate(data.post.date),
+		modified: isoDate(data.post.updated || data.post.date),
+		section: data.post.tag,
+		tags: keywords
+	}}
+	schema={[
+		{
+			'@type': 'TechArticle',
+			'@id': `${url}#article`,
+			headline: data.post.title,
+			name: data.post.title,
+			description,
+			abstract: data.post.excerpt,
+			url,
+			mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+			datePublished: isoDate(data.post.date),
+			dateModified: isoDate(data.post.updated || data.post.date),
+			author: { '@id': ORG_ID },
+			publisher: { '@id': ORG_ID },
+			isPartOf: { '@id': `${SITE_URL}/labs` },
+			image: {
+				'@type': 'ImageObject',
+				url: DEFAULT_OG_IMAGE.url,
+				width: DEFAULT_OG_IMAGE.width,
+				height: DEFAULT_OG_IMAGE.height
+			},
+			articleSection: data.post.tag,
+			keywords: keywords.join(', '),
+			about: topicsFor(`${data.post.title} ${data.post.excerpt}`).map((name) => ({ '@type': 'Thing', name })),
+			wordCount: data.post.wordCount,
+			timeRequired: `PT${Math.max(1, Math.round(data.post.wordCount / 230))}M`,
+			inLanguage: 'en-US',
+			isAccessibleForFree: true,
+			speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.article-content p:first-of-type'] }
+		},
+		breadcrumbs([
+			{ name: 'Home', path: '/' },
+			{ name: 'Labs', path: '/labs' },
+			{ name: data.post.title, path: '/labs/blog/' + data.post.slug }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 

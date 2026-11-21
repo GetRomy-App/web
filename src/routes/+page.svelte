@@ -9,6 +9,21 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import {
+		CORE_KEYWORDS,
+		softwareSchema,
+		breadcrumbs,
+		ORG_ID,
+		WEBSITE_ID,
+		SOFTWARE_ID,
+		SITE_URL,
+		DEFAULT_OG_IMAGE
+	} from '$lib/seo';
+
+	const title = 'AI Prospect Research & Donor Intelligence for Nonprofits | Rōmy';
+	const description =
+		'Rōmy helps small nonprofits find new major donors at a fraction of the cost of enterprise wealth screening. AI prospect research, wealth indicators and giving history.';
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +56,30 @@
 		);
 	});
 </script>
+
+<Seo
+	{title}
+	{description}
+	path="/"
+	keywords={CORE_KEYWORDS}
+	schema={[
+		softwareSchema,
+		{
+			'@type': 'WebPage',
+			'@id': `${SITE_URL}/#webpage`,
+			url: `${SITE_URL}/`,
+			name: title,
+			description,
+			isPartOf: { '@id': WEBSITE_ID },
+			about: { '@id': SOFTWARE_ID },
+			mainEntity: { '@id': SOFTWARE_ID },
+			publisher: { '@id': ORG_ID },
+			primaryImageOfPage: { '@type': 'ImageObject', url: DEFAULT_OG_IMAGE.url },
+			inLanguage: 'en-US'
+		},
+		breadcrumbs([{ name: 'Home', path: '/' }])
+	]}
+/>
 
 <Footer bind:footerText />
 
