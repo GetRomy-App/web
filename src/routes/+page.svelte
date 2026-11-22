@@ -9,6 +9,8 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { organizationJsonLd, websiteJsonLd, softwareJsonLd } from '$lib/seo';
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +43,31 @@
 		);
 	});
 </script>
+
+<Seo
+	title="Rōmy — AI Prospect Research & Donor Intelligence for Nonprofits"
+	socialTitle="Rōmy — Donor Intelligence for Small Nonprofits"
+	description="Rōmy helps small nonprofits find new major donors with AI prospect research: wealth indicators, giving history and affinity signals, at a fraction of the cost."
+	path="/"
+	keywords={[
+		'Rōmy',
+		'donor intelligence',
+		'AI prospect research',
+		'prospect research software',
+		'wealth screening',
+		'affordable wealth screening',
+		'major donor prospecting',
+		'donor research tool',
+		'nonprofit fundraising software',
+		'small nonprofit fundraising',
+		'giving history',
+		'donor wealth indicators',
+		'DonorSearch alternative',
+		'iWave alternative',
+		'WealthEngine alternative'
+	]}
+	jsonLd={[organizationJsonLd, websiteJsonLd, softwareJsonLd]}
+/>
 
 <Footer bind:footerText />
 

@@ -136,7 +136,10 @@
 			<img
 				bind:this={previewImg}
 				src="/screenshot.webp"
-				alt="Preview of Rōmy"
+				width="2966"
+				height="1850"
+				fetchpriority="high"
+				alt="Rōmy donor intelligence app generating an AI wealth profile of a prospective donor, with financial indicators, philanthropic history and the three A’s of prospect qualification"
 				decoding="async"
 				class="screenshot-img h-auto w-full rounded-md opacity-0"
 			/>

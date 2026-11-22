@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Seo from '$lib/components/Seo.svelte';
 	import '../../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, SplitText } from '$lib/gsap';
@@ -125,18 +126,7 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
-</svelte:head>
+<Seo {...data.seo} />
 
 <Footer bind:footerText />
 
@@ -164,9 +154,9 @@
 					<span class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-2.5 py-0.5 text-xs font-medium">
 						{data.post.tag}
 					</span>
-					<span class="text-gray-alpha-400 text-xs">
+					<time datetime={data.post.date} class="text-gray-alpha-400 text-xs">
 						{formatDate(data.post.date)}
-					</span>
+					</time>
 				</div>
 
 				<h1 class="text-foreground text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
@@ -268,6 +258,35 @@
 						</div>
 					</div>
 				</div>
+			{/if}
+
+			<!-- Related posts (internal linking) -->
+			{#if data.related.length}
+				<nav
+					aria-labelledby="related-heading"
+					class="border-gray-alpha-100 border-t px-4 md:px-8 pt-10 pb-4 max-w-3xl mx-auto"
+				>
+					<h2 id="related-heading" class="text-foreground text-lg font-medium tracking-tight mb-4">
+						Keep reading
+					</h2>
+					<ul class="divide-gray-alpha-100 divide-y">
+						{#each data.related as rel (rel.slug)}
+							<li>
+								<a
+									href="/blog/{rel.slug}"
+									class="group flex flex-col gap-1 py-4 no-underline transition-colors"
+								>
+									<span class="text-gray-alpha-400 text-xs">
+										{rel.tag} · <time datetime={rel.date}>{formatDate(rel.date)}</time>
+									</span>
+									<span class="text-foreground group-hover:text-blue-700 text-base font-medium tracking-tight transition-colors">
+										{rel.title}
+									</span>
+								</a>
+							</li>
+						{/each}
+					</ul>
+				</nav>
 			{/if}
 
 			<!-- Back link -->
