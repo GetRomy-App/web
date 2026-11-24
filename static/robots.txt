@@ -1,4 +1,64 @@
+# Rōmy — https://getromy.app
+# Search engines and AI answer engines are welcome. Summaries for LLMs: /llms.txt and /llms-full.txt
+
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /keystatic
+
+# AI search / answer-engine crawlers — explicitly allowed so Rōmy can be cited in AI answers
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /api/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /api/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /api/
+
+User-agent: CCBot
+Allow: /
+Disallow: /api/
 
 Sitemap: https://getromy.app/sitemap.xml

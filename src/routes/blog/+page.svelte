@@ -8,8 +8,22 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Grid from '$lib/components/ui/Grid.svelte';
 	import { contactModal } from '$lib/stores/contact.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { blogIndexSchema, keywordsFor } from '$lib/seo';
 
 	let { data } = $props();
+
+	const seoTitle = 'Rōmy Blog: Major Gift Fundraising & Prospect Research';
+	const seoDescription =
+		'Field notes and research on major gift fundraising, donor stewardship and prospect research for small nonprofits, from the team behind Rōmy donor intelligence.';
+	const schema = $derived(
+		blogIndexSchema(data.posts, {
+			path: '/blog',
+			name: 'Rōmy Blog',
+			description: seoDescription,
+			postPath: (slug) => `/blog/${slug}`
+		})
+	);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -100,22 +114,14 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title={seoTitle}
+	ogTitle="Rōmy Blog — Insights on AI Donor Research & Nonprofit Fundraising"
+	description={seoDescription}
+	path="/blog"
+	keywords={keywordsFor('Field Notes', ['nonprofit fundraising blog', 'major gift fundraising', 'donor stewardship', 'prospect research'])}
+	{schema}
+/>
 
 <Footer bind:footerText />
 
@@ -169,15 +175,15 @@
 							>
 								{post.tag}
 							</span>
-							<span class="text-gray-alpha-400 text-xs">
+							<time datetime={post.date} class="text-gray-alpha-400 text-xs">
 								{formatDate(post.date)}
-							</span>
+							</time>
 						</div>
-						<h3
+						<h2
 							class="text-foreground text-xl font-medium tracking-tight md:text-2xl group-hover:text-blue-700 transition-colors"
 						>
 							{post.title}
-						</h3>
+						</h2>
 						<p class="text-gray-alpha-600 max-w-2xl text-base leading-relaxed text-pretty">
 							{post.excerpt}
 						</p>

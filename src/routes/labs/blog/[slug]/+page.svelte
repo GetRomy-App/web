@@ -5,9 +5,23 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { articleSchema, keywordsFor, isoDate } from '$lib/seo';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
 	let { data } = $props();
+
+	const postPath = $derived(`/labs/blog/${data.post.slug}`);
+	const keywords = $derived(keywordsFor(data.post.tag));
+	const published = $derived(isoDate(data.post.date));
+	const schema = $derived(
+		articleSchema(data.post, {
+			path: postPath,
+			sectionName: 'Rōmy Labs',
+			sectionPath: '/labs',
+			keywords
+		})
+	);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -126,18 +140,19 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title="{data.post.title} | Rōmy Labs"
+	ogTitle={data.post.title}
+	description={data.post.excerpt}
+	path={postPath}
+	type="article"
+	publishedTime={published}
+	modifiedTime={published}
+	section={data.post.tag}
+	tags={keywords.split(', ').slice(0, 6)}
+	{keywords}
+	{schema}
+/>
 
 <Footer bind:footerText />
 
@@ -165,9 +180,9 @@
 					<span class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-2.5 py-0.5 text-xs font-medium">
 						{data.post.tag}
 					</span>
-					<span class="text-gray-alpha-400 text-xs">
+					<time datetime={published} class="text-gray-alpha-400 text-xs">
 						{formatDate(data.post.date)}
-					</span>
+					</time>
 				</div>
 
 				<h1 class="text-foreground text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
@@ -269,6 +284,28 @@
 						</div>
 					</div>
 				</div>
+			{/if}
+
+			<!-- Related reading (internal links) -->
+			{#if data.related?.length}
+				<nav
+					aria-label="More from Rōmy Labs"
+					class="px-4 md:px-8 py-10 border-gray-alpha-100 border-t max-w-3xl mx-auto"
+				>
+					<h2 class="text-foreground text-lg font-medium tracking-tight mb-6">Keep reading</h2>
+					<ul class="divide-gray-alpha-100 flex flex-col divide-y">
+						{#each data.related as rel (rel.slug)}
+							<li>
+								<a href="/labs/blog/{rel.slug}" class="group flex flex-col gap-1 py-4 no-underline">
+									<span class="text-foreground text-base font-medium tracking-tight group-hover:text-blue-700 transition-colors">
+										{rel.title}
+									</span>
+									<span class="text-gray-alpha-400 text-xs">{rel.tag} · {formatDate(rel.date)}</span>
+								</a>
+							</li>
+						{/each}
+					</ul>
+				</nav>
 			{/if}
 
 			<!-- Back link -->
