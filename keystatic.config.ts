@@ -18,10 +18,26 @@ export default config({
 						{ label: 'Engineering', value: 'Engineering' },
 						{ label: 'Research', value: 'Research' },
 						{ label: 'Data Science', value: 'Data Science' },
-						{ label: 'Industry', value: 'Industry' }
+						{ label: 'Industry', value: 'Industry' },
+						{ label: 'Field Notes', value: 'Field Notes' }
 					],
 					defaultValue: 'Engineering'
 				}),
+				seo_title: fields.text({
+					label: 'SEO title',
+					description: 'Search-result title, 50–60 chars, keyword first. " | Rōmy" is appended automatically.'
+				}),
+				seo_description: fields.text({
+					label: 'SEO description',
+					description: 'Meta description, 140–158 chars, includes the primary keyword.',
+					multiline: true
+				}),
+				keywords: fields.array(fields.text({ label: 'Keyword' }), {
+					label: 'Keywords',
+					itemLabel: (props) => props.value
+				}),
+				updated: fields.date({ label: 'Last updated (optional)' }),
+				has_benchmarks: fields.checkbox({ label: 'Labs / benchmark post', defaultValue: false }),
 				content: fields.markdoc({ label: 'Content' })
 			}
 		}),

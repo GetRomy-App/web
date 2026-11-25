@@ -9,6 +9,17 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import {
+		CORE_KEYWORDS,
+		HOME_DESCRIPTION,
+		HOME_TITLE,
+		ORG_ID,
+		SITE_URL,
+		SOFTWARE_ID,
+		WEBSITE_ID,
+		softwareLd
+	} from '$lib/seo';
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +52,38 @@
 		);
 	});
 </script>
+
+<Seo
+	title={HOME_TITLE}
+	description={HOME_DESCRIPTION}
+	path="/"
+	keywords={[
+		...CORE_KEYWORDS,
+		'donor discovery platform',
+		'find major donors',
+		'donor prospecting tool',
+		'giving history research',
+		'nonprofit donor database research',
+		'DonorSearch alternative',
+		'iWave alternative',
+		'WealthEngine alternative'
+	]}
+	jsonld={[
+		{
+			'@type': 'WebPage',
+			'@id': `${SITE_URL}/#webpage`,
+			url: `${SITE_URL}/`,
+			name: HOME_TITLE,
+			description: HOME_DESCRIPTION,
+			inLanguage: 'en-US',
+			isPartOf: { '@id': WEBSITE_ID },
+			about: { '@id': SOFTWARE_ID },
+			publisher: { '@id': ORG_ID },
+			primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE_URL}/og-image.jpg` }
+		},
+		softwareLd
+	]}
+/>
 
 <Footer bind:footerText />
 

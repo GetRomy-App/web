@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Seo from '$lib/components/Seo.svelte';
+	import { breadcrumbLd } from '$lib/seo';
 	import '../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap } from '$lib/gsap';
@@ -68,18 +70,17 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Legal — Rōmy</title>
-	<meta name="title" content="Legal — Rōmy" />
-	<meta
-		name="description"
-		content="Privacy policy, terms, sub-processors, and other legal documents for Rōmy by GetRomy LLC."
-	/>
-	<meta name="robots" content="index, follow" />
-	<link rel="canonical" href="https://getromy.app/legal" />
-	<meta property="og:title" content="Legal — Rōmy" />
-	<meta property="og:url" content="https://getromy.app/legal" />
-</svelte:head>
+<Seo
+	title="Legal Center: Privacy, Terms, DPA & Security | Rōmy"
+	description="Privacy policy, terms of service, data processing agreement, sub-processors, security and other legal documents for Rōmy by GetRomy LLC."
+	path="/legal"
+	jsonld={[
+		breadcrumbLd([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Legal', path: '/legal' }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 

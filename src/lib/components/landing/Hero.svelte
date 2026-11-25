@@ -136,7 +136,7 @@
 			<img
 				bind:this={previewImg}
 				src="/screenshot.webp"
-				alt="Preview of Rōmy"
+				alt="Rōmy app showing an AI-generated wealth profile of a prospective donor: financial indicators, philanthropic history and prospect qualification"
 				decoding="async"
 				class="screenshot-img h-auto w-full rounded-md opacity-0"
 			/>

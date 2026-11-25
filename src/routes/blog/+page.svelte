@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Seo from '$lib/components/Seo.svelte';
+	import { SITE_URL, WEBSITE_ID, ORG_ID, isoDate, breadcrumbLd } from '$lib/seo';
 	import '../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
@@ -100,22 +102,45 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising</title>
-	<meta
-		name="description"
-		content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising, prospect research, and purpose-built AI."
-	/>
-	<meta
-		name="keywords"
-		content="nonprofit fundraising blog, donor intelligence, prospect research, AI for nonprofits, fundraising insights"
-	/>
-	<meta property="og:title" content="Romy Blog — Insights on AI Donor Research & Nonprofit Fundraising" />
-	<meta property="og:description" content="Technical deep-dives, research findings, and perspectives on nonprofit fundraising." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/blog" />
-	<link rel="canonical" href="https://getromy.app/blog" />
-</svelte:head>
+<Seo
+	title="Nonprofit Fundraising Blog: Major Gifts, Donor Stewardship & Prospect Research | Rōmy"
+	description="Field notes for small-shop fundraisers on major gift cultivation, donor stewardship, lapsed donors, planned giving and prospect research — from the team behind Rōmy."
+	path="/blog"
+	keywords={[
+		'nonprofit fundraising blog',
+		'major gift fundraising',
+		'donor stewardship',
+		'donor cultivation',
+		'prospect research',
+		'planned giving',
+		'small nonprofit fundraising',
+		'development director advice'
+	]}
+	jsonld={[
+		{
+			'@type': ['Blog', 'CollectionPage'],
+			'@id': `${SITE_URL}/blog#blog`,
+			url: `${SITE_URL}/blog`,
+			name: 'Rōmy Blog',
+			description:
+				'Field notes and industry essays on major gifts, donor stewardship and prospect research for small nonprofits.',
+			inLanguage: 'en-US',
+			isPartOf: { '@id': WEBSITE_ID },
+			publisher: { '@id': ORG_ID },
+			blogPost: data.posts.map((p) => ({
+				'@type': 'BlogPosting',
+				'@id': `${SITE_URL}/blog/${p.slug}#article`,
+				headline: p.title,
+				url: `${SITE_URL}/blog/${p.slug}`,
+				datePublished: isoDate(p.date)
+			}))
+		},
+		breadcrumbLd([
+			{ name: 'Rōmy', path: '/' },
+			{ name: 'Blog', path: '/blog' }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 
