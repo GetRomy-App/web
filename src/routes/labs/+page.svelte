@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Seo from '$lib/components/Seo.svelte';
+	import { SITE_URL, ORG_ID, WEBSITE_ID, absoluteUrl, isoDate, breadcrumbSchema } from '$lib/seo';
 	import '../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, ScrollTrigger, SplitText } from '$lib/gsap';
@@ -11,6 +13,32 @@
 	import { contactModal } from '$lib/stores/contact.svelte';
 
 	let { data } = $props();
+
+	const labsSchema = $derived([
+		{
+			'@context': 'https://schema.org',
+			'@type': 'CollectionPage',
+			'@id': `${SITE_URL}/labs#webpage`,
+			url: `${SITE_URL}/labs`,
+			name: 'Rōmy Labs — PIF-Bench v2',
+			description: 'An open, rubric-graded benchmark of AI on nonprofit development work.',
+			inLanguage: 'en-US',
+			isPartOf: { '@id': WEBSITE_ID },
+			publisher: { '@id': ORG_ID },
+			hasPart: data.posts.map((post) => ({
+				'@type': 'TechArticle',
+				headline: post.title,
+				description: post.excerpt,
+				url: absoluteUrl(`/labs/blog/${post.slug}`),
+				datePublished: isoDate(post.date),
+				articleSection: post.tag
+			}))
+		},
+		breadcrumbSchema([
+			{ name: 'Home', path: '/' },
+			{ name: 'Labs', path: '/labs' }
+		])
+	]);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -223,22 +251,25 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Rōmy Labs — PIF-Bench v2: AI Benchmarks for Nonprofit Development Work</title>
-	<meta
-		name="description"
-		content="PIF-Bench v2 grades AI systems on 25 real development-office tasks with 331 pass/fail checks written before any system ran, graded blind. On real prospects, no product met every check; Claude.ai met 83%, Rōmy 74%, Gemini 67%, ChatGPT 60%."
-	/>
-	<meta
-		name="keywords"
-		content="donor research benchmark, AI prospect research comparison, nonprofit fundraising AI, PIF-Bench, rubric-graded benchmark, gift compliance AI, ChatGPT vs Rōmy, prospect research tool"
-	/>
-	<meta property="og:title" content="Rōmy Labs — PIF-Bench v2" />
-	<meta property="og:description" content="An open, rubric-graded benchmark of AI on nonprofit development work. Live track: Claude.ai 83%, Rōmy 74%, Gemini 67%, ChatGPT 60% of checks met." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://getromy.app/labs" />
-	<link rel="canonical" href="https://getromy.app/labs" />
-</svelte:head>
+<Seo
+	title="Rōmy Labs — PIF-Bench v2: AI Benchmarks for Nonprofit Development Work"
+	ogTitle="Rōmy Labs — PIF-Bench v2"
+	description="PIF-Bench v2 grades AI systems on 25 real development-office tasks with 331 pass/fail checks written before any system ran, graded blind. On real prospects, no product met every check; Claude.ai met 83%, Rōmy 74%, Gemini 67%, ChatGPT 60%."
+	path="/labs"
+	keywords={[
+		'donor research benchmark',
+		'AI prospect research comparison',
+		'best AI for prospect research',
+		'nonprofit fundraising AI',
+		'PIF-Bench',
+		'rubric-graded benchmark',
+		'gift compliance AI',
+		'ChatGPT vs Rōmy',
+		'Claude vs ChatGPT for fundraising',
+		'prospect research tool'
+	]}
+	schema={labsSchema}
+/>
 
 <Footer bind:footerText />
 

@@ -9,6 +9,26 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { CORE_KEYWORDS, softwareSchema, SITE_URL, WEBSITE_ID, ORG_ID, SOFTWARE_ID } from '$lib/seo';
+
+	const homeSchema = [
+		softwareSchema(),
+		{
+			'@context': 'https://schema.org',
+			'@type': 'WebPage',
+			'@id': `${SITE_URL}/#webpage`,
+			url: `${SITE_URL}/`,
+			name: 'Rōmy — AI Donor Prospect Research for Small Nonprofits',
+			description:
+				'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions.',
+			isPartOf: { '@id': WEBSITE_ID },
+			about: { '@id': SOFTWARE_ID },
+			publisher: { '@id': ORG_ID },
+			primaryImageOfPage: `${SITE_URL}/og-romy.jpg`,
+			inLanguage: 'en-US'
+		}
+	];
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +61,15 @@
 		);
 	});
 </script>
+
+<Seo
+	title="Rōmy — AI Donor Prospect Research for Small Nonprofits"
+	ogTitle="Rōmy — Donor Intelligence for Small Nonprofits"
+	description="Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research, wealth screening, and giving history, at a price built for small teams."
+	path="/"
+	keywords={CORE_KEYWORDS}
+	schema={homeSchema}
+/>
 
 <Footer bind:footerText />
 

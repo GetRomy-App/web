@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Seo from '$lib/components/Seo.svelte';
+	import { articleSchema, breadcrumbSchema, postKeywords } from '$lib/seo';
 	import '../../../app.css';
 	import { onMount } from 'svelte';
 	import { gsap, SplitText } from '$lib/gsap';
@@ -125,18 +127,33 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Blog</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title="{data.post.title} — Rōmy Blog"
+	ogTitle={data.post.title}
+	description={data.post.excerpt}
+	path="/blog/{data.post.slug}"
+	type="article"
+	keywords={postKeywords(data.post.tag, data.post.title)}
+	published={data.post.date}
+	section={data.post.tag}
+	tags={[data.post.tag, 'Major gift fundraising', 'Prospect research', 'Nonprofit fundraising']}
+	schema={[
+		articleSchema({
+			title: data.post.title,
+			description: data.post.excerpt,
+			path: `/blog/${data.post.slug}`,
+			date: data.post.date,
+			tag: data.post.tag,
+			wordCount: data.post.wordCount,
+			type: 'BlogPosting'
+		}),
+		breadcrumbSchema([
+			{ name: 'Home', path: '/' },
+			{ name: 'Blog', path: '/blog' },
+			{ name: data.post.title, path: `/blog/${data.post.slug}` }
+		])
+	]}
+/>
 
 <Footer bind:footerText />
 

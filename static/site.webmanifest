@@ -17,5 +17,10 @@
   ],
   "theme_color": "#000000",
   "background_color": "#000000",
-  "display": "standalone"
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "description": "Donor intelligence and AI prospect research for small nonprofits.",
+  "lang": "en-US",
+  "categories": ["business", "productivity"]
 }

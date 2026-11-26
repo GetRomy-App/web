@@ -16,6 +16,9 @@ export interface PostMeta {
 
 export interface Post extends PostMeta {
 	content: string;
+	/** Raw Markdoc/Markdown body (no frontmatter). */
+	source: string;
+	wordCount: number;
 }
 
 export async function getAllPosts(): Promise<PostMeta[]> {
@@ -68,7 +71,9 @@ export async function getPost(slug: string): Promise<Post | null> {
 			excerpt: data.excerpt ?? '',
 			tag: data.tag ?? '',
 			has_benchmarks: data.has_benchmarks ?? false,
-			content: html
+			content: html,
+			source: markdocSource.trim(),
+			wordCount: markdocSource.split(/\s+/).filter(Boolean).length
 		};
 	} catch {
 		return null;
