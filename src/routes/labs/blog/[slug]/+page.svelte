@@ -5,9 +5,33 @@
 
 	import Navbar from '$lib/components/landing/Navbar.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { articleSchema, isoDate, keywordsForTag, metaDescription, wordStats } from '$lib/seo';
 	import { PIF_HEADLINE, PIF_DIMENSIONS, EVAL_PROMPT, PIF_METHOD_NOTE, PIF_REPO, PIF_VERSION } from '$lib/benchmarks';
 
 	let { data } = $props();
+
+	const path = $derived(`/labs/blog/${data.post.slug}`);
+	const keywords = $derived(keywordsForTag(data.post.tag));
+	const stats = $derived(wordStats(data.post.content));
+	const published = $derived(isoDate(data.post.date));
+	// Keep the post title intact; brand suffix only when it still fits a SERP title (~60 chars).
+	const seoTitle = $derived(
+		data.post.title.length <= 46 ? `${data.post.title} | Rōmy Labs` : data.post.title
+	);
+	const jsonLd = $derived([
+		articleSchema({
+			title: data.post.title,
+			description: metaDescription(data.post.excerpt, 300),
+			path,
+			date: data.post.date,
+			tag: data.post.tag,
+			words: stats.words,
+			minutes: stats.minutes,
+			keywords,
+			section: { name: 'Labs', path: '/labs' }
+		})
+	]);
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -126,18 +150,19 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{data.post.title} — Romy Labs</title>
-	<meta name="description" content={data.post.excerpt} />
-	<meta name="keywords" content="donor intelligence, nonprofit fundraising, prospect research, AI donor research, wealth screening, {data.post.tag.toLowerCase()}" />
-	<meta property="og:title" content={data.post.title} />
-	<meta property="og:description" content={data.post.excerpt} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://getromy.app/labs/blog/{data.post.slug}" />
-	<meta property="article:published_time" content={data.post.date} />
-	<meta property="article:section" content={data.post.tag} />
-	<link rel="canonical" href="https://getromy.app/labs/blog/{data.post.slug}" />
-</svelte:head>
+<Seo
+	title={seoTitle}
+	description={data.post.excerpt}
+	{path}
+	type="article"
+	{keywords}
+	publishedTime={published}
+	modifiedTime={published}
+	section={data.post.tag}
+	tags={[data.post.tag, ...keywords.slice(0, 4)]}
+	imageAlt={data.post.title}
+	{jsonLd}
+/>
 
 <Footer bind:footerText />
 
@@ -165,9 +190,10 @@
 					<span class="text-gray-alpha-600 border-gray-alpha-200 rounded-full border px-2.5 py-0.5 text-xs font-medium">
 						{data.post.tag}
 					</span>
-					<span class="text-gray-alpha-400 text-xs">
+					<time class="text-gray-alpha-400 text-xs" datetime={data.post.date}>
 						{formatDate(data.post.date)}
-					</span>
+					</time>
+					<span class="text-gray-alpha-400 text-xs">{stats.minutes} min read</span>
 				</div>
 
 				<h1 class="text-foreground text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
@@ -269,6 +295,30 @@
 						</div>
 					</div>
 				</div>
+			{/if}
+
+			<!-- Related posts (internal linking) -->
+			{#if data.related?.length}
+				<nav
+					aria-label="Related articles"
+					class="px-4 md:px-8 py-10 border-gray-alpha-100 border-t max-w-3xl mx-auto"
+				>
+					<h2 class="text-foreground text-lg font-medium tracking-tight mb-6">Keep reading</h2>
+					<ul class="flex flex-col gap-6">
+						{#each data.related as rel (rel.slug)}
+							<li>
+								<a href="/labs/blog/{rel.slug}" class="group block no-underline">
+									<span class="text-gray-alpha-400 text-xs">{rel.tag}</span>
+									<span
+										class="text-foreground group-hover:text-blue-700 block text-base font-medium tracking-tight transition-colors"
+									>
+										{rel.title}
+									</span>
+								</a>
+							</li>
+						{/each}
+					</ul>
+				</nav>
 			{/if}
 
 			<!-- Back link -->

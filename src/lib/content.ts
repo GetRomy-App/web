@@ -51,6 +51,28 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 	return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
+/**
+ * Internal linking: pick the chronological neighbours of a post within its topic (wrapping
+ * around), then fill from other topics. Every article gets inbound links, not just the newest.
+ */
+export function relatedPosts(posts: PostMeta[], slug: string, tag: string, count = 3): PostMeta[] {
+	const sameTag = posts.filter((p) => p.tag === tag);
+	const i = sameTag.findIndex((p) => p.slug === slug);
+	const picked: PostMeta[] = [];
+	if (i !== -1) {
+		for (let step = 1; picked.length < count && step < sameTag.length; step++) {
+			const offset = step % 2 === 1 ? -Math.ceil(step / 2) : step / 2;
+			const p = sameTag[(i + offset + sameTag.length) % sameTag.length];
+			if (p.slug !== slug && !picked.includes(p)) picked.push(p);
+		}
+	}
+	for (const p of posts) {
+		if (picked.length >= count) break;
+		if (p.slug !== slug && !picked.includes(p)) picked.push(p);
+	}
+	return picked;
+}
+
 export async function getPost(slug: string): Promise<Post | null> {
 	const filePath = path.join(CONTENT_DIR, slug, 'index.mdoc');
 	try {
@@ -59,6 +81,14 @@ export async function getPost(slug: string): Promise<Post | null> {
 
 		const ast = Markdoc.parse(markdocSource);
 		const transformed = Markdoc.transform(ast);
+		// The page template renders the title as the one real <h1>. Drop the duplicate
+		// leading "# Title" from the body instead of hiding it with CSS (one H1 per page).
+		if (Markdoc.Tag.isTag(transformed)) {
+			const first = transformed.children.find((c) => !(typeof c === 'string' && !c.trim()));
+			if (first && Markdoc.Tag.isTag(first) && first.name === 'h1') {
+				transformed.children.splice(transformed.children.indexOf(first), 1);
+			}
+		}
 		const html = Markdoc.renderers.html(transformed);
 
 		return {

@@ -9,6 +9,70 @@
 	import Features from '$lib/components/landing/Features.svelte';
 	import CTA from '$lib/components/landing/CTA.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import {
+		CORE_KEYWORDS,
+		ORG_ID,
+		SITE_URL,
+		SOFTWARE_ID,
+		WEBSITE_ID,
+		DEFAULT_OG_IMAGE,
+		graph
+	} from '$lib/seo';
+
+	const title = 'AI Prospect Research & Donor Intelligence for Nonprofits | Rōmy';
+	const description =
+		'Rōmy is AI prospect research and wealth screening for small nonprofits. Find major donors with wealth indicators, giving history, and affinity signals.';
+
+	const jsonLd = [
+		graph(
+			{
+				'@type': 'WebPage',
+				'@id': `${SITE_URL}/#webpage`,
+				url: `${SITE_URL}/`,
+				name: title,
+				description,
+				isPartOf: { '@id': WEBSITE_ID },
+				about: { '@id': SOFTWARE_ID },
+				publisher: { '@id': ORG_ID },
+				primaryImageOfPage: { '@type': 'ImageObject', url: DEFAULT_OG_IMAGE },
+				inLanguage: 'en-US'
+			},
+			{
+				'@type': 'SoftwareApplication',
+				'@id': SOFTWARE_ID,
+				name: 'Rōmy',
+				alternateName: 'Rōmy Donor Intelligence',
+				url: `${SITE_URL}/`,
+				applicationCategory: 'BusinessApplication',
+				applicationSubCategory: 'Nonprofit prospect research and donor intelligence',
+				operatingSystem: 'Web browser (macOS, Windows, Linux)',
+				description:
+					'Rōmy helps small nonprofits find new major donors at a fraction of the cost of existing solutions. AI-powered prospect research with wealth indicators, giving history, and affinity signals.',
+				image: DEFAULT_OG_IMAGE,
+				screenshot: `${SITE_URL}/screenshot.png`,
+				audience: {
+					'@type': 'Audience',
+					audienceType: 'Small nonprofits, development directors, major gift officers, prospect researchers'
+				},
+				offers: {
+					'@type': 'Offer',
+					price: '0',
+					priceCurrency: 'USD',
+					availability: 'https://schema.org/InStock'
+				},
+				publisher: { '@id': ORG_ID },
+				featureList: [
+					'AI-powered donor prospect research',
+					'Wealth indicator screening',
+					'Giving history analysis',
+					'Affinity signal detection',
+					'Actionable donor profiles with connection points and outreach angles',
+					'No enterprise contracts or per-seat licensing'
+				]
+			}
+		)
+	];
 
 	let mainContent: HTMLElement;
 	let footerText: HTMLElement;
@@ -41,6 +105,15 @@
 		);
 	});
 </script>
+
+<Seo
+	{title}
+	{description}
+	path="/"
+	keywords={CORE_KEYWORDS}
+	imageAlt="Rōmy — AI prospect research and donor intelligence for small nonprofits"
+	{jsonLd}
+/>
 
 <Footer bind:footerText />
 
